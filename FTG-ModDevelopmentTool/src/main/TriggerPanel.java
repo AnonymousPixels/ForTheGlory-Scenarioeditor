@@ -1,16 +1,19 @@
 package main;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Console;
 import java.text.NumberFormat;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.NumberFormatter;
 
-public class TriggerTest implements ActionListener {
+public class TriggerPanel implements ActionListener {
 	public static JComboBox domesticselection, areaselection, regionselection,
 			continentselection, techgroupselection, religionselection,
 			triggerselection, checkselection, country_aaa_selection,
@@ -22,8 +25,8 @@ public class TriggerTest implements ActionListener {
 	public static int value;
 	public static JFormattedTextField year, intdata;
 
-
-	public TriggerTest() {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public TriggerPanel() {
 		String triggercommands[] = { "(Trigger)", "random", "year", "exists",
 				"flag", "event", "ai", "city", "colonialcity", "colony",
 				"tradingpost", "provincepopulation", "fortresslevel", "cot",
@@ -153,298 +156,265 @@ public class TriggerTest implements ActionListener {
 
 		value = 0;
 
-		// year = new JTextField("year");
 		data = new JTextField("data");
 
-		GUI.trigger.add(triggerselection);
-
+		Main.panel.add(triggerselection);
+		Main.panel.setVisible(false);
+		Main.panel.setVisible(true);
+		
 		selection = (String) triggerselection.getSelectedItem();
 
-		check();
-	}
+		ActionListener triggerlistener = new ActionListener() {
 
-	public void check() {
-		while (true) {
-			selection = (String) triggerselection.getSelectedItem();
+			public void actionPerformed(ActionEvent e) {
+				selection = (String) triggerselection.getSelectedItem();
+				System.out.println(selection);
 
-			if (selection != selectionbefore) {
-
+				Main.panel.removeAll();
+				Main.panel.add(triggerselection);
 				if (selection == "alliance") {
 					// country = aaa country = bbb
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(country_aaa_selection);
-					GUI.trigger.add(country_bbb_selection);
+					 
+					Main.panel.add(country_aaa_selection);
+					Main.panel.add(country_bbb_selection);
 
 				}
 				if (selection == "dynastic") {
 					// country = aaa country = bbb
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
+					
 
-					GUI.trigger.add(country_aaa_selection);
-					GUI.trigger.add(country_bbb_selection);
+					Main.panel.add(country_aaa_selection);
+					Main.panel.add(country_bbb_selection);
 
 				}
 				if (selection == "vassal") {
 					// country = aaa country = bbb
 
-					GUI.trigger.removeAll();
+					 
 
-					GUI.trigger.add(triggerselection);
-
-					GUI.trigger.add(country_aaa_selection);
-					GUI.trigger.add(country_bbb_selection);
+					Main.panel.add(country_aaa_selection);
+					Main.panel.add(country_bbb_selection);
 
 				}
 				if (selection == "union") {
 					// country = aaa country = bbb
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(country_aaa_selection);
-					GUI.trigger.add(country_bbb_selection);
+					 
+					Main.panel.add(country_aaa_selection);
+					Main.panel.add(country_bbb_selection);
 
 				}
 				if (selection == "war") {
 					// country = aaa country = bbb
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(country_aaa_selection);
-					GUI.trigger.add(country_bbb_selection);
+					 
+					Main.panel.add(country_aaa_selection);
+					Main.panel.add(country_bbb_selection);
 
 				}
 				if (selection == "truce") {
 					// country = aaa country = bbb
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(country_aaa_selection);
-					GUI.trigger.add(country_bbb_selection);
+					 
+					Main.panel.add(country_aaa_selection);
+					Main.panel.add(country_bbb_selection);
 
 				}
 				if (selection == "atwar") {
 					// yes / no
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(checkselection);
+					 
+					Main.panel.add(checkselection);
 
 				}
 				if (selection == "isvassal") {
 					// yes / no
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(checkselection);
+					 
+					Main.panel.add(checkselection);
 
 				}
 				if (selection == "isoverlord") {
 					// yes / no
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(checkselection);
+					 
+					Main.panel.add(checkselection);
 
 				}
 				if (selection == "access") {
 					// aaa (country)
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(country_aaa_selection);
+					 
+					Main.panel.add(country_aaa_selection);
 
 				}
 				if (selection == "relation") {
 					// country = aaa data = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(country_aaa_selection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(country_aaa_selection);
+					Main.panel.add(intdata);
 					data.setText("(Value)");
 
 				}
 				if (selection == "leader") {
 					// leader = xxxx
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText(" (Leader ID) ");
 
 				}
 				if (selection == "monarch") {
 					// monarch = xxxx
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText(" (Monarch ID) ");
 
 				}
 				if (selection == "culture") {
 					// culture = culture_name
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(cultureselection);
+					 
+					Main.panel.add(cultureselection);
 
 				}
 				if (selection == "religion") {
 					// religion = religion_name
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(religionselection);
+					 
+					Main.panel.add(religionselection);
 
 				}
 				if (selection == "technology") {
 					// technology = techgroup_name
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(techgroupselection);
+					 
+					Main.panel.add(techgroupselection);
 
 				}
 				if (selection == "continent") {
 					// continent = continent_name
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(continentselection);
+					 
+					Main.panel.add(continentselection);
 
 				}
 				if (selection == "region") {
 					// region = region_name
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(regionselection);
+					 
+					Main.panel.add(regionselection);
 
 				}
 				if (selection == "area") {
 					// area = area_name
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(areaselection);
+					 
+					Main.panel.add(areaselection);
 
 				}
 				if (selection == "countrysize") {
 					// countrysize = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Countrysize)");
 
 				}
 				if (selection == "badboy") {
 					// badboy = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "inflation") {
 					// inflation = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "treasury") {
 					// treasury = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "diplomats") {
 					// diplomats = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "merchants") {
 					// merchants = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "colonists") {
 					// colonists = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "missionaries") {
 					// missionaries = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "elector") {
 					// elector = yes / no
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(checkselection);
+					 
+					Main.panel.add(checkselection);
 
 				}
 				if (selection == "emperor") {
 					// emperor = yes / no
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(checkselection);
+					 
+					Main.panel.add(checkselection);
 
 				}
 				if (selection == "hre") {
 					// hre = yes / no
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(checkselection);
+					 
+					Main.panel.add(checkselection);
 
 				}
 				if (selection == "neighbour") {
 					// neighbour = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "tag") {
 					// tag = aaa
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(country_aaa_selection);
+					 
+					Main.panel.add(country_aaa_selection);
 
 				}
 				if (selection == "domestic") {
@@ -452,382 +422,436 @@ public class TriggerTest implements ActionListener {
 					// innovative/ mercantilism/ land/ offensive/ quality/
 					// serfdom value = x }
 
-					GUI.trigger.removeAll();
-
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(domesticselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(domesticselection);
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "land") {
 					// land = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "stability") {
 					// naval = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "naval") {
 					// stability = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "trade") {
 					// trade = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "infra") {
 					// infra = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "capital") {
 					// capital = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "core_national") {
 					// core_national = { province = x data = aaa }
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(provinzselection);
-					GUI.trigger.add(country_aaa_selection);
+					 
+					Main.panel.add(provinzselection);
+					Main.panel.add(country_aaa_selection);
 				}
 				if (selection == "core_claim") {
 					// core_claim = { province = x data = aaa }
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(provinzselection);
-					GUI.trigger.add(country_aaa_selection);
+					 
+					Main.panel.add(provinzselection);
+					Main.panel.add(country_aaa_selection);
 				}
 				if (selection == "core_casusbelli") {
 					// core_casusbelli = { province = x data = aaa }
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(provinzselection);
-					GUI.trigger.add(country_aaa_selection);
+					 
+					Main.panel.add(provinzselection);
+					Main.panel.add(country_aaa_selection);
 				}
 				if (selection == "provinceculture") {
 					// provinceculture = { province = x data = y }
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(provinzselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(provinzselection);
+					Main.panel.add(intdata);
 				}
 				if (selection == "cityculture") {
 					// cityculture = { province = x data = y }
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(provinzselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(provinzselection);
+					Main.panel.add(intdata);
 
 				}
 				if (selection == "provincereligion") {
 					// provincereligion = { province = x data = y }
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(provinzselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(provinzselection);
+					Main.panel.add(intdata);
 
 				}
 				if (selection == "owned") {
 					// owned = { province = x data = aaa }
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(provinzselection);
-					GUI.trigger.add(country_aaa_selection);
+					 
+					Main.panel.add(provinzselection);
+					Main.panel.add(country_aaa_selection);
 
 				}
 				if (selection == "control") {
 					// control = { province = x data = aaa }
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(provinzselection);
-					GUI.trigger.add(country_aaa_selection);
+					 
+					Main.panel.add(provinzselection);
+					Main.panel.add(country_aaa_selection);
 
 				}
 				if (selection == "ownerchange") {
 					// ownerchange = { province = x years = y months = m days =
 					// d }
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(provinzselection);
-					GUI.trigger.add(year);
-					GUI.trigger.add(monthselection);
-					GUI.trigger.add(dayselection);
+					 
+					Main.panel.add(provinzselection);
+					Main.panel.add(year);
+					Main.panel.add(monthselection);
+					Main.panel.add(dayselection);
 
 				}
 				if (selection == "controlchange") {
 					// controlchange = { province = x years = y months = m days
 					// = d }
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(provinzselection);
-					GUI.trigger.add(year);
-					GUI.trigger.add(monthselection);
-					GUI.trigger.add(dayselection);
+					 
+					Main.panel.add(provinzselection);
+					Main.panel.add(year);
+					Main.panel.add(monthselection);
+					Main.panel.add(dayselection);
 
 				}
 				if (selection == "discovered") {
 					// discovered = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "cot") {
 					// cot = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "fortresslevel") {
 					// fortresslevel = { province = x data = y }
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(provinzselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(provinzselection);
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "provincepopulation") {
 					// provincepopulation = { province = x data = y }
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(provinzselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(provinzselection);
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "tradingpost") {
 					// tradingpost = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "colony") {
 					// colony = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "colonialcity") {
 					// colonialcity = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "city") {
 					// city = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 					intdata.setText("(Value)");
 
 				}
 				if (selection == "event") {
 					// event = xxxx
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(intdata);
+					 
+					Main.panel.add(intdata);
 
 				}
 				if (selection == "ai") {
 					// ai = yes / no
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(checkselection);
+					 
+					Main.panel.add(checkselection);
 
 				}
 				if (selection == "flag") {
 					// flag = flag name
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(data);
+					 
+					Main.panel.add(data);
 					data.setText("(Flagname)");
 
 				}
 				if (selection == "exists") {
 					// exists = aaa
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(country_aaa_selection);
+					 
+					Main.panel.add(country_aaa_selection);
 
 				}
 				if (selection == "year") {
 					// year = x
-					GUI.trigger.removeAll();
 
-					GUI.trigger.add(triggerselection);
-					GUI.trigger.add(year);
+					 
+					Main.panel.add(year);
 
 				}
 				if (selection == "random") {
 					// random = x
 
-					GUI.trigger.removeAll();
-
-					GUI.trigger.add(triggerselection);
-
 				}
-
-				GUI.trigger.add(addtrigger);
-				GUI.trigger.repaint();
-			}
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
+				Main.panel.add(addtrigger);
+				Main.panel.setVisible(false);
+				Main.panel.setVisible(true);
 
 			}
-			selectionbefore = selection;
-
-		}
+		};
+		
+		triggerselection.addActionListener(triggerlistener);
+		
 	}
-
-
+	
+	
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == addtrigger) {
+
 			if (selection == "alliance") {
 				// alliance = { country = aaa country = bbb }
-				trigger = "alliance = { country = "
-						+ (String) country_aaa_selection.getSelectedItem();
-				trigger = trigger + " country = "
-						+ (String) country_bbb_selection.getSelectedItem()
-						+ " }";
+
+				if ((String) country_aaa_selection.getSelectedItem() == "(Choose country A)"
+						|| (String) country_bbb_selection.getSelectedItem() == "(Choose country A)") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+
+					trigger = "alliance = { country = "
+							+ (String) country_aaa_selection.getSelectedItem();
+					trigger = trigger + " country = "
+							+ (String) country_bbb_selection.getSelectedItem()
+							+ " }";
+				}
 			}
 			if (selection == "dynastic") {
 				// country = aaa country = bbb
-				trigger = "dynastic = { country = "
-						+ (String) country_aaa_selection.getSelectedItem();
-				trigger = trigger + " country = "
-						+ (String) country_bbb_selection.getSelectedItem()
-						+ " }";
+				if ((String) country_aaa_selection.getSelectedItem() == "(Choose country A)"
+						|| (String) country_bbb_selection.getSelectedItem() == "(Choose country A)") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+
+					trigger = "dynastic = { country = "
+							+ (String) country_aaa_selection.getSelectedItem();
+					trigger = trigger + " country = "
+							+ (String) country_bbb_selection.getSelectedItem()
+							+ " }";
+
+				}
 			}
 			if (selection == "vassal") {
 				// country = aaa country = bbb
-				trigger = "vassal = { country = "
-						+ (String) country_aaa_selection.getSelectedItem();
-				trigger = trigger + " country = "
-						+ (String) country_bbb_selection.getSelectedItem()
-						+ " }";
+				if ((String) country_aaa_selection.getSelectedItem() == "(Choose country A)"
+						|| (String) country_bbb_selection.getSelectedItem() == "(Choose country A)") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "vassal = { country = "
+							+ (String) country_aaa_selection.getSelectedItem();
+					trigger = trigger + " country = "
+							+ (String) country_bbb_selection.getSelectedItem()
+							+ " }";
+				}
 			}
 			if (selection == "union") {
 				// country = aaa country = bbb
-				trigger = "union = { country = "
-						+ (String) country_aaa_selection.getSelectedItem();
-				trigger = trigger + " country = "
-						+ (String) country_bbb_selection.getSelectedItem()
-						+ " }";
+				if ((String) country_aaa_selection.getSelectedItem() == "(Choose country A)"
+						|| (String) country_bbb_selection.getSelectedItem() == "(Choose country A)") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "union = { country = "
+							+ (String) country_aaa_selection.getSelectedItem();
+					trigger = trigger + " country = "
+							+ (String) country_bbb_selection.getSelectedItem()
+							+ " }";
+				}
 			}
 			if (selection == "war") {
 				// country = aaa country = bbb
-				trigger = "war = { country = "
-						+ (String) country_aaa_selection.getSelectedItem();
-				trigger = trigger + " country = "
-						+ (String) country_bbb_selection.getSelectedItem()
-						+ " }";
+				if ((String) country_aaa_selection.getSelectedItem() == "(Choose country A)"
+						|| (String) country_bbb_selection.getSelectedItem() == "(Choose country A)") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "war = { country = "
+							+ (String) country_aaa_selection.getSelectedItem();
+					trigger = trigger + " country = "
+							+ (String) country_bbb_selection.getSelectedItem()
+							+ " }";
+				}
 			}
 			if (selection == "truce") {
 				// country = aaa country = bbb
-				trigger = "truce = { country = "
-						+ (String) country_aaa_selection.getSelectedItem();
-				trigger = trigger + " country = "
-						+ (String) country_bbb_selection.getSelectedItem()
-						+ " }";
+				if ((String) country_aaa_selection.getSelectedItem() == "(Choose country A)"
+						|| (String) country_bbb_selection.getSelectedItem() == "(Choose country A)") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "truce = { country = "
+							+ (String) country_aaa_selection.getSelectedItem();
+					trigger = trigger + " country = "
+							+ (String) country_bbb_selection.getSelectedItem()
+							+ " }";
+				}
 			}
 			if (selection == "atwar") {
 				// yes / no
-				trigger = "atwar = "
-						+ (String) checkselection.getSelectedItem();
+				if ((String) checkselection.getSelectedItem() == "(Yes or No)") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "atwar = "
+							+ (String) checkselection.getSelectedItem();
+				}
 			}
 			if (selection == "isvassal") {
 				// yes / no
-				trigger = "isvassal = "
-						+ (String) checkselection.getSelectedItem();
+				if ((String) checkselection.getSelectedItem() == "(Yes or No)") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "isvassal = "
+							+ (String) checkselection.getSelectedItem();
+				}
 			}
 			if (selection == "isoverlord") {
 				// yes / no
-				trigger = "isoverlord = "
-						+ (String) checkselection.getSelectedItem();
+				if ((String) checkselection.getSelectedItem() == "(Yes or No)") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "isoverlord = "
+
+					+ (String) checkselection.getSelectedItem();
+				}
 			}
 			if (selection == "access") {
 				// aaa (country)
-				trigger = "access = "
-						+ (String) country_aaa_selection.getSelectedItem();
+				if ((String) country_aaa_selection.getSelectedItem() == "(Choose country A)") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "access = "
+							+ (String) country_aaa_selection.getSelectedItem();
+				}
 			}
 			if (selection == "relation") {
 				// relation = { country = aaa data = x }
-				trigger = "relation = { country = "
-						+ (String) country_aaa_selection.getSelectedItem();
-				trigger = trigger + " data = "
-						+ (String) intdata.getSelectedText() + " }";
+				if ((String) checkselection.getSelectedItem() == "(Choose country A)"
+						|| intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "relation = { country = "
+							+ (String) country_aaa_selection.getSelectedItem();
+					trigger = trigger + " data = "
+							+ (String) intdata.getSelectedText() + " }";
+				}
 			}
 			if (selection == "leader") {
 				// leader = xxxx
-				trigger = "leader = " + intdata.getText();
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "leader = " + intdata.getText();
+				}
 			}
 			if (selection == "monarch") {
 				// monarch = xxxx
-				trigger = "monarch = " + intdata.getText();
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "monarch = " + intdata.getText();
+				}
 			}
 			if (selection == "culture") {
 				// culture = culture_name
@@ -860,58 +884,137 @@ public class TriggerTest implements ActionListener {
 			}
 			if (selection == "countrysize") {
 				// countrysize = x
-				trigger = "countrysize = " + intdata.getText();
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "countrysize = " + intdata.getText();
+				}
 			}
 			if (selection == "badboy") {
 				// badboy = x
-				trigger = "badboy = " + intdata.getText();
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "badboy = " + intdata.getText();
+				}
 			}
 			if (selection == "inflation") {
 				// inflation = x
-				trigger = "inflation = " + intdata.getText();
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "inflation = " + intdata.getText();
+				}
 			}
 			if (selection == "treasury") {
 				// treasury = x
-				trigger = "treasury = " + intdata.getText();
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "treasury = " + intdata.getText();
+				}
 			}
 			if (selection == "diplomats") {
 				// diplomats = x
-				trigger = "diplomats = " + intdata.getText();
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "diplomats = " + intdata.getText();
+				}
 			}
 			if (selection == "merchants") {
 				// merchants = x
-				trigger = "merchants = " + intdata.getText();
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "merchants = " + intdata.getText();
+				}
 			}
 			if (selection == "colonists") {
 				// colonists = x
-				trigger = "colonists = " + intdata.getText();
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "colonists = " + intdata.getText();
+				}
 			}
 			if (selection == "missionaries") {
 				// missionaries = x
-				trigger = "missionaries = " + intdata.getText();
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "missionaries = " + intdata.getText();
+				}
 			}
 			if (selection == "elector") {
 				// elector = yes / no
-				trigger = "elector = "
-						+ (String) checkselection.getSelectedItem();
+				if ((String) checkselection.getSelectedItem() == "(Yes or No)") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "elector = "
+							+ (String) checkselection.getSelectedItem();
+				}
 			}
 			if (selection == "emperor") {
 				// emperor = yes / no
-				trigger = "emperor = "
-						+ (String) checkselection.getSelectedItem();
+				if ((String) checkselection.getSelectedItem() == "(Yes or No)") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "emperor = "
+							+ (String) checkselection.getSelectedItem();
+				}
 			}
 			if (selection == "hre") {
 				// hre = yes / no
-				trigger = "hre = " + (String) checkselection.getSelectedItem();
+				if ((String) checkselection.getSelectedItem() == "(Yes or No)") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "hre = "
+							+ (String) checkselection.getSelectedItem();
+				}
 			}
 			if (selection == "neighbour") {
 				// neighbour = x
-				trigger = "neighbour = " + intdata.getText();
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "neighbour = " + intdata.getText();
+				}
 			}
 			if (selection == "tag") {
 				// tag = aaa
-				trigger = "tag = "
-						+ (String) country_aaa_selection.getSelectedItem();
+				if ((String) country_aaa_selection.getSelectedItem() == "(Choose country A)") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "tag = "
+							+ (String) country_aaa_selection.getSelectedItem();
+				}
 			}
 			if (selection == "domestic") {
 				// domestic = { type = aristocracy/ centralization/
@@ -923,27 +1026,63 @@ public class TriggerTest implements ActionListener {
 			}
 			if (selection == "land") {
 				// land = x
-				trigger = "land = " + intdata.getText();
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "land = " + intdata.getText();
+				}
 			}
 			if (selection == "stability") {
 				// naval = x
-				trigger = "stability = " + intdata.getText();
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "stability = " + intdata.getText();
+				}
 			}
 			if (selection == "naval") {
 				// stability = x
-				trigger = "naval = " + intdata.getText();
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "naval = " + intdata.getText();
+				}
 			}
 			if (selection == "trade") {
 				// trade = x
-				trigger = "trade = " + intdata.getText();
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "trade = " + intdata.getText();
+				}
 			}
 			if (selection == "infra") {
 				// infra = x
-				trigger = "infra = " + intdata.getText();
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "infra = " + intdata.getText();
+				}
 			}
 			if (selection == "capital") {
 				// capital = x
-				trigger = "capital = " + intdata.getText();
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					trigger = "capital = " + intdata.getText();
+				}
 			}
 			if (selection == "core_national") {
 				// core_national = { province = x data = aaa }
@@ -1030,15 +1169,25 @@ public class TriggerTest implements ActionListener {
 			}
 			if (selection == "discovered") {
 				// discovered = x
-				stringvalue = intdata.getText();
-				trigger = "discovered = " + stringvalue;
-
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					stringvalue = intdata.getText();
+					trigger = "discovered = " + stringvalue;
+				}
 			}
 			if (selection == "cot") {
 				// cot = x
-				stringvalue = intdata.getText();
-				trigger = "cot = " + stringvalue;
-
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					stringvalue = intdata.getText();
+					trigger = "cot = " + stringvalue;
+				}
 			}
 			if (selection == "fortresslevel") {
 				// fortresslevel = { province = x data = y }
@@ -1058,57 +1207,104 @@ public class TriggerTest implements ActionListener {
 			}
 			if (selection == "tradingpost") {
 				// tradingpost = x
-				stringvalue = intdata.getText();
-				trigger = "tradingpost = " + stringvalue;
-
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					stringvalue = intdata.getText();
+					trigger = "tradingpost = " + stringvalue;
+				}
 			}
 			if (selection == "colony") {
 				// colony = x
-				stringvalue = intdata.getText();
-				trigger = "colony = " + stringvalue;
-
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					stringvalue = intdata.getText();
+					trigger = "colony = " + stringvalue;
+				}
 			}
 			if (selection == "colonialcity") {
 				// colonialcity = x
-				stringvalue = intdata.getText();
-				trigger = "colonialcity = " + stringvalue;
-
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					stringvalue = intdata.getText();
+					trigger = "colonialcity = " + stringvalue;
+				}
 			}
 			if (selection == "city") {
 				// city = x
-				stringvalue = intdata.getText();
-				trigger = "city = " + stringvalue;
-
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					stringvalue = intdata.getText();
+					trigger = "city = " + stringvalue;
+				}
 			}
 			if (selection == "event") {
 				// event = xxxx
-				stringvalue = intdata.getText();
-				trigger = "event = " + stringvalue;
-
+				if (intdata.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					stringvalue = intdata.getText();
+					trigger = "event = " + stringvalue;
+				}
 			}
 			if (selection == "ai") {
 				// ai = yes / no
-				stringvalue = (String) checkselection.getSelectedItem();
-				trigger = "ai = " + stringvalue;
+				if ((String) checkselection.getSelectedItem() == "(Yes or No)") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					stringvalue = (String) checkselection.getSelectedItem();
+					trigger = "ai = " + stringvalue;
+				}
 
 			}
 			if (selection == "flag") {
 				// flag = flag name
-				stringvalue = (String) data.getText();
-				trigger = "flag = " + stringvalue;
-
+				if (data.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					stringvalue = (String) data.getText();
+					trigger = "flag = " + stringvalue;
+				}
 			}
 			if (selection == "exists") {
 				// exists = aaa
-				stringvalue = (String) country_aaa_selection.getSelectedItem();
-				trigger = "exists = " + stringvalue;
-
+				if ((String) country_aaa_selection.getSelectedItem() == "(Choose country A)") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					stringvalue = (String) country_aaa_selection
+							.getSelectedItem();
+					trigger = "exists = " + stringvalue;
+				}
 			}
 			if (selection == "year") {
 				// year = x
-				stringvalue = year.getText();
-				trigger = "year = " + stringvalue;
-
+				if (year.getText() == "") {
+					JOptionPane.showMessageDialog(null,
+							"Bitte richtigen Wert eingeben!", "Error - Wert",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					stringvalue = year.getText();
+					trigger = "year = " + stringvalue;
+				}
 			}
 			if (selection == "random") {
 				// random = x
@@ -1116,7 +1312,7 @@ public class TriggerTest implements ActionListener {
 				trigger = "random = " + value;
 
 			}
-			System.out.println(trigger);
+			GUI.txtaTrigger.setText(GUI.txtaTrigger.getText()+"\n"+trigger);
 		}
 
 	}

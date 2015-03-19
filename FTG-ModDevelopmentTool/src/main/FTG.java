@@ -1,12 +1,13 @@
 package main;
 
 import java.awt.Toolkit;
+import java.util.Properties;
 
 public class FTG {
 
 	public static int width = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 	public static int height = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-	
+	public static Properties properties= new Properties();
 	public static String version = "pre 0.1";
 	
 	public static void main(String[] args) {

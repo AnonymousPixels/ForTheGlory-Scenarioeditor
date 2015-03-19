@@ -443,18 +443,23 @@ public class GUI implements ActionListener {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-			txtName.setText(FTG.properties.getProperty("name"));
-			txtID.setText(FTG.properties.getProperty("id"));
-			txtaComment.setText(FTG.properties.getProperty("comment"));
-			txtaDescription.setText(FTG.properties.getProperty("description"));
-			if (FTG.properties.getProperty("random") == "1")
+			Properties prop = analyze.p[0];
+			txtName.setText(prop.getProperty("name"));
+			txtID.setText(prop.getProperty("id"));
+			try {
+				txtaComment.setText(analyze.getComment());
+			} catch (NumberFormatException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			txtaDescription.setText(prop.getProperty("desc"));
+			if (prop.getProperty("random") == "1")
 				chkRandom.setSelected(true);
 			else
 				chkRandom.setSelected(false);
-			System.out.println(FTG.properties.getProperty("country"));
+			System.out.println(prop.getProperty("country"));
 			jcbCountry.setSelectedIndex(Arrays.binarySearch(country,
-					FTG.properties.getProperty("country")));
+					prop.getProperty("country")));
 
 			// TODO Felix!
 		}

@@ -8,12 +8,17 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.Properties;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -134,12 +139,12 @@ public class GUI implements ActionListener {
 	JButton btnRefresh;
 
 	// Trigger
-	JScrollPane scrTrigger;
-	static JTextArea txtaTrigger;
+	public JScrollPane scrTrigger;
+	public static JTextArea txtaTrigger;
 
 	// Scenario
-	JScrollPane scrScenario;
-	static JTextArea txtaScenario;
+	public JScrollPane scrScenario;
+	public static JTextArea txtaScenario;
 
 	public static int width, height;
 
@@ -155,7 +160,7 @@ public class GUI implements ActionListener {
 		frame.setVisible(false);
 
 		new Main();
-		
+
 		optionsPnl();
 		datePnl();
 		deathdatePnl();
@@ -290,18 +295,22 @@ public class GUI implements ActionListener {
 
 	void triggerPnl() {
 
+		GridBagLayout lytTrigger = new GridBagLayout();
+
 		trigger = new JPanel();
 		trigger.setBorder(BorderFactory.createTitledBorder("Trigger"));
-		GridBagLayout lytTrigger = new GridBagLayout();
+
+		trigger.setLayout(lytTrigger);
 
 		txtaTrigger = new JTextArea("");
 		scrTrigger = new JScrollPane(txtaTrigger);
-		GUI.trigger.setLayout(lytTrigger);
+
 		addComponent(trigger, lytTrigger, scrTrigger, 1, 2, 1, 1, 1, 1,
 				new Insets(5, 5, 5, 5));
 
-		addComponent(trigger, lytTrigger, Main.panel, 1, 1, 1, 1, 1, 1,  new Insets(5, 5, 5, 5));
-		
+		addComponent(trigger, lytTrigger, Main.panel, 1, 1, 1, 1, 1, 1,
+				new Insets(5, 5, 5, 5));
+
 		// new TriggerPanel();
 
 		addComponent(frame.getContentPane(), layout, trigger, 1, 3, 2, 1, 1, 1,
@@ -309,30 +318,28 @@ public class GUI implements ActionListener {
 	}
 
 	void scenarioPnl() {
-
+		GridBagLayout lytScenario = new GridBagLayout();
 		scenario = new JPanel();
 		scenario.setBorder(BorderFactory.createTitledBorder("Scenario"));
+		scenario.setLayout(lytScenario);
 
-		GridBagLayout lytScenario = new GridBagLayout();
-
-		txtaScenario = new JTextArea("asd");
+		txtaScenario = new JTextArea("");
 		scrScenario = new JScrollPane(txtaScenario);
-		GUI.trigger.setLayout(lytScenario);
+
 		addComponent(scenario, lytScenario, scrScenario, 1, 2, 1, 1, 1, 1,
 				new Insets(5, 5, 5, 5));
 
-		addComponent(scenario, lytScenario, Main.panel2, 1, 1, 1, 1, 1, 1,  new Insets(5, 5, 5, 5));
+		addComponent(scenario, lytScenario, Main.panel2, 1, 1, 1, 1, 1, 1,
+				new Insets(5, 5, 5, 5));
 
 		addComponent(frame.getContentPane(), layout, scenario, 1, 4, 2, 1, 1,
 				1, new Insets(5, 5, 5, 5));
 	}
 
 	void previewPnl() {
-
+		GridBagLayout lytPreview = new GridBagLayout();
 		preview = new JPanel();
 		preview.setBorder(BorderFactory.createTitledBorder("Preview"));
-
-		GridBagLayout lytPreview = new GridBagLayout();
 		preview.setLayout(lytPreview);
 
 		edtPreview = new JTextArea("Felix Aufgabe");
@@ -382,6 +389,61 @@ public class GUI implements ActionListener {
 
 		if (ae.getSource() == btnLoad) {
 
+			JFileChooser fc = new JFileChooser();
+			fc.showOpenDialog(null);
+
+			try {
+				new analyze(fc.getSelectedFile());
+				Properties prop = analyze.p[0];
+
+				txtName.setText(prop.getProperty("name"));
+				txtID.setText(prop.getProperty("id"));
+				txtaComment.setText(prop.getProperty("comment"));
+				txtaDescription.setText(prop.getProperty("description"));
+
+				if (prop.getProperty("random") == "1")
+					chkRandom.setSelected(true);
+				else
+					chkRandom.setSelected(false);
+				Arrays.sort(country);
+
+				jcbCountry.setSelectedIndex(Arrays.binarySearch(country,
+						prop.getProperty("country")));
+
+				jcbDateDay.setSelectedItem(prop.getProperty("dateDay"));
+
+				String[] month = { "january", "february", "march", "april",
+						"mai", "june", "july", "august", "september",
+						"october", "november", "december" };
+
+				jcbDateMonth.setSelectedIndex(Arrays.binarySearch(month,
+						prop.getProperty("dateMonth")));
+
+				txtDateYear.setText(prop.getProperty("dateYear"));
+
+				try {
+					jcbDeathdateDay.setSelectedItem(prop
+							.getProperty("deathdateDay"));
+
+					jcbDeathdateMonth.setSelectedIndex(Arrays.binarySearch(
+							month, prop.getProperty("deathdateMonth")));
+
+					txtDeathdateYear.setText(prop.getProperty("deathdateYear"));
+				} catch (Exception e) {
+
+				}
+
+				txtaTrigger.setText(prop.getProperty("trigger"));
+				txtaScenario.setText(prop.getProperty("action_a"));
+
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 			txtName.setText(FTG.properties.getProperty("name"));
 			txtID.setText(FTG.properties.getProperty("id"));
 			txtaComment.setText(FTG.properties.getProperty("comment"));
@@ -390,6 +452,7 @@ public class GUI implements ActionListener {
 				chkRandom.setSelected(true);
 			else
 				chkRandom.setSelected(false);
+			System.out.println(FTG.properties.getProperty("country"));
 			jcbCountry.setSelectedIndex(Arrays.binarySearch(country,
 					FTG.properties.getProperty("country")));
 
@@ -397,5 +460,4 @@ public class GUI implements ActionListener {
 		}
 
 	}
-
 }

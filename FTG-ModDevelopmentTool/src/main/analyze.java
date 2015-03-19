@@ -465,7 +465,7 @@ public class analyze {
 				.parseInt(p[o].getProperty("eventEndFull")); h++) {
 
 			String Q = trim(fullString[h]);
-			if (Q.length() > 7) {
+			if (Q.length() > 9) {
 
 				if (Q.substring(0, 9).contains("trigger={")) {
 

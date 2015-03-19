@@ -342,7 +342,7 @@ public class GUI implements ActionListener {
 		preview.setBorder(BorderFactory.createTitledBorder("Preview"));
 		preview.setLayout(lytPreview);
 
-		edtPreview = new JTextArea("Felix Aufgabe");
+		edtPreview = new JTextArea("");
 		scrPreview = new JScrollPane(edtPreview);
 
 		btnRefresh = new JButton("Refresh");
@@ -435,7 +435,8 @@ public class GUI implements ActionListener {
 
 				txtaTrigger.setText(prop.getProperty("trigger"));
 				txtaScenario.setText(prop.getProperty("action_a"));
-
+				edtPreview.setText(prop.getProperty("fullEvent"));
+				
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

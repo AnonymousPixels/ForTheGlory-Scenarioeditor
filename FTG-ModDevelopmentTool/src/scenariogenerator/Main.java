@@ -20,7 +20,7 @@ public class Main {
 		try {
 			img = ImageIO
 					.read(new File(
-							"C:\\DeinOrdner\\ForTheGloryModDevelopmentTool\\src\\main2\\frontend.png"));
+							"C:\\Users\\Maximilian\\GitHub\\FTG-ModDevelopmentTool\\FTG-ModDevelopmentTool\\src\\scenariogenerator\\frontend.png"));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -31,7 +31,7 @@ public class Main {
 		try {
 			img2 = ImageIO
 					.read(new File(
-							"C:\\DeinOrdner\\ForTheGloryModDevelopmentTool\\src\\main2\\backend.png"));
+							"C:\\Users\\Maximilian\\GitHub\\FTG-ModDevelopmentTool\\FTG-ModDevelopmentTool\\src\\scenariogenerator\backend.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

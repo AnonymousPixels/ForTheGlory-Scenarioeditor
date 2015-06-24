@@ -26,8 +26,8 @@ public class MapPanel extends JPanel implements MouseListener,
 	JScrollBar sliderX, sliderY;
 	JLabel image;
 	Point drag;
-	int zoomFactorSelected;
-	double[] zoomFactors = { 1, 0.8, 0.6, 0.4, 0.2 };
+	float zoomFactorSelected;
+	double[] zoomFactors = { 1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2 };
 	Map map2;
 
 	public MapPanel(BufferedImage Frontend, BufferedImage Backend,
@@ -139,25 +139,25 @@ public class MapPanel extends JPanel implements MouseListener,
 	}
 
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		int formerZoomFactorSelected = zoomFactorSelected;
-		zoomFactorSelected = zoomFactorSelected + e.getWheelRotation();
+		float formerZoomFactorSelected = zoomFactorSelected;
+		zoomFactorSelected = zoomFactorSelected +e.getWheelRotation();
 		if (zoomFactorSelected < 0)
 			zoomFactorSelected = 0;
 
 		if (zoomFactorSelected >= zoomFactors.length)
 			zoomFactorSelected = zoomFactors.length - 1;
 		sliderX.setValue((int) (sliderX.getValue()
-				* zoomFactors[zoomFactorSelected] / zoomFactors[formerZoomFactorSelected]));
+				* zoomFactors[(int)zoomFactorSelected] / zoomFactors[(int)formerZoomFactorSelected]));
 		sliderY.setValue((int) (sliderY.getValue()
-				* zoomFactors[zoomFactorSelected] / zoomFactors[formerZoomFactorSelected]));
+				* zoomFactors[(int)zoomFactorSelected] / zoomFactors[(int)formerZoomFactorSelected]));
 		biFrontend = null;
 		biBackend = null;
-		if (zoomFactors[zoomFactorSelected] == 1) {
+		if (zoomFactors[(int)zoomFactorSelected] == 1) {
 			biFrontend = biFrontendOriginal;
 			biBackend = biBackendOriginal;
 		} else {
-			int newImageWidth = (int) (biFrontendOriginal.getWidth() * zoomFactors[zoomFactorSelected]);
-			int newImageHeight = (int) (biFrontendOriginal.getHeight() * zoomFactors[zoomFactorSelected]);
+			int newImageWidth = (int) (biFrontendOriginal.getWidth() * zoomFactors[(int)zoomFactorSelected]);
+			int newImageHeight = (int) (biFrontendOriginal.getHeight() * zoomFactors[(int)zoomFactorSelected]);
 			biFrontend = new BufferedImage(newImageWidth, newImageHeight,
 					biFrontendOriginal.getType());
 			Graphics2D g = biFrontend.createGraphics();

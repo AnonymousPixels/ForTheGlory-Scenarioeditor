@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
@@ -111,8 +112,8 @@ public class ColonyPanel extends JPanel {
 		txtColonizationDifficulty = new JTextField(
 				map.get("colonizationdifficulty"));
 		txtLootedYear = new JTextField(map.get("lootedYear"));
-		txtMine = new JTextField(map.get("Mine"));
-		txtTax = new JTextField(map.get("Tax"));
+		txtMine = new JTextField(map.get("mine"));
+		txtTax = new JTextField(map.get("tax"));
 
 		jcbType = new JComboBox();
 		jcbTerrain = new JComboBox();
@@ -124,79 +125,144 @@ public class ColonyPanel extends JPanel {
 		jcbLootedMonth = new JComboBox();
 		jcbLootedMonth = new JComboBox();
 
+		chkLooted = new JCheckBox("Geplündert?");
+		if (map.get("looted") == "true")
+			chkLooted.setSelected(true);
+		chkWhiteman = new JCheckBox("Von Europäern entdeckt?");
+		if (map.get("whiteman") == "true")
+			chkWhiteman.setSelected(true);
+
 		this.setPreferredSize(new Dimension(400, 600));
 
 		addPnlPopulation();
 		addPnlGeography();
+		addPnlGoods();
+		addPnlLooted();
+	}
 
+	public HashMap<String, String> getData() {
+
+		HashMap<String, String> map = new HashMap<String, String>();
+
+		map.put("name", txtName.getText());
+		map.put("manpower", txtManpower.getText());
+		map.put("income", txtIncome.getText());
+		map.put("value", txtValue.getText());
+		map.put("cotmodifier", txtCotModifier.getText());
+		map.put("colonizationdifficulty", txtColonizationDifficulty.getText());
+		map.put("lootedYear", txtLootedYear.getText());
+		map.put("mine", txtMine.getText());
+		map.put("tax", txtTax.getText());
+		map.put("looted", chkLooted.isSelected() ? "true" : "false");
+		map.put("whiteman", chkWhiteman.isSelected() ? "true" : "false");
+
+		return map;
+	}
+
+	public void setData(HashMap<String, String> map) {
+		txtName.setText(map.get("name"));
+		txtManpower.setText(map.get("manpower"));
+		txtIncome.setText(map.get("income"));
+		txtValue.setText(map.get("value"));
+		txtCotModifier.setText(map.get("cotmodifier"));
+		txtColonizationDifficulty.setText(map.get("colonizationdifficulty"));
+		txtLootedYear.setText(map.get("lootedYear"));
+		txtMine.setText(map.get("mine"));
+		txtTax.setText(map.get("tax"));
+
+		chkLooted = new JCheckBox("Geplündert?");
+		if (map.get("looted") == "true")
+			chkLooted.setSelected(true);
+		chkWhiteman = new JCheckBox("Von Europäern entdeckt?");
+		if (map.get("whiteman") == "true")
+			chkWhiteman.setSelected(true);
 	}
 
 	void addPnlPopulation() {
-//		pnlPopulation = new JPanel();
-//		pnlPopulation.setLayout(layout);
-//		// pnlPopulation.setBackground(Color.RED);
-//		// pnlPopulation.setOpaque(true);
-//		pnlPopulation
-//				.setBorder(BorderFactory.createTitledBorder("Bevölkerung"));
-//		addComponent(this, layout, pnlPopulation, 1, 1, 1, 1, 1, 0, new Insets(
-//				5, 5, 5, 5));
 
 		// Komponenten
 
-		addComponent(this, layout, lblID, 1, 1, 1, 1, 0, 0,
-				new Insets(5, 5, 5, 5));
-		addComponent(this, layout, lblID2, 2, 1, 1, 1, 1, 0,
-				new Insets(5, 5, 5, 5));
+		addComponent(this, layout, lblID, 1, 1, 1, 1, 0, 0, new Insets(5, 5, 5,
+				5));
+		addComponent(this, layout, lblID2, 2, 1, 1, 1, 1, 0, new Insets(5, 5,
+				5, 5));
 
-		addComponent(this, layout, lblName, 1, 2, 1, 1, 0, 0,
-				new Insets(5, 5, 5, 5));
-		addComponent(this, layout, txtName, 2, 2, 1, 1, 1, 0,
-				new Insets(5, 5, 5, 5));
+		addComponent(this, layout, lblName, 1, 2, 1, 1, 0, 0, new Insets(5, 5,
+				5, 5));
+		addComponent(this, layout, txtName, 2, 2, 1, 1, 1, 0, new Insets(5, 5,
+				5, 5));
 
-		addComponent(this, layout, lblManpower, 1, 3, 1, 1, 0, 0,
-				new Insets(5, 5, 5, 5));
-		addComponent(this, layout, txtManpower, 2, 3, 1, 1, 1, 0,
-				new Insets(5, 5, 5, 5));
+		addComponent(this, layout, lblManpower, 1, 3, 1, 1, 0, 0, new Insets(5,
+				5, 5, 5));
+		addComponent(this, layout, txtManpower, 2, 3, 1, 1, 1, 0, new Insets(5,
+				5, 5, 5));
 
-		addComponent(this, layout, lblIncome, 1, 4, 1, 1, 0, 0,
-				new Insets(5, 5, 5, 5));
-		addComponent(this, layout, txtIncome, 2, 4, 1, 1, 1, 0,
-				new Insets(5, 5, 5, 5));
+		addComponent(this, layout, lblIncome, 1, 4, 1, 1, 0, 0, new Insets(5,
+				5, 5, 5));
+		addComponent(this, layout, txtIncome, 2, 4, 1, 1, 1, 0, new Insets(5,
+				5, 5, 5));
 
-		addComponent(this, layout, lblReligion, 1, 5, 1, 1, 0, 0,
-				new Insets(5, 5, 30, 5));
-		addComponent(this, layout, jcbReligion, 2, 5, 1, 1, 1, 0,
-				new Insets(5, 5, 30, 5));
+		addComponent(this, layout, lblReligion, 1, 5, 1, 1, 0, 0, new Insets(5,
+				5, 40, 5));
+		addComponent(this, layout, jcbReligion, 2, 5, 1, 1, 1, 0, new Insets(5,
+				5, 40, 5));
 
-		addComponent(this, layout, lblType, 1, 6, 1, 1, 0, 0,
-				new Insets(5, 5, 5, 5));
-		addComponent(this, layout, jcbType, 2, 6, 1, 1, 1, 0,
-				new Insets(5, 5, 5, 5));
+		addComponent(this, layout, lblType, 1, 6, 1, 1, 0, 0, new Insets(5, 5,
+				5, 5));
+		addComponent(this, layout, jcbType, 2, 6, 1, 1, 1, 0, new Insets(5, 5,
+				5, 5));
 
 	}
 
 	void addPnlGeography() {
-//		pnlGeography = new JPanel();
-//		pnlGeography.setLayout(layout);
-//		pnlGeography.setBorder(BorderFactory.createTitledBorder("Geographie"));
-//		addComponent(this, layout, pnlGeography, 1, 2, 1, 1, 1, 0, new Insets(
-//				5, 5, 5, 5));
 
-		addComponent(this, layout, lblTerrain, 1, 7, 1, 1, 1, 0,
+		addComponent(this, layout, lblTerrain, 1, 7, 1, 1, 0, 0, new Insets(5,
+				5, 5, 5));
+		addComponent(this, layout, jcbTerrain, 2, 7, 1, 1, 1, 0, new Insets(5,
+				5, 5, 5));
+
+		addComponent(this, layout, lblCulture, 1, 8, 1, 1, 0, 0, new Insets(5,
+				5, 5, 5));
+		addComponent(this, layout, jcbCulture, 2, 8, 1, 1, 1, 0, new Insets(5,
+				5, 5, 5));
+
+		addComponent(this, layout, lblClimate, 1, 9, 1, 1, 0, 0, new Insets(5,
+				5, 5, 5));
+		addComponent(this, layout, jcbClimate, 2, 9, 1, 1, 1, 0, new Insets(5,
+				5, 5, 5));
+
+	}
+
+	void addPnlGoods() {
+		addComponent(this, layout, lblGoods, 1, 10, 1, 1, 0, 0, new Insets(40,
+				5, 5, 5));
+		addComponent(this, layout, jcbGoods, 2, 10, 1, 1, 0, 0, new Insets(40,
+				5, 5, 5));
+
+		addComponent(this, layout, lblValue, 1, 11, 1, 1, 0, 0, new Insets(5,
+				5, 5, 5));
+		addComponent(this, layout, txtValue, 2, 11, 1, 1, 0, 0, new Insets(5,
+				5, 5, 5));
+
+		addComponent(this, layout, lblCotModifier, 1, 12, 1, 1, 0, 0,
 				new Insets(5, 5, 5, 5));
-		addComponent(this, layout, jcbTerrain, 2, 7, 1, 1, 1, 0,
+		addComponent(this, layout, txtCotModifier, 2, 12, 1, 1, 0, 0,
 				new Insets(5, 5, 5, 5));
 
-		addComponent(this, layout, lblCulture, 1,8, 1, 1, 1, 0,
-				new Insets(5, 5, 5, 5));
-		addComponent(this, layout, jcbCulture, 2, 8, 1, 1, 1, 0,
-				new Insets(5, 5, 5, 5));
+		addComponent(this, layout, lblColonizationDifficulty, 1, 13, 1, 1, 0,
+				0, new Insets(5, 5, 5, 5));
+		addComponent(this, layout, txtColonizationDifficulty, 2, 13, 1, 1, 0,
+				0, new Insets(5, 5, 5, 5));
+	}
 
-		addComponent(this, layout, lblClimate, 1, 9, 1, 1, 1, 0,
-				new Insets(5, 5, 5, 5));
-		addComponent(this, layout, jcbClimate, 2, 9, 1, 1, 1, 0,
-				new Insets(5, 5, 5, 5));
+	void addPnlLooted() {
+		addComponent(this, layout, chkLooted, 1, 14, 1, 1, 0, 0, new Insets(40,
+				5, 5, 5));
+		addComponent(this, layout, txtLootedYear, 2, 14, 1, 1, 0, 0,
+				new Insets(40, 5, 5, 5));
 
+		addComponent(this, layout, chkWhiteman, 1, 15, 2, 1, 0, 0, new Insets(
+				5, 5, 5, 5));
 	}
 
 	static void addComponent(Container cont, GridBagLayout gbl, Component c,

@@ -19,56 +19,16 @@ import javax.swing.JTextField;
 
 public class ColonyPanel extends JPanel {
 
-	static JLabel lblID;
-
-	JLabel lblID2;
-
-	JLabel lblName;
-
-	JLabel lblType;
-
-	JLabel lblTerrain;
-
-	JLabel lblClimate;
-
-	JLabel lblReligion;
-
-	JLabel lblCulture;
-
-	JLabel lblManpower;
-
-	JLabel lblIncome;
-
-	JLabel lblGoods;
-
-	JLabel lblValue;
-
-	JLabel lblCotModifier;
-
-	JLabel lblColonizationDifficulty;
-
-	JLabel lblLooted;
-
-	JLabel lblDate;
-
-	JLabel lblMine;
-
-	JLabel lblNatives;
-
-	JLabel lblFerocity;
-
-	JLabel lblTolerance;
-
-	JLabel lblNegotiation;
-
-	JLabel lblProvinceRevoltrisk;
-
-	JLabel lblTax;
+	JLabel lblID, lblID2, lblName, lblType, lblTerrain, lblClimate,
+			lblReligion, lblCulture, lblManpower, lblIncome, lblGoods,
+			lblValue, lblCotModifier, lblColonizationDifficulty, lblLooted,
+			lblDate, lblMine, lblNatives, lblFerocity, lblTolerance,
+			lblNegotiation, lblProvinceRevoltrisk, lblTax;
 
 	JTextField txtName, txtManpower, txtIncome, txtValue, txtCotModifier,
 			txtColonizationDifficulty, txtLootedYear, txtMine, txtTax;
 
-	JComboBox jcbType, jcbTerrain, jcbClimate, jcbReligion, jcbCulture,
+	JComboBox<String> jcbType, jcbTerrain, jcbClimate, jcbReligion, jcbCulture,
 			jcbGoods, jcbLootedDay, jcbLootedMonth;
 
 	JCheckBox chkLooted, chkWhiteman;
@@ -76,14 +36,11 @@ public class ColonyPanel extends JPanel {
 	JSlider sldNatives, sldFerocity, sldTolerance, sldNegotiation,
 			sldProvinceRevoltrisk;
 
-	static JPanel pnlPopulation, pnlGeography;
-
-	JPanel pnlFinance;
-
-	JPanel pnlNatives;
+	JPanel pnlPopulation, pnlGeography, pnlFinance, pnlNatives;
 	static GridBagLayout layout;
 
-	public ColonyPanel(Map<String, String> map) {
+	public ColonyPanel(Map<String, String> map,
+			Map<String, String[]> selectables) {
 		super();
 		layout = new GridBagLayout();
 
@@ -115,15 +72,30 @@ public class ColonyPanel extends JPanel {
 		txtMine = new JTextField(map.get("mine"));
 		txtTax = new JTextField(map.get("tax"));
 
-		jcbType = new JComboBox();
-		jcbTerrain = new JComboBox();
-		jcbClimate = new JComboBox();
-		jcbReligion = new JComboBox();
-		jcbCulture = new JComboBox();
-		jcbGoods = new JComboBox();
-		jcbLootedDay = new JComboBox();
-		jcbLootedMonth = new JComboBox();
-		jcbLootedMonth = new JComboBox();
+		jcbType = new JComboBox<String>();
+		for (String s : selectables.get("type"))
+			jcbType.addItem(s);
+		jcbTerrain = new JComboBox<String>();
+		for (String s : selectables.get("terrain"))
+			jcbTerrain.addItem(s);
+		jcbClimate = new JComboBox<String>();
+		for (String s : selectables.get("climate"))
+			jcbClimate.addItem(s);
+		jcbReligion = new JComboBox<String>();
+		for (String s : selectables.get("religion"))
+			jcbReligion.addItem(s);
+		jcbCulture = new JComboBox<String>();
+		for (String s : selectables.get("culture"))
+			jcbCulture.addItem(s);
+		jcbGoods = new JComboBox<String>();
+		for (String s : selectables.get("goods"))
+			jcbGoods.addItem(s);
+		jcbLootedDay = new JComboBox<String>();
+		for (String s : selectables.get("lootedDay"))
+			jcbLootedDay.addItem(s);
+		jcbLootedMonth = new JComboBox<String>();
+		for (String s : selectables.get("lootedMonth"))
+			jcbLootedMonth.addItem(s);
 
 		chkLooted = new JCheckBox("Geplündert?");
 		if (map.get("looted") == "true")

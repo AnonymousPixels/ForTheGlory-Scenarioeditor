@@ -91,10 +91,16 @@ public class ColonyPanel extends JPanel {
 		for (String s : selectables.get("goods"))
 			jcbGoods.addItem(s);
 		jcbLootedDay = new JComboBox<String>();
-		for (String s : selectables.get("lootedDay"))
+		String[] days = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+				"11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+				"21", "22", "23", "24", "25", "26", "27", "28", "29", "30" };
+		String[] months = { "January", "February", "March", "April", "May",
+				"June", "July", "August", "September", "October", "November",
+				"December" };
+		for (String s : days)
 			jcbLootedDay.addItem(s);
 		jcbLootedMonth = new JComboBox<String>();
-		for (String s : selectables.get("lootedMonth"))
+		for (String s : months)
 			jcbLootedMonth.addItem(s);
 
 		chkLooted = new JCheckBox("Geplündert?");
@@ -156,32 +162,32 @@ public class ColonyPanel extends JPanel {
 
 		addComponent(this, layout, lblID, 1, 1, 1, 1, 0, 0, new Insets(5, 5, 5,
 				5));
-		addComponent(this, layout, lblID2, 2, 1, 1, 1, 1, 0, new Insets(5, 5,
+		addComponent(this, layout, lblID2, 2, 1, 3, 1, 1, 0, new Insets(5, 5,
 				5, 5));
 
 		addComponent(this, layout, lblName, 1, 2, 1, 1, 0, 0, new Insets(5, 5,
 				5, 5));
-		addComponent(this, layout, txtName, 2, 2, 1, 1, 1, 0, new Insets(5, 5,
+		addComponent(this, layout, txtName, 2, 2, 3, 1, 1, 0, new Insets(5, 5,
 				5, 5));
 
 		addComponent(this, layout, lblManpower, 1, 3, 1, 1, 0, 0, new Insets(5,
 				5, 5, 5));
-		addComponent(this, layout, txtManpower, 2, 3, 1, 1, 1, 0, new Insets(5,
+		addComponent(this, layout, txtManpower, 2, 3, 3, 1, 1, 0, new Insets(5,
 				5, 5, 5));
 
 		addComponent(this, layout, lblIncome, 1, 4, 1, 1, 0, 0, new Insets(5,
 				5, 5, 5));
-		addComponent(this, layout, txtIncome, 2, 4, 1, 1, 1, 0, new Insets(5,
+		addComponent(this, layout, txtIncome, 2, 4, 3, 1, 1, 0, new Insets(5,
 				5, 5, 5));
 
 		addComponent(this, layout, lblReligion, 1, 5, 1, 1, 0, 0, new Insets(5,
 				5, 40, 5));
-		addComponent(this, layout, jcbReligion, 2, 5, 1, 1, 1, 0, new Insets(5,
+		addComponent(this, layout, jcbReligion, 2, 5, 3, 1, 1, 0, new Insets(5,
 				5, 40, 5));
 
 		addComponent(this, layout, lblType, 1, 6, 1, 1, 0, 0, new Insets(5, 5,
 				5, 5));
-		addComponent(this, layout, jcbType, 2, 6, 1, 1, 1, 0, new Insets(5, 5,
+		addComponent(this, layout, jcbType, 2, 6, 3, 1, 1, 0, new Insets(5, 5,
 				5, 5));
 
 	}
@@ -190,17 +196,17 @@ public class ColonyPanel extends JPanel {
 
 		addComponent(this, layout, lblTerrain, 1, 7, 1, 1, 0, 0, new Insets(5,
 				5, 5, 5));
-		addComponent(this, layout, jcbTerrain, 2, 7, 1, 1, 1, 0, new Insets(5,
+		addComponent(this, layout, jcbTerrain, 2, 7, 3, 1, 1, 0, new Insets(5,
 				5, 5, 5));
 
 		addComponent(this, layout, lblCulture, 1, 8, 1, 1, 0, 0, new Insets(5,
 				5, 5, 5));
-		addComponent(this, layout, jcbCulture, 2, 8, 1, 1, 1, 0, new Insets(5,
+		addComponent(this, layout, jcbCulture, 2, 8, 3, 1, 1, 0, new Insets(5,
 				5, 5, 5));
 
 		addComponent(this, layout, lblClimate, 1, 9, 1, 1, 0, 0, new Insets(5,
 				5, 5, 5));
-		addComponent(this, layout, jcbClimate, 2, 9, 1, 1, 1, 0, new Insets(5,
+		addComponent(this, layout, jcbClimate, 2, 9, 3, 1, 1, 0, new Insets(5,
 				5, 5, 5));
 
 	}
@@ -208,30 +214,34 @@ public class ColonyPanel extends JPanel {
 	void addPnlGoods() {
 		addComponent(this, layout, lblGoods, 1, 10, 1, 1, 0, 0, new Insets(40,
 				5, 5, 5));
-		addComponent(this, layout, jcbGoods, 2, 10, 1, 1, 0, 0, new Insets(40,
+		addComponent(this, layout, jcbGoods, 2, 10, 3, 1, 0, 0, new Insets(40,
 				5, 5, 5));
 
 		addComponent(this, layout, lblValue, 1, 11, 1, 1, 0, 0, new Insets(5,
 				5, 5, 5));
-		addComponent(this, layout, txtValue, 2, 11, 1, 1, 0, 0, new Insets(5,
+		addComponent(this, layout, txtValue, 2, 11, 3, 1, 0, 0, new Insets(5,
 				5, 5, 5));
 
 		addComponent(this, layout, lblCotModifier, 1, 12, 1, 1, 0, 0,
 				new Insets(5, 5, 5, 5));
-		addComponent(this, layout, txtCotModifier, 2, 12, 1, 1, 0, 0,
+		addComponent(this, layout, txtCotModifier, 2, 12, 3, 1, 0, 0,
 				new Insets(5, 5, 5, 5));
 
 		addComponent(this, layout, lblColonizationDifficulty, 1, 13, 1, 1, 0,
 				0, new Insets(5, 5, 5, 5));
-		addComponent(this, layout, txtColonizationDifficulty, 2, 13, 1, 1, 0,
+		addComponent(this, layout, txtColonizationDifficulty, 2, 13, 3, 1, 0,
 				0, new Insets(5, 5, 5, 5));
 	}
 
 	void addPnlLooted() {
 		addComponent(this, layout, chkLooted, 1, 14, 1, 1, 0, 0, new Insets(40,
 				5, 5, 5));
-		addComponent(this, layout, txtLootedYear, 2, 14, 1, 1, 0, 0,
+		addComponent(this, layout, txtLootedYear, 4, 14, 1, 1, 0, 0,
 				new Insets(40, 5, 5, 5));
+		addComponent(this, layout, jcbLootedMonth, 3, 14, 1, 1, 0, 0,
+				new Insets(40, 5, 5, 5));
+		addComponent(this, layout, jcbLootedDay, 2, 14, 1, 1, 0, 0, new Insets(
+				40, 5, 5, 5));
 
 		addComponent(this, layout, chkWhiteman, 1, 15, 2, 1, 0, 0, new Insets(
 				5, 5, 5, 5));

@@ -19,16 +19,16 @@ import javax.swing.JTextField;
 
 public class ColonyPanel extends JPanel {
 
-	JLabel lblID, lblID2, lblName, lblType, lblTerrain, lblClimate,
-			lblReligion, lblCulture, lblManpower, lblIncome, lblGoods,
-			lblValue, lblCotModifier, lblColonizationDifficulty, lblLooted,
-			lblDate, lblMine, lblNatives, lblFerocity, lblTolerance,
-			lblNegotiation, lblProvinceRevoltrisk, lblTax;
+	JLabel lblID, lblID2, lblName, lblTerrain, lblClimate, lblReligion,
+			lblCulture, lblManpower, lblIncome, lblGoods, lblValue,
+			lblCotModifier, lblColonizationDifficulty, lblLooted, lblDate,
+			lblMine, lblNatives, lblFerocity, lblTolerance, lblNegotiation,
+			lblProvinceRevoltrisk, lblTax;
 
 	JTextField txtName, txtManpower, txtIncome, txtValue, txtCotModifier,
 			txtColonizationDifficulty, txtLootedYear, txtMine, txtTax;
 
-	JComboBox<String> jcbType, jcbTerrain, jcbClimate, jcbReligion, jcbCulture,
+	JComboBox<String> jcbTerrain, jcbClimate, jcbReligion, jcbCulture,
 			jcbGoods, jcbLootedDay, jcbLootedMonth;
 
 	JCheckBox chkLooted, chkWhiteman;
@@ -49,7 +49,7 @@ public class ColonyPanel extends JPanel {
 		lblID = new JLabel("ID:");
 		lblID2 = new JLabel(map.get("id"));
 		lblName = new JLabel("Name:");
-		lblType = new JLabel("Typ:");
+		;
 		lblTerrain = new JLabel("Terrain:");
 		lblClimate = new JLabel("Klima:");
 		lblReligion = new JLabel("Religion:");
@@ -72,9 +72,6 @@ public class ColonyPanel extends JPanel {
 		txtMine = new JTextField(map.get("mine"));
 		txtTax = new JTextField(map.get("tax"));
 
-		jcbType = new JComboBox<String>();
-		for (String s : selectables.get("type"))
-			jcbType.addItem(s);
 		jcbTerrain = new JComboBox<String>();
 		for (String s : selectables.get("terrain"))
 			jcbTerrain.addItem(s);
@@ -184,11 +181,6 @@ public class ColonyPanel extends JPanel {
 				5, 40, 5));
 		addComponent(this, layout, jcbReligion, 2, 5, 3, 1, 1, 0, new Insets(5,
 				5, 40, 5));
-
-		addComponent(this, layout, lblType, 1, 6, 1, 1, 0, 0, new Insets(5, 5,
-				5, 5));
-		addComponent(this, layout, jcbType, 2, 6, 3, 1, 1, 0, new Insets(5, 5,
-				5, 5));
 
 	}
 

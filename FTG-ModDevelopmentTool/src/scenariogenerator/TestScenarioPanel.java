@@ -31,6 +31,7 @@ public class TestScenarioPanel {
 		map.put("cotmodifier", "0");
 		map.put("colonizationdifficulty", "0");
 		map.put("lootedYear", "0");
+		map.put("religion", "hussite");
 		JFrame frame = new JFrame();
 		frame.add(new ColonyPanel(map, map2));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

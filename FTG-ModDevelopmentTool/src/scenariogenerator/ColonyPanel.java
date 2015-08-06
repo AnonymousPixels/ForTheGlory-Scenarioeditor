@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +19,8 @@ import javax.swing.JSlider;
 import javax.swing.JTextField;
 
 public class ColonyPanel extends JPanel {
+
+	Map<String, String[]> selectable;
 
 	JLabel lblID, lblID2, lblName, lblTerrain, lblClimate, lblReligion,
 			lblCulture, lblManpower, lblIncome, lblGoods, lblValue,
@@ -43,6 +46,8 @@ public class ColonyPanel extends JPanel {
 			Map<String, String[]> selectables) {
 		super();
 		layout = new GridBagLayout();
+
+		selectable = selectables;
 
 		this.setLayout(layout);
 
@@ -106,7 +111,7 @@ public class ColonyPanel extends JPanel {
 		chkWhiteman = new JCheckBox("Von Europäern entdeckt?");
 		if (map.get("whiteman") == "true")
 			chkWhiteman.setSelected(true);
-
+		setData(map);
 		this.setPreferredSize(new Dimension(400, 600));
 
 		addPnlPopulation();
@@ -130,11 +135,16 @@ public class ColonyPanel extends JPanel {
 		map.put("tax", txtTax.getText());
 		map.put("looted", chkLooted.isSelected() ? "true" : "false");
 		map.put("whiteman", chkWhiteman.isSelected() ? "true" : "false");
+		map.put("religion", jcbReligion.getSelectedItem().toString());
+		map.put("terrain", jcbTerrain.getSelectedItem().toString());
+		map.put("culture", jcbCulture.getSelectedItem().toString());
+		map.put("climate", jcbClimate.getSelectedItem().toString());
+		map.put("goods", jcbGoods.getSelectedItem().toString());
 
 		return map;
 	}
 
-	public void setData(HashMap<String, String> map) {
+	public void setData(Map<String, String> map) {
 		txtName.setText(map.get("name"));
 		txtManpower.setText(map.get("manpower"));
 		txtIncome.setText(map.get("income"));
@@ -144,6 +154,16 @@ public class ColonyPanel extends JPanel {
 		txtLootedYear.setText(map.get("lootedYear"));
 		txtMine.setText(map.get("mine"));
 		txtTax.setText(map.get("tax"));
+
+		jcbReligion.setSelectedItem(map.get("religion"));
+
+		jcbTerrain.setSelectedItem(map.get("terrain"));
+
+		jcbClimate.setSelectedItem(map.get("climate"));
+
+		jcbCulture.setSelectedItem(map.get("culture"));
+
+		jcbGoods.setSelectedItem(map.get("goods"));
 
 		chkLooted = new JCheckBox("Geplündert?");
 		if (map.get("looted") == "true")

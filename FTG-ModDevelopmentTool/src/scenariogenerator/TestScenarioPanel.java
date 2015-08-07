@@ -17,11 +17,13 @@ public class TestScenarioPanel {
 		HashMap<String, String[]> map2 = new HashMap<String, String[]>();
 		String[] climate = { "arctic", "tropical", "temperate", "ncontinental",
 				"scontinental", "tundra", "desertic" };
-		map2.put("terrain", LoadGameFiles.loadTerrainsFile());
+		GameFiles game = new GameFiles(
+				"C:\\Program Files (x86)\\Steam\\SteamApps\\common\\For The Glory\\");
+		map2.put("terrain", game.loadTerrains());
 		map2.put("climate", climate);
-		map2.put("religion", LoadGameFiles.loadReligionsFile());
-		map2.put("culture", LoadGameFiles.loadCulturesFile());
-		map2.put("goods", LoadGameFiles.loadGoodsFile());
+		map2.put("religion", game.loadReligions());
+		map2.put("culture", game.loadCultures());
+		map2.put("goods", game.loadGoods());
 
 		map.put("id", "1");
 		map.put("name", "Test");
@@ -32,6 +34,12 @@ public class TestScenarioPanel {
 		map.put("colonizationdifficulty", "0");
 		map.put("lootedYear", "0");
 		map.put("religion", "hussite");
+		map.put("terrain", "plains");
+		map.put("culture", "abenaki");
+		map.put("climate", "arctic");
+		map.put("goods", "cloth");
+		map.put("looted", "true");
+		map.put("whiteman", "true");
 		JFrame frame = new JFrame();
 		frame.add(new ColonyPanel(map, map2));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -15,7 +15,8 @@ public class Main {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException,
+			InterruptedException {
 		BufferedImage img = null;
 		try {
 			img = ImageIO
@@ -37,7 +38,9 @@ public class Main {
 			e.printStackTrace();
 		}
 		System.out.println("Images loaded");
-		MapPanel map = new MapPanel(img, img2, new HashMap<Color, Integer>());
+		GameFiles game = new GameFiles(null);
+		MapPanel map = new MapPanel(img, img2,
+				game.loadMap("C:\\Users\\Maximilian\\Desktop\\log.txt"));
 		JFrame frame = new JFrame("Test MapPanel");
 		frame.setBounds(10, 10, 500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -8,13 +8,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class LoadGameFiles {
+public class GameFiles {
 
-	public static HashMap<Color, Integer> loadMapFile() throws IOException,
-			InterruptedException {
+	static String gamePath;
+
+	public GameFiles(String path) {
+		gamePath = path;
+	}
+
+	public static HashMap<Color, Integer> loadMap(String path)
+			throws IOException, InterruptedException {
 		HashMap<Color, Integer> map = new HashMap<Color, Integer>();
-		FileReader r = new FileReader(new File(
-				"C:\\Users\\Maximilian\\Desktop\\log.txt"));
+		FileReader r = new FileReader(new File(path));
 		BufferedReader br = new BufferedReader(r);
 		String line;
 		while ((line = br.readLine()) != null)
@@ -37,12 +42,10 @@ public class LoadGameFiles {
 		return map;
 	}
 
-	public static String[] loadCulturesFile() throws IOException {
+	public String[] loadCultures() throws IOException {
 		int length = 0;
 
-		FileReader r = new FileReader(
-				new File(
-						"C:\\Program Files (x86)\\Steam\\SteamApps\\common\\For The Glory\\Db\\cultures.txt"));
+		FileReader r = new FileReader(new File(gamePath + "Db\\cultures.txt"));
 		BufferedReader br = new BufferedReader(r);
 		String line;
 		while ((line = br.readLine()) != null)
@@ -53,9 +56,7 @@ public class LoadGameFiles {
 		r.close();
 		r = null;
 		br = null;
-		r = new FileReader(
-				new File(
-						"C:\\Program Files (x86)\\Steam\\SteamApps\\common\\For The Glory\\Db\\cultures.txt"));
+		r = new FileReader(new File(gamePath + "Db\\cultures.txt"));
 		br = new BufferedReader(r);
 		String[] cultures = new String[length];
 		int i = 0;
@@ -75,12 +76,10 @@ public class LoadGameFiles {
 
 	}
 
-	public static String[] loadGoodsFile() throws IOException {
+	public static String[] loadGoods() throws IOException {
 		int length = 0;
 
-		FileReader r = new FileReader(
-				new File(
-						"C:\\Program Files (x86)\\Steam\\SteamApps\\common\\For The Glory\\Db\\goods.txt"));
+		FileReader r = new FileReader(new File(gamePath + "Db\\goods.txt"));
 		BufferedReader br = new BufferedReader(r);
 		String line;
 		while ((line = br.readLine()) != null)
@@ -91,9 +90,7 @@ public class LoadGameFiles {
 		r.close();
 		r = null;
 		br = null;
-		r = new FileReader(
-				new File(
-						"C:\\Program Files (x86)\\Steam\\SteamApps\\common\\For The Glory\\Db\\goods.txt"));
+		r = new FileReader(new File(gamePath + "Db\\goods.txt"));
 		br = new BufferedReader(r);
 		String[] cultures = new String[length];
 		int i = 0;
@@ -113,12 +110,11 @@ public class LoadGameFiles {
 
 	}
 
-	public static String[] loadReligionsFile() throws IOException {
+	public static String[] loadReligions() throws IOException {
 		int length = 0;
 
-		FileReader r = new FileReader(
-				new File(
-						"C:\\Program Files (x86)\\Steam\\SteamApps\\common\\For The Glory\\Db\\Religions\\religions.txt"));
+		FileReader r = new FileReader(new File(gamePath
+				+ "Db\\Religions\\religions.txt"));
 		BufferedReader br = new BufferedReader(r);
 		String line;
 		while ((line = br.readLine()) != null)
@@ -133,9 +129,7 @@ public class LoadGameFiles {
 		r.close();
 		r = null;
 		br = null;
-		r = new FileReader(
-				new File(
-						"C:\\Program Files (x86)\\Steam\\SteamApps\\common\\For The Glory\\Db\\Religions\\religions.txt"));
+		r = new FileReader(new File(gamePath + "Db\\Religions\\religions.txt"));
 		br = new BufferedReader(r);
 		String[] cultures = new String[length];
 		int i = 0;
@@ -159,12 +153,11 @@ public class LoadGameFiles {
 
 	}
 
-	public static String[] loadTerrainsFile() throws IOException {
+	public static String[] loadTerrains() throws IOException {
 		int length = 0;
 
-		FileReader r = new FileReader(
-				new File(
-						"C:\\Program Files (x86)\\Steam\\SteamApps\\common\\For The Glory\\Db\\Map\\terrains.txt"));
+		FileReader r = new FileReader(new File(gamePath
+				+ "Db\\Map\\terrains.txt"));
 		BufferedReader br = new BufferedReader(r);
 		String line;
 		while ((line = br.readLine()) != null)
@@ -175,9 +168,7 @@ public class LoadGameFiles {
 		r.close();
 		r = null;
 		br = null;
-		r = new FileReader(
-				new File(
-						"C:\\Program Files (x86)\\Steam\\SteamApps\\common\\For The Glory\\Db\\Map\\terrains.txt"));
+		r = new FileReader(new File(gamePath + "Db\\Map\\terrains.txt"));
 		br = new BufferedReader(r);
 		String[] cultures = new String[length];
 		int i = 0;

@@ -40,7 +40,7 @@ public class Main {
 		System.out.println("Images loaded");
 		GameFiles game = new GameFiles(null);
 		MapPanel map = new MapPanel(img, img2,
-				game.loadMap("C:\\Users\\Maximilian\\Desktop\\log.txt"));
+				game.loadMap("C:\\Users\\Maximilian\\GitHub\\FTG-ModDevelopmentTool\\FTG-ModDevelopmentTool\\src\\scenariogenerator\\colors.txt"));
 		JFrame frame = new JFrame("Test MapPanel");
 		frame.setBounds(10, 10, 500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

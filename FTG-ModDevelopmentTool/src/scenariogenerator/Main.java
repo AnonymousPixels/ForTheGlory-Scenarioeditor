@@ -32,15 +32,18 @@ public class Main {
 		try {
 			img2 = ImageIO
 					.read(new File(
-							"C:\\Users\\Maximilian\\GitHub\\FTG-ModDevelopmentTool\\FTG-ModDevelopmentTool\\src\\scenariogenerator\backend.png"));
+							"C:\\Users\\Maximilian\\GitHub\\FTG-ModDevelopmentTool\\FTG-ModDevelopmentTool\\src\\scenariogenerator\\backend.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Images loaded");
-		GameFiles game = new GameFiles(null);
-		MapPanel map = new MapPanel(img, img2,
-				game.loadMap("C:\\Users\\Maximilian\\GitHub\\FTG-ModDevelopmentTool\\FTG-ModDevelopmentTool\\src\\scenariogenerator\\colors.txt"));
+		GameFiles game = new GameFiles(
+				"C:\\Program Files (x86)\\Steam\\SteamApps\\common\\For The Glory");
+		MapPanel map = new MapPanel(
+				img,
+				img2,
+				game.loadMap("C:\\Users\\Maximilian\\GitHub\\FTG-ModDevelopmentTool\\FTG-ModDevelopmentTool\\src\\scenariogenerator\\MapConfigurationFile.txt"));
 		JFrame frame = new JFrame("Test MapPanel");
 		frame.setBounds(10, 10, 500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

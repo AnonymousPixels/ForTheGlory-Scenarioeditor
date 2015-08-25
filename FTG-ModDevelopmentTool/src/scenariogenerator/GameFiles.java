@@ -8,6 +8,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
+/**
+ * A useful class to load a couple of game-files from the game <i>For The
+ * Glory</i>
+ * 
+ * @author Maximilian von Gaisberg
+ */
+
 public class GameFiles {
 
 	static String gamePath;
@@ -16,10 +23,96 @@ public class GameFiles {
 		gamePath = path;
 	}
 
-	public static HashMap<Color, Integer> loadMap(String path)
+	/**
+	 * Search the given {@code geography.txt} file for the given string and
+	 * returns the tags. It makes sense for one geography files, so this method
+	 * is completely useless. But hardcoding <b>sucks</b>, so I had to code this
+	 * 
+	 * @param path
+	 *            The Path of the {@code geography.txt} file
+	 *
+	 * 
+	 * @param findWhat
+	 *            The String to search for (country, region, area)
+	 * 
+	 * @return A Stringarray of the detected tags
+	 */
+
+	public static String[] findTags(String path, String findWhat)
+			throws FileNotFoundException, IOException {
+
+		BufferedReader stream = new BufferedReader(new FileReader(path));
+		String text = "";
+		String text2 = "";
+		String line = stream.readLine();
+
+		while (line != null) {
+			if ((!line.startsWith("#"))
+					&& (!line.startsWith("vp_discover_first")))
+				text = text + "\n" + line;
+
+			line = stream.readLine();
+		}
+		stream.close();
+		text = text.replaceAll("\t", "");
+		text = text.replaceAll(" ", "");
+
+		String[] lines = text.split("[\\r\\n]+");
+
+		text = "";
+
+		for (String string : lines) {
+			// System.out.println(string);
+			if (!string.startsWith("vp_discover_first"))
+				text = text + string + "\n";
+		}
+
+		int count = 0;
+
+		while (text.contains("continent={")) {
+			count++;
+			String section = text.substring(text.indexOf("continent={"),
+					text.indexOf("}", text.indexOf("continent={")));
+			text = text.substring(text.indexOf("}") + 1, text.length());
+			text2 = text2 + section;
+
+		}
+		String[] tags = new String[count];
+		int count2 = 0;
+		lines = text2.split("[\\r\\n]+");
+		for (int i = 0; i < lines.length; i++) {
+			System.out.println(i);
+			if (lines[i].startsWith("tag=")) {
+
+				tags[count2] = lines[i].substring(5, lines[i].length() - 1);
+				System.out.println(tags[count2]);
+				count2++;
+			}
+		}
+		for (String string : tags) {
+			System.out.println(string);
+		}
+		return tags;
+
+	}
+
+	/**
+	 * Load the colors for the Map from .txt File
+	 * 
+	 * @param MapPath
+	 *            Path of the Map Configuration File (most likely called
+	 *            {@code MapConfigurationFile.txt})
+	 * @return A HashMap with all the colors and the IDs contained in the file.
+	 *         It has only one use:<br>
+	 *         {@code MapPanel(bif,bib,GameFiles.loadMap(String path));}
+	 * @throws IOException
+	 * @throws InterruptedException
+	 */
+
+	public static HashMap<Color, Integer> loadMap(String MapPath)
 			throws IOException, InterruptedException {
 		HashMap<Color, Integer> map = new HashMap<Color, Integer>();
-		FileReader r = new FileReader(new File(path));
+		FileReader r = new FileReader(new File(MapPath));
 		BufferedReader br = new BufferedReader(r);
 		String line;
 		while ((line = br.readLine()) != null)

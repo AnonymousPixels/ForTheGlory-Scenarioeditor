@@ -19,11 +19,9 @@ public class TestGlobalDataPanel {
 				"scontinental", "tundra", "desertic" };
 		GameFiles game = new GameFiles(
 				"C:\\Program Files (x86)\\Steam\\SteamApps\\common\\For The Glory\\");
-		map2.put("terrain", game.loadTerrains());
-		map2.put("climate", climate);
-		map2.put("religion", game.loadReligions());
-		map2.put("culture", game.loadCultures());
-		map2.put("goods", game.loadGoods());
+		map2.put("continent", GameFiles.loadTags("continent"));
+		map2.put("area", GameFiles.loadTags("area"));
+		map2.put("region", GameFiles.loadTags("region"));
 
 		map.put("id", "1");
 		map.put("name", "Test");
@@ -41,7 +39,7 @@ public class TestGlobalDataPanel {
 		map.put("looted", "true");
 		map.put("whiteman", "true");
 		JFrame frame = new JFrame("Global Scenario Panel");
-		frame.add(new GlobalDataPanel(map));
+		frame.add(new GlobalDataPanel(map, map2));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);

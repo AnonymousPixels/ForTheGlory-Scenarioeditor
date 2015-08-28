@@ -26,22 +26,21 @@ public class GameFiles {
 	/**
 	 * Search the given {@code geography.txt} file for the given string and
 	 * returns the tags. It makes sense for one geography files, so this method
-	 * is completely useless. But hardcoding <b>sucks</b>, so I had to code this
-	 * 
-	 * @param path
-	 *            The Path of the {@code geography.txt} file
+	 * is completely useless. But hardcoding <b>sucks</b>, so I had to code
+	 * this.
 	 *
-	 * 
 	 * @param findWhat
-	 *            The String to search for (country, region, area)
+	 *            The String to search for (continent, region, area)
 	 * 
 	 * @return A Stringarray of the detected tags
 	 */
 
-	public static String[] findTags(String path, String findWhat)
+	public static String[] loadTags(String findWhat)
 			throws FileNotFoundException, IOException {
 
-		BufferedReader stream = new BufferedReader(new FileReader(path));
+		String path2 = gamePath + "Db\\Map\\geography.txt";
+
+		BufferedReader stream = new BufferedReader(new FileReader(path2));
 		String text = "";
 		String text2 = "";
 		String line = stream.readLine();
@@ -49,7 +48,7 @@ public class GameFiles {
 		while (line != null) {
 			if ((!line.startsWith("#"))
 					&& (!line.startsWith("vp_discover_first")))
-				text = text + "\n" + line;
+				text = text + line;
 
 			line = stream.readLine();
 		}
@@ -69,26 +68,42 @@ public class GameFiles {
 
 		int count = 0;
 
-		while (text.contains("continent={")) {
+		while (text.contains(findWhat + "={")) {
 			count++;
-			String section = text.substring(text.indexOf("continent={"),
-					text.indexOf("}", text.indexOf("continent={")));
+
+			String section = text.substring(text.indexOf(findWhat + "={"),
+					text.indexOf("}", text.indexOf(findWhat + "={")));
 			text = text.substring(text.indexOf("}") + 1, text.length());
-			text2 = text2 + section;
+			System.out.println(count);
+			System.out.println(section);
+			text2 = text2 + "\n" + section;
 
 		}
 		String[] tags = new String[count];
 		int count2 = 0;
 		lines = text2.split("[\\r\\n]+");
 		for (int i = 0; i < lines.length; i++) {
-			System.out.println(i);
-			if (lines[i].startsWith("tag=")) {
-
-				tags[count2] = lines[i].substring(5, lines[i].length() - 1);
-				System.out.println(tags[count2]);
+			if (lines[i].contains("tag=")) {
+				int e = count - 1;
+				if (e < 1)
+				if ((lines[i].substring(lines[i].indexOf("tag=\"") + 5,
+						lines[i].indexOf("\"", lines[i].indexOf("tag=\"") + 5)) != null)
+						&& (tags[e].substring(
+								lines[i].indexOf("tag=\"") + 5,
+								lines[i].indexOf("\"",
+										lines[i].indexOf("tag=\"") + 5))) != lines[i]
+								.substring(
+										lines[i].indexOf("tag=\"") + 5,
+										lines[i].indexOf("\"",
+												lines[i].indexOf("tag=\"") + 5)))
+					;
+				tags[count2] = lines[i].substring(
+						lines[i].indexOf("tag=\"") + 5,
+						lines[i].indexOf("\"", lines[i].indexOf("tag=\"") + 5));
 				count2++;
 			}
 		}
+		System.out.println("Find That: " + findWhat);
 		for (String string : tags) {
 			System.out.println(string);
 		}

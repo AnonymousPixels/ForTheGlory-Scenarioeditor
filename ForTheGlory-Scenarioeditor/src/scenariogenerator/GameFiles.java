@@ -85,18 +85,7 @@ public class GameFiles {
 		for (int i = 0; i < lines.length; i++) {
 			if (lines[i].contains("tag=")) {
 				int e = count - 1;
-				if (e < 1)
-				if ((lines[i].substring(lines[i].indexOf("tag=\"") + 5,
-						lines[i].indexOf("\"", lines[i].indexOf("tag=\"") + 5)) != null)
-						&& (tags[e].substring(
-								lines[i].indexOf("tag=\"") + 5,
-								lines[i].indexOf("\"",
-										lines[i].indexOf("tag=\"") + 5))) != lines[i]
-								.substring(
-										lines[i].indexOf("tag=\"") + 5,
-										lines[i].indexOf("\"",
-												lines[i].indexOf("tag=\"") + 5)))
-					;
+
 				tags[count2] = lines[i].substring(
 						lines[i].indexOf("tag=\"") + 5,
 						lines[i].indexOf("\"", lines[i].indexOf("tag=\"") + 5));
@@ -104,9 +93,20 @@ public class GameFiles {
 			}
 		}
 		System.out.println("Find That: " + findWhat);
+
+		int count4 = 0;
+		int count3 = 0;
 		for (String string : tags) {
-			System.out.println(string);
+			int u = count3 - 1;
+			if (u >= 0)
+				if (tags[u] != tags[count3])
+					count4++;
+			count3++;
 		}
+
+		
+		
+
 		return tags;
 
 	}

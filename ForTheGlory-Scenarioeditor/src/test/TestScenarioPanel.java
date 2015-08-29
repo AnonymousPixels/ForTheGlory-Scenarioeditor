@@ -1,10 +1,13 @@
-package scenariogenerator;
+package test;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JFrame;
+
+import scenariogenerator.ColonyPanel;
+import scenariogenerator.GameFiles;
 
 public class TestScenarioPanel {
 

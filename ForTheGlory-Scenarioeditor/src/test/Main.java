@@ -1,4 +1,4 @@
-package scenariogenerator;
+package test;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -8,6 +8,9 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+
+import scenariogenerator.GameFiles;
+import scenariogenerator.MapPanel;
 
 public class Main {
 

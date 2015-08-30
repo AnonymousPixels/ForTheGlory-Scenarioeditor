@@ -5,6 +5,8 @@ import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
@@ -17,14 +19,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-public class GlobalDataPanel extends JPanel {
+public class GlobalDataPanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = -247067539212798277L;
 	JLabel lblType;
 	GridBagLayout layout;
 	JPanel date, deathdate, discoverys;
-	JComboBox jcbDateDay, jcbDateMonth, jcbDeathdateDay, jcbDeathdateMonth,
-			jcbType, jcbDiscovery;
+	JComboBox<String> jcbDateDay, jcbDateMonth, jcbDeathdateDay,
+			jcbDeathdateMonth, jcbType, jcbDiscovery;
 	JTextField txtDateYear, txtDeathdateYear;
 	JButton btnAdd;
 	JCheckBox chkValue;
@@ -33,7 +35,7 @@ public class GlobalDataPanel extends JPanel {
 
 	String[] countries, areas, regions;
 
-	Map map, selectables;
+	Map<?, ?> map, selectables;
 
 	public GlobalDataPanel(Map<String, String> map,
 			Map<String, String[]> selectables) {
@@ -69,8 +71,8 @@ public class GlobalDataPanel extends JPanel {
 		String[] months = { "january", "february", "march", "april", "mai",
 				"june", "july", "august", "september", "october", "november",
 				"december" };
-		jcbDateDay = new JComboBox(days);
-		jcbDateMonth = new JComboBox(months);
+		jcbDateDay = new JComboBox<String>(days);
+		jcbDateMonth = new JComboBox<String>(months);
 		txtDateYear = new JTextField("1337");
 
 		addComponent(date, lytDate, jcbDateDay, 1, 1, 1, 1, 1, 1, new Insets(5,
@@ -125,9 +127,12 @@ public class GlobalDataPanel extends JPanel {
 		String[] type = { "Continent", "Area", "Region" };
 
 		jcbType = new JComboBox<String>(type);
-		jcbDiscovery = new JComboBox((String[]) this.selectables.get("region"));
+		jcbType.addActionListener(this);
+		jcbDiscovery = new JComboBox<String>(
+				(String[]) this.selectables.get("continent"));
 		chkValue = new JCheckBox("Value");
 		btnAdd = new JButton("Add");
+		btnAdd.addActionListener(this);
 		jepDiscovery = new JEditorPane();
 		jspDiscovery = new JScrollPane(jepDiscovery);
 		jspDiscovery
@@ -165,4 +170,51 @@ public class GlobalDataPanel extends JPanel {
 		cont.add(c);
 	}
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		if (e.getSource() == btnAdd) {
+
+			jepDiscovery.setText(jepDiscovery.getText() + "discovery = { "
+					+ jcbType.getSelectedItem().toString().toLowerCase()
+					+ " = \"" + jcbDiscovery.getSelectedItem().toString()
+					+ "\" value = "
+					+ (chkValue.isSelected() ? "true" : "false") + " }\n");
+
+		}
+
+		if (e.getSource() == jcbType) {
+			switch (jcbType.getSelectedItem().toString()) {
+			case "Area":
+				jcbDiscovery.removeAllItems();
+				for (String string : (String[]) this.selectables.get("area")) {
+					jcbDiscovery.addItem(string);
+				}
+
+				break;
+
+			case "Continent":
+				jcbDiscovery.removeAllItems();
+				for (String string : (String[]) this.selectables
+						.get("continent")) {
+					jcbDiscovery.addItem(string);
+				}
+				break;
+
+			case "Region":
+				jcbDiscovery.removeAllItems();
+				for (String string : (String[]) this.selectables.get("region")) {
+					jcbDiscovery.addItem(string);
+				}
+				break;
+			default:
+
+				System.out
+						.println("Program failure ahead! Some stupid programmer made a heavy mistake!");
+				break;
+			}
+
+		}
+
+	}
 }

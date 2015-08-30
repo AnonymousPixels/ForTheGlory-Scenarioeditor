@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -94,20 +95,36 @@ public class GameFiles {
 		}
 		System.out.println("Find That: " + findWhat);
 
-		int count4 = 0;
-		int count3 = 0;
-		for (String string : tags) {
-			int u = count3 - 1;
-			if (u >= 0)
-				if (tags[u] != tags[count3])
-					count4++;
-			count3++;
+		// Wiederholungen löschen
+
+		int count3 = 1;
+		System.out.println(tags.length);
+		for (int o = 0; o < tags.length; o++) {
+			if (o > 0)
+				if (tags[o] != null && tags[o - 1] != null)
+					if (!tags[o].equals(tags[o - 1])) {
+						System.out.println(tags[o]);
+						System.out.println(count3);
+						count3++;
+					}
 		}
+		System.out.println(count3);
 
-		
-		
+		String[] tags2 = new String[count3];
+		tags2[0] = tags[0];
 
-		return tags;
+		int count4 = 1;
+		for (int o = 0; o < tags.length; o++) {
+			if (o > 0)
+				if (tags[o] != null && tags[o - 1] != null)
+					if (!tags[o].equals(tags[o - 1])) {
+						tags2[count4] = tags[o];
+						System.out.println(tags2[count4]);
+						count4++;
+					}
+		}
+		Arrays.sort(tags2);
+		return tags2;
 
 	}
 

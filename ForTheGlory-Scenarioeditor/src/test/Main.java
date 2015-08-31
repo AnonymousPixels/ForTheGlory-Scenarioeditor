@@ -9,8 +9,8 @@ import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
-import scenariogenerator.GameFiles;
-import scenariogenerator.MapPanel;
+import scenarioeditor.GameFiles;
+import scenarioeditor.MapPanel;
 
 public class Main {
 

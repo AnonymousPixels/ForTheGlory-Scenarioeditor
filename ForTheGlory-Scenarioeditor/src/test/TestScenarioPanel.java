@@ -6,8 +6,8 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 
-import scenariogenerator.ColonyPanel;
-import scenariogenerator.GameFiles;
+import scenarioeditor.ColonyPanel;
+import scenarioeditor.GameFiles;
 
 public class TestScenarioPanel {
 

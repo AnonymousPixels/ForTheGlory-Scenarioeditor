@@ -6,8 +6,8 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 
-import scenariogenerator.GameFiles;
-import scenariogenerator.GlobalDataPanel;
+import scenarioeditor.GameFiles;
+import scenarioeditor.GlobalDataPanel;
 
 public class TestGlobalDataPanel {
 

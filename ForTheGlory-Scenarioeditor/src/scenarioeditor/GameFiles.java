@@ -1,4 +1,4 @@
-package scenariogenerator;
+package scenarioeditor;
 
 import java.awt.Color;
 import java.io.BufferedReader;

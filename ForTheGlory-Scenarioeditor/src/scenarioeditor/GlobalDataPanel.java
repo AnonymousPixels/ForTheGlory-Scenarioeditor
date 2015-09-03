@@ -2,6 +2,7 @@ package scenarioeditor;
 
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -24,14 +25,15 @@ public class GlobalDataPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -247067539212798277L;
 	JLabel lblType;
 	GridBagLayout layout;
-	JPanel date, deathdate, discoverys;
+	JPanel date, deathdate, discoveries, etablishment;
 	JComboBox<String> jcbDateDay, jcbDateMonth, jcbDeathdateDay,
 			jcbDeathdateMonth, jcbType, jcbDiscovery;
+	JComboBox<String> jcbType2, jcbEtablishment;
 	JTextField txtDateYear, txtDeathdateYear;
-	JButton btnAdd;
-	JCheckBox chkValue;
-	JEditorPane jepDiscovery;
-	JScrollPane jspDiscovery;
+	JButton btnAdd, btnAdd2;
+	JCheckBox chkValue, chkValue2;
+	JEditorPane jepDiscovery, jepEtablishment;
+	JScrollPane jspDiscovery, jspEtablishment;
 
 	String[] countries, areas, regions;
 
@@ -55,6 +57,7 @@ public class GlobalDataPanel extends JPanel implements ActionListener {
 		datePnl();
 		deathdatePnl();
 		discoveriesPanel();
+		etablishmentsPanel();
 
 	}
 
@@ -117,12 +120,12 @@ public class GlobalDataPanel extends JPanel implements ActionListener {
 	}
 
 	void discoveriesPanel() {
-		discoverys = new JPanel();
-		discoverys.setBorder(BorderFactory.createTitledBorder("Discoverys"));
+		discoveries = new JPanel();
+		discoveries.setBorder(BorderFactory.createTitledBorder("Discoverys"));
 
 		GridBagLayout lytDiscovery = new GridBagLayout();
 
-		discoverys.setLayout(lytDiscovery);
+		discoveries.setLayout(lytDiscovery);
 
 		String[] type = { "Continent", "Area", "Region" };
 
@@ -139,18 +142,61 @@ public class GlobalDataPanel extends JPanel implements ActionListener {
 				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		jspDiscovery
 				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		addComponent(discoverys, lytDiscovery, jcbType, 1, 1, 1, 1, 1, 0,
+		jspDiscovery
+				.setPreferredSize(new Dimension(discoveries.getWidth(), 100));
+		addComponent(discoveries, lytDiscovery, jcbType, 1, 1, 1, 1, 1, 0,
 				new Insets(5, 5, 5, 5));
-		addComponent(discoverys, lytDiscovery, jcbDiscovery, 2, 1, 1, 1, 1, 0,
+		addComponent(discoveries, lytDiscovery, jcbDiscovery, 2, 1, 1, 1, 1, 0,
 				new Insets(5, 5, 5, 5));
-		addComponent(discoverys, lytDiscovery, chkValue, 3, 1, 1, 1, 1, 0,
+		addComponent(discoveries, lytDiscovery, chkValue, 3, 1, 1, 1, 1, 0,
 				new Insets(5, 5, 5, 5));
-		addComponent(discoverys, lytDiscovery, btnAdd, 4, 1, 1, 1, 1, 0,
+		addComponent(discoveries, lytDiscovery, btnAdd, 4, 1, 1, 1, 1, 0,
 				new Insets(5, 5, 5, 5));
-		addComponent(discoverys, lytDiscovery, jspDiscovery, 1, 2, 4, 1, 1, 1,
+		addComponent(discoveries, lytDiscovery, jspDiscovery, 1, 2, 4, 1, 1, 1,
 				new Insets(5, 5, 5, 5));
-		addComponent(this, layout, discoverys, 1, 2, 2, 1, 1, 0.1, new Insets(
+		addComponent(this, layout, discoveries, 1, 2, 2, 1, 1, 0.1, new Insets(
 				5, 5, 5, 5));
+
+	}
+
+	void etablishmentsPanel() {
+		etablishment = new JPanel();
+		etablishment.setBorder(BorderFactory
+				.createTitledBorder("Etablishments"));
+
+		GridBagLayout lytEtablishment = new GridBagLayout();
+
+		etablishment.setLayout(lytEtablishment);
+
+		String[] type = { "Continent", "Area", "Region" };
+
+		jcbType2 = new JComboBox<String>(type);
+		jcbType2.addActionListener(this);
+		jcbEtablishment = new JComboBox<String>(
+				(String[]) this.selectables.get("continent"));
+		chkValue2 = new JCheckBox("Value");
+		btnAdd2 = new JButton("Add");
+		btnAdd2.addActionListener(this);
+		jepEtablishment = new JEditorPane();
+		jspEtablishment = new JScrollPane(jepEtablishment);
+		jspEtablishment
+				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		jspEtablishment
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		jspEtablishment.setPreferredSize(new Dimension(etablishment.getWidth(),
+				100));
+		addComponent(etablishment, lytEtablishment, jcbType2, 1, 1, 1, 1, 1, 0,
+				new Insets(5, 5, 5, 5));
+		addComponent(etablishment, lytEtablishment, jcbEtablishment, 2, 1, 1,
+				1, 1, 0, new Insets(5, 5, 5, 5));
+		addComponent(etablishment, lytEtablishment, chkValue2, 3, 1, 1, 1, 1,
+				0, new Insets(5, 5, 5, 5));
+		addComponent(etablishment, lytEtablishment, btnAdd2, 4, 1, 1, 1, 1, 0,
+				new Insets(5, 5, 5, 5));
+		addComponent(etablishment, lytEtablishment, jspEtablishment, 1, 2, 4,
+				1, 1, 1, new Insets(5, 5, 5, 5));
+		addComponent(this, layout, etablishment, 1, 3, 2, 1, 1, 0.1,
+				new Insets(5, 5, 5, 5));
 
 	}
 
@@ -182,6 +228,16 @@ public class GlobalDataPanel extends JPanel implements ActionListener {
 					+ (chkValue.isSelected() ? "true" : "false") + " }\n");
 
 		}
+		if (e.getSource() == btnAdd2) {
+
+			jepEtablishment.setText(jepEtablishment.getText()
+					+ "etablishment = { "
+					+ jcbType2.getSelectedItem().toString().toLowerCase()
+					+ " = \"" + jcbEtablishment.getSelectedItem().toString()
+					+ "\" value = "
+					+ (chkValue2.isSelected() ? "true" : "false") + " }\n");
+
+		}
 
 		if (e.getSource() == jcbType) {
 			switch (jcbType.getSelectedItem().toString()) {
@@ -197,7 +253,7 @@ public class GlobalDataPanel extends JPanel implements ActionListener {
 				jcbDiscovery.removeAllItems();
 				for (String string : (String[]) this.selectables
 						.get("continent")) {
-					jcbDiscovery.addItem(string);
+					jcbEtablishment.addItem(string);
 				}
 				break;
 
@@ -205,6 +261,38 @@ public class GlobalDataPanel extends JPanel implements ActionListener {
 				jcbDiscovery.removeAllItems();
 				for (String string : (String[]) this.selectables.get("region")) {
 					jcbDiscovery.addItem(string);
+				}
+				break;
+			default:
+
+				System.out
+						.println("Program failure ahead! Some stupid programmer made a heavy mistake!");
+				break;
+			}
+
+		}
+		if (e.getSource() == jcbType2) {
+			switch (jcbType2.getSelectedItem().toString()) {
+			case "Area":
+				jcbEtablishment.removeAllItems();
+				for (String string : (String[]) this.selectables.get("area")) {
+					jcbEtablishment.addItem(string);
+				}
+
+				break;
+
+			case "Continent":
+				jcbEtablishment.removeAllItems();
+				for (String string : (String[]) this.selectables
+						.get("continent")) {
+					jcbEtablishment.addItem(string);
+				}
+				break;
+
+			case "Region":
+				jcbEtablishment.removeAllItems();
+				for (String string : (String[]) this.selectables.get("region")) {
+					jcbEtablishment.addItem(string);
 				}
 				break;
 			default:

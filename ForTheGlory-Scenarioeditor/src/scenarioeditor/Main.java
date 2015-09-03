@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+import javax.crypto.Cipher;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -92,6 +93,7 @@ public class Main {
 				}
 			}
 		});
+
 		addComponent(panel, layout, btnPath, 1, 0, 1, 1, 0, 0, new Insets(10,
 				0, 10, 10));
 
@@ -123,8 +125,10 @@ public class Main {
 						e1.printStackTrace();
 					}
 				} else
-					JOptionPane.showMessageDialog(null, Strings.getString("Main.5"),
-							Strings.getString("Main.6"), JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null,
+							Strings.getString("Main.5"),
+							Strings.getString("Main.6"),
+							JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		addComponent(panel, layout, btnContinue, 1, 2, 1, 1, 0, 0, new Insets(

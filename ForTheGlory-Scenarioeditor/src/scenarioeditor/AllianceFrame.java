@@ -28,11 +28,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
 
-public class WarFrame extends JFrame {
+public class AllianceFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
 	private JComboBox comboBox;
 
 	/**
@@ -42,7 +41,7 @@ public class WarFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					WarFrame frame = new WarFrame();
+					AllianceFrame frame = new AllianceFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,9 +53,9 @@ public class WarFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public WarFrame() {
-		setTitle("Add new war");
-		setMinimumSize(new Dimension(400, 400));
+	public AllianceFrame() {
+		setTitle("Add new alliance");
+		setMinimumSize(new Dimension(400, 300));
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -65,13 +64,13 @@ public class WarFrame extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0, 1.0, 1.0, 0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0, 1.0, 0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Date", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Expirydate", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.gridwidth = 2;
 		gbc_panel.insets = new Insets(0, 0, 5, 5);
@@ -117,7 +116,7 @@ public class WarFrame extends JFrame {
 		textField.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "Enddate", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Type", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_1.gridwidth = 2;
@@ -132,18 +131,8 @@ public class WarFrame extends JFrame {
 		gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"}));
-		comboBox_2.setEditable(true);
-		GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
-		gbc_comboBox_2.insets = new Insets(0, 0, 0, 5);
-		gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_2.gridx = 0;
-		gbc_comboBox_2.gridy = 0;
-		panel_1.add(comboBox_2, gbc_comboBox_2);
-		
 		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {" january", "february", "march", "april", "mai", "june", "uly", "august", "september", "october", "november", "december"}));
+		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"militaryalliance", "dynasticalliance", "vassalization"}));
 		comboBox_3.setEditable(true);
 		GridBagConstraints gbc_comboBox_3 = new GridBagConstraints();
 		gbc_comboBox_3.insets = new Insets(0, 0, 0, 5);
@@ -152,18 +141,8 @@ public class WarFrame extends JFrame {
 		gbc_comboBox_3.gridy = 0;
 		panel_1.add(comboBox_3, gbc_comboBox_3);
 		
-		textField_1 = new JTextField();
-		textField_1.setMinimumSize(new Dimension(80, 20));
-		textField_1.setText("1337");
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 2;
-		gbc_textField_1.gridy = 0;
-		panel_1.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
-		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(null, "Attackers", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Participants", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
 		gbc_panel_2.gridwidth = 4;
 		gbc_panel_2.insets = new Insets(0, 0, 5, 0);
@@ -189,6 +168,7 @@ public class WarFrame extends JFrame {
 		panel_2.add(scrollPane, gbc_scrollPane);
 		
 		JEditorPane editorPane = new JEditorPane();
+		editorPane.setToolTipText("First one is the Alliance-Leader");
 		editorPane.setPreferredSize(new Dimension(106, 100));
 		scrollPane.setViewportView(editorPane);
 		
@@ -206,50 +186,6 @@ public class WarFrame extends JFrame {
 		gbc_btnAdd.gridy = 1;
 		panel_2.add(btnAdd, gbc_btnAdd);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(null, "Defenders", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		GridBagConstraints gbc_panel_3 = new GridBagConstraints();
-		gbc_panel_3.insets = new Insets(0, 0, 5, 0);
-		gbc_panel_3.gridwidth = 4;
-		gbc_panel_3.fill = GridBagConstraints.BOTH;
-		gbc_panel_3.gridx = 0;
-		gbc_panel_3.gridy = 2;
-		contentPane.add(panel_3, gbc_panel_3);
-		GridBagLayout gbl_panel_3 = new GridBagLayout();
-		gbl_panel_3.columnWidths = new int[]{0, 0, 0};
-		gbl_panel_3.rowHeights = new int[]{0, 0, 0};
-		gbl_panel_3.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_3.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
-		panel_3.setLayout(gbl_panel_3);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
-		gbc_scrollPane_1.weighty = 1.0;
-		gbc_scrollPane_1.gridwidth = 2;
-		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 0);
-		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane_1.gridx = 0;
-		gbc_scrollPane_1.gridy = 0;
-		panel_3.add(scrollPane_1, gbc_scrollPane_1);
-		
-		JEditorPane editorPane_1 = new JEditorPane();
-		editorPane_1.setPreferredSize(new Dimension(106, 100));
-		scrollPane_1.setViewportView(editorPane_1);
-		
-		JComboBox comboBox_5 = new JComboBox();
-		GridBagConstraints gbc_comboBox_5 = new GridBagConstraints();
-		gbc_comboBox_5.insets = new Insets(0, 0, 0, 5);
-		gbc_comboBox_5.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_5.gridx = 0;
-		gbc_comboBox_5.gridy = 1;
-		panel_3.add(comboBox_5, gbc_comboBox_5);
-		
-		JButton btnAdd_1 = new JButton("Add");
-		GridBagConstraints gbc_btnAdd_1 = new GridBagConstraints();
-		gbc_btnAdd_1.gridx = 1;
-		gbc_btnAdd_1.gridy = 1;
-		panel_3.add(btnAdd_1, gbc_btnAdd_1);
-		
 		JButton btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -261,7 +197,7 @@ public class WarFrame extends JFrame {
 		gbc_btnOk.insets = new Insets(0, 0, 5, 0);
 		gbc_btnOk.anchor = GridBagConstraints.EAST;
 		gbc_btnOk.gridx = 3;
-		gbc_btnOk.gridy = 3;
+		gbc_btnOk.gridy = 2;
 		contentPane.add(btnOk, gbc_btnOk);
 	}
 

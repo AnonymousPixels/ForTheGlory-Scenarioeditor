@@ -1,38 +1,39 @@
 package scenarioeditor;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import javax.swing.JTextPane;
-import java.awt.Insets;
-import javax.swing.border.TitledBorder;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
-import javax.swing.JEditorPane;
-import javax.swing.JButton;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
-import java.awt.Color;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 
 public class AllianceFrame extends JFrame {
 
+	/**
+	 * 
+	 */
 	private JPanel contentPane;
 	private JTextField textField;
 	private JComboBox comboBox;
+	JComboBox comboBox_3;
+	JEditorPane editorPane;
+	JComboBox comboBox_1;
+	int id;
+	int type;
 
 	/**
 	 * Launch the application.
@@ -53,6 +54,12 @@ public class AllianceFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+
+	public void setID(int id, int type) {
+		this.id = id;
+		this.type = type;
+	}
+
 	public AllianceFrame() {
 		setTitle("Add new alliance");
 		setMinimumSize(new Dimension(400, 300));
@@ -63,14 +70,18 @@ public class AllianceFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0, 1.0, 0, Double.MIN_VALUE};
+		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0, 0 };
+		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0 };
+		gbl_contentPane.columnWeights = new double[] { 1.0, 1.0, 1.0, 1.0,
+				Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[] { 0, 1.0, 0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
-		
+
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Expirydate", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBorder(new TitledBorder(UIManager
+				.getBorder("TitledBorder.border"), "Expirydate",
+				TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(0, 0, 0)));
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.gridwidth = 2;
 		gbc_panel.insets = new Insets(0, 0, 5, 5);
@@ -79,14 +90,18 @@ public class AllianceFrame extends JFrame {
 		gbc_panel.gridy = 0;
 		contentPane.add(panel, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0, 0, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0};
-		gbl_panel.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panel.columnWidths = new int[] { 0, 0, 0, 0 };
+		gbl_panel.rowHeights = new int[] { 0, 0 };
+		gbl_panel.columnWeights = new double[] { 1.0, 1.0, 1.0,
+				Double.MIN_VALUE };
+		gbl_panel.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
-		
+
 		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "1", "2",
+				"3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13",
+				"14", "15", "16", "17", "18", "19", "20", "21", "22", "23",
+				"24", "25", "26", "27", "28", "29", "30" }));
 		comboBox.setEditable(true);
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 0, 5);
@@ -94,9 +109,11 @@ public class AllianceFrame extends JFrame {
 		gbc_comboBox.gridx = 0;
 		gbc_comboBox.gridy = 0;
 		panel.add(comboBox, gbc_comboBox);
-		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"january", "february", "march", "april", "mai", "june", "uly", "august", "september", "october", "november", "december"}));
+
+		comboBox_1 = new JComboBox();
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] { "january",
+				"february", "march", "april", "mai", "june", "uly", "august",
+				"september", "october", "november", "december" }));
 		comboBox_1.setEditable(true);
 		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
 		gbc_comboBox_1.insets = new Insets(0, 0, 0, 5);
@@ -104,7 +121,7 @@ public class AllianceFrame extends JFrame {
 		gbc_comboBox_1.gridx = 1;
 		gbc_comboBox_1.gridy = 0;
 		panel.add(comboBox_1, gbc_comboBox_1);
-		
+
 		textField = new JTextField();
 		textField.setMinimumSize(new Dimension(80, 20));
 		textField.setText("1337");
@@ -114,9 +131,12 @@ public class AllianceFrame extends JFrame {
 		gbc_textField.gridy = 0;
 		panel.add(textField, gbc_textField);
 		textField.setColumns(10);
-		
+
 		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Type", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_1.setBorder(new TitledBorder(UIManager
+				.getBorder("TitledBorder.border"), "Type",
+				TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(0, 0, 0)));
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_1.gridwidth = 2;
@@ -125,14 +145,16 @@ public class AllianceFrame extends JFrame {
 		gbc_panel_1.gridy = 0;
 		contentPane.add(panel_1, gbc_panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0};
-		gbl_panel_1.rowHeights = new int[]{0, 0};
-		gbl_panel_1.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panel_1.columnWidths = new int[] { 0, 0, 0, 0 };
+		gbl_panel_1.rowHeights = new int[] { 0, 0 };
+		gbl_panel_1.columnWeights = new double[] { 1.0, 1.0, 1.0,
+				Double.MIN_VALUE };
+		gbl_panel_1.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 		panel_1.setLayout(gbl_panel_1);
-		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"militaryalliance", "dynasticalliance", "vassalization"}));
+
+		comboBox_3 = new JComboBox();
+		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {
+				"militaryalliance", "dynasticalliance", "vassalization" }));
 		comboBox_3.setEditable(true);
 		GridBagConstraints gbc_comboBox_3 = new GridBagConstraints();
 		gbc_comboBox_3.insets = new Insets(0, 0, 0, 5);
@@ -140,9 +162,12 @@ public class AllianceFrame extends JFrame {
 		gbc_comboBox_3.gridx = 1;
 		gbc_comboBox_3.gridy = 0;
 		panel_1.add(comboBox_3, gbc_comboBox_3);
-		
+
 		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Participants", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_2.setBorder(new TitledBorder(UIManager
+				.getBorder("TitledBorder.border"), "Participants",
+				TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(0, 0, 0)));
 		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
 		gbc_panel_2.gridwidth = 4;
 		gbc_panel_2.insets = new Insets(0, 0, 5, 0);
@@ -151,12 +176,12 @@ public class AllianceFrame extends JFrame {
 		gbc_panel_2.gridy = 1;
 		contentPane.add(panel_2, gbc_panel_2);
 		GridBagLayout gbl_panel_2 = new GridBagLayout();
-		gbl_panel_2.columnWidths = new int[]{0, 0, 0};
-		gbl_panel_2.rowHeights = new int[]{0, 0, 0};
-		gbl_panel_2.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_2.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+		gbl_panel_2.columnWidths = new int[] { 0, 0, 0 };
+		gbl_panel_2.rowHeights = new int[] { 0, 0, 0 };
+		gbl_panel_2.columnWeights = new double[] { 1.0, 0.0, Double.MIN_VALUE };
+		gbl_panel_2.rowWeights = new double[] { 1.0, 1.0, Double.MIN_VALUE };
 		panel_2.setLayout(gbl_panel_2);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.weighty = 1.0;
@@ -166,12 +191,12 @@ public class AllianceFrame extends JFrame {
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 0;
 		panel_2.add(scrollPane, gbc_scrollPane);
-		
-		JEditorPane editorPane = new JEditorPane();
+
+		editorPane = new JEditorPane();
 		editorPane.setToolTipText("First one is the Alliance-Leader");
 		editorPane.setPreferredSize(new Dimension(106, 100));
 		scrollPane.setViewportView(editorPane);
-		
+
 		JComboBox comboBox_4 = new JComboBox();
 		GridBagConstraints gbc_comboBox_4 = new GridBagConstraints();
 		gbc_comboBox_4.insets = new Insets(0, 0, 0, 5);
@@ -179,16 +204,25 @@ public class AllianceFrame extends JFrame {
 		gbc_comboBox_4.gridx = 0;
 		gbc_comboBox_4.gridy = 1;
 		panel_2.add(comboBox_4, gbc_comboBox_4);
-		
+
 		JButton btnAdd = new JButton("Add");
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
 		gbc_btnAdd.gridx = 1;
 		gbc_btnAdd.gridy = 1;
 		panel_2.add(btnAdd, gbc_btnAdd);
-		
+
 		JButton btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				String result = "alliance = {\nid = {type = " + type + " id = "
+						+ id + "}\ntype = "
+						+ comboBox_3.getSelectedItem().toString()
+						+ "\nexpirydate = { year = " + textField.getText()
+						+ " month = " + comboBox_1.getSelectedItem().toString()
+						+ " day = " + comboBox.getSelectedItem().toString()
+						+ "}\nparticipant = {" + editorPane.getText() + "}\n}";
+				System.out.println(result);
 			}
 		});
 		btnOk.setMinimumSize(new Dimension(70, 23));
@@ -200,5 +234,4 @@ public class AllianceFrame extends JFrame {
 		gbc_btnOk.gridy = 2;
 		contentPane.add(btnOk, gbc_btnOk);
 	}
-
 }

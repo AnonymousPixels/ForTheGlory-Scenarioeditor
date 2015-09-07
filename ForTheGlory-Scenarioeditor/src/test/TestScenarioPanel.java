@@ -11,9 +11,6 @@ import scenarioeditor.GameFiles;
 
 public class TestScenarioPanel {
 
-	public TestScenarioPanel() {
-		// TODO Auto-generated constructor stub
-	}
 
 	public static void main(String[] args) throws IOException {
 		HashMap<String, String> map = new HashMap<String, String>();

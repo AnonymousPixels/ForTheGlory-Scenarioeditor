@@ -24,6 +24,12 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
+/**
+ * 
+ * @author Felix Beutter
+ *
+ */
+
 public class Main {
 
 	static JFrame frame;
@@ -41,7 +47,7 @@ public class Main {
 	static Color clrBackground = new Color(240, 240, 240), clrFont = new Color(
 			0, 0, 0);
 	static Font fntStandart = new Font("Sans Serif", 1, 12);
-
+	
 	public static void main(String[] args) {
 
 		try {
@@ -97,7 +103,7 @@ public class Main {
 		addComponent(panel, layout, btnPath, 1, 0, 1, 1, 0, 0, new Insets(10,
 				0, 10, 10));
 
-		txfPath = new JTextField();
+		txfPath = new JTextField("C:\\Program Files (x86)\\Steam\\SteamApps\\common\\For The Glory\\");
 		txfPath.setEditable(false);
 		txfPath.setForeground(clrFont);
 		txfPath.setBackground(Color.white);
@@ -105,6 +111,8 @@ public class Main {
 		addComponent(panel, layout, txfPath, 0, 1, 2, 1, 1, 0, new Insets(0,
 				10, 10, 10));
 
+		path = txfPath.getText();
+		
 		addComponent(panel, layout, new JPanel(), 0, 2, 1, 1, 1, 0, new Insets(
 				0, 0, 0, 0));
 

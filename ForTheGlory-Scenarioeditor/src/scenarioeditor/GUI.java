@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -35,6 +37,12 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+/**
+ * 
+ * @author Felix Beutter
+ *
+ */
 
 public class GUI implements ActionListener, ChangeListener {
 
@@ -52,7 +60,7 @@ public class GUI implements ActionListener, ChangeListener {
 			cbxLeadertable, cbxSelectedProvince, cbxCopy, cbxCulture, cbxReligion, cbxSelectedCountry, cbxCasusBelli,
 			cbxCasusBelliMonth, cbxWarnedMonth, cbxIndependenceMonth, cbxPeaceMonth, cbxUnits, cbxUnitLocation,
 			cbxNavalUnits, cbxNavalUnitLocation;
-	JScrollPane scpCountrySettings;
+	JScrollPane scpCountrySettings, scpProvinces;
 	JTextField txfPolicyDateDay, txfPolicyDateYear, txfTechnologyLand, txfTechnologyNaval, txfTechnologyTrade,
 			txfTechnologyInfra, txfTechnologyStability, txfColonialAttempts, txfLoansize, txfTreasury, txfInflation,
 			txfMissionaries, txfMerchants, txfDiplomats, txfWhiteMan, txfColonists, txfBadboy, txfDiplomacyRelation,
@@ -76,7 +84,12 @@ public class GUI implements ActionListener, ChangeListener {
 	JCheckBox chbMajorProvince, chbTradeAgreement, chbMilitaryAccess, chbRefuseTrade, chbCasusBelli;
 	ButtonGroup grpProvinces, grpColonialnation, grpCancelledLoans, grpExtendedLoans;
 	BufferedImage imgFrontend, imgBackend;
-	HashMap hashMap = new HashMap<Color, Integer>();
+	ColonyPanel colonyPanel;
+	GlobalDataPanel globalDataPanel;
+	GameFiles gameFiles;
+	HashMap<Color, Integer> hashMap = new HashMap<Color, Integer>();
+	HashMap<String, String> values = new HashMap<String, String>();
+	HashMap<String, String[]> selectables = new HashMap<String, String[]>();
 	Dimension minSize = new Dimension(1200, 720);
 	Color clrBackground = new Color(240, 240, 240), clrStandard = new Color(0, 0, 0);
 	Font fntStandard = new Font("Verdana", 0, 12);
@@ -88,7 +101,8 @@ public class GUI implements ActionListener, ChangeListener {
 			Strings.getString("Month.10"), Strings.getString("Month.11"), Strings.getString("Month.12") },
 			CountryCategories = { Strings.getString("Category.1"), Strings.getString("Category.2"),
 					Strings.getString("Category.3"), Strings.getString("Category.4"), Strings.getString("Category.5") },
-			CasusBelliTypes = { Strings.getString("CasusBelliPermanent"), Strings.getString("CasusBelliTemporary") };
+			CasusBelliTypes = { Strings.getString("CasusBelliPermanent"), Strings.getString("CasusBelliTemporary") },
+			climate = { "arctic", "tropical", "temperate", "ncontinental", "scontinental", "tundra", "desertic" };
 
 	// ==========================================
 
@@ -146,8 +160,10 @@ public class GUI implements ActionListener, ChangeListener {
 
 		try {
 
-			imgFrontend = ImageIO.read(new File(Main.path + "\\frontend.png"));
-			imgBackend = ImageIO.read(new File(Main.path + "\\backend.png"));
+			imgFrontend = ImageIO.read(GUI.class.getResource("/frontend.png"));
+			imgBackend = ImageIO.read(GUI.class.getResource("/backend.png"));
+			map = new MapPanel(imgFrontend, imgBackend,
+					LoadMapFile.LoadFile(new File(GUI.class.getResource("/affiliation.txt").getPath())));
 
 		} catch (IOException e) {
 
@@ -163,12 +179,10 @@ public class GUI implements ActionListener, ChangeListener {
 		// System.exit(1);
 		// }
 
-		map = new MapPanel(imgFrontend, imgBackend, LoadMapFile.LoadFile(new File(Main.path + "\\affiliation.txt")));
-
 		// ==========================================
 
-		createPnlGeneral();
 		createPnlProvinces();
+		createPnlGeneral();
 		createPnlCountries();
 
 		addComponent(pnlMap, layout, map, 0, 0, 1, 1, 1, 1, new Insets(10, 10, 10, 10));
@@ -189,20 +203,62 @@ public class GUI implements ActionListener, ChangeListener {
 
 	// ==========================================
 
-	void createPnlGeneral() {
+	void createPnlGeneral() throws IOException {
 
 		pnlGeneral = new JPanel();
 		pnlGeneral.setLayout(layout);
 		pnlGeneral.setBackground(clrBackground);
+	
+		selectables.put("continent", GameFiles.loadTags("continent"));
+		selectables.put("area", GameFiles.loadTags("area"));
+		selectables.put("region", GameFiles.loadTags("region"));
+	
+		globalDataPanel = new GlobalDataPanel(values, selectables);
+		
+//		scpProvinces = new JScrollPane(colonyPanel);
+//		scpProvinces.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+//		scpProvinces.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		addComponent(pnlGeneral, layout, globalDataPanel, 0, 0, 1, 1, 1, 1, new Insets(0, 0, 0, 0));
 	}
 
 	// ==========================================
 
-	void createPnlProvinces() {
+	void createPnlProvinces() throws IOException {
 
 		pnlProvinces = new JPanel();
 		pnlProvinces.setLayout(layout);
 		pnlProvinces.setBackground(clrBackground);
+
+		gameFiles = new GameFiles(Main.path + "\\");
+
+		selectables.put("terrain", gameFiles.loadTerrains());
+		selectables.put("climate", climate);
+		selectables.put("religion", gameFiles.loadReligions());
+		selectables.put("culture", gameFiles.loadCultures());
+		selectables.put("goods", gameFiles.loadGoods());
+
+		values.put("id", "1");
+		values.put("name", "Test");
+		values.put("manpower", "1444555");
+		values.put("income", "245");
+		values.put("value", "0");
+		values.put("cotmodifier", "0");
+		values.put("colonizationdifficulty", "0");
+		values.put("lootedYear", "0");
+		values.put("religion", "hussite");
+		values.put("terrain", "plains");
+		values.put("culture", "abenaki");
+		values.put("climate", "arctic");
+		values.put("goods", "cloth");
+		values.put("looted", "true");
+		values.put("whiteman", "true");
+
+		colonyPanel = new ColonyPanel(values, selectables);
+		
+//		scpProvinces = new JScrollPane(colonyPanel);
+//		scpProvinces.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+//		scpProvinces.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		addComponent(pnlProvinces, layout, colonyPanel, 0, 0, 1, 1, 1, 1, new Insets(0, 0, 0, 0));
 	}
 
 	// ==========================================
@@ -667,7 +723,7 @@ public class GUI implements ActionListener, ChangeListener {
 		lblAi = new JLabel(Strings.getString("GUI.32"), SwingConstants.LEFT);
 		lblAi.setForeground(clrStandard);
 		lblAi.setFont(fntStandard);
-		addComponent(pnlCountryTechnology, layout, lblAi, 0, y, 1, 1, 1, 0, new Insets(15, 5, 5, 5));
+		addComponent(pnlCountryTechnology, layout, lblAi, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
 		y++;
 
 		cbxAi = new JComboBox<String>();
@@ -1116,7 +1172,7 @@ public class GUI implements ActionListener, ChangeListener {
 		txfTransports.setPreferredSize(new Dimension(50, 20));
 		txfTransports.setEditable(true);
 		addComponent(pnlNavalUnitNumbers, layout, txfTransports, 2, 2, 1, 1, 0, 0, new Insets(0, 0, 0, 0));
-		
+
 		// TODO
 
 		addComponent(pnlCountryUnits, layout, new JPanel(), 0, y, 1, 1, 1, 1, new Insets(0, 0, 0, 0));

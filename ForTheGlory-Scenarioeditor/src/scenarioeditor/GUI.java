@@ -44,27 +44,30 @@ public class GUI implements ActionListener, ChangeListener {
 			pnlCountryPolicy, pnlPolicyDate, pnlCountryGeneral, pnlCountryTechnology, pnlCountryDiplomacy,
 			pnlCountryUnits, pnlTechnology, pnlProvincesControl, pnlColonialAttempts, pnlCountryGeneralBooleans,
 			pnlCountryGeneralTxf, pnlCountryGeneralCbx, pnlDiplomacyRelation, pnlCasusBelli, pnlWarned, pnlIndependence,
-			pnlPeace;
+			pnlPeace, pnlUnits, pnlUnitNumbers, pnlNavalUnits, pnlNavalUnitNumbers;
 	JTabbedPane tabbedPane;
 	JSplitPane splitPane;
 	MapPanel map;
 	JComboBox<String> cbxCountry, cbxCategory, cbxPolicyDateMonth, cbxTechnologyGroup, cbxAi, cbxMonarchtable,
 			cbxLeadertable, cbxSelectedProvince, cbxCopy, cbxCulture, cbxReligion, cbxSelectedCountry, cbxCasusBelli,
-			cbxCasusBelliMonth, cbxWarnedMonth, cbxIndependenceMonth, cbxPeaceMonth;
+			cbxCasusBelliMonth, cbxWarnedMonth, cbxIndependenceMonth, cbxPeaceMonth, cbxUnits, cbxUnitLocation,
+			cbxNavalUnits, cbxNavalUnitLocation;
 	JScrollPane scpCountrySettings;
 	JTextField txfPolicyDateDay, txfPolicyDateYear, txfTechnologyLand, txfTechnologyNaval, txfTechnologyTrade,
 			txfTechnologyInfra, txfTechnologyStability, txfColonialAttempts, txfLoansize, txfTreasury, txfInflation,
 			txfMissionaries, txfMerchants, txfDiplomats, txfWhiteMan, txfColonists, txfBadboy, txfDiplomacyRelation,
 			txfCasusBelliDay, txfCasusBelliYear, txfWarnedDay, txfWarnedYear, txfIndependenceDay, txfIndependenceYear,
-			txfPeaceDay, txfPeaceYear;
+			txfPeaceDay, txfPeaceYear, txfInfantry, txfCavalry, txfArtillery, txfWarships, txfGalleys, txfTransports;
 	JLabel lblCountry, lblCategory, lblPolicyDate, lblAristocracy, lblCentralization, lblInnovative, lblMercantilism,
 			lblOffensive, lblLand, lblQuality, lblSerfdom, lblTechnologyLand, lblTechnologyNaval, lblStability,
 			lblTrade, lblInfra, lblTechnologyGroup, lblAi, lblMonarchtable, lblLeadertable, lblSelectedProvince,
 			lblCopy, lblColonialAttempts, lblColonialnation, lblCancelledLoans, lblExtendedLoans, lblLoansize,
 			lblTreasury, lblInflation, lblColonists, lblMerchants, lblDiplomats, lblMissionaries, lblBadBoy,
 			lblWhiteMan, lblCulture, lblReligion, lblSelectedCountry, lblDiplomacyRelation, lblCasusBelliType,
-			lblCasusBelliDate, lblWarned, lblIndependence, lblPeace;
-	JButton btnLoad, btnSave, btnCountryDelete;
+			lblCasusBelliDate, lblWarned, lblIndependence, lblPeace, lblArmy, lblUnitLocation, lblInfantry, lblCavalry,
+			lblArtillery, lblNavy, lblNavalUnitLocation, lblWarships, lblGalleys, lblTransports;
+	JButton btnLoad, btnSave, btnCountryDelete, btnUnitAdd, btnUnitRename, btnUnitDel, btnNavalUnitAdd,
+			btnNavalUnitRename, btnNavalUnitDel;
 	JSlider sldAristocracy, sldCentralization, sldInnovative, sldMercantilism, sldOffensive, sldLand, sldQuality,
 			sldSerfdom;
 	JRadioButton rbnOwnProvinces, rbnControlledProvinces, rbnNationalProvinces, rbnKnownProvinces,
@@ -742,7 +745,7 @@ public class GUI implements ActionListener, ChangeListener {
 		chbCasusBelli.addChangeListener(this);
 		addComponent(pnlCountryDiplomacy, layout, chbCasusBelli, 0, y, 1, 1, 1, 0, new Insets(5, 5, 5, 5));
 		y++;
-		
+
 		lblCasusBelliDate = new JLabel(Strings.getString("GUI.67"), SwingConstants.LEFT);
 		lblCasusBelliDate.setForeground(clrStandard);
 		lblCasusBelliDate.setFont(fntStandard);
@@ -933,10 +936,190 @@ public class GUI implements ActionListener, ChangeListener {
 		pnlCountryUnits.setLayout(layout);
 		pnlCountryUnits.setBackground(clrBackground);
 		addComponent(pnlCountrySettings, layout, pnlCountryUnits, 0, 0, 1, 1, 1, 1, new Insets(0, 0, 0, 0));
+
+		lblArmy = new JLabel(Strings.getString("GUI.71"), SwingConstants.LEFT);
+		lblArmy.setForeground(clrStandard);
+		lblArmy.setFont(fntStandard);
+		addComponent(pnlCountryUnits, layout, lblArmy, 0, y, 1, 1, 1, 0, new Insets(5, 5, 5, 5));
+		y++;
+
+		cbxUnits = new JComboBox<String>();
+		cbxUnits.addActionListener(this);
+		addComponent(pnlCountryUnits, layout, cbxUnits, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
+		y++;
+
+		pnlUnits = new JPanel();
+		pnlUnits.setLayout(layout);
+		pnlUnits.setBackground(clrBackground);
+		addComponent(pnlCountryUnits, layout, pnlUnits, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
+		y++;
+
+		btnUnitAdd = new JButton(Strings.getString("GUI.73"));
+		btnUnitAdd.addActionListener(this);
+		addComponent(pnlUnits, layout, btnUnitAdd, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 0, 5));
+
+		btnUnitRename = new JButton(Strings.getString("GUI.74"));
+		btnUnitRename.addActionListener(this);
+		addComponent(pnlUnits, layout, btnUnitRename, 1, 0, 1, 1, 0, 0, new Insets(0, 0, 0, 5));
+
+		btnUnitDel = new JButton(Strings.getString("GUI.75"));
+		btnUnitDel.addActionListener(this);
+		addComponent(pnlUnits, layout, btnUnitDel, 2, 0, 1, 1, 0, 0, new Insets(0, 0, 0, 0));
+
+		addComponent(pnlUnits, layout, new JPanel(), 3, 0, 1, 1, 1, 0, new Insets(0, 0, 0, 0));
+
+		lblUnitLocation = new JLabel(Strings.getString("GUI.76"), SwingConstants.LEFT);
+		lblUnitLocation.setForeground(clrStandard);
+		lblUnitLocation.setFont(fntStandard);
+		addComponent(pnlCountryUnits, layout, lblUnitLocation, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
+		y++;
+
+		cbxUnitLocation = new JComboBox<String>();
+		cbxUnitLocation.addActionListener(this);
+		addComponent(pnlCountryUnits, layout, cbxUnitLocation, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
+		y++;
+
+		pnlUnitNumbers = new JPanel();
+		pnlUnitNumbers.setLayout(layout);
+		pnlUnitNumbers.setBackground(clrBackground);
+		addComponent(pnlCountryUnits, layout, pnlUnitNumbers, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
+		y++;
+
+		lblInfantry = new JLabel(Strings.getString("GUI.77"), SwingConstants.LEFT);
+		lblInfantry.setForeground(clrStandard);
+		lblInfantry.setFont(fntStandard);
+		addComponent(pnlUnitNumbers, layout, lblInfantry, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		addComponent(pnlUnitNumbers, layout, new JPanel(), 1, 0, 1, 1, 1, 0, new Insets(0, 0, 5, 0));
+
+		txfInfantry = new JTextField();
+		txfInfantry.setBackground(Color.white);
+		txfInfantry.setForeground(clrStandard);
+		txfInfantry.setPreferredSize(new Dimension(50, 20));
+		txfInfantry.setEditable(true);
+		addComponent(pnlUnitNumbers, layout, txfInfantry, 2, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
+
+		lblCavalry = new JLabel(Strings.getString("GUI.78"), SwingConstants.LEFT);
+		lblCavalry.setForeground(clrStandard);
+		lblCavalry.setFont(fntStandard);
+		addComponent(pnlUnitNumbers, layout, lblCavalry, 0, 1, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		addComponent(pnlUnitNumbers, layout, new JPanel(), 1, 1, 1, 1, 1, 0, new Insets(0, 0, 5, 0));
+
+		txfCavalry = new JTextField();
+		txfCavalry.setBackground(Color.white);
+		txfCavalry.setForeground(clrStandard);
+		txfCavalry.setPreferredSize(new Dimension(50, 20));
+		txfCavalry.setEditable(true);
+		addComponent(pnlUnitNumbers, layout, txfCavalry, 2, 1, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
+
+		lblArtillery = new JLabel(Strings.getString("GUI.79"), SwingConstants.LEFT);
+		lblArtillery.setForeground(clrStandard);
+		lblArtillery.setFont(fntStandard);
+		addComponent(pnlUnitNumbers, layout, lblArtillery, 0, 2, 1, 1, 0, 0, new Insets(0, 0, 0, 5));
+
+		addComponent(pnlUnitNumbers, layout, new JPanel(), 1, 2, 1, 1, 1, 0, new Insets(0, 0, 0, 0));
+
+		txfArtillery = new JTextField();
+		txfArtillery.setBackground(Color.white);
+		txfArtillery.setForeground(clrStandard);
+		txfArtillery.setPreferredSize(new Dimension(50, 20));
+		txfArtillery.setEditable(true);
+		addComponent(pnlUnitNumbers, layout, txfArtillery, 2, 2, 1, 1, 0, 0, new Insets(0, 0, 0, 0));
+
+		lblNavy = new JLabel(Strings.getString("GUI.72"), SwingConstants.LEFT);
+		lblNavy.setForeground(clrStandard);
+		lblNavy.setFont(fntStandard);
+		addComponent(pnlCountryUnits, layout, lblNavy, 0, y, 1, 1, 1, 0, new Insets(10, 5, 5, 5));
+		y++;
+
+		cbxNavalUnits = new JComboBox<String>();
+		cbxNavalUnits.addActionListener(this);
+		addComponent(pnlCountryUnits, layout, cbxNavalUnits, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
+		y++;
+
+		pnlNavalUnits = new JPanel();
+		pnlNavalUnits.setLayout(layout);
+		pnlNavalUnits.setBackground(clrBackground);
+		addComponent(pnlCountryUnits, layout, pnlNavalUnits, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
+		y++;
+
+		btnNavalUnitAdd = new JButton(Strings.getString("GUI.80"));
+		btnNavalUnitAdd.addActionListener(this);
+		addComponent(pnlNavalUnits, layout, btnNavalUnitAdd, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 0, 5));
+
+		btnNavalUnitRename = new JButton(Strings.getString("GUI.81"));
+		btnNavalUnitRename.addActionListener(this);
+		addComponent(pnlNavalUnits, layout, btnNavalUnitRename, 1, 0, 1, 1, 0, 0, new Insets(0, 0, 0, 5));
+
+		btnNavalUnitDel = new JButton(Strings.getString("GUI.82"));
+		btnNavalUnitDel.addActionListener(this);
+		addComponent(pnlNavalUnits, layout, btnNavalUnitDel, 2, 0, 1, 1, 0, 0, new Insets(0, 0, 0, 0));
+
+		addComponent(pnlNavalUnits, layout, new JPanel(), 3, 0, 1, 1, 1, 0, new Insets(0, 0, 0, 0));
+
+		lblNavalUnitLocation = new JLabel(Strings.getString("GUI.83"), SwingConstants.LEFT);
+		lblNavalUnitLocation.setForeground(clrStandard);
+		lblNavalUnitLocation.setFont(fntStandard);
+		addComponent(pnlCountryUnits, layout, lblNavalUnitLocation, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
+		y++;
+
+		cbxNavalUnitLocation = new JComboBox<String>();
+		cbxNavalUnitLocation.addActionListener(this);
+		addComponent(pnlCountryUnits, layout, cbxNavalUnitLocation, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
+		y++;
+
+		pnlNavalUnitNumbers = new JPanel();
+		pnlNavalUnitNumbers.setLayout(layout);
+		pnlNavalUnitNumbers.setBackground(clrBackground);
+		addComponent(pnlCountryUnits, layout, pnlNavalUnitNumbers, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
+		y++;
+
+		lblWarships = new JLabel(Strings.getString("GUI.84"), SwingConstants.LEFT);
+		lblWarships.setForeground(clrStandard);
+		lblWarships.setFont(fntStandard);
+		addComponent(pnlNavalUnitNumbers, layout, lblWarships, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		addComponent(pnlNavalUnitNumbers, layout, new JPanel(), 1, 0, 1, 1, 1, 0, new Insets(0, 0, 5, 0));
+
+		txfWarships = new JTextField();
+		txfWarships.setBackground(Color.white);
+		txfWarships.setForeground(clrStandard);
+		txfWarships.setPreferredSize(new Dimension(50, 20));
+		txfWarships.setEditable(true);
+		addComponent(pnlNavalUnitNumbers, layout, txfWarships, 2, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
+
+		lblGalleys = new JLabel(Strings.getString("GUI.85"), SwingConstants.LEFT);
+		lblGalleys.setForeground(clrStandard);
+		lblGalleys.setFont(fntStandard);
+		addComponent(pnlNavalUnitNumbers, layout, lblGalleys, 0, 1, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		addComponent(pnlNavalUnitNumbers, layout, new JPanel(), 1, 1, 1, 1, 1, 0, new Insets(0, 0, 5, 0));
+
+		txfGalleys = new JTextField();
+		txfGalleys.setBackground(Color.white);
+		txfGalleys.setForeground(clrStandard);
+		txfGalleys.setPreferredSize(new Dimension(50, 20));
+		txfGalleys.setEditable(true);
+		addComponent(pnlNavalUnitNumbers, layout, txfGalleys, 2, 1, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
+
+		lblTransports = new JLabel(Strings.getString("GUI.86"), SwingConstants.LEFT);
+		lblTransports.setForeground(clrStandard);
+		lblTransports.setFont(fntStandard);
+		addComponent(pnlNavalUnitNumbers, layout, lblTransports, 0, 2, 1, 1, 0, 0, new Insets(0, 0, 0, 5));
+
+		addComponent(pnlNavalUnitNumbers, layout, new JPanel(), 1, 2, 1, 1, 1, 0, new Insets(0, 0, 0, 0));
+
+		txfTransports = new JTextField();
+		txfTransports.setBackground(Color.white);
+		txfTransports.setForeground(clrStandard);
+		txfTransports.setPreferredSize(new Dimension(50, 20));
+		txfTransports.setEditable(true);
+		addComponent(pnlNavalUnitNumbers, layout, txfTransports, 2, 2, 1, 1, 0, 0, new Insets(0, 0, 0, 0));
 		
-		//TODO
-		
-		
+		// TODO
+
+		addComponent(pnlCountryUnits, layout, new JPanel(), 0, y, 1, 1, 1, 1, new Insets(0, 0, 0, 0));
 	}
 
 	void createPnlCountryPolicy() {

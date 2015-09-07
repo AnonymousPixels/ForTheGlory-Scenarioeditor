@@ -40,55 +40,52 @@ public class GUI implements ActionListener, ChangeListener {
 
 	JFrame frame;
 	GridBagLayout layout;
-
 	JPanel panel, pnlMap, pnlOther, pnlGeneral, pnlProvinces, pnlCountries, pnlCountrySettings, pnlCountry,
 			pnlCountryPolicy, pnlPolicyDate, pnlCountryGeneral, pnlCountryTechnology, pnlCountryDiplomacy,
 			pnlCountryUnits, pnlTechnology, pnlProvincesControl, pnlColonialAttempts, pnlCountryGeneralBooleans,
-			pnlCountryGeneralTxf, pnlCountryGeneralCbx, pnlDiplomacyRelation;
+			pnlCountryGeneralTxf, pnlCountryGeneralCbx, pnlDiplomacyRelation, pnlCasusBelli, pnlWarned, pnlIndependence,
+			pnlPeace;
 	JTabbedPane tabbedPane;
 	JSplitPane splitPane;
-
 	MapPanel map;
-
 	JComboBox<String> cbxCountry, cbxCategory, cbxPolicyDateMonth, cbxTechnologyGroup, cbxAi, cbxMonarchtable,
-			cbxLeadertable, cbxSelectedProvince, cbxCopy, cbxCulture, cbxReligion, cbxSelectedCountry;
+			cbxLeadertable, cbxSelectedProvince, cbxCopy, cbxCulture, cbxReligion, cbxSelectedCountry, cbxCasusBelli,
+			cbxCasusBelliMonth, cbxWarnedMonth, cbxIndependenceMonth, cbxPeaceMonth;
 	JScrollPane scpCountrySettings;
-
 	JTextField txfPolicyDateDay, txfPolicyDateYear, txfTechnologyLand, txfTechnologyNaval, txfTechnologyTrade,
 			txfTechnologyInfra, txfTechnologyStability, txfColonialAttempts, txfLoansize, txfTreasury, txfInflation,
-			txfMissionaries, txfMerchants, txfDiplomats, txfWhiteMan, txfColonists, txfBadboy, txfDiplomacyRelation;
+			txfMissionaries, txfMerchants, txfDiplomats, txfWhiteMan, txfColonists, txfBadboy, txfDiplomacyRelation,
+			txfCasusBelliDay, txfCasusBelliYear, txfWarnedDay, txfWarnedYear, txfIndependenceDay, txfIndependenceYear,
+			txfPeaceDay, txfPeaceYear;
 	JLabel lblCountry, lblCategory, lblPolicyDate, lblAristocracy, lblCentralization, lblInnovative, lblMercantilism,
 			lblOffensive, lblLand, lblQuality, lblSerfdom, lblTechnologyLand, lblTechnologyNaval, lblStability,
 			lblTrade, lblInfra, lblTechnologyGroup, lblAi, lblMonarchtable, lblLeadertable, lblSelectedProvince,
 			lblCopy, lblColonialAttempts, lblColonialnation, lblCancelledLoans, lblExtendedLoans, lblLoansize,
 			lblTreasury, lblInflation, lblColonists, lblMerchants, lblDiplomats, lblMissionaries, lblBadBoy,
-			lblWhiteMan, lblCulture, lblReligion, lblSelectedCountry, lblDiplomacyRelation;
+			lblWhiteMan, lblCulture, lblReligion, lblSelectedCountry, lblDiplomacyRelation, lblCasusBelliType,
+			lblCasusBelliDate, lblWarned, lblIndependence, lblPeace;
 	JButton btnLoad, btnSave, btnCountryDelete;
-
 	JSlider sldAristocracy, sldCentralization, sldInnovative, sldMercantilism, sldOffensive, sldLand, sldQuality,
 			sldSerfdom;
 	JRadioButton rbnOwnProvinces, rbnControlledProvinces, rbnNationalProvinces, rbnKnownProvinces,
 			rbnColonialnationTrue, rbnColonialnationFalse, rbnCancelledLoansTrue, rbnCancelledLoansFalse,
 			rbnExtendedLoansTrue, rbnExtendedLoansFalse;
-	JCheckBox chbMajorProvince, chbTradeAgreement, chbMilitaryAccess, chbRefuseTrade;
+	JCheckBox chbMajorProvince, chbTradeAgreement, chbMilitaryAccess, chbRefuseTrade, chbCasusBelli;
 	ButtonGroup grpProvinces, grpColonialnation, grpCancelledLoans, grpExtendedLoans;
-
 	BufferedImage imgFrontend, imgBackend;
 	HashMap hashMap = new HashMap<Color, Integer>();
-
 	Dimension minSize = new Dimension(1200, 720);
 	Color clrBackground = new Color(240, 240, 240), clrStandard = new Color(0, 0, 0);
 	Font fntStandard = new Font("Verdana", 0, 12);
-
 	String name = Strings.getString("name"), version = Strings.getString("version"), build = Strings.getString("build"),
 			title = name + " | Version: " + version + " (Build: " + build + ")";
-
 	String[] months = { Strings.getString("Month.1"), Strings.getString("Month.2"), Strings.getString("Month.3"),
 			Strings.getString("Month.4"), Strings.getString("Month.5"), Strings.getString("Month.6"),
 			Strings.getString("Month.7"), Strings.getString("Month.8"), Strings.getString("Month.9"),
 			Strings.getString("Month.10"), Strings.getString("Month.11"), Strings.getString("Month.12") },
 			CountryCategories = { Strings.getString("Category.1"), Strings.getString("Category.2"),
-					Strings.getString("Category.3"), Strings.getString("Category.4"), Strings.getString("Category.5") };
+					Strings.getString("Category.3"), Strings.getString("Category.4"), Strings.getString("Category.5") },
+			CasusBelliTypes = { Strings.getString("CasusBelliPermanent"), Strings.getString("CasusBelliTemporary") };
 
 	// ==========================================
 
@@ -738,28 +735,190 @@ public class GUI implements ActionListener, ChangeListener {
 		txfDiplomacyRelation.setEditable(true);
 		addComponent(pnlDiplomacyRelation, layout, txfDiplomacyRelation, 1, 0, 1, 1, 0, 0, new Insets(0, 0, 0, 0));
 
-		// TODO Add war-reason-gui-components
+		chbCasusBelli = new JCheckBox(Strings.getString("GUI.65"));
+		chbCasusBelli.setSelected(false);
+		chbCasusBelli.setForeground(clrStandard);
+		chbCasusBelli.setFont(fntStandard);
+		chbCasusBelli.addChangeListener(this);
+		addComponent(pnlCountryDiplomacy, layout, chbCasusBelli, 0, y, 1, 1, 1, 0, new Insets(5, 5, 5, 5));
+		y++;
 		
-		
+		lblCasusBelliDate = new JLabel(Strings.getString("GUI.67"), SwingConstants.LEFT);
+		lblCasusBelliDate.setForeground(clrStandard);
+		lblCasusBelliDate.setFont(fntStandard);
+		addComponent(pnlCountryDiplomacy, layout, lblCasusBelliDate, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
+		y++;
+
+		pnlCasusBelli = new JPanel();
+		pnlCasusBelli.setLayout(layout);
+		pnlCasusBelli.setBackground(clrBackground);
+		addComponent(pnlCountryDiplomacy, layout, pnlCasusBelli, 0, y, 1, 1, 1, 0, new Insets(0, 5, 0, 5));
+		y++;
+
+		txfCasusBelliDay = new JTextField();
+		txfCasusBelliDay.setBackground(Color.white);
+		txfCasusBelliDay.setForeground(clrStandard);
+		txfCasusBelliDay.setPreferredSize(new Dimension(50, 20));
+		txfCasusBelliDay.setEditable(true);
+		addComponent(pnlCasusBelli, layout, txfCasusBelliDay, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		addComponent(pnlCasusBelli, layout, new JLabel("."), 1, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		cbxCasusBelliMonth = new JComboBox<String>(months);
+		cbxCasusBelliMonth.addActionListener(this);
+		addComponent(pnlCasusBelli, layout, cbxCasusBelliMonth, 2, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		addComponent(pnlCasusBelli, layout, new JLabel("."), 3, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		txfCasusBelliYear = new JTextField();
+		txfCasusBelliYear.setBackground(Color.white);
+		txfCasusBelliYear.setForeground(clrStandard);
+		txfCasusBelliYear.setPreferredSize(new Dimension(50, 20));
+		txfCasusBelliYear.setEditable(true);
+		addComponent(pnlCasusBelli, layout, txfCasusBelliYear, 4, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
+
+		addComponent(pnlCasusBelli, layout, new JPanel(), 5, 0, 1, 1, 1, 0, new Insets(0, 0, 0, 0));
+
+		lblCasusBelliType = new JLabel(Strings.getString("GUI.66"), SwingConstants.LEFT);
+		lblCasusBelliType.setForeground(clrStandard);
+		lblCasusBelliType.setFont(fntStandard);
+		addComponent(pnlCountryDiplomacy, layout, lblCasusBelliType, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
+		y++;
+
+		cbxCasusBelli = new JComboBox<String>(CasusBelliTypes);
+		cbxCasusBelli.addActionListener(this);
+		addComponent(pnlCountryDiplomacy, layout, cbxCasusBelli, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
+		y++;
+
+		lblWarned = new JLabel(Strings.getString("GUI.68"));
+		lblWarned.setForeground(clrStandard);
+		lblWarned.setFont(fntStandard);
+		addComponent(pnlCountryDiplomacy, layout, lblWarned, 0, y, 1, 1, 1, 0, new Insets(5, 5, 5, 5));
+		y++;
+
+		pnlWarned = new JPanel();
+		pnlWarned.setLayout(layout);
+		pnlWarned.setBackground(clrBackground);
+		addComponent(pnlCountryDiplomacy, layout, pnlWarned, 0, y, 1, 1, 1, 0, new Insets(0, 5, 0, 5));
+		y++;
+
+		txfWarnedDay = new JTextField();
+		txfWarnedDay.setBackground(Color.white);
+		txfWarnedDay.setForeground(clrStandard);
+		txfWarnedDay.setPreferredSize(new Dimension(50, 20));
+		txfWarnedDay.setEditable(true);
+		addComponent(pnlWarned, layout, txfWarnedDay, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		addComponent(pnlWarned, layout, new JLabel("."), 1, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		cbxWarnedMonth = new JComboBox<String>(months);
+		cbxWarnedMonth.addActionListener(this);
+		addComponent(pnlWarned, layout, cbxWarnedMonth, 2, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		addComponent(pnlWarned, layout, new JLabel("."), 3, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		txfWarnedYear = new JTextField();
+		txfWarnedYear.setBackground(Color.white);
+		txfWarnedYear.setForeground(clrStandard);
+		txfWarnedYear.setPreferredSize(new Dimension(50, 20));
+		txfWarnedYear.setEditable(true);
+		addComponent(pnlWarned, layout, txfWarnedYear, 4, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
+
+		addComponent(pnlWarned, layout, new JPanel(), 5, 0, 1, 1, 1, 0, new Insets(0, 0, 0, 0));
+
+		lblIndependence = new JLabel(Strings.getString("GUI.69"), SwingConstants.LEFT);
+		lblIndependence.setForeground(clrStandard);
+		lblIndependence.setFont(fntStandard);
+		addComponent(pnlCountryDiplomacy, layout, lblIndependence, 0, y, 1, 1, 1, 0, new Insets(5, 5, 5, 5));
+		y++;
+
+		pnlIndependence = new JPanel();
+		pnlIndependence.setLayout(layout);
+		pnlIndependence.setBackground(clrBackground);
+		addComponent(pnlCountryDiplomacy, layout, pnlIndependence, 0, y, 1, 1, 1, 0, new Insets(0, 5, 0, 5));
+		y++;
+
+		txfIndependenceDay = new JTextField();
+		txfIndependenceDay.setBackground(Color.white);
+		txfIndependenceDay.setForeground(clrStandard);
+		txfIndependenceDay.setPreferredSize(new Dimension(50, 20));
+		txfIndependenceDay.setEditable(true);
+		addComponent(pnlIndependence, layout, txfIndependenceDay, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		addComponent(pnlIndependence, layout, new JLabel("."), 1, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		cbxIndependenceMonth = new JComboBox<String>(months);
+		cbxIndependenceMonth.addActionListener(this);
+		addComponent(pnlIndependence, layout, cbxIndependenceMonth, 2, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		addComponent(pnlIndependence, layout, new JLabel("."), 3, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		txfIndependenceYear = new JTextField();
+		txfIndependenceYear.setBackground(Color.white);
+		txfIndependenceYear.setForeground(clrStandard);
+		txfIndependenceYear.setPreferredSize(new Dimension(50, 20));
+		txfIndependenceYear.setEditable(true);
+		addComponent(pnlIndependence, layout, txfIndependenceYear, 4, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
+
+		addComponent(pnlIndependence, layout, new JPanel(), 5, 0, 1, 1, 1, 0, new Insets(0, 0, 0, 0));
+
+		lblPeace = new JLabel(Strings.getString("GUI.70"), SwingConstants.LEFT);
+		lblPeace.setForeground(clrStandard);
+		lblPeace.setFont(fntStandard);
+		addComponent(pnlCountryDiplomacy, layout, lblPeace, 0, y, 1, 1, 1, 0, new Insets(5, 5, 5, 5));
+		y++;
+
+		pnlPeace = new JPanel();
+		pnlPeace.setLayout(layout);
+		pnlPeace.setBackground(clrBackground);
+		addComponent(pnlCountryDiplomacy, layout, pnlPeace, 0, y, 1, 1, 1, 0, new Insets(0, 5, 0, 5));
+		y++;
+
+		txfPeaceDay = new JTextField();
+		txfPeaceDay.setBackground(Color.white);
+		txfPeaceDay.setForeground(clrStandard);
+		txfPeaceDay.setPreferredSize(new Dimension(50, 20));
+		txfPeaceDay.setEditable(true);
+		addComponent(pnlPeace, layout, txfPeaceDay, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		addComponent(pnlPeace, layout, new JLabel("."), 1, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		cbxPeaceMonth = new JComboBox<String>(months);
+		cbxPeaceMonth.addActionListener(this);
+		addComponent(pnlPeace, layout, cbxPeaceMonth, 2, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		addComponent(pnlPeace, layout, new JLabel("."), 3, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+
+		txfPeaceYear = new JTextField();
+		txfPeaceYear.setBackground(Color.white);
+		txfPeaceYear.setForeground(clrStandard);
+		txfPeaceYear.setPreferredSize(new Dimension(50, 20));
+		txfPeaceYear.setEditable(true);
+		addComponent(pnlPeace, layout, txfPeaceYear, 4, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
+
+		addComponent(pnlPeace, layout, new JPanel(), 5, 0, 1, 1, 1, 0, new Insets(0, 0, 0, 0));
 
 		chbTradeAgreement = new JCheckBox(Strings.getString("GUI.62"));
 		chbTradeAgreement.setSelected(false);
 		chbTradeAgreement.setForeground(clrStandard);
 		chbTradeAgreement.setFont(fntStandard);
-		addComponent(pnlCountryDiplomacy, layout, chbTradeAgreement, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
+		chbTradeAgreement.addChangeListener(this);
+		addComponent(pnlCountryDiplomacy, layout, chbTradeAgreement, 0, y, 1, 1, 1, 0, new Insets(5, 5, 5, 5));
 		y++;
-		
+
 		chbMilitaryAccess = new JCheckBox(Strings.getString("GUI.63"));
 		chbMilitaryAccess.setSelected(false);
 		chbMilitaryAccess.setForeground(clrStandard);
 		chbMilitaryAccess.setFont(fntStandard);
+		chbMilitaryAccess.addChangeListener(this);
 		addComponent(pnlCountryDiplomacy, layout, chbMilitaryAccess, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
 		y++;
-		
+
 		chbRefuseTrade = new JCheckBox(Strings.getString("GUI.64"));
 		chbRefuseTrade.setSelected(false);
 		chbRefuseTrade.setForeground(clrStandard);
 		chbRefuseTrade.setFont(fntStandard);
+		chbRefuseTrade.addChangeListener(this);
 		addComponent(pnlCountryDiplomacy, layout, chbRefuseTrade, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
 		y++;
 
@@ -774,6 +933,10 @@ public class GUI implements ActionListener, ChangeListener {
 		pnlCountryUnits.setLayout(layout);
 		pnlCountryUnits.setBackground(clrBackground);
 		addComponent(pnlCountrySettings, layout, pnlCountryUnits, 0, 0, 1, 1, 1, 1, new Insets(0, 0, 0, 0));
+		
+		//TODO
+		
+		
 	}
 
 	void createPnlCountryPolicy() {

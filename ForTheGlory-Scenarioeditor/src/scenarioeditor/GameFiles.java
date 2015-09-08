@@ -201,7 +201,7 @@ public class GameFiles {
 
 	}
 
-	public static String[] loadGoods() throws IOException {
+	public String[] loadGoods() throws IOException {
 		int length = 0;
 
 		FileReader r = new FileReader(new File(gamePath + "Db\\goods.txt"));
@@ -235,7 +235,7 @@ public class GameFiles {
 
 	}
 
-	public static String[] loadReligions() throws IOException {
+	public String[] loadReligions() throws IOException {
 		int length = 0;
 
 		FileReader r = new FileReader(new File(gamePath
@@ -278,7 +278,7 @@ public class GameFiles {
 
 	}
 
-	public static String[] loadTerrains() throws IOException {
+	public String[] loadTerrains() throws IOException {
 		int length = 0;
 
 		FileReader r = new FileReader(new File(gamePath

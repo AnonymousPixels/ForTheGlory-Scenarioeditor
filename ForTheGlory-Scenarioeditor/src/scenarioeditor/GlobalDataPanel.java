@@ -114,7 +114,7 @@ public class GlobalDataPanel extends JPanel implements ActionListener {
 		addComponent(deathdate, lytDeathdate, txtDeathdateYear, 3, 1, 1, 1, 1,
 				1, new Insets(5, 5, 5, 5));
 
-		addComponent(this, layout, deathdate, 2, 1, 1, 1, 1, 0, new Insets(5,
+		addComponent(this, layout, deathdate, 1, 2, 1, 1, 1, 0, new Insets(5,
 				5, 5, 5));
 		// new TriggerTest();
 	}
@@ -154,7 +154,7 @@ public class GlobalDataPanel extends JPanel implements ActionListener {
 				new Insets(5, 5, 5, 5));
 		addComponent(discoveries, lytDiscovery, jspDiscovery, 1, 2, 4, 1, 1, 1,
 				new Insets(5, 5, 5, 5));
-		addComponent(this, layout, discoveries, 1, 2, 2, 1, 1, 0.1, new Insets(
+		addComponent(this, layout, discoveries, 1, 3, 2, 1, 1, 0.1, new Insets(
 				5, 5, 5, 5));
 
 	}
@@ -195,7 +195,7 @@ public class GlobalDataPanel extends JPanel implements ActionListener {
 				new Insets(5, 5, 5, 5));
 		addComponent(etablishment, lytEtablishment, jspEtablishment, 1, 2, 4,
 				1, 1, 1, new Insets(5, 5, 5, 5));
-		addComponent(this, layout, etablishment, 1, 3, 2, 1, 1, 0.1,
+		addComponent(this, layout, etablishment, 1, 4, 2, 1, 1, 0.1,
 				new Insets(5, 5, 5, 5));
 
 	}

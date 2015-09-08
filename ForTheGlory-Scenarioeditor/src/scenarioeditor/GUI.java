@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -21,7 +20,6 @@ import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -59,13 +57,14 @@ public class GUI implements ActionListener, ChangeListener {
 	JComboBox<String> cbxCountry, cbxCategory, cbxPolicyDateMonth, cbxTechnologyGroup, cbxAi, cbxMonarchtable,
 			cbxLeadertable, cbxSelectedProvince, cbxCopy, cbxCulture, cbxReligion, cbxSelectedCountry, cbxCasusBelli,
 			cbxCasusBelliMonth, cbxWarnedMonth, cbxIndependenceMonth, cbxPeaceMonth, cbxUnits, cbxUnitLocation,
-			cbxNavalUnits, cbxNavalUnitLocation;
+			cbxNavalUnits, cbxNavalUnitLocation, cbxPolicyDateDay, cbxCasusBelliDay, cbxWarnedDay, cbxIndependenceDay,
+			cbxPeaceDay;
 	JScrollPane scpCountrySettings, scpProvinces;
-	JTextField txfPolicyDateDay, txfPolicyDateYear, txfTechnologyLand, txfTechnologyNaval, txfTechnologyTrade,
-			txfTechnologyInfra, txfTechnologyStability, txfColonialAttempts, txfLoansize, txfTreasury, txfInflation,
-			txfMissionaries, txfMerchants, txfDiplomats, txfWhiteMan, txfColonists, txfBadboy, txfDiplomacyRelation,
-			txfCasusBelliDay, txfCasusBelliYear, txfWarnedDay, txfWarnedYear, txfIndependenceDay, txfIndependenceYear,
-			txfPeaceDay, txfPeaceYear, txfInfantry, txfCavalry, txfArtillery, txfWarships, txfGalleys, txfTransports;
+	JTextField txfPolicyDateYear, txfTechnologyLand, txfTechnologyNaval, txfTechnologyTrade, txfTechnologyInfra,
+			txfTechnologyStability, txfColonialAttempts, txfLoansize, txfTreasury, txfInflation, txfMissionaries,
+			txfMerchants, txfDiplomats, txfWhiteMan, txfColonists, txfBadboy, txfDiplomacyRelation, txfCasusBelliYear,
+			txfWarnedYear, txfIndependenceYear, txfPeaceYear, txfInfantry, txfCavalry, txfArtillery, txfWarships,
+			txfGalleys, txfTransports;
 	JLabel lblCountry, lblCategory, lblPolicyDate, lblAristocracy, lblCentralization, lblInnovative, lblMercantilism,
 			lblOffensive, lblLand, lblQuality, lblSerfdom, lblTechnologyLand, lblTechnologyNaval, lblStability,
 			lblTrade, lblInfra, lblTechnologyGroup, lblAi, lblMonarchtable, lblLeadertable, lblSelectedProvince,
@@ -102,7 +101,9 @@ public class GUI implements ActionListener, ChangeListener {
 			CountryCategories = { Strings.getString("Category.1"), Strings.getString("Category.2"),
 					Strings.getString("Category.3"), Strings.getString("Category.4"), Strings.getString("Category.5") },
 			CasusBelliTypes = { Strings.getString("CasusBelliPermanent"), Strings.getString("CasusBelliTemporary") },
-			climate = { "arctic", "tropical", "temperate", "ncontinental", "scontinental", "tundra", "desertic" };
+			climate = { "arctic", "tropical", "temperate", "ncontinental", "scontinental", "tundra", "desertic" },
+			days = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18",
+					"19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" };
 
 	// ==========================================
 
@@ -181,6 +182,8 @@ public class GUI implements ActionListener, ChangeListener {
 
 		// ==========================================
 
+		fillHashMaps();
+
 		createPnlProvinces();
 		createPnlGeneral();
 		createPnlCountries();
@@ -203,21 +206,42 @@ public class GUI implements ActionListener, ChangeListener {
 
 	// ==========================================
 
+	void fillHashMaps() {
+
+		values.put("id", "1");
+		values.put("name", "Test");
+		values.put("manpower", "1444555");
+		values.put("income", "245");
+		values.put("value", "0");
+		values.put("cotmodifier", "0");
+		values.put("colonizationdifficulty", "0");
+		values.put("lootedYear", "0");
+		values.put("religion", "hussite");
+		values.put("terrain", "plains");
+		values.put("culture", "abenaki");
+		values.put("climate", "arctic");
+		values.put("goods", "cloth");
+		values.put("looted", "true");
+		values.put("whiteman", "true");
+	}
+
+	// ==========================================
+
 	void createPnlGeneral() throws IOException {
 
 		pnlGeneral = new JPanel();
 		pnlGeneral.setLayout(layout);
 		pnlGeneral.setBackground(clrBackground);
-	
+
 		selectables.put("continent", GameFiles.loadTags("continent"));
 		selectables.put("area", GameFiles.loadTags("area"));
 		selectables.put("region", GameFiles.loadTags("region"));
-	
+
 		globalDataPanel = new GlobalDataPanel(values, selectables);
-		
-//		scpProvinces = new JScrollPane(colonyPanel);
-//		scpProvinces.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-//		scpProvinces.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+		// scpProvinces = new JScrollPane(globalDataPanel);
+		// scpProvinces.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		// scpProvinces.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		addComponent(pnlGeneral, layout, globalDataPanel, 0, 0, 1, 1, 1, 1, new Insets(0, 0, 0, 0));
 	}
 
@@ -237,27 +261,11 @@ public class GUI implements ActionListener, ChangeListener {
 		selectables.put("culture", gameFiles.loadCultures());
 		selectables.put("goods", gameFiles.loadGoods());
 
-		values.put("id", "1");
-		values.put("name", "Test");
-		values.put("manpower", "1444555");
-		values.put("income", "245");
-		values.put("value", "0");
-		values.put("cotmodifier", "0");
-		values.put("colonizationdifficulty", "0");
-		values.put("lootedYear", "0");
-		values.put("religion", "hussite");
-		values.put("terrain", "plains");
-		values.put("culture", "abenaki");
-		values.put("climate", "arctic");
-		values.put("goods", "cloth");
-		values.put("looted", "true");
-		values.put("whiteman", "true");
-
 		colonyPanel = new ColonyPanel(values, selectables);
-		
-//		scpProvinces = new JScrollPane(colonyPanel);
-//		scpProvinces.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-//		scpProvinces.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+		// scpProvinces = new JScrollPane(colonyPanel);
+		// scpProvinces.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		// scpProvinces.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		addComponent(pnlProvinces, layout, colonyPanel, 0, 0, 1, 1, 1, 1, new Insets(0, 0, 0, 0));
 	}
 
@@ -814,12 +822,9 @@ public class GUI implements ActionListener, ChangeListener {
 		addComponent(pnlCountryDiplomacy, layout, pnlCasusBelli, 0, y, 1, 1, 1, 0, new Insets(0, 5, 0, 5));
 		y++;
 
-		txfCasusBelliDay = new JTextField();
-		txfCasusBelliDay.setBackground(Color.white);
-		txfCasusBelliDay.setForeground(clrStandard);
-		txfCasusBelliDay.setPreferredSize(new Dimension(50, 20));
-		txfCasusBelliDay.setEditable(true);
-		addComponent(pnlCasusBelli, layout, txfCasusBelliDay, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+		cbxCasusBelliDay = new JComboBox<String>(days);
+		cbxCasusBelliDay.addActionListener(this);
+		addComponent(pnlCasusBelli, layout, cbxCasusBelliDay, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
 
 		addComponent(pnlCasusBelli, layout, new JLabel("."), 1, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
 
@@ -861,12 +866,9 @@ public class GUI implements ActionListener, ChangeListener {
 		addComponent(pnlCountryDiplomacy, layout, pnlWarned, 0, y, 1, 1, 1, 0, new Insets(0, 5, 0, 5));
 		y++;
 
-		txfWarnedDay = new JTextField();
-		txfWarnedDay.setBackground(Color.white);
-		txfWarnedDay.setForeground(clrStandard);
-		txfWarnedDay.setPreferredSize(new Dimension(50, 20));
-		txfWarnedDay.setEditable(true);
-		addComponent(pnlWarned, layout, txfWarnedDay, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+		cbxWarnedDay = new JComboBox<String>(days);
+		cbxWarnedDay.addActionListener(this);
+		addComponent(pnlWarned, layout, cbxWarnedDay, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
 
 		addComponent(pnlWarned, layout, new JLabel("."), 1, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
 
@@ -897,12 +899,9 @@ public class GUI implements ActionListener, ChangeListener {
 		addComponent(pnlCountryDiplomacy, layout, pnlIndependence, 0, y, 1, 1, 1, 0, new Insets(0, 5, 0, 5));
 		y++;
 
-		txfIndependenceDay = new JTextField();
-		txfIndependenceDay.setBackground(Color.white);
-		txfIndependenceDay.setForeground(clrStandard);
-		txfIndependenceDay.setPreferredSize(new Dimension(50, 20));
-		txfIndependenceDay.setEditable(true);
-		addComponent(pnlIndependence, layout, txfIndependenceDay, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+		cbxIndependenceDay = new JComboBox<String>(days);
+		cbxIndependenceDay.addActionListener(this);
+		addComponent(pnlIndependence, layout, cbxIndependenceDay, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
 
 		addComponent(pnlIndependence, layout, new JLabel("."), 1, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
 
@@ -933,12 +932,9 @@ public class GUI implements ActionListener, ChangeListener {
 		addComponent(pnlCountryDiplomacy, layout, pnlPeace, 0, y, 1, 1, 1, 0, new Insets(0, 5, 0, 5));
 		y++;
 
-		txfPeaceDay = new JTextField();
-		txfPeaceDay.setBackground(Color.white);
-		txfPeaceDay.setForeground(clrStandard);
-		txfPeaceDay.setPreferredSize(new Dimension(50, 20));
-		txfPeaceDay.setEditable(true);
-		addComponent(pnlPeace, layout, txfPeaceDay, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+		cbxPeaceDay = new JComboBox<String>(days);
+		cbxPeaceDay.addActionListener(this);
+		addComponent(pnlPeace, layout, cbxPeaceDay, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
 
 		addComponent(pnlPeace, layout, new JLabel("."), 1, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
 
@@ -1199,12 +1195,9 @@ public class GUI implements ActionListener, ChangeListener {
 		addComponent(pnlCountryPolicy, layout, pnlPolicyDate, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
 		y++;
 
-		txfPolicyDateDay = new JTextField();
-		txfPolicyDateDay.setBackground(Color.white);
-		txfPolicyDateDay.setForeground(clrStandard);
-		txfPolicyDateDay.setPreferredSize(new Dimension(50, 20));
-		txfPolicyDateDay.setEditable(true);
-		addComponent(pnlPolicyDate, layout, txfPolicyDateDay, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+		cbxPolicyDateDay = new JComboBox<String>(days);
+		cbxPolicyDateDay.addActionListener(this);
+		addComponent(pnlPolicyDate, layout, cbxPolicyDateDay, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
 
 		addComponent(pnlPolicyDate, layout, new JLabel("."), 1, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
 

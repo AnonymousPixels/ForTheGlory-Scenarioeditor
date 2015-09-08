@@ -80,9 +80,9 @@ public class GlobalDataPanel extends JPanel implements ActionListener {
 
 		addComponent(date, lytDate, jcbDateDay, 1, 1, 1, 1, 1, 1, new Insets(5,
 				5, 5, 5));
-		addComponent(date, lytDate, jcbDateMonth, 1, 1, 1, 1, 1, 1, new Insets(
+		addComponent(date, lytDate, jcbDateMonth, 2, 1, 1, 1, 1, 1, new Insets(
 				5, 5, 5, 5));
-		addComponent(date, lytDate, txtDateYear, 1, 1, 1, 1, 1, 1, new Insets(
+		addComponent(date, lytDate, txtDateYear, 3, 1, 1, 1, 1, 1, new Insets(
 				5, 5, 5, 5));
 
 		addComponent(this, layout, date, 1, 1, 1, 1, 1, 0, new Insets(5, 5, 5,
@@ -109,9 +109,9 @@ public class GlobalDataPanel extends JPanel implements ActionListener {
 
 		addComponent(deathdate, lytDeathdate, jcbDeathdateDay, 1, 1, 1, 1, 1,
 				1, new Insets(5, 5, 5, 5));
-		addComponent(deathdate, lytDeathdate, jcbDeathdateMonth, 1, 1, 1, 1, 1,
+		addComponent(deathdate, lytDeathdate, jcbDeathdateMonth, 2, 1, 1, 1, 1,
 				1, new Insets(5, 5, 5, 5));
-		addComponent(deathdate, lytDeathdate, txtDeathdateYear, 1, 1, 1, 1, 1,
+		addComponent(deathdate, lytDeathdate, txtDeathdateYear, 3, 1, 1, 1, 1,
 				1, new Insets(5, 5, 5, 5));
 
 		addComponent(this, layout, deathdate, 1, 2, 1, 1, 1, 0, new Insets(5,

@@ -38,7 +38,7 @@ public class MapPanel extends JPanel implements MouseListener,
 		map2 = map;
 		biFrontend = biFrontendOriginal = Frontend;
 		biBackend = biBackendOriginal = Backend;
-		zoomFactorSelected = 0;
+		zoomFactorSelected = 1;
 		image = new JLabel(new ImageIcon(biFrontend));
 		sliderX = new JScrollBar();
 		sliderY = new JScrollBar();

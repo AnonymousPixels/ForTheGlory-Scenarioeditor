@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -64,7 +65,7 @@ public class AllianceFrame extends JFrame {
 		setTitle("Add new alliance");
 		setMinimumSize(new Dimension(400, 300));
 		setAlwaysOnTop(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -215,14 +216,18 @@ public class AllianceFrame extends JFrame {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				String result = "alliance = {\nid = {type = " + type + " id = "
-						+ id + "}\ntype = "
+				String result = "alliance = {\n    id = {type = " + type
+						+ " id = " + id + "}\n    type = "
 						+ comboBox_3.getSelectedItem().toString()
-						+ "\nexpirydate = { year = " + textField.getText()
+						+ "\n    expirydate = {year = " + textField.getText()
 						+ " month = " + comboBox_1.getSelectedItem().toString()
 						+ " day = " + comboBox.getSelectedItem().toString()
-						+ "}\nparticipant = {" + editorPane.getText() + "}\n}";
-				System.out.println(result);
+						+ "}\n    participant = { " + editorPane.getText()
+						+ " }\n}";
+				scenarioeditor.GlobalDataPanel.jepAlliance
+						.setText(scenarioeditor.GlobalDataPanel.jepAlliance
+								.getText() + "\n" + result);
+				close();
 			}
 		});
 		btnOk.setMinimumSize(new Dimension(70, 23));
@@ -233,5 +238,9 @@ public class AllianceFrame extends JFrame {
 		gbc_btnOk.gridx = 3;
 		gbc_btnOk.gridy = 2;
 		contentPane.add(btnOk, gbc_btnOk);
+	}
+
+	private void close() {
+		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}
 }

@@ -120,7 +120,7 @@ public class GUI implements ActionListener, ChangeListener {
 		frame.setResizable(true);
 		frame.setLayout(layout);
 		frame.setMinimumSize(minSize);
-
+		
 		// ==========================================
 
 		panel = new JPanel();
@@ -427,25 +427,7 @@ public class GUI implements ActionListener, ChangeListener {
 		cbxReligion.addActionListener(this);
 		addComponent(pnlCountryGeneral, layout, cbxReligion, 0, y, 1, 1, 1, 0, new Insets(0, 5, 10, 5));
 		y++;
-
-		pnlColonialAttempts = new JPanel();
-		pnlColonialAttempts.setLayout(layout);
-		pnlColonialAttempts.setBackground(clrBackground);
-		addComponent(pnlCountryGeneral, layout, pnlColonialAttempts, 0, y, 1, 1, 1, 0, new Insets(5, 5, 5, 5));
-		y++;
-
-		lblColonialAttempts = new JLabel(Strings.getString("GUI.43"));
-		lblColonialAttempts.setForeground(clrStandard);
-		lblColonialAttempts.setFont(fntStandard);
-		addComponent(pnlColonialAttempts, layout, lblColonialAttempts, 0, 0, 1, 1, 1, 0, new Insets(0, 0, 0, 5));
-
-		txfColonialAttempts = new JTextField();
-		txfColonialAttempts.setBackground(Color.white);
-		txfColonialAttempts.setForeground(clrStandard);
-		txfColonialAttempts.setPreferredSize(new Dimension(50, 20));
-		txfColonialAttempts.setEditable(true);
-		addComponent(pnlColonialAttempts, layout, txfColonialAttempts, 1, 0, 1, 1, 0, 0, new Insets(0, 0, 0, 0));
-
+		
 		pnlCountryGeneralBooleans = new JPanel();
 		pnlCountryGeneralBooleans.setLayout(layout);
 		pnlCountryGeneralBooleans.setBackground(clrBackground);
@@ -517,6 +499,24 @@ public class GUI implements ActionListener, ChangeListener {
 		grpExtendedLoans.add(rbnExtendedLoansTrue);
 		grpExtendedLoans.add(rbnExtendedLoansFalse);
 
+		pnlColonialAttempts = new JPanel();
+		pnlColonialAttempts.setLayout(layout);
+		pnlColonialAttempts.setBackground(clrBackground);
+		addComponent(pnlCountryGeneral, layout, pnlColonialAttempts, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
+		y++;
+
+		lblColonialAttempts = new JLabel(Strings.getString("GUI.43"));
+		lblColonialAttempts.setForeground(clrStandard);
+		lblColonialAttempts.setFont(fntStandard);
+		addComponent(pnlColonialAttempts, layout, lblColonialAttempts, 0, 0, 1, 1, 1, 0, new Insets(0, 0, 0, 5));
+
+		txfColonialAttempts = new JTextField();
+		txfColonialAttempts.setBackground(Color.white);
+		txfColonialAttempts.setForeground(clrStandard);
+		txfColonialAttempts.setPreferredSize(new Dimension(50, 20));
+		txfColonialAttempts.setEditable(true);
+		addComponent(pnlColonialAttempts, layout, txfColonialAttempts, 1, 0, 1, 1, 0, 0, new Insets(0, 0, 0, 0));
+		
 		pnlCountryGeneralTxf = new JPanel();
 		pnlCountryGeneralTxf.setLayout(layout);
 		pnlCountryGeneralTxf.setBackground(clrBackground);

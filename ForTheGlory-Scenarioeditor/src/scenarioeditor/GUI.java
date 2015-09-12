@@ -1168,9 +1168,7 @@ public class GUI implements ActionListener, ChangeListener {
 		txfTransports.setPreferredSize(new Dimension(50, 20));
 		txfTransports.setEditable(true);
 		addComponent(pnlNavalUnitNumbers, layout, txfTransports, 2, 2, 1, 1, 0, 0, new Insets(0, 0, 0, 0));
-
-		// TODO
-
+		
 		addComponent(pnlCountryUnits, layout, new JPanel(), 0, y, 1, 1, 1, 1, new Insets(0, 0, 0, 0));
 	}
 

@@ -143,10 +143,12 @@ public class GUI implements ActionListener, ChangeListener {
 
 		btnLoad = new JButton(Strings.getString("GUI.3"));
 		btnLoad.addActionListener(this);
+		btnLoad.setEnabled(false);
 		addComponent(pnlOther, layout, btnLoad, 1, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
 
 		btnSave = new JButton(Strings.getString("GUI.4"));
 		btnSave.addActionListener(this);
+		btnSave.setEnabled(false);
 		addComponent(pnlOther, layout, btnSave, 2, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
 
 		try {

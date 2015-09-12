@@ -45,7 +45,7 @@ public class Main {
 
 	static Color clrBackground = new Color(240, 240, 240), clrFont = new Color(
 			0, 0, 0);
-	static Font fntStandart = new Font("Sans Serif", 1, 12);
+	static Font fntStandart = new Font("Verdana", 1, 12);
 	
 	public static void main(String[] args) {
 

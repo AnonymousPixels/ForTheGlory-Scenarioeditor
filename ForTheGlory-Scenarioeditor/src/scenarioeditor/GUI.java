@@ -49,7 +49,7 @@ public class GUI implements ActionListener, ChangeListener {
 	JPanel panel, pnlMap, pnlOther, pnlGeneral, pnlProvinces, pnlCountries, pnlCountrySettings, pnlCountry,
 			pnlCountryPolicy, pnlPolicyDate, pnlCountryGeneral, pnlCountryTechnology, pnlCountryDiplomacy,
 			pnlCountryUnits, pnlTechnology, pnlProvincesControl, pnlColonialAttempts, pnlCountryGeneralBooleans,
-			pnlCountryGeneralTxf, pnlCountryGeneralCbx, pnlDiplomacyRelation, pnlCasusBelli, pnlWarned, pnlIndependence,
+			pnlCountryGeneralTxf, pnlDiplomacyRelation, pnlCasusBelli, pnlWarned, pnlIndependence,
 			pnlPeace, pnlUnits, pnlUnitNumbers, pnlNavalUnits, pnlNavalUnitNumbers;
 	JTabbedPane tabbedPane;
 	JSplitPane splitPane;
@@ -404,40 +404,38 @@ public class GUI implements ActionListener, ChangeListener {
 		cbxCopy.addActionListener(this);
 		addComponent(pnlProvincesControl, layout, cbxCopy, 0, 6, 2, 1, 1, 0, new Insets(0, 5, 5, 5));
 
-		pnlCountryGeneralCbx = new JPanel();
-		pnlCountryGeneralCbx.setLayout(layout);
-		pnlCountryGeneralCbx.setBackground(clrBackground);
-		addComponent(pnlCountryGeneral, layout, pnlCountryGeneralCbx, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
-		y++;
-
 		lblCulture = new JLabel(Strings.getString("GUI.58"), SwingConstants.LEFT);
 		lblCulture.setForeground(clrStandard);
 		lblCulture.setFont(fntStandard);
-		addComponent(pnlCountryGeneralCbx, layout, lblCulture, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
-
+		addComponent(pnlCountryGeneral, layout, lblCulture, 0, y, 1, 1, 1, 0, new Insets(5, 5, 5, 5));
+		y++;
+		
 		cbxCulture = new JComboBox<String>();
 		cbxCulture.addActionListener(this);
-		addComponent(pnlCountryGeneralCbx, layout, cbxCulture, 1, 0, 1, 1, 1, 0, new Insets(0, 0, 5, 0));
-
+		addComponent(pnlCountryGeneral, layout, cbxCulture, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
+		y++;
+		
 		lblReligion = new JLabel(Strings.getString("GUI.59"), SwingConstants.LEFT);
 		lblReligion.setForeground(clrStandard);
 		lblReligion.setFont(fntStandard);
-		addComponent(pnlCountryGeneralCbx, layout, lblReligion, 0, 1, 1, 1, 0, 0, new Insets(0, 0, 0, 5));
-
+		addComponent(pnlCountryGeneral, layout, lblReligion, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
+		y++;
+		
 		cbxReligion = new JComboBox<String>();
 		cbxReligion.addActionListener(this);
-		addComponent(pnlCountryGeneralCbx, layout, cbxReligion, 1, 1, 1, 1, 1, 0, new Insets(0, 0, 0, 0));
-
+		addComponent(pnlCountryGeneral, layout, cbxReligion, 0, y, 1, 1, 1, 0, new Insets(0, 5, 10, 5));
+		y++;
+		
 		pnlColonialAttempts = new JPanel();
 		pnlColonialAttempts.setLayout(layout);
 		pnlColonialAttempts.setBackground(clrBackground);
-		addComponent(pnlCountryGeneral, layout, pnlColonialAttempts, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
+		addComponent(pnlCountryGeneral, layout, pnlColonialAttempts, 0, y, 1, 1, 1, 0, new Insets(5, 5, 5, 5));
 		y++;
 
 		lblColonialAttempts = new JLabel(Strings.getString("GUI.43"));
 		lblColonialAttempts.setForeground(clrStandard);
 		lblColonialAttempts.setFont(fntStandard);
-		addComponent(pnlColonialAttempts, layout, lblColonialAttempts, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 0, 5));
+		addComponent(pnlColonialAttempts, layout, lblColonialAttempts, 0, 0, 1, 1, 1, 0, new Insets(0, 0, 0, 5));
 
 		txfColonialAttempts = new JTextField();
 		txfColonialAttempts.setBackground(Color.white);
@@ -446,18 +444,16 @@ public class GUI implements ActionListener, ChangeListener {
 		txfColonialAttempts.setEditable(true);
 		addComponent(pnlColonialAttempts, layout, txfColonialAttempts, 1, 0, 1, 1, 0, 0, new Insets(0, 0, 0, 0));
 
-		addComponent(pnlColonialAttempts, layout, new JPanel(), 2, 0, 1, 1, 1, 0, new Insets(0, 0, 0, 0));
-
 		pnlCountryGeneralBooleans = new JPanel();
 		pnlCountryGeneralBooleans.setLayout(layout);
 		pnlCountryGeneralBooleans.setBackground(clrBackground);
-		addComponent(pnlCountryGeneral, layout, pnlCountryGeneralBooleans, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
+		addComponent(pnlCountryGeneral, layout, pnlCountryGeneralBooleans, 0, y, 1, 1, 1, 0, new Insets(0, 5, 10, 5));
 		y++;
 
 		lblColonialnation = new JLabel(Strings.getString("GUI.44"), SwingConstants.LEFT);
 		lblColonialnation.setForeground(clrStandard);
 		lblColonialnation.setFont(fntStandard);
-		addComponent(pnlCountryGeneralBooleans, layout, lblColonialnation, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 0, 5));
+		addComponent(pnlCountryGeneralBooleans, layout, lblColonialnation, 0, 0, 1, 1, 1, 0, new Insets(0, 0, 0, 5));
 
 		rbnColonialnationTrue = new JRadioButton(Strings.getString("GUI.45"));
 		rbnColonialnationTrue.addChangeListener(this);
@@ -479,7 +475,7 @@ public class GUI implements ActionListener, ChangeListener {
 		lblCancelledLoans = new JLabel(Strings.getString("GUI.47"), SwingConstants.LEFT);
 		lblCancelledLoans.setForeground(clrStandard);
 		lblCancelledLoans.setFont(fntStandard);
-		addComponent(pnlCountryGeneralBooleans, layout, lblCancelledLoans, 0, 1, 1, 1, 0, 0, new Insets(0, 0, 0, 5));
+		addComponent(pnlCountryGeneralBooleans, layout, lblCancelledLoans, 0, 1, 1, 1, 1, 0, new Insets(0, 0, 0, 5));
 
 		rbnCancelledLoansTrue = new JRadioButton(Strings.getString("GUI.45"));
 		rbnCancelledLoansTrue.addChangeListener(this);
@@ -501,7 +497,7 @@ public class GUI implements ActionListener, ChangeListener {
 		lblExtendedLoans = new JLabel(Strings.getString("GUI.48"), SwingConstants.LEFT);
 		lblExtendedLoans.setForeground(clrStandard);
 		lblExtendedLoans.setFont(fntStandard);
-		addComponent(pnlCountryGeneralBooleans, layout, lblExtendedLoans, 0, 2, 1, 1, 0, 0, new Insets(0, 0, 0, 5));
+		addComponent(pnlCountryGeneralBooleans, layout, lblExtendedLoans, 0, 2, 1, 1, 1, 0, new Insets(0, 0, 0, 5));
 
 		rbnExtendedLoansTrue = new JRadioButton(Strings.getString("GUI.45"));
 		rbnExtendedLoansTrue.addChangeListener(this);
@@ -519,8 +515,6 @@ public class GUI implements ActionListener, ChangeListener {
 		grpExtendedLoans.add(rbnExtendedLoansTrue);
 		grpExtendedLoans.add(rbnExtendedLoansFalse);
 
-		addComponent(pnlCountryGeneralBooleans, layout, new JPanel(), 3, 0, 1, 3, 1, 0, new Insets(0, 0, 0, 0));
-
 		pnlCountryGeneralTxf = new JPanel();
 		pnlCountryGeneralTxf.setLayout(layout);
 		pnlCountryGeneralTxf.setBackground(clrBackground);
@@ -530,7 +524,7 @@ public class GUI implements ActionListener, ChangeListener {
 		lblLoansize = new JLabel(Strings.getString("GUI.49"), SwingConstants.LEFT);
 		lblLoansize.setForeground(clrStandard);
 		lblLoansize.setFont(fntStandard);
-		addComponent(pnlCountryGeneralTxf, layout, lblLoansize, 0, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+		addComponent(pnlCountryGeneralTxf, layout, lblLoansize, 0, 0, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
 
 		txfLoansize = new JTextField();
 		txfLoansize.setBackground(Color.white);
@@ -542,7 +536,7 @@ public class GUI implements ActionListener, ChangeListener {
 		lblTreasury = new JLabel(Strings.getString("GUI.50"), SwingConstants.LEFT);
 		lblTreasury.setForeground(clrStandard);
 		lblTreasury.setFont(fntStandard);
-		addComponent(pnlCountryGeneralTxf, layout, lblTreasury, 0, 1, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+		addComponent(pnlCountryGeneralTxf, layout, lblTreasury, 0, 1, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
 
 		txfTreasury = new JTextField();
 		txfTreasury.setBackground(Color.white);
@@ -554,7 +548,7 @@ public class GUI implements ActionListener, ChangeListener {
 		lblInflation = new JLabel(Strings.getString("GUI.51"), SwingConstants.LEFT);
 		lblInflation.setForeground(clrStandard);
 		lblInflation.setFont(fntStandard);
-		addComponent(pnlCountryGeneralTxf, layout, lblInflation, 0, 2, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+		addComponent(pnlCountryGeneralTxf, layout, lblInflation, 0, 2, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
 
 		txfInflation = new JTextField();
 		txfInflation.setBackground(Color.white);
@@ -566,7 +560,7 @@ public class GUI implements ActionListener, ChangeListener {
 		lblColonists = new JLabel(Strings.getString("GUI.52"), SwingConstants.LEFT);
 		lblColonists.setForeground(clrStandard);
 		lblColonists.setFont(fntStandard);
-		addComponent(pnlCountryGeneralTxf, layout, lblColonists, 0, 3, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+		addComponent(pnlCountryGeneralTxf, layout, lblColonists, 0, 3, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
 
 		txfColonists = new JTextField();
 		txfColonists.setBackground(Color.white);
@@ -578,7 +572,7 @@ public class GUI implements ActionListener, ChangeListener {
 		lblMerchants = new JLabel(Strings.getString("GUI.53"), SwingConstants.LEFT);
 		lblMerchants.setForeground(clrStandard);
 		lblMerchants.setFont(fntStandard);
-		addComponent(pnlCountryGeneralTxf, layout, lblMerchants, 0, 4, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+		addComponent(pnlCountryGeneralTxf, layout, lblMerchants, 0, 4, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
 
 		txfMerchants = new JTextField();
 		txfMerchants.setBackground(Color.white);
@@ -590,7 +584,7 @@ public class GUI implements ActionListener, ChangeListener {
 		lblDiplomats = new JLabel(Strings.getString("GUI.54"), SwingConstants.LEFT);
 		lblDiplomats.setForeground(clrStandard);
 		lblDiplomats.setFont(fntStandard);
-		addComponent(pnlCountryGeneralTxf, layout, lblDiplomats, 0, 5, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+		addComponent(pnlCountryGeneralTxf, layout, lblDiplomats, 0, 5, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
 
 		txfDiplomats = new JTextField();
 		txfDiplomats.setBackground(Color.white);
@@ -602,7 +596,7 @@ public class GUI implements ActionListener, ChangeListener {
 		lblMissionaries = new JLabel(Strings.getString("GUI.55"), SwingConstants.LEFT);
 		lblMissionaries.setForeground(clrStandard);
 		lblMissionaries.setFont(fntStandard);
-		addComponent(pnlCountryGeneralTxf, layout, lblMissionaries, 0, 6, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+		addComponent(pnlCountryGeneralTxf, layout, lblMissionaries, 0, 6, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
 
 		txfMissionaries = new JTextField();
 		txfMissionaries.setBackground(Color.white);
@@ -614,7 +608,7 @@ public class GUI implements ActionListener, ChangeListener {
 		lblBadBoy = new JLabel(Strings.getString("GUI.56"), SwingConstants.LEFT);
 		lblBadBoy.setForeground(clrStandard);
 		lblBadBoy.setFont(fntStandard);
-		addComponent(pnlCountryGeneralTxf, layout, lblBadBoy, 0, 7, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+		addComponent(pnlCountryGeneralTxf, layout, lblBadBoy, 0, 7, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
 
 		txfBadboy = new JTextField();
 		txfBadboy.setBackground(Color.white);
@@ -626,7 +620,7 @@ public class GUI implements ActionListener, ChangeListener {
 		lblWhiteMan = new JLabel(Strings.getString("GUI.57"), SwingConstants.LEFT);
 		lblWhiteMan.setForeground(clrStandard);
 		lblWhiteMan.setFont(fntStandard);
-		addComponent(pnlCountryGeneralTxf, layout, lblWhiteMan, 0, 8, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
+		addComponent(pnlCountryGeneralTxf, layout, lblWhiteMan, 0, 8, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
 
 		txfWhiteMan = new JTextField();
 		txfWhiteMan.setBackground(Color.white);
@@ -634,8 +628,6 @@ public class GUI implements ActionListener, ChangeListener {
 		txfWhiteMan.setPreferredSize(new Dimension(50, 20));
 		txfWhiteMan.setEditable(true);
 		addComponent(pnlCountryGeneralTxf, layout, txfWhiteMan, 1, 8, 1, 1, 0, 0, new Insets(0, 0, 0, 0));
-
-		addComponent(pnlCountryGeneralTxf, layout, new JPanel(), 2, 0, 1, 9, 1, 0, new Insets(0, 0, 0, 0));
 
 		addComponent(pnlCountryGeneral, layout, new JPanel(), 0, y, 1, 1, 1, 1, new Insets(0, 0, 0, 0));
 	}

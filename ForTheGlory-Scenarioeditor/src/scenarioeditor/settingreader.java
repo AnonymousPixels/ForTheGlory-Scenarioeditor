@@ -10,19 +10,14 @@ public class settingreader {
 	public static BufferedReader reader;
 	public static FileReader file;
 	public static String input;
-	public static int brackets, bracketposition, counter_country,
-			counter_techgroups, counter_techspeed, counter_cultures,
-			counter_cultures_city, counter_cultures_buildings,
-			counter_cultures_color;
-	public static String[] shortcountryname_array, cultures_array,
-			cultures_city_array, cultures_color_array,
+	public static int brackets, bracketposition, counter_country, counter_techgroups, counter_techspeed,
+			counter_cultures, counter_cultures_city, counter_cultures_buildings, counter_cultures_color;
+	public static String[] shortcountryname_array, cultures_array, cultures_city_array, cultures_color_array,
 			cultures_buildings_array, techgroups_array, techspeed_array;
 
-	public static String[] newcountry_array, picture_array, color_array,
-			techgroup_array, leader_language_array, new_colony_array,
-			army_array, navy_array, aristocracy_array, centralization_array,
-			innovative_array, mercantilism_array, offensive_array, land_array,
-			quality_array, serfdom_array, elector_array;
+	public static String[] newcountry_array, picture_array, color_array, techgroup_array, leader_language_array,
+			new_colony_array, army_array, navy_array, aristocracy_array, centralization_array, innovative_array,
+			mercantilism_array, offensive_array, land_array, quality_array, serfdom_array, elector_array;
 
 	public settingreader(String gamepath) {
 		// Nur Coutries keine eigenschaften
@@ -87,8 +82,7 @@ public class settingreader {
 				if (brackets == 1 && input.indexOf("=") == 3) {
 					bracketposition = input.indexOf("=");
 					input = input.substring(0, bracketposition);
-					System.out.println("Country: " + input + " "
-							+ counter_country + " " + bracketposition);
+					System.out.println("Country: " + input + " " + counter_country + " " + bracketposition);
 					newcountry_array[counter_country] = input;
 					counter_country++;
 
@@ -191,8 +185,7 @@ public class settingreader {
 		settings.hashmap.put("country_picture", picture_array);
 		settings.hashmap.put("country_color", color_array);
 		settings.hashmap.put("country_techgroup", techgroup_array);
-		settings.hashmap.put("country_leader_language",
-				leader_language_array);
+		settings.hashmap.put("country_leader_language", leader_language_array);
 		settings.hashmap.put("country_new_colony", new_colony_array);
 		settings.hashmap.put("country_army", army_array);
 		settings.hashmap.put("country_navy", navy_array);
@@ -361,8 +354,7 @@ public class settingreader {
 					techgroups_array[counter_techgroups] = input;
 					counter_techgroups++;
 				}
-				if (brackets == 1 && input != null
-						&& input.contains("tech_speed=")) {
+				if (brackets == 1 && input != null && input.contains("tech_speed=")) {
 					input = input.replaceAll("tech_speed=", "");
 					techspeed_array[counter_techspeed] = input;
 					counter_techspeed++;

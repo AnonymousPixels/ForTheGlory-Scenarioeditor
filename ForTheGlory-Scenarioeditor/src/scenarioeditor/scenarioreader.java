@@ -7,22 +7,16 @@ import java.io.IOException;
 public class scenarioreader {
 	public static BufferedReader reader;
 	public static FileReader file;
-	public static String input, scenarioname, startdate, enddate,
-			selectablestring;
+	public static String input, scenarioname, startdate, enddate, selectablestring;
 	public static int counter_country, counter_include, bracket;
-	public static String[] tag_array, ai_array, colonialattempts_array,
-			colonialnation_array, major_array, colonists_array,
-			merchants_array, treasury_array, inflation_array, whiteman_array,
-			religion_array, culture_array, knownprovinces_array,
-			controlledprovinces_array, nationalprovinces_array,
-			city_name_array, ownedprovinces_array, city_fortress_array,
-			city_population_array, city_location_array, city_capital_array,
-			landunit_id_array, landunit_name_array, landunit_location_array,
-			landunit_infantry_array, landunit_artillery_array,
-			landunit_cavalry_array, technology_stability_array,
-			technology_naval_array, technology_land_array,
-			technology_infra_array, technology_trade_array, selectable_array,
-			include_array, cancelledloans_array, extendedloans_array, diplomats_array, technology_group_array;
+	public static String[] tag_array, ai_array, colonialattempts_array, colonialnation_array, major_array,
+			colonists_array, merchants_array, treasury_array, inflation_array, whiteman_array, religion_array,
+			culture_array, knownprovinces_array, controlledprovinces_array, nationalprovinces_array, city_name_array,
+			ownedprovinces_array, city_fortress_array, city_population_array, city_location_array, city_capital_array,
+			landunit_id_array, landunit_name_array, landunit_location_array, landunit_infantry_array,
+			landunit_artillery_array, landunit_cavalry_array, technology_stability_array, technology_naval_array,
+			technology_land_array, technology_infra_array, technology_trade_array, selectable_array, include_array,
+			cancelledloans_array, extendedloans_array, diplomats_array, technology_group_array;
 
 	public scenarioreader(String path) throws IOException {
 		file = new FileReader(path);
@@ -232,7 +226,7 @@ public class scenarioreader {
 				System.out.println(input);
 				inflation_array[counter_country] = input;
 			}
-			
+
 			if (input.contains("diplomats")) {
 				input = input.replaceAll(" ", "");
 				input = input.replaceAll("diplomats", "");
@@ -241,7 +235,7 @@ public class scenarioreader {
 				System.out.println(input);
 				diplomats_array[counter_country] = input;
 			}
-			
+
 			if (input.contains("whiteman")) {
 				input = input.replaceAll(" ", "");
 				input = input.replaceAll("whiteman", "");
@@ -521,7 +515,7 @@ public class scenarioreader {
 						System.out.println(input);
 						technology_naval_array[counter_country] = input;
 					}
-					if(input.contains("group")){
+					if (input.contains("group")) {
 						input = input.replaceAll(" ", "");
 						input = input.replaceAll("group", "");
 						input = input.replaceAll("	", "");
@@ -534,7 +528,6 @@ public class scenarioreader {
 			input = reader.readLine();
 
 		}
-		
 
 		settings.hashmap.put("scenario_technology_group", technology_group_array);
 		settings.hashmap.put("scenario_diplomats", diplomats_array);

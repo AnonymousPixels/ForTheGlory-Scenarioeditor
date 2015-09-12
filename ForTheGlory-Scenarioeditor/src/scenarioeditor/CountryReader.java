@@ -14,8 +14,7 @@ public class CountryReader {
 	public static Properties[] p;
 	public static String[] string, fullString;
 	public static String s;
-	public static int i = 0, x = 0, n = 0, k = 0, e = 0, l = 0, L = 0, count = 0,
-			I = 0;
+	public static int i = 0, x = 0, n = 0, k = 0, e = 0, l = 0, L = 0, count = 0, I = 0;
 	public static boolean b = false, B = false;
 
 	public CountryReader(File f) throws FileNotFoundException, IOException {
@@ -99,7 +98,7 @@ public class CountryReader {
 			}
 		}
 
-//		 System.out.println(n);
+		// System.out.println(n);
 
 		for (int q = 0; q < n; q++) {
 
@@ -209,54 +208,38 @@ public class CountryReader {
 
 						if (S.charAt(h) == '=' && count == 2) {
 
-							p[o].setProperty("dateYear",
-									String.valueOf(S.charAt(h + 1)));
+							p[o].setProperty("dateYear", String.valueOf(S.charAt(h + 1)));
 							if (S.length() > h + 2)
 								if (S.charAt(h + 2) != '}') {
 
-									p[o].setProperty(
-											"dateYear",
-											p[o].getProperty("dateYear")
-													+ String.valueOf(S
-															.charAt(h + 2)));
+									p[o].setProperty("dateYear",
+											p[o].getProperty("dateYear") + String.valueOf(S.charAt(h + 2)));
 								}
 							if (S.length() > h + 3)
 								if (S.charAt(h + 3) != '}') {
 
-									p[o].setProperty(
-											"dateYear",
-											p[o].getProperty("dateYear")
-													+ String.valueOf(S
-															.charAt(h + 3)));
+									p[o].setProperty("dateYear",
+											p[o].getProperty("dateYear") + String.valueOf(S.charAt(h + 3)));
 								}
 							if (S.length() > h + 4)
 								if (S.charAt(h + 4) != '}') {
 
-									p[o].setProperty(
-											"dateYear",
-											p[o].getProperty("dateYear")
-													+ String.valueOf(S
-															.charAt(h + 4)));
+									p[o].setProperty("dateYear",
+											p[o].getProperty("dateYear") + String.valueOf(S.charAt(h + 4)));
 								}
 
 							if (S.length() > h + 5)
 								if (S.charAt(h + 5) != '}') {
 
-									p[o].setProperty(
-											"dateYear",
-											p[o].getProperty("dateYear")
-													+ String.valueOf(S
-															.charAt(h + 5)));
+									p[o].setProperty("dateYear",
+											p[o].getProperty("dateYear") + String.valueOf(S.charAt(h + 5)));
 								}
 
 							if (S.length() > h + 6)
 								if (S.charAt(h + 6) != '}') {
 
-									p[o].setProperty(
-											"dateYear",
-											p[o].getProperty("dateYear")
-													+ String.valueOf(S
-															.charAt(h + 6)));
+									p[o].setProperty("dateYear",
+											p[o].getProperty("dateYear") + String.valueOf(S.charAt(h + 6)));
 								}
 
 							count = 0;
@@ -268,14 +251,10 @@ public class CountryReader {
 
 						if (S.charAt(h) == '=' && count == 0) {
 
-							p[o].setProperty("dateDay",
-									String.valueOf(S.charAt(h + 1)));
+							p[o].setProperty("dateDay", String.valueOf(S.charAt(h + 1)));
 							if (S.charAt(h + 2) != 'm')
-								p[o].setProperty(
-										"dateDay",
-										p[o].getProperty("dateDay")
-												+ String.valueOf(S
-														.charAt(h + 2)));
+								p[o].setProperty("dateDay",
+										p[o].getProperty("dateDay") + String.valueOf(S.charAt(h + 2)));
 							count++;
 						}
 					}
@@ -314,54 +293,38 @@ public class CountryReader {
 
 						if (S.charAt(h) == '=' && count == 2) {
 
-							p[o].setProperty("deathdateYear",
-									String.valueOf(S.charAt(h + 1)));
+							p[o].setProperty("deathdateYear", String.valueOf(S.charAt(h + 1)));
 							if (S.length() > h + 2)
 								if (S.charAt(h + 2) != '}') {
 
-									p[o].setProperty(
-											"deathdateYear",
-											p[o].getProperty("deathdateYear")
-													+ String.valueOf(S
-															.charAt(h + 2)));
+									p[o].setProperty("deathdateYear",
+											p[o].getProperty("deathdateYear") + String.valueOf(S.charAt(h + 2)));
 								}
 							if (S.length() > h + 3)
 								if (S.charAt(h + 3) != '}') {
 
-									p[o].setProperty(
-											"deathdateYear",
-											p[o].getProperty("deathdateYear")
-													+ String.valueOf(S
-															.charAt(h + 3)));
+									p[o].setProperty("deathdateYear",
+											p[o].getProperty("deathdateYear") + String.valueOf(S.charAt(h + 3)));
 								}
 							if (S.length() > h + 4)
 								if (S.charAt(h + 4) != '}') {
 
-									p[o].setProperty(
-											"deathdateYear",
-											p[o].getProperty("deathdateYear")
-													+ String.valueOf(S
-															.charAt(h + 4)));
+									p[o].setProperty("deathdateYear",
+											p[o].getProperty("deathdateYear") + String.valueOf(S.charAt(h + 4)));
 								}
 
 							if (S.length() > h + 5)
 								if (S.charAt(h + 5) != '}') {
 
-									p[o].setProperty(
-											"deathdateYear",
-											p[o].getProperty("deathdateYear")
-													+ String.valueOf(S
-															.charAt(h + 5)));
+									p[o].setProperty("deathdateYear",
+											p[o].getProperty("deathdateYear") + String.valueOf(S.charAt(h + 5)));
 								}
 
 							if (S.length() > h + 6)
 								if (S.charAt(h + 6) != '}') {
 
-									p[o].setProperty(
-											"deathdateYear",
-											p[o].getProperty("deathdateYear")
-													+ String.valueOf(S
-															.charAt(h + 6)));
+									p[o].setProperty("deathdateYear",
+											p[o].getProperty("deathdateYear") + String.valueOf(S.charAt(h + 6)));
 								}
 
 							count = 0;
@@ -373,14 +336,10 @@ public class CountryReader {
 
 						if (S.charAt(h) == '=' && count == 0) {
 
-							p[o].setProperty("deathdateDay",
-									String.valueOf(S.charAt(h + 1)));
+							p[o].setProperty("deathdateDay", String.valueOf(S.charAt(h + 1)));
 							if (S.charAt(h + 2) != 'm')
-								p[o].setProperty(
-										"deathdateDay",
-										p[o].getProperty("deathdateDay")
-												+ String.valueOf(S
-														.charAt(h + 2)));
+								p[o].setProperty("deathdateDay",
+										p[o].getProperty("deathdateDay") + String.valueOf(S.charAt(h + 2)));
 							count++;
 						}
 					}
@@ -447,13 +406,11 @@ public class CountryReader {
 				.parseInt(p[o].getProperty("eventEndFull"))); w++) {
 
 			if (fullString[w].contains("name")) {
-				S = fullString[w].substring(8, fullString[w].length())
-						.replaceAll("\"", "");
+				S = fullString[w].substring(8, fullString[w].length()).replaceAll("\"", "");
 				p[o].setProperty("name", S);
 			}
 			if (fullString[w].contains("desc")) {
-				S = fullString[w].substring(8, fullString[w].length())
-						.replaceAll("\"", "");
+				S = fullString[w].substring(8, fullString[w].length()).replaceAll("\"", "");
 				p[o].setProperty("desc", S);
 			}
 		}
@@ -471,8 +428,7 @@ public class CountryReader {
 
 					p[o].setProperty("triggerStart", String.valueOf(h));
 
-					for (int D = h + 1; D < Integer.parseInt(p[o]
-							.getProperty("eventEndFull")); D++) {
+					for (int D = h + 1; D < Integer.parseInt(p[o].getProperty("eventEndFull")); D++) {
 
 						for (int d = 0; d < fullString[D].length(); d++) {
 
@@ -481,8 +437,7 @@ public class CountryReader {
 							if (fullString[D].charAt(d) == 125)
 								k--;
 							if (k == 0 && B == false) {
-								p[o].setProperty("triggerEnd",
-										Integer.toString(D));
+								p[o].setProperty("triggerEnd", Integer.toString(D));
 								B = true;
 							}
 						}
@@ -536,8 +491,7 @@ public class CountryReader {
 
 					p[o].setProperty("action_aStart", String.valueOf(h));
 
-					for (int D = h + 1; D < Integer.parseInt(p[o]
-							.getProperty("lineEndFull")); D++) {
+					for (int D = h + 1; D < Integer.parseInt(p[o].getProperty("lineEndFull")); D++) {
 
 						for (int d = 0; d < fullString[D].length(); d++) {
 
@@ -546,8 +500,7 @@ public class CountryReader {
 							if (fullString[D].charAt(d) == 125)
 								k--;
 							if (k == 0 && B == false) {
-								p[o].setProperty("action_aEnd",
-										Integer.toString(D));
+								p[o].setProperty("action_aEnd", Integer.toString(D));
 								B = true;
 							}
 						}
@@ -586,8 +539,7 @@ public class CountryReader {
 
 					p[o].setProperty("action_bStart", String.valueOf(h));
 
-					for (int D = h + 1; D < Integer.parseInt(p[o]
-							.getProperty("lineEndFull")); D++) {
+					for (int D = h + 1; D < Integer.parseInt(p[o].getProperty("lineEndFull")); D++) {
 
 						for (int d = 0; d < fullString[D].length(); d++) {
 
@@ -596,8 +548,7 @@ public class CountryReader {
 							if (fullString[D].charAt(d) == 125)
 								k--;
 							if (k == 0 && B == false) {
-								p[o].setProperty("action_bEnd",
-										Integer.toString(D));
+								p[o].setProperty("action_bEnd", Integer.toString(D));
 								B = true;
 							}
 						}
@@ -636,8 +587,7 @@ public class CountryReader {
 
 					p[o].setProperty("action_cStart", String.valueOf(h));
 
-					for (int D = h + 1; D < Integer.parseInt(p[o]
-							.getProperty("lineEndFull")); D++) {
+					for (int D = h + 1; D < Integer.parseInt(p[o].getProperty("lineEndFull")); D++) {
 
 						for (int d = 0; d < fullString[D].length(); d++) {
 
@@ -646,8 +596,7 @@ public class CountryReader {
 							if (fullString[D].charAt(d) == 125)
 								k--;
 							if (k == 0 && B == false) {
-								p[o].setProperty("action_cEnd",
-										Integer.toString(D));
+								p[o].setProperty("action_cEnd", Integer.toString(D));
 								B = true;
 							}
 						}
@@ -686,8 +635,7 @@ public class CountryReader {
 
 					p[o].setProperty("action_dStart", String.valueOf(h));
 
-					for (int D = h + 1; D < Integer.parseInt(p[o]
-							.getProperty("lineEndFull")); D++) {
+					for (int D = h + 1; D < Integer.parseInt(p[o].getProperty("lineEndFull")); D++) {
 
 						for (int d = 0; d < fullString[D].length(); d++) {
 
@@ -696,8 +644,7 @@ public class CountryReader {
 							if (fullString[D].charAt(d) == 125)
 								k--;
 							if (k == 0 && B == false) {
-								p[o].setProperty("action_dEnd",
-										Integer.toString(D));
+								p[o].setProperty("action_dEnd", Integer.toString(D));
 								B = true;
 							}
 						}
@@ -723,8 +670,7 @@ public class CountryReader {
 		}
 	}
 
-	public static String getComment() throws NumberFormatException,
-			IOException {
+	public static String getComment() throws NumberFormatException, IOException {
 
 		int L = 0;
 

@@ -37,9 +37,11 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
+ * This class is more or less the second main class, because it doesn't just
+ * create the graphical user interface, it also handles the most of the program
+ * flow
  * 
  * @author Felix Beutter
- *
  */
 
 public class GUI implements ActionListener, ChangeListener {
@@ -49,8 +51,8 @@ public class GUI implements ActionListener, ChangeListener {
 	JPanel panel, pnlMap, pnlOther, pnlGeneral, pnlProvinces, pnlCountries, pnlCountrySettings, pnlCountry,
 			pnlCountryPolicy, pnlPolicyDate, pnlCountryGeneral, pnlCountryTechnology, pnlCountryDiplomacy,
 			pnlCountryUnits, pnlTechnology, pnlProvincesControl, pnlColonialAttempts, pnlCountryGeneralBooleans,
-			pnlCountryGeneralTxf, pnlDiplomacyRelation, pnlCasusBelli, pnlWarned, pnlIndependence,
-			pnlPeace, pnlUnits, pnlUnitNumbers, pnlNavalUnits, pnlNavalUnitNumbers;
+			pnlCountryGeneralTxf, pnlDiplomacyRelation, pnlCasusBelli, pnlWarned, pnlIndependence, pnlPeace, pnlUnits,
+			pnlUnitNumbers, pnlNavalUnits, pnlNavalUnitNumbers;
 	JTabbedPane tabbedPane;
 	JSplitPane splitPane;
 	MapPanel map;
@@ -409,23 +411,23 @@ public class GUI implements ActionListener, ChangeListener {
 		lblCulture.setFont(fntStandard);
 		addComponent(pnlCountryGeneral, layout, lblCulture, 0, y, 1, 1, 1, 0, new Insets(5, 5, 5, 5));
 		y++;
-		
+
 		cbxCulture = new JComboBox<String>();
 		cbxCulture.addActionListener(this);
 		addComponent(pnlCountryGeneral, layout, cbxCulture, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
 		y++;
-		
+
 		lblReligion = new JLabel(Strings.getString("GUI.59"), SwingConstants.LEFT);
 		lblReligion.setForeground(clrStandard);
 		lblReligion.setFont(fntStandard);
 		addComponent(pnlCountryGeneral, layout, lblReligion, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
 		y++;
-		
+
 		cbxReligion = new JComboBox<String>();
 		cbxReligion.addActionListener(this);
 		addComponent(pnlCountryGeneral, layout, cbxReligion, 0, y, 1, 1, 1, 0, new Insets(0, 5, 10, 5));
 		y++;
-		
+
 		pnlColonialAttempts = new JPanel();
 		pnlColonialAttempts.setLayout(layout);
 		pnlColonialAttempts.setBackground(clrBackground);
@@ -1160,7 +1162,7 @@ public class GUI implements ActionListener, ChangeListener {
 		txfTransports.setPreferredSize(new Dimension(50, 20));
 		txfTransports.setEditable(true);
 		addComponent(pnlNavalUnitNumbers, layout, txfTransports, 2, 2, 1, 1, 0, 0, new Insets(0, 0, 0, 0));
-		
+
 		addComponent(pnlCountryUnits, layout, new JPanel(), 0, y, 1, 1, 1, 1, new Insets(0, 0, 0, 0));
 	}
 
@@ -1366,6 +1368,8 @@ public class GUI implements ActionListener, ChangeListener {
 
 				return true;
 			}
+
+			reader.close();
 
 		} catch (IOException e) {
 			System.out.println(

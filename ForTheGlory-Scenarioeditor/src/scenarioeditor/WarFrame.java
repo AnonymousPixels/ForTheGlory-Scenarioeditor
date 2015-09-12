@@ -38,6 +38,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Font;
 
 public class WarFrame extends JFrame {
 
@@ -70,10 +71,10 @@ public class WarFrame extends JFrame {
 	 */
 	public WarFrame() {
 		setTitle("Add new war");
-		setMinimumSize(new Dimension(400, 400));
+		setMinimumSize(new Dimension(550, 400));
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 550, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -87,6 +88,7 @@ public class WarFrame extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 
 		JPanel panel = new JPanel();
+		panel.setFont(new Font("Verdana", Font.PLAIN, 11));
 		panel.setBorder(new TitledBorder(null, "Date", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -105,6 +107,7 @@ public class WarFrame extends JFrame {
 		panel.setLayout(gbl_panel);
 
 		comboBox = new JComboBox();
+		comboBox.setFont(new Font("Verdana", Font.PLAIN, 11));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] { "1", "2",
 				"3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13",
 				"14", "15", "16", "17", "18", "19", "20", "21", "22", "23",
@@ -118,6 +121,7 @@ public class WarFrame extends JFrame {
 		panel.add(comboBox, gbc_comboBox);
 
 		comboBox_1 = new JComboBox();
+		comboBox_1.setFont(new Font("Verdana", Font.PLAIN, 11));
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] { "january",
 				"february", "march", "april", "mai", "june", "uly", "august",
 				"september", "october", "november", "december" }));
@@ -130,6 +134,7 @@ public class WarFrame extends JFrame {
 		panel.add(comboBox_1, gbc_comboBox_1);
 
 		textField = new JTextField();
+		textField.setFont(new Font("Verdana", Font.PLAIN, 11));
 		textField.setMinimumSize(new Dimension(80, 20));
 		textField.setText("1337");
 		GridBagConstraints gbc_textField = new GridBagConstraints();
@@ -140,6 +145,7 @@ public class WarFrame extends JFrame {
 		textField.setColumns(10);
 
 		JPanel panel_1 = new JPanel();
+		panel_1.setFont(new Font("Verdana", Font.PLAIN, 11));
 		panel_1.setBorder(new TitledBorder(null, "Enddate",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
@@ -158,6 +164,7 @@ public class WarFrame extends JFrame {
 		panel_1.setLayout(gbl_panel_1);
 
 		comboBox_2 = new JComboBox();
+		comboBox_2.setFont(new Font("Verdana", Font.PLAIN, 11));
 		comboBox_2.setModel(new DefaultComboBoxModel(new String[] { "1", "2",
 				"3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13",
 				"14", "15", "16", "17", "18", "19", "20", "21", "22", "23",
@@ -171,6 +178,7 @@ public class WarFrame extends JFrame {
 		panel_1.add(comboBox_2, gbc_comboBox_2);
 
 		comboBox_3 = new JComboBox();
+		comboBox_3.setFont(new Font("Verdana", Font.PLAIN, 11));
 		comboBox_3.setModel(new DefaultComboBoxModel(new String[] { " january",
 				"february", "march", "april", "mai", "june", "uly", "august",
 				"september", "october", "november", "december" }));
@@ -183,6 +191,7 @@ public class WarFrame extends JFrame {
 		panel_1.add(comboBox_3, gbc_comboBox_3);
 
 		textField_1 = new JTextField();
+		textField_1.setFont(new Font("Verdana", Font.PLAIN, 11));
 		textField_1.setMinimumSize(new Dimension(80, 20));
 		textField_1.setText("1337");
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
@@ -193,6 +202,7 @@ public class WarFrame extends JFrame {
 		textField_1.setColumns(10);
 
 		JPanel panel_2 = new JPanel();
+		panel_2.setFont(new Font("Verdana", Font.PLAIN, 11));
 		panel_2.setBorder(new TitledBorder(null, "Attackers",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
@@ -220,6 +230,7 @@ public class WarFrame extends JFrame {
 		panel_2.add(scrollPane, gbc_scrollPane);
 
 		editorPane = new JEditorPane();
+		editorPane.setFont(new Font("Verdana", Font.PLAIN, 11));
 		editorPane.setPreferredSize(new Dimension(106, 100));
 		scrollPane.setViewportView(editorPane);
 
@@ -232,12 +243,14 @@ public class WarFrame extends JFrame {
 		panel_2.add(comboBox_4, gbc_comboBox_4);
 
 		JButton btnAdd = new JButton("Add");
+		btnAdd.setFont(new Font("Verdana", Font.PLAIN, 11));
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
 		gbc_btnAdd.gridx = 1;
 		gbc_btnAdd.gridy = 1;
 		panel_2.add(btnAdd, gbc_btnAdd);
 
 		JPanel panel_3 = new JPanel();
+		panel_3.setFont(new Font("Verdana", Font.PLAIN, 11));
 		panel_3.setBorder(new TitledBorder(null, "Defenders",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_3 = new GridBagConstraints();
@@ -277,12 +290,14 @@ public class WarFrame extends JFrame {
 		panel_3.add(comboBox_5, gbc_comboBox_5);
 
 		JButton btnAdd_1 = new JButton("Add");
+		btnAdd_1.setFont(new Font("Verdana", Font.PLAIN, 11));
 		GridBagConstraints gbc_btnAdd_1 = new GridBagConstraints();
 		gbc_btnAdd_1.gridx = 1;
 		gbc_btnAdd_1.gridy = 1;
 		panel_3.add(btnAdd_1, gbc_btnAdd_1);
 
 		JButton btnOk = new JButton("OK");
+		btnOk.setFont(new Font("Verdana", Font.PLAIN, 11));
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String result = "war = {\n    id = { type = "

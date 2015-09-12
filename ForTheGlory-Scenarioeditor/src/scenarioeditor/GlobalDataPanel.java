@@ -3,6 +3,7 @@ package scenarioeditor;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -63,6 +64,11 @@ public class GlobalDataPanel extends JPanel implements ActionListener {
 		etablishmentsPanel();
 		warsPanel();
 		alliancesPanel();
+
+		Component[] comp = this.getComponents();
+		for (Component component : comp) {
+			component.setFont(new Font("Verdana", 0, 12));
+		}
 
 	}
 

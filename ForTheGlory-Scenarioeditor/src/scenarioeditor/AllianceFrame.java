@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import java.awt.Font;
 
 public class AllianceFrame extends JFrame {
 
@@ -62,8 +63,9 @@ public class AllianceFrame extends JFrame {
 	}
 
 	public AllianceFrame() {
+		setFont(new Font("Verdana", Font.PLAIN, 12));
 		setTitle("Add new alliance");
-		setMinimumSize(new Dimension(400, 300));
+		setMinimumSize(new Dimension(550, 300));
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -79,6 +81,7 @@ public class AllianceFrame extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 
 		JPanel panel = new JPanel();
+		panel.setFont(new Font("Verdana", Font.PLAIN, 11));
 		panel.setBorder(new TitledBorder(UIManager
 				.getBorder("TitledBorder.border"), "Expirydate",
 				TitledBorder.LEADING, TitledBorder.TOP, null,
@@ -99,6 +102,7 @@ public class AllianceFrame extends JFrame {
 		panel.setLayout(gbl_panel);
 
 		comboBox = new JComboBox();
+		comboBox.setFont(new Font("Verdana", Font.PLAIN, 11));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] { "1", "2",
 				"3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13",
 				"14", "15", "16", "17", "18", "19", "20", "21", "22", "23",
@@ -112,6 +116,7 @@ public class AllianceFrame extends JFrame {
 		panel.add(comboBox, gbc_comboBox);
 
 		comboBox_1 = new JComboBox();
+		comboBox_1.setFont(new Font("Verdana", Font.PLAIN, 11));
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] { "january",
 				"february", "march", "april", "mai", "june", "uly", "august",
 				"september", "october", "november", "december" }));
@@ -124,6 +129,7 @@ public class AllianceFrame extends JFrame {
 		panel.add(comboBox_1, gbc_comboBox_1);
 
 		textField = new JTextField();
+		textField.setFont(new Font("Verdana", Font.PLAIN, 11));
 		textField.setMinimumSize(new Dimension(80, 20));
 		textField.setText("1337");
 		GridBagConstraints gbc_textField = new GridBagConstraints();
@@ -134,6 +140,7 @@ public class AllianceFrame extends JFrame {
 		textField.setColumns(10);
 
 		JPanel panel_1 = new JPanel();
+		panel_1.setFont(new Font("Verdana", Font.PLAIN, 11));
 		panel_1.setBorder(new TitledBorder(UIManager
 				.getBorder("TitledBorder.border"), "Type",
 				TitledBorder.LEADING, TitledBorder.TOP, null,
@@ -154,6 +161,7 @@ public class AllianceFrame extends JFrame {
 		panel_1.setLayout(gbl_panel_1);
 
 		comboBox_3 = new JComboBox();
+		comboBox_3.setFont(new Font("Verdana", Font.PLAIN, 11));
 		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {
 				"militaryalliance", "dynasticalliance", "vassalization" }));
 		comboBox_3.setEditable(true);
@@ -165,6 +173,7 @@ public class AllianceFrame extends JFrame {
 		panel_1.add(comboBox_3, gbc_comboBox_3);
 
 		JPanel panel_2 = new JPanel();
+		panel_2.setFont(new Font("Verdana", Font.PLAIN, 11));
 		panel_2.setBorder(new TitledBorder(UIManager
 				.getBorder("TitledBorder.border"), "Participants",
 				TitledBorder.LEADING, TitledBorder.TOP, null,
@@ -199,6 +208,7 @@ public class AllianceFrame extends JFrame {
 		scrollPane.setViewportView(editorPane);
 
 		JComboBox comboBox_4 = new JComboBox();
+		comboBox_4.setFont(new Font("Verdana", Font.PLAIN, 11));
 		GridBagConstraints gbc_comboBox_4 = new GridBagConstraints();
 		gbc_comboBox_4.insets = new Insets(0, 0, 0, 5);
 		gbc_comboBox_4.fill = GridBagConstraints.HORIZONTAL;
@@ -207,12 +217,14 @@ public class AllianceFrame extends JFrame {
 		panel_2.add(comboBox_4, gbc_comboBox_4);
 
 		JButton btnAdd = new JButton("Add");
+		btnAdd.setFont(new Font("Verdana", Font.PLAIN, 11));
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
 		gbc_btnAdd.gridx = 1;
 		gbc_btnAdd.gridy = 1;
 		panel_2.add(btnAdd, gbc_btnAdd);
 
 		JButton btnOk = new JButton("OK");
+		btnOk.setFont(new Font("Verdana", Font.PLAIN, 11));
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 

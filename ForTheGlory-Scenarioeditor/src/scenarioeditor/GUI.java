@@ -107,21 +107,15 @@ public class GUI implements ActionListener, ChangeListener {
 			days = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18",
 					"19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" };
 
-	// ==========================================
-
 	public GUI() throws IOException, InterruptedException {
 
 		layout = new GridBagLayout();
-
-		// ==========================================
 
 		frame = new JFrame(title);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(true);
 		frame.setLayout(layout);
 		frame.setMinimumSize(minSize);
-		
-		// ==========================================
 
 		panel = new JPanel();
 		panel.setLayout(layout);
@@ -129,8 +123,6 @@ public class GUI implements ActionListener, ChangeListener {
 		addComponent(frame, layout, panel, 0, 0, 1, 1, 1, 1, new Insets(0, 0, 0, 0));
 
 		splitPane = new JSplitPane();
-
-		// ==========================================
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
 
@@ -142,8 +134,6 @@ public class GUI implements ActionListener, ChangeListener {
 		splitPane.setRightComponent(tabbedPane);
 
 		splitPane.setResizeWeight(1);
-
-		// ==========================================
 
 		pnlOther = new JPanel();
 		pnlOther.setLayout(layout);
@@ -158,8 +148,6 @@ public class GUI implements ActionListener, ChangeListener {
 		btnSave = new JButton(Strings.getString("GUI.4"));
 		btnSave.addActionListener(this);
 		addComponent(pnlOther, layout, btnSave, 2, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
-
-		// ==========================================
 
 		try {
 
@@ -182,8 +170,6 @@ public class GUI implements ActionListener, ChangeListener {
 		// System.exit(1);
 		// }
 
-		// ==========================================
-
 		fillHashMaps();
 
 		createPnlProvinces();
@@ -199,14 +185,10 @@ public class GUI implements ActionListener, ChangeListener {
 		tabbedPane.add(Strings.getString("GUI.2"), pnlCountries);
 		tabbedPane.setPreferredSize(new Dimension(280, 500));
 
-		// ==========================================
-
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
-
-	// ==========================================
 
 	void fillHashMaps() {
 
@@ -227,8 +209,6 @@ public class GUI implements ActionListener, ChangeListener {
 		values.put("whiteman", "true");
 	}
 
-	// ==========================================
-
 	void createPnlGeneral() throws IOException {
 
 		pnlGeneral = new JPanel();
@@ -246,8 +226,6 @@ public class GUI implements ActionListener, ChangeListener {
 		// scpProvinces.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		addComponent(pnlGeneral, layout, globalDataPanel, 0, 0, 1, 1, 1, 1, new Insets(0, 0, 0, 0));
 	}
-
-	// ==========================================
 
 	void createPnlProvinces() throws IOException {
 
@@ -270,8 +248,6 @@ public class GUI implements ActionListener, ChangeListener {
 		// scpProvinces.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		addComponent(pnlProvinces, layout, colonyPanel, 0, 0, 1, 1, 1, 1, new Insets(0, 0, 0, 0));
 	}
-
-	// ==========================================
 
 	void createPnlCountries() {
 
@@ -427,7 +403,7 @@ public class GUI implements ActionListener, ChangeListener {
 		cbxReligion.addActionListener(this);
 		addComponent(pnlCountryGeneral, layout, cbxReligion, 0, y, 1, 1, 1, 0, new Insets(0, 5, 10, 5));
 		y++;
-		
+
 		pnlCountryGeneralBooleans = new JPanel();
 		pnlCountryGeneralBooleans.setLayout(layout);
 		pnlCountryGeneralBooleans.setBackground(clrBackground);
@@ -516,7 +492,7 @@ public class GUI implements ActionListener, ChangeListener {
 		txfColonialAttempts.setPreferredSize(new Dimension(50, 20));
 		txfColonialAttempts.setEditable(true);
 		addComponent(pnlColonialAttempts, layout, txfColonialAttempts, 1, 0, 1, 1, 0, 0, new Insets(0, 0, 0, 0));
-		
+
 		pnlCountryGeneralTxf = new JPanel();
 		pnlCountryGeneralTxf.setLayout(layout);
 		pnlCountryGeneralTxf.setBackground(clrBackground);
@@ -1340,8 +1316,6 @@ public class GUI implements ActionListener, ChangeListener {
 		addComponent(pnlCountryPolicy, layout, new JPanel(), 0, y, 1, 1, 1, 1, new Insets(0, 0, 0, 0));
 	}
 
-	// ==========================================
-
 	boolean createHashMap(File f) {
 
 		try {
@@ -1379,8 +1353,6 @@ public class GUI implements ActionListener, ChangeListener {
 
 		return false;
 	}
-
-	// ==========================================
 
 	void addComponent(Container cont, GridBagLayout gbl, Component c, int x, int y, int width, int height,
 			double weightx, double weighty, Insets insets) {

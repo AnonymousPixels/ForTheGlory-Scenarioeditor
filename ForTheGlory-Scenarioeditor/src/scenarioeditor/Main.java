@@ -43,17 +43,17 @@ public class Main {
 	static File file;
 	static String path = "";
 
-	static Color clrBackground = new Color(240, 240, 240), clrFont = new Color(
-			0, 0, 0);
+	static Color clrBackground = new Color(240, 240, 240), clrFont = new Color(0, 0, 0);
 	static Font fntStandart = new Font("Verdana", 1, 12);
-	
+
+	static boolean finishedLoading = false;
+
 	public static void main(String[] args) {
 
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
-			System.out
-					.println("Error while setting LookAndFeel! Default Java LookAndFeel will be used...");
+			System.out.println("Error while setting LookAndFeel! Default Java LookAndFeel will be used...");
 		}
 
 		file = new File("");
@@ -74,14 +74,12 @@ public class Main {
 		panel = new JPanel();
 		panel.setLayout(layout);
 		panel.setBackground(clrBackground);
-		addComponent(frame, layout, panel, 0, 0, 1, 1, 1, 1, new Insets(0, 0,
-				0, 0));
+		addComponent(frame, layout, panel, 0, 0, 1, 1, 1, 1, new Insets(0, 0, 0, 0));
 
 		lblPath = new JLabel(Strings.getString("Main.2"), SwingConstants.LEFT);
 		lblPath.setForeground(clrFont);
 		lblPath.setFont(fntStandart);
-		addComponent(panel, layout, lblPath, 0, 0, 1, 1, 1, 0, new Insets(10,
-				10, 10, 10));
+		addComponent(panel, layout, lblPath, 0, 0, 1, 1, 1, 0, new Insets(10, 10, 10, 10));
 
 		btnPath = new JButton(Strings.getString("Main.3"));
 		btnPath.addActionListener(new ActionListener() {
@@ -99,21 +97,18 @@ public class Main {
 			}
 		});
 
-		addComponent(panel, layout, btnPath, 1, 0, 1, 1, 0, 0, new Insets(10,
-				0, 10, 10));
+		addComponent(panel, layout, btnPath, 1, 0, 1, 1, 0, 0, new Insets(10, 0, 10, 10));
 
 		txfPath = new JTextField("C:\\Program Files (x86)\\Steam\\SteamApps\\common\\For The Glory\\");
 		txfPath.setEditable(false);
 		txfPath.setForeground(clrFont);
 		txfPath.setBackground(Color.white);
 		txfPath.setPreferredSize(new Dimension(300, 20));
-		addComponent(panel, layout, txfPath, 0, 1, 2, 1, 1, 0, new Insets(0,
-				10, 10, 10));
+		addComponent(panel, layout, txfPath, 0, 1, 2, 1, 1, 0, new Insets(0, 10, 10, 10));
 
 		path = txfPath.getText();
-		
-		addComponent(panel, layout, new JPanel(), 0, 2, 1, 1, 1, 0, new Insets(
-				0, 0, 0, 0));
+
+		addComponent(panel, layout, new JPanel(), 0, 2, 1, 1, 1, 0, new Insets(0, 0, 0, 0));
 
 		btnContinue = new JButton(Strings.getString("Main.4"));
 		btnContinue.addActionListener(new ActionListener() {
@@ -123,32 +118,51 @@ public class Main {
 
 				if (path != null && path != "") {
 
-					frame.setVisible(false);
-					try {
-						new GUI();
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					} catch (InterruptedException e1) {
-						e1.printStackTrace();
-					}
+					Thread loadingThread = new Thread(new Runnable() {
+
+						@Override
+						public void run() {
+
+							Thread loadLoadingGUI = new Thread(new Runnable() {
+
+								@Override
+								public void run() {
+
+									try {
+										loadGUI();
+									} catch (IOException | InterruptedException e) {
+
+										e.printStackTrace();
+									}
+								}
+							});
+							loadLoadingGUI.start();
+
+							try {
+								new GUI();
+							} catch (IOException | InterruptedException e) {
+								e.printStackTrace();
+							}
+						}
+					});
+					loadingThread.start();
+
 				} else
-					JOptionPane.showMessageDialog(null,
-							Strings.getString("Main.5"),
-							Strings.getString("Main.6"),
+					JOptionPane.showMessageDialog(null, Strings.getString("Main.5"), Strings.getString("Main.6"),
 							JOptionPane.ERROR_MESSAGE);
+
+				System.out.println("MAX DU PFOSTEN");
 			}
 		});
-		addComponent(panel, layout, btnContinue, 1, 2, 1, 1, 0, 0, new Insets(
-				0, 10, 10, 10));
+		addComponent(panel, layout, btnContinue, 1, 2, 1, 1, 0, 0, new Insets(0, 10, 10, 10));
 
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 
-	static void addComponent(Container cont, GridBagLayout gbl, Component c,
-			int x, int y, int width, int height, double weightx,
-			double weighty, Insets insets) {
+	static void addComponent(Container cont, GridBagLayout gbl, Component c, int x, int y, int width, int height,
+			double weightx, double weighty, Insets insets) {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.gridx = x;
@@ -160,5 +174,23 @@ public class Main {
 		gbc.insets = insets;
 		gbl.setConstraints(c, gbc);
 		cont.add(c);
+	}
+
+	static void loadGUI() throws IOException, InterruptedException {
+
+		panel.setVisible(false);
+
+		frame.setTitle(Strings.getString("loading"));
+
+		// TODO Add loading gui components
+
+		while (!finishedLoading)
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+		frame.setVisible(false);
 	}
 }

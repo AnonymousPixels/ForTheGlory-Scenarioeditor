@@ -94,7 +94,6 @@ public class GUI implements ActionListener, ChangeListener {
 	Dimension minSize = new Dimension(1200, 720);
 	Color clrBackground = new Color(240, 240, 240), clrStandard = new Color(0, 0, 0);
 	Font fntStandard = new Font("Verdana", 0, 12);
-	static Boolean loadingGUI, terminatedLoadingGUI;
 	String name = Strings.getString("name"), version = Strings.getString("version"), build = Strings.getString("build"),
 			title = name + " | Version: " + version + " (Build: " + build + ")";
 	String[] months = { Strings.getString("Month.1"), Strings.getString("Month.2"), Strings.getString("Month.3"),
@@ -111,12 +110,6 @@ public class GUI implements ActionListener, ChangeListener {
 	public GUI() throws IOException, InterruptedException {
 
 		layout = new GridBagLayout();
-
-		terminatedLoadingGUI = false;
-		loadingGUI = true;
-
-		Thread loadingThread = new Thread(new LoadingFrame());
-		loadingThread.start();
 
 		frame = new JFrame(title);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -196,13 +189,9 @@ public class GUI implements ActionListener, ChangeListener {
 
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-
-		loadingGUI = false;
-		while (!terminatedLoadingGUI)
-			Thread.sleep(10);
 		
-		Thread.sleep(500);
-
+		Main.finishedLoading = true;
+		
 		frame.setVisible(true);
 	}
 

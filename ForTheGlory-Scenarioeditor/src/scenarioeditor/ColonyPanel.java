@@ -24,14 +24,15 @@ public class ColonyPanel extends JPanel {
 
 	Map<String, String[]> selectable;
 
-	JLabel lblID, lblID2, lblName, lblTerrain, lblClimate, lblReligion,
-			lblCulture, lblManpower, lblIncome, lblGoods, lblValue,
-			lblCotModifier, lblColonizationDifficulty, lblLooted, lblDate,
-			lblMine, lblNatives, lblFerocity, lblTolerance, lblNegotiation,
-			lblProvinceRevoltrisk, lblTax;
+	JLabel lblID, lblName, lblTerrain, lblClimate, lblReligion, lblCulture,
+			lblManpower, lblIncome, lblGoods, lblValue, lblCotModifier,
+			lblColonizationDifficulty, lblLooted, lblDate, lblMine, lblNatives,
+			lblFerocity, lblTolerance, lblNegotiation, lblProvinceRevoltrisk,
+			lblTax;
 
-	JTextField txtName, txtManpower, txtIncome, txtValue, txtCotModifier,
-			txtColonizationDifficulty, txtLootedYear, txtMine, txtTax;
+	JTextField txtName, lblID2, txtManpower, txtIncome, txtValue,
+			txtCotModifier, txtColonizationDifficulty, txtLootedYear, txtMine,
+			txtTax;
 
 	JComboBox<String> jcbTerrain, jcbClimate, jcbReligion, jcbCulture,
 			jcbGoods, jcbLootedDay, jcbLootedMonth;
@@ -54,9 +55,9 @@ public class ColonyPanel extends JPanel {
 		this.setLayout(layout);
 
 		lblID = new JLabel("ID:");
-		lblID2 = new JLabel(map.get("id"));
+		lblID2 = new JTextField(map.get("id"));
+		lblID2.setEnabled(false);
 		lblName = new JLabel("Name:");
-		;
 		lblTerrain = new JLabel("Terrain:");
 		lblClimate = new JLabel("Klima:");
 		lblReligion = new JLabel("Religion:");
@@ -178,6 +179,9 @@ public class ColonyPanel extends JPanel {
 	void addPnlPopulation() {
 
 		// Komponenten
+		txtManpower.setMaximumSize(new Dimension(40, 20));
+		txtIncome.setMaximumSize(new Dimension(40, 20));
+		txtIncome.setSize(new Dimension(40, 20));
 
 		addComponent(this, layout, lblID, 1, 1, 1, 1, 0, 0, new Insets(5, 5, 5,
 				5));
@@ -186,78 +190,79 @@ public class ColonyPanel extends JPanel {
 
 		addComponent(this, layout, lblName, 1, 2, 1, 1, 0, 0, new Insets(5, 5,
 				5, 5));
-		addComponent(this, layout, txtName, 2, 2, 3, 1, 1, 0, new Insets(5, 5,
-				5, 5));
+		addComponent(this, layout, txtName, 1, 3, 4, 1, 1, 0, new Insets(5, 5,
+				20, 5));
 
-		addComponent(this, layout, lblManpower, 1, 3, 1, 1, 0, 0, new Insets(5,
+		addComponent(this, layout, lblManpower, 1, 4, 1, 1, 0, 0, new Insets(5,
 				5, 5, 5));
-		addComponent(this, layout, txtManpower, 2, 3, 3, 1, 1, 0, new Insets(5,
-				5, 5, 5));
-
-		addComponent(this, layout, lblIncome, 1, 4, 1, 1, 0, 0, new Insets(5,
-				5, 5, 5));
-		addComponent(this, layout, txtIncome, 2, 4, 3, 1, 1, 0, new Insets(5,
+		addComponent(this, layout, txtManpower, 2, 4, 3, 1, 1, 0, new Insets(5,
 				5, 5, 5));
 
-		addComponent(this, layout, lblReligion, 1, 5, 1, 1, 0, 0, new Insets(5,
-				5, 40, 5));
-		addComponent(this, layout, jcbReligion, 2, 5, 3, 1, 1, 0, new Insets(5,
-				5, 40, 5));
+		addComponent(this, layout, lblIncome, 1, 5, 1, 1, 0, 0, new Insets(5,
+				5, 5, 5));
+		addComponent(this, layout, txtIncome, 2, 5, 3, 1, 1, 0, new Insets(5,
+				5, 5, 5));
+
+		addComponent(this, layout, lblReligion, 1, 6, 1, 1, 0, 0, new Insets(5,
+				5, 5, 5));
+		addComponent(this, layout, jcbReligion, 1, 7, 4, 1, 1, 0, new Insets(5,
+				5, 5, 5));
 
 	}
 
 	void addPnlGeography() {
 
-		addComponent(this, layout, lblTerrain, 1, 7, 1, 1, 0, 0, new Insets(5,
+		addComponent(this, layout, lblTerrain, 1, 8, 1, 1, 0, 0, new Insets(5,
 				5, 5, 5));
-		addComponent(this, layout, jcbTerrain, 2, 7, 3, 1, 1, 0, new Insets(5,
-				5, 5, 5));
-
-		addComponent(this, layout, lblCulture, 1, 8, 1, 1, 0, 0, new Insets(5,
-				5, 5, 5));
-		addComponent(this, layout, jcbCulture, 2, 8, 3, 1, 1, 0, new Insets(5,
+		addComponent(this, layout, jcbTerrain, 1, 9, 4, 1, 1, 0, new Insets(5,
 				5, 5, 5));
 
-		addComponent(this, layout, lblClimate, 1, 9, 1, 1, 0, 0, new Insets(5,
+		addComponent(this, layout, lblCulture, 1, 10, 1, 1, 0, 0, new Insets(5,
 				5, 5, 5));
-		addComponent(this, layout, jcbClimate, 2, 9, 3, 1, 1, 0, new Insets(5,
+		addComponent(this, layout, jcbCulture, 1, 11, 4, 1, 1, 0, new Insets(5,
+				5, 5, 5));
+
+		addComponent(this, layout, lblClimate, 1, 12, 1, 1, 0, 0, new Insets(5,
+				5, 5, 5));
+		addComponent(this, layout, jcbClimate, 1, 13, 4, 1, 1, 0, new Insets(5,
 				5, 5, 5));
 
 	}
 
 	void addPnlGoods() {
-		addComponent(this, layout, lblGoods, 1, 10, 1, 1, 0, 0, new Insets(40,
+		addComponent(this, layout, lblGoods, 1, 14, 1, 1, 0, 0, new Insets(5,
 				5, 5, 5));
-		addComponent(this, layout, jcbGoods, 2, 10, 3, 1, 0, 0, new Insets(40,
-				5, 5, 5));
-
-		addComponent(this, layout, lblValue, 1, 11, 1, 1, 0, 0, new Insets(5,
-				5, 5, 5));
-		addComponent(this, layout, txtValue, 2, 11, 3, 1, 0, 0, new Insets(5,
+		addComponent(this, layout, jcbGoods, 1, 15, 4, 1, 0, 0, new Insets(5,
 				5, 5, 5));
 
-		addComponent(this, layout, lblCotModifier, 1, 12, 1, 1, 0, 0,
+		addComponent(this, layout, lblValue, 1, 16, 1, 1, 0, 0, new Insets(5,
+				5, 5, 5));
+		addComponent(this, layout, txtValue, 2, 16, 3, 1, 0, 0, new Insets(5,
+				5, 5, 5));
+
+		addComponent(this, layout, lblCotModifier, 1, 17, 1, 1, 0, 0,
 				new Insets(5, 5, 5, 5));
-		addComponent(this, layout, txtCotModifier, 2, 12, 3, 1, 0, 0,
+		addComponent(this, layout, txtCotModifier, 2, 17, 3, 1, 0, 0,
 				new Insets(5, 5, 5, 5));
 
-		addComponent(this, layout, lblColonizationDifficulty, 1, 13, 1, 1, 0,
+		addComponent(this, layout, lblColonizationDifficulty, 1, 18, 1, 1, 0,
 				0, new Insets(5, 5, 5, 5));
-		addComponent(this, layout, txtColonizationDifficulty, 2, 13, 3, 1, 0,
+		addComponent(this, layout, txtColonizationDifficulty, 2, 18, 3, 1, 0,
 				0, new Insets(5, 5, 5, 5));
 	}
 
 	void addPnlLooted() {
-		addComponent(this, layout, chkLooted, 1, 14, 1, 1, 0, 0, new Insets(40,
+		txtLootedYear.setMinimumSize(new Dimension(40, 20));
+		addComponent(this, layout, chkLooted, 1, 19, 1, 1, 0, 0, new Insets(40,
 				5, 5, 5));
-		addComponent(this, layout, txtLootedYear, 4, 14, 1, 1, 0, 0,
+		addComponent(this, layout, txtLootedYear, 4, 19, 1, 1, 0, 0,
 				new Insets(40, 5, 5, 5));
-		addComponent(this, layout, jcbLootedMonth, 3, 14, 1, 1, 0, 0,
+		addComponent(this, layout, jcbLootedMonth, 3, 19, 1, 1, 0, 0,
 				new Insets(40, 5, 5, 5));
-		addComponent(this, layout, jcbLootedDay, 2, 14, 1, 1, 0, 0, new Insets(
+		addComponent(this, layout, jcbLootedDay, 2, 19, 1, 1, 0, 0, new Insets(
 				40, 5, 5, 5));
 
-		addComponent(this, layout, chkWhiteman, 1, 15, 2, 1, 0, 0, new Insets(
+		addComponent(this, layout, chkWhiteman, 1, 20, 2, 1, 0, 0, new Insets(
 				5, 5, 5, 5));
 	}
 

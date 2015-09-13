@@ -103,16 +103,16 @@ public class CountryReader {
 		for (int q = 0; q < n; q++) {
 
 			analyseEvent(q);
-			System.out.println("---trigger---");
-			System.out.println(p[q].getProperty("trigger"));
-			System.out.println("---action_a---");
-			System.out.println(p[q].getProperty("action_a"));
-			System.out.println("---action_b---");
-			System.out.println(p[q].getProperty("action_b"));
-			System.out.println("---action_c---");
-			System.out.println(p[q].getProperty("action_c"));
-			System.out.println("---action_d---");
-			System.out.println(p[q].getProperty("action_d"));
+//			System.out.println("---trigger---");
+//			System.out.println(p[q].getProperty("trigger"));
+//			System.out.println("---action_a---");
+//			System.out.println(p[q].getProperty("action_a"));
+//			System.out.println("---action_b---");
+//			System.out.println(p[q].getProperty("action_b"));
+//			System.out.println("---action_c---");
+//			System.out.println(p[q].getProperty("action_c"));
+//			System.out.println("---action_d---");
+//			System.out.println(p[q].getProperty("action_d"));
 
 		}
 

@@ -75,16 +75,16 @@ public class MapPanel extends JPanel implements MouseListener,
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
-		System.out.println(sliderX.getMaximum());
-		System.out.println(sliderX.getValue());
-		System.out.println("X:" + (arg0.getX() + sliderX.getValue()));
-		System.out.println("Y:" + (arg0.getY() + sliderY.getValue()));
+//		System.out.println(sliderX.getMaximum());
+//		System.out.println(sliderX.getValue());
+//		System.out.println("X:" + (arg0.getX() + sliderX.getValue()));
+//		System.out.println("Y:" + (arg0.getY() + sliderY.getValue()));
 		Color target = new Color(biBackend.getRGB(
 				(arg0.getX() + sliderX.getValue()),
 				(arg0.getY() + sliderY.getValue())));
-		System.out.println("Red:" + target.getRed() + " Green:"
-				+ target.getGreen() + " Blue:" + target.getBlue());
-		System.out.println(map2.get(target));
+//		System.out.println("Red:" + target.getRed() + " Green:"
+//				+ target.getGreen() + " Blue:" + target.getBlue());
+//		System.out.println(map2.get(target));
 
 		// ********************************************************
 		// Hier Code einfügen!
@@ -129,7 +129,7 @@ public class MapPanel extends JPanel implements MouseListener,
 			y = 0;
 		sliderX.setValue(x);
 		sliderY.setValue(y);
-		System.out.println(x);
+//		System.out.println(x);
 		drag = e.getPoint();
 
 	}

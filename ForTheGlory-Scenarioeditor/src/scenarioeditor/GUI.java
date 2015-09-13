@@ -94,6 +94,7 @@ public class GUI implements ActionListener, ChangeListener {
 	Dimension minSize = new Dimension(1200, 720);
 	Color clrBackground = new Color(240, 240, 240), clrStandard = new Color(0, 0, 0);
 	Font fntStandard = new Font("Verdana", 0, 12);
+	static Boolean loadingGUI, terminatedLoadingGUI;
 	String name = Strings.getString("name"), version = Strings.getString("version"), build = Strings.getString("build"),
 			title = name + " | Version: " + version + " (Build: " + build + ")";
 	String[] months = { Strings.getString("Month.1"), Strings.getString("Month.2"), Strings.getString("Month.3"),
@@ -110,6 +111,12 @@ public class GUI implements ActionListener, ChangeListener {
 	public GUI() throws IOException, InterruptedException {
 
 		layout = new GridBagLayout();
+
+		terminatedLoadingGUI = false;
+		loadingGUI = true;
+
+		Thread loadingThread = new Thread(new LoadingFrame());
+		loadingThread.start();
 
 		frame = new JFrame(title);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -189,6 +196,13 @@ public class GUI implements ActionListener, ChangeListener {
 
 		frame.pack();
 		frame.setLocationRelativeTo(null);
+
+		loadingGUI = false;
+		while (!terminatedLoadingGUI)
+			Thread.sleep(10);
+		
+		Thread.sleep(500);
+
 		frame.setVisible(true);
 	}
 
@@ -477,137 +491,131 @@ public class GUI implements ActionListener, ChangeListener {
 		grpExtendedLoans.add(rbnExtendedLoansTrue);
 		grpExtendedLoans.add(rbnExtendedLoansFalse);
 
-		pnlColonialAttempts = new JPanel();
-		pnlColonialAttempts.setLayout(layout);
-		pnlColonialAttempts.setBackground(clrBackground);
-		addComponent(pnlCountryGeneral, layout, pnlColonialAttempts, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
-		y++;
-
-		lblColonialAttempts = new JLabel(Strings.getString("GUI.43"));
-		lblColonialAttempts.setForeground(clrStandard);
-		lblColonialAttempts.setFont(fntStandard);
-		addComponent(pnlColonialAttempts, layout, lblColonialAttempts, 0, 0, 1, 1, 1, 0, new Insets(0, 0, 0, 5));
-
-		txfColonialAttempts = new JTextField();
-		txfColonialAttempts.setBackground(Color.white);
-		txfColonialAttempts.setForeground(clrStandard);
-		txfColonialAttempts.setPreferredSize(new Dimension(50, 20));
-		txfColonialAttempts.setEditable(true);
-		addComponent(pnlColonialAttempts, layout, txfColonialAttempts, 1, 0, 1, 1, 0, 0, new Insets(0, 0, 0, 0));
-
 		pnlCountryGeneralTxf = new JPanel();
 		pnlCountryGeneralTxf.setLayout(layout);
 		pnlCountryGeneralTxf.setBackground(clrBackground);
 		addComponent(pnlCountryGeneral, layout, pnlCountryGeneralTxf, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
 		y++;
 
+		lblColonialAttempts = new JLabel(Strings.getString("GUI.43"));
+		lblColonialAttempts.setForeground(clrStandard);
+		lblColonialAttempts.setFont(fntStandard);
+		addComponent(pnlCountryGeneralTxf, layout, lblColonialAttempts, 0, 0, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
+
+		txfColonialAttempts = new JTextField();
+		txfColonialAttempts.setBackground(Color.white);
+		txfColonialAttempts.setForeground(clrStandard);
+		txfColonialAttempts.setPreferredSize(new Dimension(50, 20));
+		txfColonialAttempts.setEditable(true);
+		addComponent(pnlCountryGeneralTxf, layout, txfColonialAttempts, 1, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
+
 		lblLoansize = new JLabel(Strings.getString("GUI.49"), SwingConstants.LEFT);
 		lblLoansize.setForeground(clrStandard);
 		lblLoansize.setFont(fntStandard);
-		addComponent(pnlCountryGeneralTxf, layout, lblLoansize, 0, 0, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
+		addComponent(pnlCountryGeneralTxf, layout, lblLoansize, 0, 1, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
 
 		txfLoansize = new JTextField();
 		txfLoansize.setBackground(Color.white);
 		txfLoansize.setForeground(clrStandard);
 		txfLoansize.setPreferredSize(new Dimension(50, 20));
 		txfLoansize.setEditable(true);
-		addComponent(pnlCountryGeneralTxf, layout, txfLoansize, 1, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
+		addComponent(pnlCountryGeneralTxf, layout, txfLoansize, 1, 1, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
 
 		lblTreasury = new JLabel(Strings.getString("GUI.50"), SwingConstants.LEFT);
 		lblTreasury.setForeground(clrStandard);
 		lblTreasury.setFont(fntStandard);
-		addComponent(pnlCountryGeneralTxf, layout, lblTreasury, 0, 1, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
+		addComponent(pnlCountryGeneralTxf, layout, lblTreasury, 0, 2, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
 
 		txfTreasury = new JTextField();
 		txfTreasury.setBackground(Color.white);
 		txfTreasury.setForeground(clrStandard);
 		txfTreasury.setPreferredSize(new Dimension(50, 20));
 		txfTreasury.setEditable(true);
-		addComponent(pnlCountryGeneralTxf, layout, txfTreasury, 1, 1, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
+		addComponent(pnlCountryGeneralTxf, layout, txfTreasury, 1, 2, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
 
 		lblInflation = new JLabel(Strings.getString("GUI.51"), SwingConstants.LEFT);
 		lblInflation.setForeground(clrStandard);
 		lblInflation.setFont(fntStandard);
-		addComponent(pnlCountryGeneralTxf, layout, lblInflation, 0, 2, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
+		addComponent(pnlCountryGeneralTxf, layout, lblInflation, 0, 3, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
 
 		txfInflation = new JTextField();
 		txfInflation.setBackground(Color.white);
 		txfInflation.setForeground(clrStandard);
 		txfInflation.setPreferredSize(new Dimension(50, 20));
 		txfInflation.setEditable(true);
-		addComponent(pnlCountryGeneralTxf, layout, txfInflation, 1, 2, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
+		addComponent(pnlCountryGeneralTxf, layout, txfInflation, 1, 3, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
 
 		lblColonists = new JLabel(Strings.getString("GUI.52"), SwingConstants.LEFT);
 		lblColonists.setForeground(clrStandard);
 		lblColonists.setFont(fntStandard);
-		addComponent(pnlCountryGeneralTxf, layout, lblColonists, 0, 3, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
+		addComponent(pnlCountryGeneralTxf, layout, lblColonists, 0, 4, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
 
 		txfColonists = new JTextField();
 		txfColonists.setBackground(Color.white);
 		txfColonists.setForeground(clrStandard);
 		txfColonists.setPreferredSize(new Dimension(50, 20));
 		txfColonists.setEditable(true);
-		addComponent(pnlCountryGeneralTxf, layout, txfColonists, 1, 3, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
+		addComponent(pnlCountryGeneralTxf, layout, txfColonists, 1, 4, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
 
 		lblMerchants = new JLabel(Strings.getString("GUI.53"), SwingConstants.LEFT);
 		lblMerchants.setForeground(clrStandard);
 		lblMerchants.setFont(fntStandard);
-		addComponent(pnlCountryGeneralTxf, layout, lblMerchants, 0, 4, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
+		addComponent(pnlCountryGeneralTxf, layout, lblMerchants, 0, 5, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
 
 		txfMerchants = new JTextField();
 		txfMerchants.setBackground(Color.white);
 		txfMerchants.setForeground(clrStandard);
 		txfMerchants.setPreferredSize(new Dimension(50, 20));
 		txfMerchants.setEditable(true);
-		addComponent(pnlCountryGeneralTxf, layout, txfMerchants, 1, 4, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
+		addComponent(pnlCountryGeneralTxf, layout, txfMerchants, 1, 5, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
 
 		lblDiplomats = new JLabel(Strings.getString("GUI.54"), SwingConstants.LEFT);
 		lblDiplomats.setForeground(clrStandard);
 		lblDiplomats.setFont(fntStandard);
-		addComponent(pnlCountryGeneralTxf, layout, lblDiplomats, 0, 5, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
+		addComponent(pnlCountryGeneralTxf, layout, lblDiplomats, 0, 6, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
 
 		txfDiplomats = new JTextField();
 		txfDiplomats.setBackground(Color.white);
 		txfDiplomats.setForeground(clrStandard);
 		txfDiplomats.setPreferredSize(new Dimension(50, 20));
 		txfDiplomats.setEditable(true);
-		addComponent(pnlCountryGeneralTxf, layout, txfDiplomats, 1, 5, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
+		addComponent(pnlCountryGeneralTxf, layout, txfDiplomats, 1, 6, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
 
 		lblMissionaries = new JLabel(Strings.getString("GUI.55"), SwingConstants.LEFT);
 		lblMissionaries.setForeground(clrStandard);
 		lblMissionaries.setFont(fntStandard);
-		addComponent(pnlCountryGeneralTxf, layout, lblMissionaries, 0, 6, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
+		addComponent(pnlCountryGeneralTxf, layout, lblMissionaries, 0, 7, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
 
 		txfMissionaries = new JTextField();
 		txfMissionaries.setBackground(Color.white);
 		txfMissionaries.setForeground(clrStandard);
 		txfMissionaries.setPreferredSize(new Dimension(50, 20));
 		txfMissionaries.setEditable(true);
-		addComponent(pnlCountryGeneralTxf, layout, txfMissionaries, 1, 6, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
+		addComponent(pnlCountryGeneralTxf, layout, txfMissionaries, 1, 7, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
 
 		lblBadBoy = new JLabel(Strings.getString("GUI.56"), SwingConstants.LEFT);
 		lblBadBoy.setForeground(clrStandard);
 		lblBadBoy.setFont(fntStandard);
-		addComponent(pnlCountryGeneralTxf, layout, lblBadBoy, 0, 7, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
+		addComponent(pnlCountryGeneralTxf, layout, lblBadBoy, 0, 8, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
 
 		txfBadboy = new JTextField();
 		txfBadboy.setBackground(Color.white);
 		txfBadboy.setForeground(clrStandard);
 		txfBadboy.setPreferredSize(new Dimension(50, 20));
 		txfBadboy.setEditable(true);
-		addComponent(pnlCountryGeneralTxf, layout, txfBadboy, 1, 7, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
+		addComponent(pnlCountryGeneralTxf, layout, txfBadboy, 1, 8, 1, 1, 0, 0, new Insets(0, 0, 5, 0));
 
 		lblWhiteMan = new JLabel(Strings.getString("GUI.57"), SwingConstants.LEFT);
 		lblWhiteMan.setForeground(clrStandard);
 		lblWhiteMan.setFont(fntStandard);
-		addComponent(pnlCountryGeneralTxf, layout, lblWhiteMan, 0, 8, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
+		addComponent(pnlCountryGeneralTxf, layout, lblWhiteMan, 0, 9, 1, 1, 1, 0, new Insets(0, 0, 5, 5));
 
 		txfWhiteMan = new JTextField();
 		txfWhiteMan.setBackground(Color.white);
 		txfWhiteMan.setForeground(clrStandard);
 		txfWhiteMan.setPreferredSize(new Dimension(50, 20));
 		txfWhiteMan.setEditable(true);
-		addComponent(pnlCountryGeneralTxf, layout, txfWhiteMan, 1, 8, 1, 1, 0, 0, new Insets(0, 0, 0, 0));
+		addComponent(pnlCountryGeneralTxf, layout, txfWhiteMan, 1, 9, 1, 1, 0, 0, new Insets(0, 0, 0, 0));
 
 		addComponent(pnlCountryGeneral, layout, new JPanel(), 0, y, 1, 1, 1, 1, new Insets(0, 0, 0, 0));
 	}
@@ -630,7 +638,7 @@ public class GUI implements ActionListener, ChangeListener {
 		lblTechnologyLand = new JLabel(Strings.getString("GUI.26"), SwingConstants.LEFT);
 		lblTechnologyLand.setForeground(clrStandard);
 		lblTechnologyLand.setFont(fntStandard);
-		addComponent(pnlTechnology, layout, lblTechnologyLand, 0, 0, 1, 1, 0, 0, new Insets(5, 5, 5, 10));
+		addComponent(pnlTechnology, layout, lblTechnologyLand, 0, 0, 1, 1, 1, 0, new Insets(5, 5, 5, 10));
 
 		txfTechnologyLand = new JTextField();
 		txfTechnologyLand.setBackground(Color.white);
@@ -642,7 +650,7 @@ public class GUI implements ActionListener, ChangeListener {
 		lblTechnologyNaval = new JLabel(Strings.getString("GUI.27"), SwingConstants.LEFT);
 		lblTechnologyNaval.setForeground(clrStandard);
 		lblTechnologyNaval.setFont(fntStandard);
-		addComponent(pnlTechnology, layout, lblTechnologyNaval, 0, 1, 1, 1, 0, 0, new Insets(5, 5, 5, 10));
+		addComponent(pnlTechnology, layout, lblTechnologyNaval, 0, 1, 1, 1, 1, 0, new Insets(5, 5, 5, 10));
 
 		txfTechnologyNaval = new JTextField();
 		txfTechnologyNaval.setBackground(Color.white);
@@ -654,7 +662,7 @@ public class GUI implements ActionListener, ChangeListener {
 		lblTrade = new JLabel(Strings.getString("GUI.28"), SwingConstants.LEFT);
 		lblTrade.setForeground(clrStandard);
 		lblTrade.setFont(fntStandard);
-		addComponent(pnlTechnology, layout, lblTrade, 0, 2, 1, 1, 0, 0, new Insets(5, 5, 5, 10));
+		addComponent(pnlTechnology, layout, lblTrade, 0, 2, 1, 1, 1, 0, new Insets(5, 5, 5, 10));
 
 		txfTechnologyTrade = new JTextField();
 		txfTechnologyTrade.setBackground(Color.white);
@@ -666,7 +674,7 @@ public class GUI implements ActionListener, ChangeListener {
 		lblInfra = new JLabel(Strings.getString("GUI.29"), SwingConstants.LEFT);
 		lblInfra.setForeground(clrStandard);
 		lblInfra.setFont(fntStandard);
-		addComponent(pnlTechnology, layout, lblInfra, 0, 3, 1, 1, 0, 0, new Insets(5, 5, 5, 10));
+		addComponent(pnlTechnology, layout, lblInfra, 0, 3, 1, 1, 1, 0, new Insets(5, 5, 5, 10));
 
 		txfTechnologyInfra = new JTextField();
 		txfTechnologyInfra.setBackground(Color.white);
@@ -678,7 +686,7 @@ public class GUI implements ActionListener, ChangeListener {
 		lblStability = new JLabel(Strings.getString("GUI.30"), SwingConstants.LEFT);
 		lblStability.setForeground(clrStandard);
 		lblStability.setFont(fntStandard);
-		addComponent(pnlTechnology, layout, lblStability, 0, 4, 1, 1, 0, 0, new Insets(5, 5, 5, 10));
+		addComponent(pnlTechnology, layout, lblStability, 0, 4, 1, 1, 1, 0, new Insets(5, 5, 5, 10));
 
 		txfTechnologyStability = new JTextField();
 		txfTechnologyStability.setBackground(Color.white);
@@ -686,8 +694,6 @@ public class GUI implements ActionListener, ChangeListener {
 		txfTechnologyStability.setPreferredSize(new Dimension(50, 20));
 		txfTechnologyStability.setEditable(true);
 		addComponent(pnlTechnology, layout, txfTechnologyStability, 1, 4, 1, 1, 0, 0, new Insets(5, 0, 5, 5));
-
-		addComponent(pnlTechnology, layout, new JPanel(), 2, 0, 1, 5, 1, 1, new Insets(0, 0, 0, 0));
 
 		lblTechnologyGroup = new JLabel(Strings.getString("GUI.31"), SwingConstants.LEFT);
 		lblTechnologyGroup.setForeground(clrStandard);
@@ -1404,5 +1410,21 @@ public class GUI implements ActionListener, ChangeListener {
 
 	public void stateChanged(ChangeEvent e) {
 
+		if (e.getSource() == chbCasusBelli) {
+
+			if (chbCasusBelli.isSelected()) {
+
+				cbxCasusBelliDay.setEnabled(true);
+				cbxCasusBelliMonth.setEnabled(true);
+				txfCasusBelliYear.setEnabled(true);
+				cbxCasusBelli.setEnabled(true);
+			} else {
+
+				cbxCasusBelliDay.setEnabled(false);
+				cbxCasusBelliMonth.setEnabled(false);
+				txfCasusBelliYear.setEnabled(false);
+				cbxCasusBelli.setEnabled(false);
+			}
+		}
 	}
 }

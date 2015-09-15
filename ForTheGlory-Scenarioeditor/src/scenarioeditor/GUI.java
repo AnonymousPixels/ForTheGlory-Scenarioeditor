@@ -91,11 +91,13 @@ public class GUI implements ActionListener, ChangeListener {
 	HashMap<Color, Integer> hashMap = new HashMap<Color, Integer>();
 	HashMap<String, String> values = new HashMap<String, String>();
 	HashMap<String, String[]> selectables = new HashMap<String, String[]>();
+	HashMap<String, Object> dataMap = new HashMap<String, Object>();
 	Dimension minSize = new Dimension(1200, 720);
 	Color clrBackground = new Color(240, 240, 240), clrStandard = new Color(0, 0, 0);
 	Font fntStandard = new Font("Verdana", 0, 12);
 	String name = Strings.getString("name"), version = Strings.getString("version"), build = Strings.getString("build"),
-			title = name + " | Version: " + version + " (Build: " + build + ")";
+			title = name + " | Version: " + version + " (Build: " + build + ")",
+			scenarioFilePath = "C://Program Files (x86)//Steam//steamapps//common//For The Glory//Scenarios//1419 - The Grand Campaign.eeg";
 	String[] months = { Strings.getString("Month.1"), Strings.getString("Month.2"), Strings.getString("Month.3"),
 			Strings.getString("Month.4"), Strings.getString("Month.5"), Strings.getString("Month.6"),
 			Strings.getString("Month.7"), Strings.getString("Month.8"), Strings.getString("Month.9"),
@@ -108,6 +110,8 @@ public class GUI implements ActionListener, ChangeListener {
 					"19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" };
 
 	public GUI() throws IOException, InterruptedException {
+
+		readData();
 
 		layout = new GridBagLayout();
 
@@ -189,10 +193,20 @@ public class GUI implements ActionListener, ChangeListener {
 
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-		
+
 		Main.finishedLoading = true;
-		
+
 		frame.setVisible(true);
+	}
+
+	void readData() {
+
+		HashMap<String, String[]> hash;
+		try {
+			hash = settings.getsettings(Main.path, scenarioFilePath);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	void fillHashMaps() {

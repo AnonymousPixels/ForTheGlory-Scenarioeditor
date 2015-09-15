@@ -1,7 +1,9 @@
-package scenarioeditor;
+package test;
 
 import java.io.IOException;
 import java.util.HashMap;
+
+import scenarioeditor.settings;
 
 public class ReaderMain {
 

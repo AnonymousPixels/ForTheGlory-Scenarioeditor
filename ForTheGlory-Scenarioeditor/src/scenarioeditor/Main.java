@@ -182,7 +182,7 @@ public class Main {
 
 		frame.setTitle(Strings.getString("loading"));
 
-		// TODO Add loading gui components
+		// TODO Add loading gui
 
 		while (!finishedLoading)
 			try {

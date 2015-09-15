@@ -90,8 +90,7 @@ public class GUI implements ActionListener, ChangeListener {
 	GameFiles gameFiles;
 	HashMap<Color, Integer> hashMap = new HashMap<Color, Integer>();
 	HashMap<String, String> values = new HashMap<String, String>();
-	HashMap<String, String[]> selectables = new HashMap<String, String[]>();
-	HashMap<String, Object> dataMap = new HashMap<String, Object>();
+	HashMap<String, String[]> selectables = new HashMap<String, String[]>(), dataMap = new HashMap<String, String[]>();
 	Dimension minSize = new Dimension(1200, 720);
 	Color clrBackground = new Color(240, 240, 240), clrStandard = new Color(0, 0, 0);
 	Font fntStandard = new Font("Verdana", 0, 12);
@@ -201,9 +200,8 @@ public class GUI implements ActionListener, ChangeListener {
 
 	void readData() {
 
-		HashMap<String, String[]> hash;
 		try {
-			hash = settings.getsettings(Main.path, scenarioFilePath);
+			dataMap = settings.getsettings(Main.path, scenarioFilePath);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

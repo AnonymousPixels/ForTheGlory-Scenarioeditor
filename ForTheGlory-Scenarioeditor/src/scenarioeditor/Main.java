@@ -151,7 +151,7 @@ public class Main {
 					JOptionPane.showMessageDialog(null, Strings.getString("Main.5"), Strings.getString("Main.6"),
 							JOptionPane.ERROR_MESSAGE);
 
-				System.out.println("MAX DU PFOSTEN");
+//				System.out.println("MAX DU PFOSTEN");
 			}
 		});
 		addComponent(panel, layout, btnContinue, 1, 2, 1, 1, 0, 0, new Insets(0, 10, 10, 10));

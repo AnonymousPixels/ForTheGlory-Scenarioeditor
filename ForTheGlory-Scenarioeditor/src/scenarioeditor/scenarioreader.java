@@ -7,16 +7,23 @@ import java.io.IOException;
 public class scenarioreader {
 	public static BufferedReader reader;
 	public static FileReader file;
-	public static String input, scenarioname, startdate, enddate, selectablestring;
+	public static String input, scenarioname, startdate, enddate,
+			selectablestring;
 	public static int counter_country, counter_include, bracket;
-	public static String[] tag_array, ai_array, colonialattempts_array, colonialnation_array, major_array,
-			colonists_array, merchants_array, treasury_array, inflation_array, whiteman_array, religion_array,
-			culture_array, knownprovinces_array, controlledprovinces_array, nationalprovinces_array, city_name_array,
-			ownedprovinces_array, city_fortress_array, city_population_array, city_location_array, city_capital_array,
-			landunit_id_array, landunit_name_array, landunit_location_array, landunit_infantry_array,
-			landunit_artillery_array, landunit_cavalry_array, technology_stability_array, technology_naval_array,
-			technology_land_array, technology_infra_array, technology_trade_array, selectable_array, include_array,
-			cancelledloans_array, extendedloans_array, diplomats_array, technology_group_array;
+	public static String[] tag_array, ai_array, colonialattempts_array,
+			colonialnation_array, major_array, colonists_array,
+			merchants_array, treasury_array, inflation_array, whiteman_array,
+			religion_array, culture_array, knownprovinces_array,
+			controlledprovinces_array, nationalprovinces_array,
+			city_name_array, ownedprovinces_array, city_fortress_array,
+			city_population_array, city_location_array, city_capital_array,
+			landunit_id_array, landunit_name_array, landunit_location_array,
+			landunit_infantry_array, landunit_artillery_array,
+			landunit_cavalry_array, technology_stability_array,
+			technology_naval_array, technology_land_array,
+			technology_infra_array, technology_trade_array, selectable_array,
+			include_array, cancelledloans_array, extendedloans_array,
+			diplomats_array, technology_group_array;
 
 	public scenarioreader(String path) throws IOException {
 		file = new FileReader(path);
@@ -67,7 +74,7 @@ public class scenarioreader {
 
 		input = reader.readLine();
 		while (input != null) {
-			System.out.println(input);
+			// System.out.println(input);
 
 			if (input.contains("name")) {
 				input = input.replaceAll(" ", "");
@@ -75,7 +82,7 @@ public class scenarioreader {
 				input = input.replaceAll("	", "");
 				input = input.replaceAll("=", "");
 				input = input.replaceAll("\"", "");
-				System.out.println(input);
+				// System.out.println(input);
 				scenarioname = input;
 			}
 			if (input.contains("startdate")) {
@@ -88,7 +95,7 @@ public class scenarioreader {
 				input = input.replaceAll("day", "");
 				input = input.replaceAll("month", ".");
 				input = input.replaceAll("year", ".");
-				System.out.println(input);
+				// System.out.println(input);
 				startdate = input;
 			}
 
@@ -102,7 +109,7 @@ public class scenarioreader {
 				input = input.replaceAll("day", "");
 				input = input.replaceAll("month", ".");
 				input = input.replaceAll("year", ".");
-				System.out.println(input);
+				// System.out.println(input);
 				enddate = input;
 			}
 
@@ -110,13 +117,13 @@ public class scenarioreader {
 
 				while (!input.contains("}")) {
 					input = reader.readLine();
-					System.out.println(input);
+					// System.out.println(input);
 					selectablestring = selectablestring + input;
 				}
 				selectablestring = selectablestring.replaceAll("		", "");
 				selectablestring = selectablestring.replaceAll("	", "");
 				selectablestring = selectablestring.replaceAll("}", "");
-				System.out.println(selectablestring);
+				// System.out.println(selectablestring);
 				selectable_array = selectablestring.split(" ");
 
 			}
@@ -128,7 +135,7 @@ public class scenarioreader {
 				input = input.replace("\\", "//");
 				include_array[counter_include] = input;
 				counter_include++;
-				System.out.println(input);
+				// System.out.println(input);
 
 			}
 
@@ -140,14 +147,14 @@ public class scenarioreader {
 				input = input.replaceAll("tag", "");
 				input = input.replaceAll("	", "");
 				input = input.replaceAll("=", "");
-				System.out.println(input);
+				// System.out.println(input);
 				tag_array[counter_country] = input;
 			}
 			if (input.contains("ai")) {
 				input = input.replaceAll(" ", "");
 				input = input.replaceAll("ai=", "");
 				input = input.replaceAll("	", "");
-				System.out.println(input);
+				// System.out.println(input);
 				ai_array[counter_country] = input;
 			}
 			if (input.contains("colonialattempts")) {
@@ -155,7 +162,7 @@ public class scenarioreader {
 				input = input.replaceAll("colonialattempts", "");
 				input = input.replaceAll("	", "");
 				input = input.replaceAll("=", "");
-				System.out.println(input);
+				// System.out.println(input);
 				colonialattempts_array[counter_country] = input;
 
 			}
@@ -164,7 +171,7 @@ public class scenarioreader {
 				input = input.replaceAll("colonialnation", "");
 				input = input.replaceAll("	", "");
 				input = input.replaceAll("=", "");
-				System.out.println(input);
+				// System.out.println(input);
 				colonialnation_array[counter_country] = input;
 			}
 			if (input.contains("major")) {
@@ -172,7 +179,7 @@ public class scenarioreader {
 				input = input.replaceAll("major", "");
 				input = input.replaceAll("	", "");
 				input = input.replaceAll("=", "");
-				System.out.println(input);
+				// System.out.println(input);
 				major_array[counter_country] = input;
 			}
 			if (input.contains("colonists")) {
@@ -180,7 +187,7 @@ public class scenarioreader {
 				input = input.replaceAll("colonists", "");
 				input = input.replaceAll("	", "");
 				input = input.replaceAll("=", "");
-				System.out.println(input);
+				// System.out.println(input);
 				colonists_array[counter_country] = input;
 			}
 
@@ -189,7 +196,7 @@ public class scenarioreader {
 				input = input.replaceAll("cancelledloans", "");
 				input = input.replaceAll("	", "");
 				input = input.replaceAll("=", "");
-				System.out.println(input);
+				// System.out.println(input);
 				cancelledloans_array[counter_country] = input;
 			}
 
@@ -198,7 +205,7 @@ public class scenarioreader {
 				input = input.replaceAll("extendedloans", "");
 				input = input.replaceAll("	", "");
 				input = input.replaceAll("=", "");
-				System.out.println(input);
+				// System.out.println(input);
 				extendedloans_array[counter_country] = input;
 			}
 
@@ -207,7 +214,7 @@ public class scenarioreader {
 				input = input.replaceAll("merchants", "");
 				input = input.replaceAll("	", "");
 				input = input.replaceAll("=", "");
-				System.out.println(input);
+				// System.out.println(input);
 				merchants_array[counter_country] = input;
 			}
 			if (input.contains("treasury")) {
@@ -215,7 +222,7 @@ public class scenarioreader {
 				input = input.replaceAll("treasury", "");
 				input = input.replaceAll("	", "");
 				input = input.replaceAll("=", "");
-				System.out.println(input);
+				// System.out.println(input);
 				treasury_array[counter_country] = input;
 			}
 			if (input.contains("inflation")) {
@@ -223,7 +230,7 @@ public class scenarioreader {
 				input = input.replaceAll("inflation", "");
 				input = input.replaceAll("	", "");
 				input = input.replaceAll("=", "");
-				System.out.println(input);
+				// System.out.println(input);
 				inflation_array[counter_country] = input;
 			}
 
@@ -232,7 +239,7 @@ public class scenarioreader {
 				input = input.replaceAll("diplomats", "");
 				input = input.replaceAll("	", "");
 				input = input.replaceAll("=", "");
-				System.out.println(input);
+				// System.out.println(input);
 				diplomats_array[counter_country] = input;
 			}
 
@@ -241,7 +248,7 @@ public class scenarioreader {
 				input = input.replaceAll("whiteman", "");
 				input = input.replaceAll("	", "");
 				input = input.replaceAll("=", "");
-				System.out.println(input);
+				// System.out.println(input);
 				whiteman_array[counter_country] = input;
 			}
 			if (input.contains("religion")) {
@@ -252,7 +259,7 @@ public class scenarioreader {
 				input = input.replaceAll("type", "");
 				input = input.replaceAll("	", "");
 				input = input.replaceAll("=", "");
-				System.out.println(input);
+				// System.out.println(input);
 				religion_array[counter_country] = input;
 			}
 			if (input.contains("culture")) {
@@ -263,7 +270,7 @@ public class scenarioreader {
 				input = input.replaceAll("type", "");
 				input = input.replaceAll("	", "");
 				input = input.replaceAll("=", "");
-				System.out.println(input);
+				// System.out.println(input);
 				culture_array[counter_country] = input;
 			}
 			if (input.contains("knownprovinces")) {
@@ -275,7 +282,7 @@ public class scenarioreader {
 				input = input.replaceAll("=", "");
 				input = input.replaceAll(";;;", "");
 				input = input.replaceAll(";;", "");
-				System.out.println(input);
+				// System.out.println(input);
 				knownprovinces_array[counter_country] = input;
 			}
 			if (input.contains("ownedprovinces")) {
@@ -287,7 +294,7 @@ public class scenarioreader {
 				input = input.replaceAll("=", "");
 				input = input.replaceAll(";;;", "");
 				input = input.replaceAll(";;", "");
-				System.out.println(input);
+				// System.out.println(input);
 				ownedprovinces_array[counter_country] = input;
 			}
 			if (input.contains("controlledprovinces")) {
@@ -299,7 +306,7 @@ public class scenarioreader {
 				input = input.replaceAll("=", "");
 				input = input.replaceAll(";;;", "");
 				input = input.replaceAll(";;", "");
-				System.out.println(input);
+				// System.out.println(input);
 				controlledprovinces_array[counter_country] = input;
 			}
 			if (input.contains("nationalprovinces")) {
@@ -311,21 +318,21 @@ public class scenarioreader {
 				input = input.replaceAll("=", "");
 				input = input.replaceAll(";;;", "");
 				input = input.replaceAll(";;", "");
-				System.out.println(input);
+				// System.out.println(input);
 				nationalprovinces_array[counter_country] = input;
 			}
 
 			if (input.contains("city")) {
 				while (!input.contains("	}")) {
 					input = reader.readLine();
-					System.out.println(input);
+					// System.out.println(input);
 					if (input.contains("name")) {
 						input = input.replaceAll(" ", "");
 						input = input.replaceAll("name", "");
 						input = input.replaceAll("	", "");
 						input = input.replaceAll("=", "");
 						input = input.replaceAll("\"", "");
-						System.out.println(input);
+						// System.out.println(input);
 						city_name_array[counter_country] = input;
 					}
 
@@ -337,7 +344,7 @@ public class scenarioreader {
 						input = input.replaceAll("}", "");
 						input = input.replaceAll("	", "");
 						input = input.replaceAll("=", "");
-						System.out.println(input);
+						// System.out.println(input);
 						city_fortress_array[counter_country] = input;
 					}
 
@@ -346,7 +353,7 @@ public class scenarioreader {
 						input = input.replaceAll("population", "");
 						input = input.replaceAll("	", "");
 						input = input.replaceAll("=", "");
-						System.out.println(input);
+						// System.out.println(input);
 						city_population_array[counter_country] = input;
 					}
 
@@ -355,7 +362,7 @@ public class scenarioreader {
 						input = input.replaceAll("location", "");
 						input = input.replaceAll("	", "");
 						input = input.replaceAll("=", "");
-						System.out.println(input);
+						// System.out.println(input);
 						city_location_array[counter_country] = input;
 					}
 
@@ -364,7 +371,7 @@ public class scenarioreader {
 						input = input.replaceAll("capital", "");
 						input = input.replaceAll("	", "");
 						input = input.replaceAll("=", "");
-						System.out.println(input);
+						// System.out.println(input);
 						city_capital_array[counter_country] = input;
 					}
 				}
@@ -374,7 +381,7 @@ public class scenarioreader {
 			if (input.contains("landunit")) {
 				while (!input.contains("	}")) {
 					input = reader.readLine();
-					System.out.println(input);
+					// System.out.println(input);
 					if (input.contains("id")) {
 						input = input.replaceAll(" ", ";");
 						input = input.replaceAll("id", "");
@@ -386,7 +393,7 @@ public class scenarioreader {
 						input = input.replaceAll(";;;", ";");
 						input = input.replaceAll(";;;;;", "");
 						input = input.replaceAll(";;;", "");
-						System.out.println(input);
+						// System.out.println(input);
 						landunit_id_array[counter_country] = input;
 					}
 
@@ -396,7 +403,7 @@ public class scenarioreader {
 						input = input.replaceAll("	", "");
 						input = input.replaceAll("=", "");
 						input = input.replaceAll("\"", "");
-						System.out.println(input);
+						// System.out.println(input);
 						landunit_name_array[counter_country] = input;
 					}
 
@@ -405,7 +412,7 @@ public class scenarioreader {
 						input = input.replaceAll("infantry", "");
 						input = input.replaceAll("	", "");
 						input = input.replaceAll("=", "");
-						System.out.println(input);
+						// System.out.println(input);
 						landunit_infantry_array[counter_country] = input;
 					}
 
@@ -414,7 +421,7 @@ public class scenarioreader {
 						input = input.replaceAll("location", "");
 						input = input.replaceAll("	", "");
 						input = input.replaceAll("=", "");
-						System.out.println(input);
+						// System.out.println(input);
 						landunit_location_array[counter_country] = input;
 					}
 					if (input.contains("cavalry")) {
@@ -422,7 +429,7 @@ public class scenarioreader {
 						input = input.replaceAll("cavalry", "");
 						input = input.replaceAll("	", "");
 						input = input.replaceAll("=", "");
-						System.out.println(input);
+						// System.out.println(input);
 						landunit_cavalry_array[counter_country] = input;
 					}
 					if (input.contains("artillery")) {
@@ -430,7 +437,7 @@ public class scenarioreader {
 						input = input.replaceAll("artillery", "");
 						input = input.replaceAll("	", "");
 						input = input.replaceAll("=", "");
-						System.out.println(input);
+						// System.out.println(input);
 						landunit_artillery_array[counter_country] = input;
 					}
 				}
@@ -439,7 +446,7 @@ public class scenarioreader {
 			if (input.contains("technology")) {
 				while (!input.contains("	}")) {
 					input = reader.readLine();
-					System.out.println(input);
+					// System.out.println(input);
 					if (input.contains("stability")) {
 						input = input.replaceAll(" ", ";");
 						input = input.replaceAll("stability", "");
@@ -452,7 +459,7 @@ public class scenarioreader {
 						input = input.replaceAll(";;;", ";");
 						input = input.replaceAll(";;;;;", "");
 						input = input.replaceAll(";;;", "");
-						System.out.println(input);
+						// System.out.println(input);
 						technology_stability_array[counter_country] = input;
 					}
 					if (input.contains("infra")) {
@@ -467,7 +474,7 @@ public class scenarioreader {
 						input = input.replaceAll(";;;", ";");
 						input = input.replaceAll(";;;;;", "");
 						input = input.replaceAll(";;;", "");
-						System.out.println(input);
+						// System.out.println(input);
 						technology_infra_array[counter_country] = input;
 					}
 					if (input.contains("trade")) {
@@ -482,7 +489,7 @@ public class scenarioreader {
 						input = input.replaceAll(";;;", ";");
 						input = input.replaceAll(";;;;;", "");
 						input = input.replaceAll(";;;", "");
-						System.out.println(input);
+						// System.out.println(input);
 						technology_trade_array[counter_country] = input;
 					}
 					if (input.contains("land")) {
@@ -497,7 +504,7 @@ public class scenarioreader {
 						input = input.replaceAll(";;;", ";");
 						input = input.replaceAll(";;;;;", "");
 						input = input.replaceAll(";;;", "");
-						System.out.println(input);
+						// System.out.println(input);
 						technology_land_array[counter_country] = input;
 					}
 					if (input.contains("naval")) {
@@ -512,7 +519,7 @@ public class scenarioreader {
 						input = input.replaceAll(";;;", ";");
 						input = input.replaceAll(";;;;;", "");
 						input = input.replaceAll(";;;", "");
-						System.out.println(input);
+						// System.out.println(input);
 						technology_naval_array[counter_country] = input;
 					}
 					if (input.contains("group")) {
@@ -520,7 +527,7 @@ public class scenarioreader {
 						input = input.replaceAll("group", "");
 						input = input.replaceAll("	", "");
 						input = input.replaceAll("=", "");
-						System.out.println(input);
+						// System.out.println(input);
 						technology_group_array[counter_country] = input;
 					}
 				}
@@ -529,21 +536,30 @@ public class scenarioreader {
 
 		}
 
-		settings.hashmap.put("scenario_technology_group", technology_group_array);
+		settings.hashmap.put("scenario_technology_group",
+				technology_group_array);
 		settings.hashmap.put("scenario_diplomats", diplomats_array);
 		settings.hashmap.put("scenario_extendedloans", extendedloans_array);
 		settings.hashmap.put("scenario_cancelledloans", cancelledloans_array);
 		settings.hashmap.put("scenario_include", include_array);
 		settings.hashmap.put("scenario_selectable", selectable_array);
-		settings.hashmap.put("scenario_technology_naval", technology_naval_array);
+		settings.hashmap.put("scenario_technology_naval",
+				technology_naval_array);
 		settings.hashmap.put("scenario_technology_land", technology_land_array);
-		settings.hashmap.put("scenario_technology_trade", technology_trade_array);
-		settings.hashmap.put("scenario_technology_infra", technology_infra_array);
-		settings.hashmap.put("scenario_technology_stability", technology_stability_array);
-		settings.hashmap.put("scenario_landunit_cavalry", landunit_cavalry_array);
-		settings.hashmap.put("scenario_landunit_artillery", landunit_artillery_array);
-		settings.hashmap.put("scenario_landunit_infantry", landunit_infantry_array);
-		settings.hashmap.put("scenario_landunit_location", landunit_location_array);
+		settings.hashmap.put("scenario_technology_trade",
+				technology_trade_array);
+		settings.hashmap.put("scenario_technology_infra",
+				technology_infra_array);
+		settings.hashmap.put("scenario_technology_stability",
+				technology_stability_array);
+		settings.hashmap.put("scenario_landunit_cavalry",
+				landunit_cavalry_array);
+		settings.hashmap.put("scenario_landunit_artillery",
+				landunit_artillery_array);
+		settings.hashmap.put("scenario_landunit_infantry",
+				landunit_infantry_array);
+		settings.hashmap.put("scenario_landunit_location",
+				landunit_location_array);
 		settings.hashmap.put("scenario_landunit_name", landunit_name_array);
 		settings.hashmap.put("scenario_landunit_id", landunit_id_array);
 		settings.hashmap.put("scenario_city_capital", city_capital_array);
@@ -551,8 +567,10 @@ public class scenarioreader {
 		settings.hashmap.put("scenario_city_population", city_population_array);
 		settings.hashmap.put("scenario_city_fortress", city_fortress_array);
 		settings.hashmap.put("scenario_city_name", city_name_array);
-		settings.hashmap.put("scenario_nationalprovinces", nationalprovinces_array);
-		settings.hashmap.put("scenario_controlledprovinces", controlledprovinces_array);
+		settings.hashmap.put("scenario_nationalprovinces",
+				nationalprovinces_array);
+		settings.hashmap.put("scenario_controlledprovinces",
+				controlledprovinces_array);
 		settings.hashmap.put("scenario_knownprovinces", knownprovinces_array);
 		settings.hashmap.put("scenario_ownedprovinces", ownedprovinces_array);
 		settings.hashmap.put("scenario_culture", culture_array);
@@ -564,7 +582,8 @@ public class scenarioreader {
 		settings.hashmap.put("scenario_colonists", colonists_array);
 		settings.hashmap.put("scenario_major", major_array);
 		settings.hashmap.put("scenario_colonialnation", colonialnation_array);
-		settings.hashmap.put("scenario_colonialattempts", colonialattempts_array);
+		settings.hashmap.put("scenario_colonialattempts",
+				colonialattempts_array);
 		settings.hashmap.put("scenario_ai", ai_array);
 		settings.hashmap.put("scenario_tag", tag_array);
 

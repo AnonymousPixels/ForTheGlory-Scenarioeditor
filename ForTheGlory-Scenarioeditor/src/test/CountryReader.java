@@ -1,4 +1,4 @@
-package scenarioeditor;
+package test;
 
 import java.io.BufferedReader;
 import java.io.File;

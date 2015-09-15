@@ -21,19 +21,19 @@ public class settingreader {
 
 	public settingreader(String gamepath) {
 		// Nur Coutries keine eigenschaften
-		// getCountries(gamepath + "//Db//countries.txt");
+		 getCountries(gamepath + "//Db//countries.txt");
 
 		// Vollständig
-		// getCountrySettings(gamepath + "//Db//countries.txt");
+		 getCountrySettings(gamepath + "//Db//countries.txt");
 
 		// Vollständig
-		// getCultures(gamepath + "//Db//cultures.txt");
+		 getCultures(gamepath + "//Db//cultures.txt");
 
 		// Vollständig
-		// getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
+		 getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
 
 		// VIEL AUSZULESEN NICHT FERTIG
-		getProvinces(gamepath + "//Db//Map//provinces.txt");
+		//getProvinces(gamepath + "//Db//Map//provinces.txt");
 
 		// Nicht sicher mit einlesen
 		// getArmynames(gamepath + "//Db//armynames.txt");

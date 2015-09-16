@@ -9,7 +9,7 @@ public class ReaderMain {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		HashMap<String, String[]> hash;
+		HashMap<String, Object> hash;
 		try {
 			hash = settings.getsettings("C://Program Files (x86)//Steam//steamapps//common//For The Glory",
 					"C://Program Files (x86)//Steam//steamapps//common//For The Glory//Scenarios//1419 - The Grand Campaign.eeg");

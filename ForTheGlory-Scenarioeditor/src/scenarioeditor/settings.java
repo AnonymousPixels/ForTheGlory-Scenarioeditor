@@ -12,8 +12,8 @@ public class settings {
 		hashmap = new HashMap<String, Object>();
 
 		new settingreader(gamepath);
-		new scenarioreader(scenariofilepath);
-		new readIncludes(gamepath);
+//		new scenarioreader(scenariofilepath);
+//		new readIncludes(gamepath);
 		return hashmap;
 
 	}

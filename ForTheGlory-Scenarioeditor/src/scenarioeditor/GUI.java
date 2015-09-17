@@ -202,7 +202,7 @@ public class GUI implements ActionListener, ChangeListener {
 	void readData() {
 
 		try {
-			dataMap = settings.getsettings(Main.path, scenarioFilePath);
+			dataMap = Settings.getsettings(Main.path, scenarioFilePath);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

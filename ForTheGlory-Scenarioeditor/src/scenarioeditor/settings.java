@@ -3,19 +3,22 @@ package scenarioeditor;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class settings {
+public class Settings {
 
-	static HashMap<String, Object> hashmap;
+	public static HashMap<String, Object> hashmap;
 
-	public static HashMap<String, Object> getsettings(String gamepath, String scenariofilepath) throws IOException {
+	public static HashMap<String, Object> getSettings(String gamepath, String scenariofilepath) throws IOException {
 
 		hashmap = new HashMap<String, Object>();
 
-		new settingreader(gamepath);
+		new SettingReader(gamepath);
 //		new scenarioreader(scenariofilepath);
 //		new readIncludes(gamepath);
 		return hashmap;
-
+	}
+	
+	public static void putInHashMap(String key, Object value ){
+		hashmap.put(key, value);
 	}
 
 }

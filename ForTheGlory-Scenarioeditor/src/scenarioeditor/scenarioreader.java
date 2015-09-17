@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class scenarioreader {
+public class ScenarioReader {
 	public static BufferedReader reader;
 	public static FileReader file;
 	public static String input, scenarioname, startdate, enddate,
@@ -25,7 +25,7 @@ public class scenarioreader {
 			include_array, cancelledloans_array, extendedloans_array,
 			diplomats_array, technology_group_array;
 
-	public scenarioreader(String path) throws IOException {
+	public ScenarioReader(String path) throws IOException {
 		file = new FileReader(path);
 		reader = new BufferedReader(file);
 		tag_array = new String[9999];
@@ -536,56 +536,56 @@ public class scenarioreader {
 
 		}
 
-		settings.hashmap.put("scenario_technology_group",
+		Settings.hashmap.put("scenario_technology_group",
 				technology_group_array);
-		settings.hashmap.put("scenario_diplomats", diplomats_array);
-		settings.hashmap.put("scenario_extendedloans", extendedloans_array);
-		settings.hashmap.put("scenario_cancelledloans", cancelledloans_array);
-		settings.hashmap.put("scenario_include", include_array);
-		settings.hashmap.put("scenario_selectable", selectable_array);
-		settings.hashmap.put("scenario_technology_naval",
+		Settings.hashmap.put("scenario_diplomats", diplomats_array);
+		Settings.hashmap.put("scenario_extendedloans", extendedloans_array);
+		Settings.hashmap.put("scenario_cancelledloans", cancelledloans_array);
+		Settings.hashmap.put("scenario_include", include_array);
+		Settings.hashmap.put("scenario_selectable", selectable_array);
+		Settings.hashmap.put("scenario_technology_naval",
 				technology_naval_array);
-		settings.hashmap.put("scenario_technology_land", technology_land_array);
-		settings.hashmap.put("scenario_technology_trade",
+		Settings.hashmap.put("scenario_technology_land", technology_land_array);
+		Settings.hashmap.put("scenario_technology_trade",
 				technology_trade_array);
-		settings.hashmap.put("scenario_technology_infra",
+		Settings.hashmap.put("scenario_technology_infra",
 				technology_infra_array);
-		settings.hashmap.put("scenario_technology_stability",
+		Settings.hashmap.put("scenario_technology_stability",
 				technology_stability_array);
-		settings.hashmap.put("scenario_landunit_cavalry",
+		Settings.hashmap.put("scenario_landunit_cavalry",
 				landunit_cavalry_array);
-		settings.hashmap.put("scenario_landunit_artillery",
+		Settings.hashmap.put("scenario_landunit_artillery",
 				landunit_artillery_array);
-		settings.hashmap.put("scenario_landunit_infantry",
+		Settings.hashmap.put("scenario_landunit_infantry",
 				landunit_infantry_array);
-		settings.hashmap.put("scenario_landunit_location",
+		Settings.hashmap.put("scenario_landunit_location",
 				landunit_location_array);
-		settings.hashmap.put("scenario_landunit_name", landunit_name_array);
-		settings.hashmap.put("scenario_landunit_id", landunit_id_array);
-		settings.hashmap.put("scenario_city_capital", city_capital_array);
-		settings.hashmap.put("scenario_city_location", city_location_array);
-		settings.hashmap.put("scenario_city_population", city_population_array);
-		settings.hashmap.put("scenario_city_fortress", city_fortress_array);
-		settings.hashmap.put("scenario_city_name", city_name_array);
-		settings.hashmap.put("scenario_nationalprovinces",
+		Settings.hashmap.put("scenario_landunit_name", landunit_name_array);
+		Settings.hashmap.put("scenario_landunit_id", landunit_id_array);
+		Settings.hashmap.put("scenario_city_capital", city_capital_array);
+		Settings.hashmap.put("scenario_city_location", city_location_array);
+		Settings.hashmap.put("scenario_city_population", city_population_array);
+		Settings.hashmap.put("scenario_city_fortress", city_fortress_array);
+		Settings.hashmap.put("scenario_city_name", city_name_array);
+		Settings.hashmap.put("scenario_nationalprovinces",
 				nationalprovinces_array);
-		settings.hashmap.put("scenario_controlledprovinces",
+		Settings.hashmap.put("scenario_controlledprovinces",
 				controlledprovinces_array);
-		settings.hashmap.put("scenario_knownprovinces", knownprovinces_array);
-		settings.hashmap.put("scenario_ownedprovinces", ownedprovinces_array);
-		settings.hashmap.put("scenario_culture", culture_array);
-		settings.hashmap.put("scenario_religion", religion_array);
-		settings.hashmap.put("scenario_whiteman", whiteman_array);
-		settings.hashmap.put("scenario_inflation", inflation_array);
-		settings.hashmap.put("scenario_treasury", treasury_array);
-		settings.hashmap.put("scenario_merchants", merchants_array);
-		settings.hashmap.put("scenario_colonists", colonists_array);
-		settings.hashmap.put("scenario_major", major_array);
-		settings.hashmap.put("scenario_colonialnation", colonialnation_array);
-		settings.hashmap.put("scenario_colonialattempts",
+		Settings.hashmap.put("scenario_knownprovinces", knownprovinces_array);
+		Settings.hashmap.put("scenario_ownedprovinces", ownedprovinces_array);
+		Settings.hashmap.put("scenario_culture", culture_array);
+		Settings.hashmap.put("scenario_religion", religion_array);
+		Settings.hashmap.put("scenario_whiteman", whiteman_array);
+		Settings.hashmap.put("scenario_inflation", inflation_array);
+		Settings.hashmap.put("scenario_treasury", treasury_array);
+		Settings.hashmap.put("scenario_merchants", merchants_array);
+		Settings.hashmap.put("scenario_colonists", colonists_array);
+		Settings.hashmap.put("scenario_major", major_array);
+		Settings.hashmap.put("scenario_colonialnation", colonialnation_array);
+		Settings.hashmap.put("scenario_colonialattempts",
 				colonialattempts_array);
-		settings.hashmap.put("scenario_ai", ai_array);
-		settings.hashmap.put("scenario_tag", tag_array);
+		Settings.hashmap.put("scenario_ai", ai_array);
+		Settings.hashmap.put("scenario_tag", tag_array);
 
 	}
 

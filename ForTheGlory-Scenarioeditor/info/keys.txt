@@ -57,3 +57,8 @@
 "scenario_colonialattempts", colonialattempts_array
 "scenario_ai", ai_array
 "scenario_tag", tag_array
+
+
+
+
+id, name, efficiency, tolerance, tp_negotiation, ferocity, combat, colonization_difficulty, continent, region, area, type, terrain, size_modifier, climate, religion, culture, manpower, income, goods, city_name, cot_modifier;

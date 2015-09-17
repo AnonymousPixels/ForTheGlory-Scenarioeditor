@@ -12,21 +12,27 @@ public class settingreader {
 	public static BufferedReader reader;
 	public static FileReader file;
 	public static String input;
-	public static int brackets, bracketposition, counter_country, counter_techgroups, counter_techspeed,
-			counter_cultures, counter_cultures_city, counter_cultures_buildings, counter_cultures_color;
-	public static String[] shortcountryname_array, cultures_array, cultures_city_array, cultures_color_array,
+	public static int brackets, bracketposition, counter_country,
+			counter_techgroups, counter_techspeed, counter_cultures,
+			counter_cultures_city, counter_cultures_buildings,
+			counter_cultures_color;
+	public static String[] shortcountryname_array, cultures_array,
+			cultures_city_array, cultures_color_array,
 			cultures_buildings_array, techgroups_array, techspeed_array;
 
-	public static String[] newcountry_array, picture_array, color_array, techgroup_array, leader_language_array,
-			new_colony_array, army_array, navy_array, aristocracy_array, centralization_array, innovative_array,
-			mercantilism_array, offensive_array, land_array, quality_array, serfdom_array, elector_array;
+	public static String[] newcountry_array, picture_array, color_array,
+			techgroup_array, leader_language_array, new_colony_array,
+			army_array, navy_array, aristocracy_array, centralization_array,
+			innovative_array, mercantilism_array, offensive_array, land_array,
+			quality_array, serfdom_array, elector_array;
 
 	public static HashMap<String, Object> provincesettinghashmap;
 	public HashMap<String, Object> provincehashmap;
 
-	public static String id, name, efficiency, tolerance, tp_negotiation, ferocity, combat, colonization_difficulty,
-			continent, region, area, type, terrain, size_modifier, climate, religion, culture, manpower, income, goods,
-			city_name, cot_modifier;
+	public static String id, name, efficiency, tolerance, tp_negotiation,
+			ferocity, combat, colonization_difficulty, continent, region, area,
+			type, terrain, size_modifier, climate, religion, culture, manpower,
+			income, goods, city_name, cot_modifier;
 
 	// , String countryfilepath, String culturefilepath, String
 	// techgroupfilepath, String provincefilepath, String armynamesfilepath
@@ -86,7 +92,8 @@ public class settingreader {
 			if (brackets == 1 && input.indexOf("=") == 3) {
 				bracketposition = input.indexOf("=");
 				input = input.substring(0, bracketposition);
-				System.out.println("Country: " + input + " " + counter_country + " " + bracketposition);
+				System.out.println("Country: " + input + " " + counter_country
+						+ " " + bracketposition);
 				newcountry_array[counter_country] = input;
 				counter_country++;
 
@@ -395,13 +402,12 @@ public class settingreader {
 		}
 
 		String[] lines = line.split("[\\r\\n]+");
-
+		provincehashmap = new HashMap<String, Object>();
 		for (String input : lines) {
-			provincehashmap = new HashMap<String, Object>();
+
 			input = input.replaceAll(" ", "");
 			input = input.replaceAll("	", "");
-			input = input.replaceAll("\n\n", "\n");
-
+			input = input.replaceAll("\"", "");
 			if (input.contains("{")) {
 				brackets++;
 
@@ -412,106 +418,130 @@ public class settingreader {
 
 			if (input.trim().charAt(0) == '#') {
 
-			} else if (input.contains("id")) {
+			}
+			if (input.contains("id")) {
 				id = input.replaceAll("id=", "");
 				provincehashmap.put("id", id);
-			} else if (input.contains("name")) {
-				name = input.replaceAll("name=\"", "");
+			}
+			if (input.contains("name")) {
+				name = input.replaceAll("name=", "");
 				provincehashmap.put("name", name);
-			} else if (input.contains("continent")) {
-				continent = input.replaceAll("continent=\"", "");
+			}
+			if (input.contains("continent")) {
+				continent = input.replaceAll("continent=", "");
 				provincehashmap.put("continent", continent);
 
-			} else if (input.contains("region")) {
-				region = input.replaceAll("region=\"", "");
+			}
+			if (input.contains("region")) {
+				region = input.replaceAll("region=", "");
 				provincehashmap.put("region", region);
 
-			} else if (input.contains("area")) {
-				area = input.replaceAll("area=\"", "");
+			}
+			if (input.contains("area")) {
+				area = input.replaceAll("area=", "");
 				provincehashmap.put("area", area);
 
-			} else if (input.contains("type")) {
-				type = input.replaceAll("type=\"", "");
+			}
+			if (input.contains("type")) {
+				type = input.replaceAll("type=", "");
 				provincehashmap.put("type", type);
 
-			} else if (input.contains("terrain")) {
-				terrain = input.replaceAll("terrain=\"", "");
+			}
+			if (input.contains("terrain")) {
+				terrain = input.replaceAll("terrain=", "");
 				provincehashmap.put("terrain", terrain);
 
-			} else if (input.contains("size_modifier")) {
-				size_modifier = input.replaceAll("size_modifier=\"", "");
+			}
+			if (input.contains("size_modifier")) {
+				size_modifier = input.replaceAll("size_modifier=", "");
 				provincehashmap.put("size_modifier", size_modifier);
 
-			} else if (input.contains("climate")) {
-				climate = input.replaceAll("climate=\"", "");
+			}
+			if (input.contains("climate")) {
+				climate = input.replaceAll("climate=", "");
 				provincehashmap.put("climate", climate);
 
-			} else if (input.contains("religion")) {
-				religion = input.replaceAll("religion=\"", "");
+			}
+			if (input.contains("religion")) {
+				religion = input.replaceAll("religion=", "");
 				provincehashmap.put("religion", religion);
 
-			} else if (input.contains("culture")) {
-				culture = input.replaceAll("culture=\"", "");
+			}
+			if (input.contains("culture")) {
+				culture = input.replaceAll("culture=", "");
 				provincehashmap.put("culture", culture);
 
-			} else if (input.contains("manpower")) {
-				manpower = input.replaceAll("manpower=\"", "");
+			}
+			if (input.contains("manpower")) {
+				manpower = input.replaceAll("manpower=", "");
 				provincehashmap.put("manpower", manpower);
 
-			} else if (input.contains("income")) {
-				income = input.replaceAll("income=\"", "");
+			}
+			if (input.contains("income")) {
+				income = input.replaceAll("income=", "");
 				provincehashmap.put("income", income);
 
-			} else if (input.contains("goods")) {
-				goods = input.replaceAll("goods=\"", "");
+			}
+			if (input.contains("goods")) {
+				goods = input.replaceAll("goods=", "");
 				provincehashmap.put("goods", goods);
 
-			} else if (input.contains("city_name")) {
-				city_name = input.replaceAll("city_name=\"", "");
+			}
+			if (input.contains("city_name")) {
+				city_name = input.replaceAll("city_name=", "");
 				provincehashmap.put("city_name", city_name);
 
-			} else if (input.contains("cot_modifier")) {
-				cot_modifier = input.replaceAll("cot_modifier=\"", "");
+			}
+			if (input.contains("cot_modifier")) {
+				cot_modifier = input.replaceAll("cot_modifier=", "");
 				provincehashmap.put("cot_modifier", cot_modifier);
 
-			} else if (input.contains("colonization_difficulty")) {
-				colonization_difficulty = input.replaceAll("colonization_difficulty=\"", "");
-				provincehashmap.put("colonization_difficulty", colonization_difficulty);
+			}
+			if (input.contains("colonization_difficulty")) {
+				colonization_difficulty = input.replaceAll(
+						"colonization_difficulty=", "");
+				provincehashmap.put("colonization_difficulty",
+						colonization_difficulty);
 
-			} else if (input.contains("combat")) {
-				combat = input.replaceAll("combat=\"", "");
+			}
+			if (input.contains("combat")) {
+				combat = input.replaceAll("combat=", "");
 				provincehashmap.put("combat", combat);
 
-			} else if (input.contains("ferocity")) {
-				ferocity = input.replaceAll("ferocity=\"", "");
+			}
+			if (input.contains("ferocity")) {
+				ferocity = input.replaceAll("ferocity=", "");
 				provincehashmap.put("ferocity", ferocity);
 
-			} else if (input.contains("efficiency")) {
-				efficiency = input.replaceAll("efficiency=\"", "");
+			}
+			if (input.contains("efficiency")) {
+				efficiency = input.replaceAll("efficiency=", "");
 				provincehashmap.put("efficiency", efficiency);
 
-			} else if (input.contains("tp_negotiation")) {
-				tp_negotiation = input.replaceAll("tp_negotiation=\"", "");
+			}
+			if (input.contains("tp_negotiation")) {
+				tp_negotiation = input.replaceAll("tp_negotiation=", "");
 				provincehashmap.put("tp_negotiation", tp_negotiation);
 
-			} else if (input.contains("tolerance")) {
-				tolerance = input.replaceAll("tolerance=\"", "");
+			}
+			if (input.contains("tolerance")) {
+				tolerance = input.replaceAll("tolerance=", "");
 				provincehashmap.put("tolerance", tolerance);
 
 			}
-
 			if (brackets == 0) {
-				provincesettinghashmap.put(id, provincehashmap);
+				provincesettinghashmap.put(id, provincehashmap.clone());
 
 			}
 
 		}
-		
-		Iterator<Entry<String, Object>> it = provincesettinghashmap.entrySet().iterator();
-		while (it.hasNext()) {
-			Map.Entry pair = (Map.Entry) it.next();
-			System.out.println(pair.getKey() + " = " + pair.getValue());
-		}
+		// Iterator<Entry<String, Object>> it =
+		// provincesettinghashmap.entrySet()
+		// .iterator();
+		// while (it.hasNext()) {
+		// Map.Entry pair = (Map.Entry) it.next();
+		// System.out.println(pair.getKey() + " = " + pair.getValue());
+		// }
 	}
 
 	public void getArmynames(String countryfilepath) throws IOException {

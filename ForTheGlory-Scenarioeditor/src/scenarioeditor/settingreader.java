@@ -4,32 +4,29 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class settingreader {
 	public static BufferedReader reader;
 	public static FileReader file;
 	public static String input;
-	public static int brackets, bracketposition, counter_country,
-			counter_techgroups, counter_techspeed, counter_cultures,
-			counter_cultures_city, counter_cultures_buildings,
-			counter_cultures_color;
-	public static String[] shortcountryname_array, cultures_array,
-			cultures_city_array, cultures_color_array,
+	public static int brackets, bracketposition, counter_country, counter_techgroups, counter_techspeed,
+			counter_cultures, counter_cultures_city, counter_cultures_buildings, counter_cultures_color;
+	public static String[] shortcountryname_array, cultures_array, cultures_city_array, cultures_color_array,
 			cultures_buildings_array, techgroups_array, techspeed_array;
 
-	public static String[] newcountry_array, picture_array, color_array,
-			techgroup_array, leader_language_array, new_colony_array,
-			army_array, navy_array, aristocracy_array, centralization_array,
-			innovative_array, mercantilism_array, offensive_array, land_array,
-			quality_array, serfdom_array, elector_array;
+	public static String[] newcountry_array, picture_array, color_array, techgroup_array, leader_language_array,
+			new_colony_array, army_array, navy_array, aristocracy_array, centralization_array, innovative_array,
+			mercantilism_array, offensive_array, land_array, quality_array, serfdom_array, elector_array;
 
 	public static HashMap<String, Object> provincesettinghashmap;
 	public HashMap<String, Object> provincehashmap;
 
-	public static String id, name, efficiency, tolerance, tp_negotiation,
-			ferocity, combat, colonization_difficulty, continent, region, area,
-			type, terrain, size_modifier, climate, religion, culture, manpower,
-			income, goods, city_name, cot_modifier;
+	public static String id, name, efficiency, tolerance, tp_negotiation, ferocity, combat, colonization_difficulty,
+			continent, region, area, type, terrain, size_modifier, climate, religion, culture, manpower, income, goods,
+			city_name, cot_modifier;
 
 	// , String countryfilepath, String culturefilepath, String
 	// techgroupfilepath, String provincefilepath, String armynamesfilepath
@@ -89,8 +86,7 @@ public class settingreader {
 			if (brackets == 1 && input.indexOf("=") == 3) {
 				bracketposition = input.indexOf("=");
 				input = input.substring(0, bracketposition);
-				System.out.println("Country: " + input + " " + counter_country
-						+ " " + bracketposition);
+				System.out.println("Country: " + input + " " + counter_country + " " + bracketposition);
 				newcountry_array[counter_country] = input;
 				counter_country++;
 
@@ -414,7 +410,7 @@ public class settingreader {
 				brackets--;
 			}
 
-			if (input.contains("#")) {
+			if (input.trim().charAt(0) == '#') {
 
 			} else if (input.contains("id")) {
 				id = input.replaceAll("id=", "");
@@ -479,10 +475,8 @@ public class settingreader {
 				provincehashmap.put("cot_modifier", cot_modifier);
 
 			} else if (input.contains("colonization_difficulty")) {
-				colonization_difficulty = input.replaceAll(
-						"colonization_difficulty=\"", "");
-				provincehashmap.put("colonization_difficulty",
-						colonization_difficulty);
+				colonization_difficulty = input.replaceAll("colonization_difficulty=\"", "");
+				provincehashmap.put("colonization_difficulty", colonization_difficulty);
 
 			} else if (input.contains("combat")) {
 				combat = input.replaceAll("combat=\"", "");
@@ -512,7 +506,12 @@ public class settingreader {
 			}
 
 		}
-
+		
+		Iterator<Entry<String, Object>> it = provincesettinghashmap.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry pair = (Map.Entry) it.next();
+			System.out.println(pair.getKey() + " = " + pair.getValue());
+		}
 	}
 
 	public void getArmynames(String countryfilepath) throws IOException {

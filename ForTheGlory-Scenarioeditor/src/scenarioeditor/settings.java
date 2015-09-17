@@ -12,12 +12,12 @@ public class Settings {
 		hashmap = new HashMap<String, Object>();
 
 		new SettingReader(gamepath);
-//		new scenarioreader(scenariofilepath);
-//		new readIncludes(gamepath);
+		// new scenarioreader(scenariofilepath);
+		// new readIncludes(gamepath);
 		return hashmap;
 	}
-	
-	public static void putInHashMap(String key, Object value ){
+
+	public static void putInHashMap(String key, Object value) {
 		hashmap.put(key, value);
 	}
 

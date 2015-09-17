@@ -191,6 +191,8 @@ public class GUI implements ActionListener, ChangeListener {
 		tabbedPane.add(Strings.getString("GUI.2"), pnlCountries);
 		tabbedPane.setPreferredSize(new Dimension(280, 500));
 
+		setData(dataMap);
+
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 
@@ -199,10 +201,22 @@ public class GUI implements ActionListener, ChangeListener {
 		frame.setVisible(true);
 	}
 
+	void setData(HashMap<String, Object> h) {
+
+		// TODO fill graphical user interface components with data
+	}
+
+	HashMap<String, Object> getData() {
+
+		// TODO fill dataMap
+
+		return dataMap;
+	}
+
 	void readData() {
 
 		try {
-			dataMap = Settings.getsettings(Main.path, scenarioFilePath);
+			dataMap = Settings.getSettings(Main.path, scenarioFilePath);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

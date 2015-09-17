@@ -4,13 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.swing.text.AbstractDocument.BranchElement;
-
-import org.omg.CORBA.OMGVMCID;
 
 public class SettingReader {
 	public static BufferedReader reader;
@@ -44,172 +37,17 @@ public class SettingReader {
 
 	public SettingReader(String gamepath) throws IOException {
 
-		// getCountries(gamepath + "//Db//countries.txt");
-		// getCountrySettings(gamepath + "//Db//countries.txt");
-		getCountrySettingsNEW(gamepath + "//Db//countries.txt");
+		getCountrySettings(gamepath + "//Db//countries.txt");
 		// getCultures(gamepath + "//Db//cultures.txt");
 		// getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
 
-		// getProvinces(gamepath + "//Db//Map//provinces - kopie.txt");
+		getProvinces(gamepath + "//Db//Map//provinces.txt");
 
 		// getArmynames(gamepath + "//Db//armynames.txt");
 
 	}
 
 	public void getCountrySettings(String countryfilepath) throws IOException {
-
-		file = new FileReader(countryfilepath);
-		reader = new BufferedReader(file);
-		input = "";
-		counter_country = 1;
-		bracketposition = 0;
-		input = reader.readLine();
-
-		newcountry_array = new String[9999];
-		picture_array = new String[9999];
-		color_array = new String[9999];
-		techgroup_array = new String[9999];
-		leader_language_array = new String[9999];
-		new_colony_array = new String[9999];
-		army_array = new String[9999];
-		navy_array = new String[9999];
-		aristocracy_array = new String[9999];
-		centralization_array = new String[9999];
-		innovative_array = new String[9999];
-		mercantilism_array = new String[9999];
-		offensive_array = new String[9999];
-		land_array = new String[9999];
-		quality_array = new String[9999];
-		serfdom_array = new String[9999];
-		elector_array = new String[9999];
-
-		while (input != null) {
-			if (input.contains("{")) {
-				brackets++;
-
-			}
-			if (input.contains("}")) {
-				brackets--;
-			}
-			System.out.println(input);
-			input = input.replaceAll(" ", "");
-			input = input.replaceAll("	", "");
-
-			if (brackets == 1 && input.indexOf("=") == 3) {
-				bracketposition = input.indexOf("=");
-				input = input.substring(0, bracketposition);
-				System.out.println("Country: " + input + " " + counter_country
-						+ " " + bracketposition);
-				newcountry_array[counter_country] = input;
-				counter_country++;
-
-			}
-			if (input.contains("picture=")) {
-				input = input.replaceAll("picture=", "");
-				input = input.replaceAll("\"", "");
-				picture_array[counter_country - 1] = input;
-				// System.out.println("Picture: " + input + " "
-				// + (counter_country-1));
-			}
-			if (input.contains("color=")) {
-				input = input.replaceAll("color=", "");
-				color_array[counter_country - 1] = input;
-				// System.out.println("Color: " + input);
-			}
-			if (input.contains("techgroup=")) {
-				input = input.replaceAll("techgroup=", "");
-				techgroup_array[counter_country - 1] = input;
-				// System.out.println("Techgroup: " + input);
-			}
-			if (input.contains("leader_language=")) {
-				input = input.replaceAll("leader_language=", "");
-				leader_language_array[counter_country - 1] = input;
-				// System.out.println("Leader_language: " + input);
-			}
-			if (input.contains("new_colony=")) {
-				input = input.replaceAll("new_colony=", "");
-				new_colony_array[counter_country - 1] = input;
-				// System.out.println("new_colony: " + input);
-			}
-			if (input.contains("army=")) {
-				input = input.replaceAll("army=", "");
-				army_array[counter_country - 1] = input;
-				// System.out.println("army: " + input);
-			}
-			if (input.contains("navy=")) {
-				input = input.replaceAll("navy=", "");
-				navy_array[counter_country - 1] = input;
-				// System.out.println("navy: " + input);
-			}
-			if (input.contains("aristocracy=")) {
-				input = input.replaceAll("aristocracy=", "");
-				aristocracy_array[counter_country - 1] = input;
-				// System.out.println("aristocracy: " + input);
-			}
-			if (input.contains("centralization=")) {
-				input = input.replaceAll("centralization=", "");
-				centralization_array[counter_country - 1] = input;
-				// System.out.println("centralization: " + input);
-			}
-			if (input.contains("innovative=")) {
-				input = input.replaceAll("innovative=", "");
-				innovative_array[counter_country - 1] = input;
-				// System.out.println("innovative: " + input);
-			}
-			if (input.contains("mercantilism=")) {
-				input = input.replaceAll("mercantilism=", "");
-				mercantilism_array[counter_country - 1] = input;
-				// System.out.println("mercantilism: " + input);
-			}
-			if (input.contains("offensive=")) {
-				input = input.replaceAll("offensive=", "");
-				offensive_array[counter_country - 1] = input;
-				// System.out.println("offensive: " + input);
-			}
-			if (input.contains("land=")) {
-				input = input.replaceAll("land=", "");
-				land_array[counter_country - 1] = input;
-				// System.out.println("land: " + input);
-			}
-			if (input.contains("quality=")) {
-				input = input.replaceAll("quality=", "");
-				quality_array[counter_country - 1] = input;
-				// System.out.println("quality: " + input);
-			}
-			if (input.contains("serfdom=")) {
-				input = input.replaceAll("serfdom=", "");
-				serfdom_array[counter_country - 1] = input;
-				// System.out.println("serfdom: " + input);
-			}
-			if (input.contains("elector=")) {
-				input = input.replaceAll("elector=", "");
-				elector_array[counter_country - 1] = input;
-				// System.out.println("elector: " + input);
-			}
-
-			input = reader.readLine();
-
-		}
-
-		Settings.hashmap.put("country_list", newcountry_array);
-		Settings.hashmap.put("country_picture", picture_array);
-		Settings.hashmap.put("country_color", color_array);
-		Settings.hashmap.put("country_techgroup", techgroup_array);
-		Settings.hashmap.put("country_leader_language", leader_language_array);
-		Settings.hashmap.put("country_new_colony", new_colony_array);
-		Settings.hashmap.put("country_army", army_array);
-		Settings.hashmap.put("country_navy", navy_array);
-		Settings.hashmap.put("country_aristocracy", aristocracy_array);
-		Settings.hashmap.put("country_centralization", centralization_array);
-		Settings.hashmap.put("country_innovative", innovative_array);
-		Settings.hashmap.put("country_mercantilism", mercantilism_array);
-		Settings.hashmap.put("country_offensive_array", offensive_array);
-		Settings.hashmap.put("countrylist_land_array", land_array);
-
-	}
-
-	public void getCountrySettingsNEW(String countryfilepath)
-			throws IOException {
 		countrysettinghashmap = new HashMap<String, Object>();
 		file = new FileReader(countryfilepath);
 		reader = new BufferedReader(file);
@@ -227,7 +65,6 @@ public class SettingReader {
 		String[] lines = line.split("[\\r\\n]+");
 		countryhashmap = new HashMap<String, Object>();
 		for (String input : lines) {
-			System.out.println(input);
 			input = input.replaceAll(" ", "");
 			input = input.replaceAll("	", "");
 			input = input.replaceAll("\"", "");
@@ -244,7 +81,6 @@ public class SettingReader {
 			} else if ((input != null || input != "") && brackets == 1
 					&& input.contains("={")) {
 				varification = input.substring(0, 3);
-				System.out.println("Varibla: " + varification);
 			}
 			String[] checkFor = { "picture", "color", "techgroup",
 					"leader_language", "combat", "colonization_difficulty",
@@ -260,65 +96,19 @@ public class SettingReader {
 				}
 			}
 			if (brackets == 0) {
-				System.out.println();
+
 				countrysettinghashmap.put(varification, countryhashmap.clone());
 			}
 		}
 
-		Iterator<Entry<String, Object>> it = countrysettinghashmap.entrySet()
-				.iterator();
-		while (it.hasNext()) {
-			Map.Entry pair = (Map.Entry) it.next();
-			System.out.println(pair.getKey() + " = " + pair.getValue());
-		}
+		// Iterator<Entry<String, Object>> it = countrysettinghashmap.entrySet()
+		// .iterator();
+		// while (it.hasNext()) {
+		// Map.Entry pair = (Map.Entry) it.next();
+		// System.out.println(pair.getKey() + " = " + pair.getValue());
+		// }
 
 		Settings.putInHashMap("countrydata", countrysettinghashmap.clone());
-
-	}
-
-	// useless
-	public void getCountries(String countryfilepath) throws IOException {
-
-		file = new FileReader(countryfilepath);
-		reader = new BufferedReader(file);
-		counter_country = 0;
-		input = "";
-		shortcountryname_array = new String[9999];
-		bracketposition = 0;
-
-		input = reader.readLine();
-		while (input != null) {
-			if (input.contains("{")) {
-				brackets++;
-
-			}
-			if (input.contains("}")) {
-				brackets--;
-			}
-
-			if (brackets == 1 && input != null) {
-				input = input.replace(" ", "");
-				input = input.replace("	", "");
-				input = input.replaceAll("\t", "");
-				input = input.replaceAll("\n", "");
-				input = input.replaceAll("\r", "");
-				bracketposition = input.indexOf("={");
-				if (bracketposition < 0) {
-					bracketposition = 0;
-				}
-				input = input.substring(0, bracketposition);
-				input = input.replace(" ", "");
-				input = input.replace("history", "");
-				if (input.length() == 3) {
-
-					shortcountryname_array[counter_country] = input;
-					counter_country++;
-				}
-			}
-
-			input = reader.readLine();
-
-		}
 
 	}
 

@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -34,15 +35,13 @@ public class Main {
 	static JFrame frame;
 	static JPanel panel;
 	static GridBagLayout layout;
-
 	static JLabel lblPath;
 	static JTextField txfPath;
 	static JButton btnPath, btnContinue;
-
+	static JProgressBar progressBar;
 	static JFileChooser chooser;
 	static File file;
 	static String path = "";
-
 	static Color clrBackground = new Color(240, 240, 240), clrFont = new Color(0, 0, 0);
 	static Font fntStandart = new Font("Verdana", 1, 12);
 
@@ -151,10 +150,13 @@ public class Main {
 					JOptionPane.showMessageDialog(null, Strings.getString("Main.5"), Strings.getString("Main.6"),
 							JOptionPane.ERROR_MESSAGE);
 
-//				System.out.println("MAX DU PFOSTEN");
+				// System.out.println("MAX DU PFOSTEN");
 			}
 		});
 		addComponent(panel, layout, btnContinue, 1, 2, 1, 1, 0, 0, new Insets(0, 10, 10, 10));
+
+		progressBar = new JProgressBar();
+		addComponent(panel, layout, progressBar, 0, 3, 3, 1, 1, 0, new Insets(5, 10, 10, 10));
 
 		frame.pack();
 		frame.setLocationRelativeTo(null);
@@ -178,14 +180,18 @@ public class Main {
 
 	static void loadGUI() throws IOException, InterruptedException {
 
-		panel.setVisible(false);
-
 		frame.setTitle(Strings.getString("loading"));
 
-		// TODO Add loading gui
+		btnPath.setEnabled(false);
+		btnContinue.setEnabled(false);
+		txfPath.setEditable(false);
 
 		while (!finishedLoading)
 			try {
+				int i = progressBar.getValue() + 1;
+				if (i > 100)
+					i = 0;
+				progressBar.setValue(i);
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				e.printStackTrace();

@@ -179,36 +179,38 @@ public class Main {
 	static void loadGUI() throws IOException, InterruptedException {
 
 		frame.setTitle(Strings.getString("loading"));
-		
+
 		btnPath.setEnabled(false);
 		btnContinue.setEnabled(false);
 		txfPath.setEditable(false);
-		
+
 		btnPath.setVisible(false);
 		btnContinue.setVisible(false);
 		txfPath.setVisible(false);
 		lblPath.setVisible(false);
-		
+
 		panel.removeAll();
-		
+
 		ImageIcon icon = new ImageIcon(Main.class.getResource("/loading.gif"));
-		
+
 		JLabel label = new JLabel(Strings.getString("load"));
 		label.setForeground(clrFont);
 		label.setFont(fntStandart);
 		addComponent(panel, layout, label, 0, 0, 1, 1, 0, 0, new Insets(5, 5, 5, 5));
-		
+
 		addComponent(panel, layout, new JPanel(), 1, 0, 1, 1, 1, 0, new Insets(0, 0, 0, 0));
-		
+
 		JLabel gif = new JLabel(icon);
 		addComponent(panel, layout, gif, 2, 0, 1, 1, 0, 0, new Insets(5, 0, 5, 5));
 		
+		gif.setVisible(false);
+
 		JProgressBar progressBar = new JProgressBar();
-		addComponent(panel, layout, progressBar, 0, 1, 3, 1, 1, 0, new Insets(0, 5, 5, 5));
-		
+		addComponent(panel, layout, progressBar, 0, 1, 3, 1, 1, 0, new Insets(5, 5, 5, 5));
+
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-		
+
 		boolean b = false;
 		int i = 0;
 
@@ -216,7 +218,7 @@ public class Main {
 			try {
 				if (b) {
 
-					i = progressBar.getValue() + 2;
+					i = progressBar.getValue() + 1;
 					if (i > 100) {
 
 						i = 100;
@@ -224,7 +226,7 @@ public class Main {
 					}
 				} else {
 
-					i = progressBar.getValue() - 2;
+					i = progressBar.getValue() - 1;
 					if (i < 0) {
 
 						i = 0;

@@ -194,7 +194,7 @@ public class GUI implements ActionListener, ChangeListener {
 		setData(dataMap);
 
 		Main.finishedLoading = true;
-		
+
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 

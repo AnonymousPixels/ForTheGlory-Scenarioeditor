@@ -1,4 +1,4 @@
-package scenarioeditor;
+package test;
 
 import java.awt.Color;
 import java.awt.Graphics;

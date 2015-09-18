@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -25,9 +26,10 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 /**
+ * Main class of the szenario editor. Contains main void to start the program
+ * flow
  * 
  * @author Felix Beutter
- *
  */
 
 public class Main {
@@ -38,7 +40,6 @@ public class Main {
 	static JLabel lblPath;
 	static JTextField txfPath;
 	static JButton btnPath, btnContinue;
-	static JProgressBar progressBar;
 	static JFileChooser chooser;
 	static File file;
 	static String path = "";
@@ -155,9 +156,6 @@ public class Main {
 		});
 		addComponent(panel, layout, btnContinue, 1, 2, 1, 1, 0, 0, new Insets(0, 10, 10, 10));
 
-		progressBar = new JProgressBar();
-		addComponent(panel, layout, progressBar, 0, 3, 3, 1, 1, 0, new Insets(5, 10, 10, 10));
-
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
@@ -181,16 +179,58 @@ public class Main {
 	static void loadGUI() throws IOException, InterruptedException {
 
 		frame.setTitle(Strings.getString("loading"));
-
+		
 		btnPath.setEnabled(false);
 		btnContinue.setEnabled(false);
 		txfPath.setEditable(false);
+		
+		btnPath.setVisible(false);
+		btnContinue.setVisible(false);
+		txfPath.setVisible(false);
+		lblPath.setVisible(false);
+		
+		panel.removeAll();
+		
+		ImageIcon icon = new ImageIcon(Main.class.getResource("/loading.gif"));
+		
+		JLabel label = new JLabel(Strings.getString("load"));
+		label.setForeground(clrFont);
+		label.setFont(fntStandart);
+		addComponent(panel, layout, label, 0, 0, 1, 1, 0, 0, new Insets(5, 5, 5, 5));
+		
+		addComponent(panel, layout, new JPanel(), 1, 0, 1, 1, 1, 0, new Insets(0, 0, 0, 0));
+		
+		JLabel gif = new JLabel(icon);
+		addComponent(panel, layout, gif, 2, 0, 1, 1, 0, 0, new Insets(5, 0, 5, 5));
+		
+		JProgressBar progressBar = new JProgressBar();
+		addComponent(panel, layout, progressBar, 0, 1, 3, 1, 1, 0, new Insets(0, 5, 5, 5));
+		
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+		
+		boolean b = false;
+		int i = 0;
 
 		while (!finishedLoading)
 			try {
-				int i = progressBar.getValue() + 1;
-				if (i > 100)
-					i = 0;
+				if (b) {
+
+					i = progressBar.getValue() + 2;
+					if (i > 100) {
+
+						i = 100;
+						b = false;
+					}
+				} else {
+
+					i = progressBar.getValue() - 2;
+					if (i < 0) {
+
+						i = 0;
+						b = true;
+					}
+				}
 				progressBar.setValue(i);
 				Thread.sleep(10);
 			} catch (InterruptedException e) {

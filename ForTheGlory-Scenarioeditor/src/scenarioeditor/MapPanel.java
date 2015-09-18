@@ -89,7 +89,7 @@ public class MapPanel extends JPanel implements MouseListener,
 		}
 
 		g.drawImage(biFrontendOriginal, 0, 0, this.getWidth(), this.getWidth(),
-				x - newWidth, y - newHeight, newWidth * 2, newHeight * 2, null);
+				x - newWidth, y - newHeight, x + newWidth, y + newHeight, null);
 
 	}
 

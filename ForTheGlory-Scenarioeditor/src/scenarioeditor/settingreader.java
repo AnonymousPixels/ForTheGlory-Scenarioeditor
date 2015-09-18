@@ -245,7 +245,7 @@ public class SettingReader {
 			String[] checkFor = { "tolerance", "tp_negotiation", "efficiency", "ferocity", "combat",
 					"colonization_difficulty", "cot_modifier", "city_name", "goods", "income", "manpower", "culture",
 					"religion", "climate", "size_modifier", "terrain", "type", "area", "region", "continent", "name",
-					"id", "terrain1", "terrain2", "terrain3", "terrain4", };
+					"id", "terrain1", "terrain2", "terrain3", "terrain4" };
 			for (String s : checkFor) {
 
 				if (input.contains(s)) {

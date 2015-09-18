@@ -4,20 +4,9 @@
 "cultures_city", cultures_city_array
 "cultures_buildings", cultures_buildings_array
 "cultures_color", cultures_color_array
-"country_list", newcountry_array
-"country_picture", picture_array
-"country_color", color_array
-"country_techgroup", techgroup_array
-"country_leader_language", leader_language_array
-"country_new_colony", new_colony_array
-"country_army", army_array
-"country_navy", navy_array
-"country_aristocracy", aristocracy_array
-"country_centralization", centralization_array
-"country_innovative", innovative_array
-"country_mercantilism", mercantilism_array
-"country_offensive_array", offensive_array
-"countrylist_land_array", land_array
+
+//Cultures
+"picture", "color", "techgroup", "leader_language", "combat", "colonization_difficulty", "cot_modifier", "new_colony", "army", "navy", "aristocracy", "centralization", "innovative", "mercantilism", "offensive", "land", "serfdom", "quality", "elector", "history", "varification"
 
 "scenario_technology_group", technology_group_array
 "scenario_diplomats", diplomats_array
@@ -60,5 +49,5 @@
 
 
 
-
-id, name, efficiency, tolerance, tp_negotiation, ferocity, combat, colonization_difficulty, continent, region, area, type, terrain, size_modifier, climate, religion, culture, manpower, income, goods, city_name, cot_modifier;
+//Provinces
+"tolerance", "tp_negotiation", "efficiency", "ferocity", "combat", "colonization_difficulty", "cot_modifier", "city_name", "goods", "income", "manpower", "culture", "religion", "climate", "size_modifier", "terrain", "type", "area", "region", "continent", "name", "id", "terrain1", "terrain2", "terrain3", "terrain4"

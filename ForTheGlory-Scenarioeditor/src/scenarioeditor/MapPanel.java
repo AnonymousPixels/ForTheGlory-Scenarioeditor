@@ -22,13 +22,15 @@ import javax.swing.SwingConstants;
 public class MapPanel extends JPanel implements MouseListener,
 		MouseMotionListener, MouseWheelListener {
 
-	BufferedImage biFrontend, biBackend, biFrontendOriginal, biBackendOriginal;
+	BufferedImage biBackend, biFrontendOriginal, biBackendOriginal;
 	JScrollBar sliderX, sliderY;
 	JLabel image;
 	Point drag;
-	float zoomFactorSelected = 8;
-	double[] zoomFactors = { 1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2 };
+	float zoomFactorSelected = 1;
+	float zoomFactor = (float) 0.1;
 	Map map2;
+	int x, y;
+	int newHeight, newWidth;
 
 	public MapPanel(BufferedImage Frontend, BufferedImage Backend,
 			Map<Color, Integer> map) {
@@ -36,9 +38,12 @@ public class MapPanel extends JPanel implements MouseListener,
 		this.setOpaque(true);
 		this.setLayout(null);
 		map2 = map;
-		biFrontend = biFrontendOriginal = Frontend;
+		x = Frontend.getWidth() / 2;
+		y = Frontend.getHeight() / 2;
+
+		biFrontendOriginal = Frontend;
 		biBackend = biBackendOriginal = Backend;
-		image = new JLabel(new ImageIcon(biFrontend));
+		// image = new JLabel(new ImageIcon(Frontend));
 		sliderX = new JScrollBar();
 		sliderY = new JScrollBar();
 		sliderY.setOrientation(SwingConstants.VERTICAL);
@@ -47,44 +52,64 @@ public class MapPanel extends JPanel implements MouseListener,
 		sliderY.setVisible(true);
 		this.add(sliderX);
 		this.add(sliderY);
-		this.add(image);
-		image.addMouseListener(this);
-		image.addMouseMotionListener(this);
-		image.addMouseWheelListener(this);
+		// this.add(image);
+		this.addMouseListener(this);
+		this.addMouseMotionListener(this);
+		this.addMouseWheelListener(this);
 		mouseWheelMoved(new MouseWheelEvent(this, 1, 1, 1, 1, 1, 0, false, 0,
 				0, 0));
-		// generatePrerenderedImages();
+
 	}
 
 	public void paintComponent(Graphics g) {
-		sliderY.setBounds(this.getWidth() - 20, 0, 20, this.getHeight() - 20);
-		sliderX.setBounds(0, this.getHeight() - 20, this.getWidth() - 20, 20);
-		image.setBounds(0, 0, this.getWidth() - 20, this.getHeight() - 20);
-		sliderX.setMinimum(0);
-		sliderX.setMaximum(biFrontend.getWidth() - this.getWidth());
-		sliderY.setMinimum(0);
-		sliderY.setMaximum(biFrontend.getHeight() - this.getHeight());
-		int startX = sliderX.getValue();
-		int startY = sliderY.getValue();
-		int endX = this.getWidth();
-		int endY = this.getHeight();
-
-		image.setIcon(new ImageIcon(biFrontend.getSubimage(startX, startY,
-				endX, endY)));
+		System.out.println("paint");
 		super.paintComponent(g);
+		newHeight = (int) (biFrontendOriginal.getHeight() * zoomFactorSelected / 2);
+		System.out.println(newHeight);
+		newWidth = (int) ((float) newHeight * ((float) this.getWidth() / (float) this
+				.getHeight()));
+		System.out.println(newWidth);
+
+		if ((y + newHeight) > biFrontendOriginal.getHeight()) {
+			System.out.println("1");
+			y = biFrontendOriginal.getHeight() - newHeight;
+		}
+		if ((x + newWidth) > biFrontendOriginal.getWidth()) {
+			System.out.println("2");
+			x = biFrontendOriginal.getWidth() - newWidth;
+		}
+
+		if (newHeight > y) {
+			System.out.println("3");
+			y = newHeight;
+		}
+		if (newWidth > x) {
+			System.out.println("4");
+			x = newWidth;
+		}
+
+		g.drawImage(biFrontendOriginal, 0, 0, this.getWidth(), this.getWidth(),
+				x - newWidth, y - newHeight, newWidth * 2, newHeight * 2, null);
+
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
-//		System.out.println(sliderX.getMaximum());
-//		System.out.println(sliderX.getValue());
-//		System.out.println("X:" + (arg0.getX() + sliderX.getValue()));
-//		System.out.println("Y:" + (arg0.getY() + sliderY.getValue()));
+		System.out.println("Mouse clicked");
+		// System.out.println(sliderX.getMaximum());
+		// System.out.println(sliderX.getValue());
+		// System.out.println("X:" + (arg0.getX() + sliderX.getValue()));
+		// System.out.println("Y:" + (arg0.getY() + sliderY.getValue()));
+
+		Graphics2D g = (Graphics2D) biBackend.getGraphics();
+
+		g.drawImage(biBackendOriginal, 0, 0, this.getWidth(), this.getWidth(),
+				x - newWidth, y - newHeight, newWidth * 2, newHeight * 2, null);
 		Color target = new Color(biBackend.getRGB(
 				(arg0.getX() + sliderX.getValue()),
 				(arg0.getY() + sliderY.getValue())));
-//		System.out.println("Red:" + target.getRed() + " Green:"
-//				+ target.getGreen() + " Blue:" + target.getBlue());
-//		System.out.println(map2.get(target));
+		System.out.println("Red:" + target.getRed() + " Green:"
+				+ target.getGreen() + " Blue:" + target.getBlue());
+		System.out.println(map2.get(target));
 
 		// ********************************************************
 		// Hier Code einfügen!
@@ -95,12 +120,12 @@ public class MapPanel extends JPanel implements MouseListener,
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		System.out.println("Entered");
 
 	}
 
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		System.out.println("Exited");
 
 	}
 
@@ -110,27 +135,21 @@ public class MapPanel extends JPanel implements MouseListener,
 	}
 
 	public void mouseReleased(MouseEvent arg0) {
-
+		System.out.println("Released");
 	}
 
 	public void mouseDragged(MouseEvent e) {
-		int x = -(int) (e.getX() - drag.getX()) + sliderX.getValue();
-		int y = -(int) (e.getY() - drag.getY()) + sliderY.getValue();
-		x = (int) ((double) x);
-		y = (int) ((double) y);
-		if (x > sliderX.getMaximum())
-			x = sliderX.getMaximum();
-		if (y > sliderY.getMaximum())
-			y = sliderY.getMaximum();
+		System.out.println("Dragged");
+		x = -(int) (e.getX() - drag.getX()) + x;
+		y = -(int) (e.getY() - drag.getY()) + y;
 
 		if (x < 0)
 			x = 0;
 		if (y < 0)
 			y = 0;
-		sliderX.setValue(x);
-		sliderY.setValue(y);
-//		System.out.println(x);
+
 		drag = e.getPoint();
+		repaint();
 
 	}
 
@@ -140,40 +159,12 @@ public class MapPanel extends JPanel implements MouseListener,
 	}
 
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		float formerZoomFactorSelected = zoomFactorSelected;
-		zoomFactorSelected = zoomFactorSelected + e.getWheelRotation();
-		if (zoomFactorSelected < 0)
-			zoomFactorSelected = 0;
-
-		if (zoomFactorSelected >= zoomFactors.length)
-			zoomFactorSelected = zoomFactors.length - 1;
-		sliderX.setValue((int) (sliderX.getValue()
-				* zoomFactors[(int) zoomFactorSelected] / zoomFactors[(int) formerZoomFactorSelected]));
-		sliderY.setValue((int) (sliderY.getValue()
-				* zoomFactors[(int) zoomFactorSelected] / zoomFactors[(int) formerZoomFactorSelected]));
-		biFrontend = null;
-		biBackend = null;
-		if (zoomFactors[(int) zoomFactorSelected] == 1) {
-			biFrontend = biFrontendOriginal;
-			biBackend = biBackendOriginal;
-		} else {
-			int newImageWidth = (int) (biFrontendOriginal.getWidth() * zoomFactors[(int) zoomFactorSelected]);
-			int newImageHeight = (int) (biFrontendOriginal.getHeight() * zoomFactors[(int) zoomFactorSelected]);
-			biFrontend = new BufferedImage(newImageWidth, newImageHeight,
-					biFrontendOriginal.getType());
-			Graphics2D g = biFrontend.createGraphics();
-			g.drawImage(biFrontendOriginal, 0, 0, newImageWidth,
-					newImageHeight, null);
-			g.dispose();
-			g = null;
-
-			biBackend = new BufferedImage(newImageWidth, newImageHeight,
-					biFrontendOriginal.getType());
-			Graphics2D g2 = biBackend.createGraphics();
-			g2.drawImage(biBackendOriginal, 0, 0, newImageWidth,
-					newImageHeight, null);
-			g2.dispose();
-			g2 = null;
-		}
+		zoomFactorSelected = zoomFactorSelected + zoomFactor
+				* e.getWheelRotation();
+		if (zoomFactorSelected < 0.1)
+			zoomFactorSelected = 0.1f;
+		if (zoomFactorSelected > 1)
+			zoomFactorSelected = 1;
+		repaint();
 	}
 }

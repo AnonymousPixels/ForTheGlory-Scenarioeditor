@@ -1,10 +1,8 @@
 package test;
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -24,7 +22,7 @@ public class Main {
 		try {
 			img = ImageIO
 					.read(new File(
-							"C:\\Users\\Maximilian\\GitHub\\FTG-ModDevelopmentTool\\FTG-ModDevelopmentTool\\src\\scenariogenerator\\frontend.png"));
+							"C:\\Users\\Maximilian\\GitHub\\ForTheGlory-Scenarioeditor\\ForTheGlory-Scenarioeditor\\res\\frontend.png"));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -35,7 +33,7 @@ public class Main {
 		try {
 			img2 = ImageIO
 					.read(new File(
-							"C:\\Users\\Maximilian\\GitHub\\FTG-ModDevelopmentTool\\FTG-ModDevelopmentTool\\src\\scenariogenerator\\backend.png"));
+							"C:\\Users\\Maximilian\\GitHub\\ForTheGlory-Scenarioeditor\\ForTheGlory-Scenarioeditor\\res\\backend.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -46,7 +44,7 @@ public class Main {
 		MapPanel map = new MapPanel(
 				img,
 				img2,
-				game.loadMap("C:\\Users\\Maximilian\\GitHub\\FTG-ModDevelopmentTool\\FTG-ModDevelopmentTool\\src\\scenariogenerator\\MapConfigurationFile.txt"));
+				game.loadMap("C:\\Users\\Maximilian\\GitHub\\ForTheGlory-Scenarioeditor\\ForTheGlory-Scenarioeditor\\res\\affiliation.txt"));
 		JFrame frame = new JFrame("Test MapPanel");
 		frame.setBounds(10, 10, 500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

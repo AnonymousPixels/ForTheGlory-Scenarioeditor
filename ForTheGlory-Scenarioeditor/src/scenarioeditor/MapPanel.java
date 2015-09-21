@@ -88,8 +88,9 @@ public class MapPanel extends JPanel implements MouseListener,
 			x = newWidth;
 		}
 
-		g.drawImage(biFrontendOriginal, 0, 0, this.getWidth(), this.getWidth(),
-				x - newWidth, y - newHeight, x + newWidth, y + newHeight, null);
+		g.drawImage(biFrontendOriginal, 0, 0, this.getWidth(),
+				this.getHeight(), x - newWidth, y - newHeight, x + newWidth, y
+						+ newHeight, null);
 
 	}
 
@@ -103,7 +104,8 @@ public class MapPanel extends JPanel implements MouseListener,
 		Graphics2D g = (Graphics2D) biBackend.getGraphics();
 
 		g.drawImage(biBackendOriginal, 0, 0, this.getWidth(), this.getWidth(),
-				x - newWidth, y - newHeight, newWidth * 2, newHeight * 2, null);
+				x - newWidth, y - newHeight, x + newWidth, y + newHeight * 2,
+				null);
 		Color target = new Color(biBackend.getRGB(
 				(arg0.getX() + sliderX.getValue()),
 				(arg0.getY() + sliderY.getValue())));
@@ -140,8 +142,11 @@ public class MapPanel extends JPanel implements MouseListener,
 
 	public void mouseDragged(MouseEvent e) {
 		System.out.println("Dragged");
-		x = -(int) (e.getX() - drag.getX()) + x;
-		y = -(int) (e.getY() - drag.getY()) + y;
+
+		float factor = (float) this.getWidth() / (float) newWidth;
+
+		x = -(int) ((e.getX() - drag.getX()) * factor) + x;
+		y = -(int) ((e.getY() - drag.getY()) * factor) + y;
 
 		if (x < 0)
 			x = 0;

@@ -118,7 +118,7 @@ public class Main {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (path != null && path != "") {
+				if (path.trim() != null && !path.trim().equals("")) {
 
 					String modDir = path + "//Mods";
 					File[] modFiles = new File(modDir).listFiles();
@@ -228,7 +228,19 @@ public class Main {
 						}
 					}
 				});
-				loadingThread.start();
+
+				if (cbxMods.getSelectedItem().equals(Strings.getString("Main.10"))) {
+
+					if (txfName.getText().trim() != null && !txfName.getText().trim().equals("")) {
+						
+						System.out.println("Text:" + txfName.getText() + "!");
+						
+						loadingThread.start();
+					} else
+						JOptionPane.showMessageDialog(null, Strings.getString("Main.11"), Strings.getString("Main.6"),
+								JOptionPane.ERROR_MESSAGE);
+				} else
+					loadingThread.start();
 			}
 		});
 		addComponent(panel, layout, btnAccept, 1, 7, 1, 1, 0, 0, new Insets(0, 10, 10, 10));

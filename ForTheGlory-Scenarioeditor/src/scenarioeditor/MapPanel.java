@@ -26,10 +26,10 @@ public class MapPanel extends JPanel implements MouseListener,
 	JScrollBar sliderX, sliderY;
 	JLabel image;
 	Point drag;
-	float zoomFactorSelected = 1;
+	float zoomFactorSelected = 0.3f;
 	float zoomFactor = (float) 0.1;
 	Map map2;
-	int x, y;
+	int x = 10000, y = 2000;
 	int newHeight, newWidth;
 
 	public MapPanel(BufferedImage Frontend, BufferedImage Backend,
@@ -38,8 +38,6 @@ public class MapPanel extends JPanel implements MouseListener,
 		this.setOpaque(true);
 		this.setLayout(null);
 		map2 = map;
-		x = Frontend.getWidth() / 2;
-		y = Frontend.getHeight() / 2;
 
 		biFrontendOriginal = Frontend;
 		biBackend = biBackendOriginal = Backend;
@@ -62,29 +60,25 @@ public class MapPanel extends JPanel implements MouseListener,
 	}
 
 	public void paintComponent(Graphics g) {
-		System.out.println("paint");
+		System.out.println(x);
+		System.out.println(y);
+		System.out.println(zoomFactorSelected);
 		super.paintComponent(g);
 		newHeight = (int) (biFrontendOriginal.getHeight() * zoomFactorSelected / 2);
-		System.out.println(newHeight);
 		newWidth = (int) ((float) newHeight * ((float) this.getWidth() / (float) this
 				.getHeight()));
-		System.out.println(newWidth);
 
 		if ((y + newHeight) > biFrontendOriginal.getHeight()) {
-			System.out.println("1");
 			y = biFrontendOriginal.getHeight() - newHeight;
 		}
 		if ((x + newWidth) > biFrontendOriginal.getWidth()) {
-			System.out.println("2");
 			x = biFrontendOriginal.getWidth() - newWidth;
 		}
 
 		if (newHeight > y) {
-			System.out.println("3");
 			y = newHeight;
 		}
 		if (newWidth > x) {
-			System.out.println("4");
 			x = newWidth;
 		}
 
@@ -95,12 +89,6 @@ public class MapPanel extends JPanel implements MouseListener,
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
-		System.out.println("Mouse clicked");
-		// System.out.println(sliderX.getMaximum());
-		// System.out.println(sliderX.getValue());
-		// System.out.println("X:" + (arg0.getX() + sliderX.getValue()));
-		// System.out.println("Y:" + (arg0.getY() + sliderY.getValue()));
-
 		Graphics2D g = (Graphics2D) biBackend.getGraphics();
 
 		g.drawImage(biBackendOriginal, 0, 0, this.getWidth(), this.getWidth(),
@@ -122,12 +110,10 @@ public class MapPanel extends JPanel implements MouseListener,
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
-		System.out.println("Entered");
 
 	}
 
 	public void mouseExited(MouseEvent arg0) {
-		System.out.println("Exited");
 
 	}
 
@@ -137,13 +123,12 @@ public class MapPanel extends JPanel implements MouseListener,
 	}
 
 	public void mouseReleased(MouseEvent arg0) {
-		System.out.println("Released");
 	}
 
 	public void mouseDragged(MouseEvent e) {
-		System.out.println("Dragged");
 
-		float factor = (float) this.getWidth() / (float) newWidth;
+		float factor = (float) newWidth / (float) this.getWidth();
+		factor = factor * 2;
 
 		x = -(int) ((e.getX() - drag.getX()) * factor) + x;
 		y = -(int) ((e.getY() - drag.getY()) * factor) + y;

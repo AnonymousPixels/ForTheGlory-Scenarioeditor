@@ -189,8 +189,11 @@ public class Main {
 		txfPath.setVisible(false);
 		lblPath.setVisible(false);
 
-		panel.removeAll();
-
+		try {
+			panel.removeAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		ImageIcon icon = new ImageIcon(Main.class.getResource("/loading.gif"));
 
 		JLabel label = new JLabel(Strings.getString("load"));
@@ -202,38 +205,18 @@ public class Main {
 
 		JLabel gif = new JLabel(icon);
 		addComponent(panel, layout, gif, 2, 0, 1, 1, 0, 0, new Insets(5, 0, 5, 5));
-		
+
 		gif.setVisible(false);
 
 		JProgressBar progressBar = new JProgressBar();
+		progressBar.setIndeterminate(true);
 		addComponent(panel, layout, progressBar, 0, 1, 3, 1, 1, 0, new Insets(5, 5, 5, 5));
 
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 
-		boolean b = false;
-		int i = 0;
-
 		while (!finishedLoading)
 			try {
-				if (b) {
-
-					i = progressBar.getValue() + 1;
-					if (i > 100) {
-
-						i = 100;
-						b = false;
-					}
-				} else {
-
-					i = progressBar.getValue() - 1;
-					if (i < 0) {
-
-						i = 0;
-						b = true;
-					}
-				}
-				progressBar.setValue(i);
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				e.printStackTrace();

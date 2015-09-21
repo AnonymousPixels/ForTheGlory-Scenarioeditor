@@ -12,6 +12,10 @@ public class Settings {
 		hashmap = new HashMap<String, Object>();
 
 		new SettingReader(gamepath);
+		
+
+		
+		
 		// new scenarioreader(scenariofilepath);
 		// new readIncludes(gamepath);
 		return hashmap;
@@ -19,6 +23,7 @@ public class Settings {
 
 	public static void putInHashMap(String key, Object value) {
 		hashmap.put(key, value);
+		
 	}
 
 }

@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class SettingReader {
 	public static BufferedReader reader;
@@ -35,7 +38,7 @@ public class SettingReader {
 		// getCultures(gamepath + "//Db//cultures.txt");
 		// getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
 
-		getProvinces(gamepath + "//Db//Map//provinces.txt");
+//		getProvinces(gamepath + "//Db//Map//provinces.txt");
 
 		// getArmynames(gamepath + "//Db//armynames.txt");
 
@@ -92,12 +95,12 @@ public class SettingReader {
 			}
 		}
 
-		// Iterator<Entry<String, Object>> it = countrysettinghashmap.entrySet()
-		// .iterator();
-		// while (it.hasNext()) {
-		// Map.Entry pair = (Map.Entry) it.next();
-		// System.out.println(pair.getKey() + " = " + pair.getValue());
-		// }
+//		 Iterator<Entry<String, Object>> it = countrysettinghashmap.entrySet()
+//		 .iterator();
+//		 while (it.hasNext()) {
+//		 Map.Entry pair = (Map.Entry) it.next();
+//		 System.out.println(pair.getKey() + " = " + pair.getValue());
+//		 }
 
 		Settings.putInHashMap("countrydata", countrysettinghashmap.clone());
 

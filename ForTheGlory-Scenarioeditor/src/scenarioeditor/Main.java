@@ -232,9 +232,9 @@ public class Main {
 				if (cbxMods.getSelectedItem().equals(Strings.getString("Main.10"))) {
 
 					if (txfName.getText().trim() != null && !txfName.getText().trim().equals("")) {
-						
+
 						System.out.println("Text:" + txfName.getText() + "!");
-						
+
 						loadingThread.start();
 					} else
 						JOptionPane.showMessageDialog(null, Strings.getString("Main.11"), Strings.getString("Main.6"),
@@ -249,6 +249,18 @@ public class Main {
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+	}
+
+	static String getModFolderName() {
+
+		String s = "";
+
+		if (cbxMods.getSelectedItem().equals(Strings.getString("Main.10")))
+			s = txfName.getText().trim();
+		else
+			s = (String) cbxMods.getSelectedItem();
+
+		return s;
 	}
 
 	static void addComponent(Container cont, GridBagLayout gbl, Component c, int x, int y, int width, int height,

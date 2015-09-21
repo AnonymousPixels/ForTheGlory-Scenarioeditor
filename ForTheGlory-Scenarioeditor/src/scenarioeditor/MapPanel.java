@@ -153,7 +153,7 @@ public class MapPanel extends JPanel implements MouseListener,
 				* e.getWheelRotation();
 		if (zoomFactorSelected < 0.1)
 			zoomFactorSelected = 0.1f;
-		if (zoomFactorSelected > 0.4)
+		if (zoomFactorSelected > 0.5)
 			zoomFactorSelected = 0.5f;
 		repaint();
 	}

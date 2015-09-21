@@ -91,7 +91,7 @@ public class GUI implements ActionListener, ChangeListener {
 	HashMap<Color, Integer> hashMap = new HashMap<Color, Integer>();
 	HashMap<String, String> values = new HashMap<String, String>();
 	HashMap<String, String[]> selectables = new HashMap<String, String[]>();
-	HashMap<String, Object> dataMap = new HashMap<String, Object>();
+	static HashMap<String, Object> dataMap = new HashMap<String, Object>();
 	Dimension minSize = new Dimension(1200, 720);
 	Color clrBackground = new Color(240, 240, 240), clrStandard = new Color(0, 0, 0);
 	Font fntStandard = new Font("Verdana", 0, 12);
@@ -201,12 +201,12 @@ public class GUI implements ActionListener, ChangeListener {
 		frame.setVisible(true);
 	}
 
-	void setData(HashMap<String, Object> h) {
+	static void setData(HashMap<String, Object> h) {
 
 		// TODO fill graphical user interface components with data
 	}
 
-	HashMap<String, Object> getData() {
+	static HashMap<String, Object> getData() {
 
 		// TODO fill dataMap
 

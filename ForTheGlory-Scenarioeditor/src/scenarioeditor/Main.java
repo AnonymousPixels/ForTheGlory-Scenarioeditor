@@ -15,6 +15,7 @@ import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -37,10 +38,11 @@ public class Main {
 	static JFrame frame;
 	static JPanel panel;
 	static GridBagLayout layout;
-	static JLabel lblPath;
-	static JTextField txfPath;
-	static JButton btnPath, btnContinue;
+	static JLabel lblPath, lblMods, lblName;
+	static JTextField txfPath, txfName;
+	static JButton btnPath, btnContinue, btnAccept;
 	static JFileChooser chooser;
+	static JComboBox<String> cbxMods = new JComboBox<>();
 	static File file;
 	static String path = "";
 	static Color clrBackground = new Color(240, 240, 240), clrFont = new Color(0, 0, 0);
@@ -118,35 +120,53 @@ public class Main {
 
 				if (path != null && path != "") {
 
-					Thread loadingThread = new Thread(new Runnable() {
+					String modDir = path + "//Mods";
+					File[] modFiles = new File(modDir).listFiles();
+					String[] mods = new String[1];
+
+					mods[0] = Strings.getString("Main.10");
+
+					for (int i = 0; i < modFiles.length; i++) {
+
+						if (modFiles[i].isDirectory()) {
+
+							String[] mods2 = new String[mods.length + 1];
+							System.arraycopy(mods, 0, mods2, 0, mods.length);
+							mods2[mods.length] = modFiles[i].getName();
+							mods = mods2;
+						}
+					}
+
+					cbxMods = new JComboBox<String>(mods);
+					cbxMods.addActionListener(new ActionListener() {
 
 						@Override
-						public void run() {
+						public void actionPerformed(ActionEvent e) {
 
-							Thread loadLoadingGUI = new Thread(new Runnable() {
-
-								@Override
-								public void run() {
-
-									try {
-										loadGUI();
-									} catch (IOException | InterruptedException e) {
-
-										e.printStackTrace();
-									}
-								}
-							});
-							loadLoadingGUI.start();
-
-							try {
-								new GUI();
-							} catch (IOException | InterruptedException e) {
-								e.printStackTrace();
+							if (cbxMods.getSelectedItem().equals(Strings.getString("Main.10"))) {
+								txfName.setVisible(true);
+								lblName.setVisible(true);
+								frame.pack();
+							} else {
+								txfName.setVisible(false);
+								lblName.setVisible(false);
+								frame.pack();
 							}
 						}
 					});
-					loadingThread.start();
+					addComponent(panel, layout, cbxMods, 0, 4, 2, 1, 1, 0, new Insets(0, 10, 10, 10));
+					cbxMods.setVisible(false);
 
+					lblMods.setVisible(true);
+					cbxMods.setVisible(true);
+					lblName.setVisible(true);
+					txfName.setVisible(true);
+					btnAccept.setVisible(true);
+
+					btnPath.setEnabled(false);
+					btnContinue.setEnabled(false);
+
+					frame.pack();
 				} else
 					JOptionPane.showMessageDialog(null, Strings.getString("Main.5"), Strings.getString("Main.6"),
 							JOptionPane.ERROR_MESSAGE);
@@ -155,6 +175,64 @@ public class Main {
 			}
 		});
 		addComponent(panel, layout, btnContinue, 1, 2, 1, 1, 0, 0, new Insets(0, 10, 10, 10));
+
+		lblMods = new JLabel(Strings.getString("Main.7"), SwingConstants.LEFT);
+		lblMods.setForeground(Color.black);
+		lblMods.setFont(fntStandart);
+		addComponent(panel, layout, lblMods, 0, 3, 2, 1, 1, 0, new Insets(10, 10, 5, 10));
+		lblMods.setVisible(false);
+
+		lblName = new JLabel(Strings.getString("Main.8"), SwingConstants.LEFT);
+		lblName.setForeground(Color.black);
+		lblName.setFont(new Font("Verdana", 0, 12));
+		addComponent(panel, layout, lblName, 0, 5, 2, 1, 1, 0, new Insets(5, 10, 5, 10));
+		lblName.setVisible(false);
+
+		txfName = new JTextField();
+		txfName.setEditable(true);
+		txfName.setForeground(Color.black);
+		txfName.setBackground(Color.white);
+		addComponent(panel, layout, txfName, 0, 6, 2, 1, 1, 0, new Insets(0, 10, 10, 10));
+		txfName.setVisible(false);
+
+		btnAccept = new JButton(Strings.getString("Main.9"));
+		btnAccept.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				Thread loadingThread = new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+
+						Thread loadLoadingGUI = new Thread(new Runnable() {
+
+							@Override
+							public void run() {
+
+								try {
+									loadGUI();
+								} catch (IOException | InterruptedException e) {
+
+									e.printStackTrace();
+								}
+							}
+						});
+						loadLoadingGUI.start();
+
+						try {
+							new GUI();
+						} catch (IOException | InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				loadingThread.start();
+			}
+		});
+		addComponent(panel, layout, btnAccept, 1, 7, 1, 1, 0, 0, new Insets(0, 10, 10, 10));
+		btnAccept.setVisible(false);
 
 		frame.pack();
 		frame.setLocationRelativeTo(null);

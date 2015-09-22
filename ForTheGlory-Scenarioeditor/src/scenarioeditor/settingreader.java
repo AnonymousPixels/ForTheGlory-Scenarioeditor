@@ -12,21 +12,27 @@ public class SettingReader {
 	public static BufferedReader reader;
 	public static FileReader file;
 	public static String input, line;
-	public static int brackets, bracketposition, counter_country, counter_techgroups, counter_techspeed,
-			counter_cultures, counter_cultures_city, counter_cultures_buildings, counter_cultures_color;
-	public static String[] shortcountryname_array, cultures_array, cultures_city_array, cultures_color_array,
+	public static int brackets, bracketposition, counter_country,
+			counter_techgroups, counter_techspeed, counter_cultures,
+			counter_cultures_city, counter_cultures_buildings,
+			counter_cultures_color;
+	public static String[] shortcountryname_array, cultures_array,
+			cultures_city_array, cultures_color_array,
 			cultures_buildings_array, techgroups_array, techspeed_array;
 
-	public static String[] newcountry_array, picture_array, color_array, techgroup_array, leader_language_array,
-			new_colony_array, army_array, navy_array, aristocracy_array, centralization_array, innovative_array,
-			mercantilism_array, offensive_array, land_array, quality_array, serfdom_array, elector_array;
+	public static String[] newcountry_array, picture_array, color_array,
+			techgroup_array, leader_language_array, new_colony_array,
+			army_array, navy_array, aristocracy_array, centralization_array,
+			innovative_array, mercantilism_array, offensive_array, land_array,
+			quality_array, serfdom_array, elector_array;
 
-	public static HashMap<String, Object> provincesettinghashmap, provincehashmap, countryhashmap,
-			countrysettinghashmap;
+	public static HashMap<String, Object> provincesettinghashmap,
+			provincehashmap, countryhashmap, countrysettinghashmap;
 
-	public static String id, name, efficiency, tolerance, tp_negotiation, ferocity, combat, colonization_difficulty,
-			continent, region, area, type, terrain, size_modifier, climate, religion, culture, manpower, income, goods,
-			city_name, cot_modifier;
+	public static String id, name, efficiency, tolerance, tp_negotiation,
+			ferocity, combat, colonization_difficulty, continent, region, area,
+			type, terrain, size_modifier, climate, religion, culture, manpower,
+			income, goods, city_name, cot_modifier;
 	public static String varification;
 
 	// , String countryfilepath, String culturefilepath, String
@@ -35,10 +41,10 @@ public class SettingReader {
 	public SettingReader(String gamepath) throws IOException {
 
 		getCountrySettings(gamepath + "//Db//countries.txt");
-		// getCultures(gamepath + "//Db//cultures.txt");
-		// getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
+		getCultures(gamepath + "//Db//cultures.txt");
+		getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
 
-//		getProvinces(gamepath + "//Db//Map//provinces.txt");
+		getProvinces(gamepath + "//Db//Map//provinces.txt");
 
 		// getArmynames(gamepath + "//Db//armynames.txt");
 
@@ -75,12 +81,15 @@ public class SettingReader {
 
 			}
 			if (input.contains("history")) {
-			} else if ((input != null || input != "") && brackets == 1 && input.contains("={")) {
+			} else if ((input != null || input != "") && brackets == 1
+					&& input.contains("={")) {
 				varification = input.substring(0, 3);
 			}
-			String[] checkFor = { "picture", "color", "techgroup", "leader_language", "combat",
-					"colonization_difficulty", "cot_modifier", "new_colony", "army", "navy", "aristocracy",
-					"centralization", "innovative", "mercantilism", "offensive", "land", "serfdom", "quality",
+			String[] checkFor = { "picture", "color", "techgroup",
+					"leader_language", "combat", "colonization_difficulty",
+					"cot_modifier", "new_colony", "army", "navy",
+					"aristocracy", "centralization", "innovative",
+					"mercantilism", "offensive", "land", "serfdom", "quality",
 					"elector", "history", "varification" };
 			for (String s : checkFor) {
 
@@ -95,12 +104,12 @@ public class SettingReader {
 			}
 		}
 
-//		 Iterator<Entry<String, Object>> it = countrysettinghashmap.entrySet()
-//		 .iterator();
-//		 while (it.hasNext()) {
-//		 Map.Entry pair = (Map.Entry) it.next();
-//		 System.out.println(pair.getKey() + " = " + pair.getValue());
-//		 }
+		// Iterator<Entry<String, Object>> it = countrysettinghashmap.entrySet()
+		// .iterator();
+		// while (it.hasNext()) {
+		// Map.Entry pair = (Map.Entry) it.next();
+		// System.out.println(pair.getKey() + " = " + pair.getValue());
+		// }
 
 		Settings.putInHashMap("countrydata", countrysettinghashmap.clone());
 
@@ -245,17 +254,21 @@ public class SettingReader {
 			if (input.trim().charAt(0) == '#') {
 
 			}
-			String[] checkFor = { "tolerance", "tp_negotiation", "efficiency", "ferocity", "combat",
-					"colonization_difficulty", "cot_modifier", "city_name", "goods", "income", "manpower", "culture",
-					"religion", "climate", "size_modifier", "terrain", "type", "area", "region", "continent", "name",
-					"id", "terrain1", "terrain2", "terrain3", "terrain4" };
+			String[] checkFor = { "terrain", "sea_adjacency", "tolerance",
+					"tp_negotiation", "efficiency", "ferocity", "combat",
+					"colonization_difficulty", "cot_modifier", "city_name",
+					"goods", "income", "manpower", "culture", "religion",
+					"climate", "size_modifier", "terrain", "type", "area",
+					"region", "continent", "name", "id", "terrain1",
+					"terrain2", "terrain3", "terrain4", "river" };
 			for (String s : checkFor) {
 
 				if (input.contains(s)) {
 
 					String property = input.replaceAll(s + "=", "");
 					provincehashmap.put(s, property);
-					if (s.contains("id"))
+					if (s.contains("id") && property.length() <= 4)
+
 						id = property;
 				}
 			}

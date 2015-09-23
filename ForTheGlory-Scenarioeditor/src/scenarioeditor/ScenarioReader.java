@@ -1,10 +1,8 @@
-
+package scenarioeditor;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
-import scenarioeditor.Settings;
 
 public class ScenarioReader {
 	public static BufferedReader reader;

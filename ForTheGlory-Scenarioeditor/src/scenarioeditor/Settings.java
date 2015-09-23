@@ -1,9 +1,7 @@
-
+package scenarioeditor;
 
 import java.io.IOException;
 import java.util.HashMap;
-
-import scenarioeditor.SettingReader;
 
 public class Settings {
 

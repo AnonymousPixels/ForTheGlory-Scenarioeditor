@@ -1,7 +1,6 @@
+package scenarioeditor;
 
 import java.io.IOException;
-
-import scenarioeditor.ScenarioReader;
 
 public class ReadIncludes {
 	public ReadIncludes(String gamepath) throws IOException {
@@ -12,9 +11,9 @@ public class ReadIncludes {
 		}
 		int i = 0;
 		while (includes[i] != null) {
-
-			new ScenarioReader(gamepath + includes[i]);
-
+			
+				new ScenarioReader(gamepath + includes[i]);
+			
 		}
 	}
 }

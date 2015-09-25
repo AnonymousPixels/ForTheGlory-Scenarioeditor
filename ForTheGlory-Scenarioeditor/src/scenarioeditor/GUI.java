@@ -200,6 +200,8 @@ public class GUI implements ActionListener, ChangeListener {
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 
+		selectedCountryItem = (String) cbxCountry.getSelectedItem();
+
 		frame.setVisible(true);
 	}
 
@@ -1489,8 +1491,6 @@ public class GUI implements ActionListener, ChangeListener {
 
 		if (e.getSource() == cbxCountry) {
 
-			if (selectedCountryItem == null)
-				selectedCountryItem = (String) cbxCountry.getSelectedItem();
 			saveValues(dataMap);
 			setValues(dataMap);
 			selectedCountryItem = (String) cbxCountry.getSelectedItem();

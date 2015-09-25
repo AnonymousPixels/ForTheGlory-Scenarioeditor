@@ -38,12 +38,12 @@ public class SettingReader {
 	public SettingReader(String gamepath) throws IOException {
 
 		getCountrySettings(gamepath + "//Db//countries.txt");
-		getCultures(gamepath + "//Db//cultures.txt");
-		getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
+//		getCultures(gamepath + "//Db//cultures.txt");
+//		getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
+//
+//		getProvinces(gamepath + "//Db//Map//provinces.txt");
 
-		getProvinces(gamepath + "//Db//Map//provinces.txt");
-
-		// getArmynames(gamepath + "//Db//armynames.txt");
+//		 getArmynames(gamepath + "//Db//armynames.txt");
 
 	}
 

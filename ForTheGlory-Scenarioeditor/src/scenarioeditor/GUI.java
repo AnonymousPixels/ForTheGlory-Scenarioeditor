@@ -15,10 +15,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -59,7 +61,7 @@ public class GUI implements ActionListener, ChangeListener {
 	JTabbedPane tabbedPane;
 	JSplitPane splitPane;
 	MapPanel map;
-	JComboBox<String> cbxCountry, cbxCategory, cbxPolicyDateMonth, cbxTechnologyGroup, cbxAi, cbxMonarchtable,
+	static JComboBox<String> cbxCountry, cbxCategory, cbxPolicyDateMonth, cbxTechnologyGroup, cbxAi, cbxMonarchtable,
 			cbxLeadertable, cbxSelectedProvince, cbxCopy, cbxCulture, cbxReligion, cbxSelectedCountry, cbxCasusBelli,
 			cbxCasusBelliMonth, cbxWarnedMonth, cbxIndependenceMonth, cbxPeaceMonth, cbxUnits, cbxUnitLocation,
 			cbxNavalUnits, cbxNavalUnitLocation, cbxPolicyDateDay, cbxCasusBelliDay, cbxWarnedDay, cbxIndependenceDay,
@@ -80,7 +82,7 @@ public class GUI implements ActionListener, ChangeListener {
 			lblArtillery, lblNavy, lblNavalUnitLocation, lblWarships, lblGalleys, lblTransports;
 	JButton btnLoad, btnSave, btnCountryDelete, btnUnitAdd, btnUnitRename, btnUnitDel, btnNavalUnitAdd,
 			btnNavalUnitRename, btnNavalUnitDel;
-	JSlider sldAristocracy, sldCentralization, sldInnovative, sldMercantilism, sldOffensive, sldLand, sldQuality,
+	static JSlider sldAristocracy, sldCentralization, sldInnovative, sldMercantilism, sldOffensive, sldLand, sldQuality,
 			sldSerfdom;
 	JRadioButton rbnOwnProvinces, rbnControlledProvinces, rbnNationalProvinces, rbnKnownProvinces,
 			rbnColonialnationTrue, rbnColonialnationFalse, rbnCancelledLoansTrue, rbnCancelledLoansFalse,
@@ -206,12 +208,54 @@ public class GUI implements ActionListener, ChangeListener {
 
 	static void setData(HashMap<String, Object> map) {
 
-		Iterator<Entry<String, Object>> it = map.entrySet().iterator();
-		while (it.hasNext()) {
-			@SuppressWarnings("rawtypes")
-			Map.Entry pair = (Map.Entry) it.next();
-			System.out.println(pair.getKey() + " = " + pair.getValue());
-		}
+		// Iterator<Entry<String, Object>> it = map.entrySet().iterator();
+		// while (it.hasNext()) {
+		// @SuppressWarnings("rawtypes")
+		// Map.Entry pair = (Map.Entry) it.next();
+		// System.out.println(pair.getKey() + " = " + pair.getValue());
+		// }
+
+		Set<String> keys = ((HashMap<String, Object>) map.get("countrydata")).keySet();
+		String[] coutryTags = keys.toArray(new String[keys.size()]);
+		Arrays.sort(coutryTags);
+		cbxCountry.removeAll();
+		for (String s : coutryTags)
+			if (!s.equals(""))
+				cbxCountry.addItem(s);
+
+		setValues(map, (String) cbxCountry.getSelectedItem());
+	}
+
+	static void setValues(HashMap<String, Object> map, String s) {
+
+		sldAristocracy.setValue(Integer
+				.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(s))
+						.get("aristocracy")));
+		sldCentralization.setValue(Integer
+				.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(s))
+						.get("centralization")));
+		sldInnovative.setValue(Integer
+				.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(s))
+						.get("innovative")));
+		sldMercantilism.setValue(Integer
+				.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(s))
+						.get("mercantilism")));
+		sldOffensive.setValue(Integer
+				.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(s))
+						.get("offensive")));
+		sldLand.setValue(Integer
+				.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(s))
+						.get("land")));
+		sldQuality.setValue(Integer
+				.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(s))
+						.get("quality")));
+		sldSerfdom.setValue(Integer
+				.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(s))
+						.get("serfdom")));
+	}
+
+	void saveValues() {
+
 	}
 
 	static HashMap<String, Object> getData() {
@@ -1302,10 +1346,9 @@ public class GUI implements ActionListener, ChangeListener {
 		addComponent(pnlCountryPolicy, layout, lblLand, 0, y, 1, 1, 1, 0, new Insets(0, 5, 5, 5));
 		y++;
 
-		sldLand = new JSlider(JSlider.HORIZONTAL, -60, 60, 0);
+		sldLand = new JSlider(JSlider.HORIZONTAL, 0, 10, 0);
 		sldLand.addChangeListener(this);
-		sldLand.setMajorTickSpacing(10);
-		sldLand.setMinorTickSpacing(1);
+		sldLand.setMajorTickSpacing(1);
 		sldLand.setPaintTicks(true);
 		sldLand.setSnapToTicks(true);
 		sldLand.setPaintLabels(true);
@@ -1402,6 +1445,13 @@ public class GUI implements ActionListener, ChangeListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		
+		if (e.getSource() == cbxCountry) {
+
+			System.out.println("sdihfjsdlk");
+			saveValues();
+			setValues(dataMap, (String) cbxCountry.getSelectedItem());
+		}
 
 		if (e.getSource() == cbxCategory) {
 

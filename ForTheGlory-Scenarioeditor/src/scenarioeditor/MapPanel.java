@@ -21,10 +21,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.SwingConstants;
 
-interface MapEventListener {
-	void provinceClicked(String id);
-}
-
 public class MapPanel extends JPanel implements MouseListener,
 		MouseMotionListener, MouseWheelListener {
 
@@ -37,7 +33,7 @@ public class MapPanel extends JPanel implements MouseListener,
 	Map map2;
 	int x = 10000, y = 2000;
 	int newHeight, newWidth;
-	private List<MapEventListener> listeners;
+	private List<IMapEventListener> listeners;
 
 	public MapPanel(BufferedImage Frontend, BufferedImage Backend,
 			Map<Color, Integer> map) {
@@ -45,7 +41,7 @@ public class MapPanel extends JPanel implements MouseListener,
 		this.setOpaque(true);
 		this.setLayout(null);
 		map2 = map;
-		listeners = new ArrayList<MapEventListener>();
+		listeners = new ArrayList<IMapEventListener>();
 		biFrontendOriginal = Frontend;
 		biBackend = biBackendOriginal = Backend;
 		// image = new JLabel(new ImageIcon(Frontend));
@@ -66,7 +62,7 @@ public class MapPanel extends JPanel implements MouseListener,
 
 	}
 
-	public void addMapListener(MapEventListener toAdd) {
+	public void addMapListener(IMapEventListener toAdd) {
 		listeners.add(toAdd);
 	}
 
@@ -139,7 +135,7 @@ public class MapPanel extends JPanel implements MouseListener,
 		// map2.get(target) ist die gespeicherte ID für die Provinz
 		// ********************************************************
 
-		for (MapEventListener listeners : listeners)
+		for (IMapEventListener listeners : listeners)
 			listeners.provinceClicked((String) map2.get(target));
 
 	}

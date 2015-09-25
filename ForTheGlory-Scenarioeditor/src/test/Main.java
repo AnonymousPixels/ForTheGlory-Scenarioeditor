@@ -8,9 +8,10 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import scenarioeditor.GameFiles;
+import scenarioeditor.IMapEventListener;
 import scenarioeditor.MapPanel;
 
-public class Main {
+public class Main implements IMapEventListener {
 
 	public Main() {
 		// TODO Auto-generated constructor stub
@@ -50,6 +51,17 @@ public class Main {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.add(map);
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see scenarioeditor.IMapEventListener#provinceClicked(java.lang.String)
+	 */
+	@Override
+	public void provinceClicked(String id) {
+		// TODO Auto-generated method stub
 
 	}
 

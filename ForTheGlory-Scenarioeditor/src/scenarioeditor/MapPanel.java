@@ -10,6 +10,8 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.Icon;
@@ -18,6 +20,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.SwingConstants;
+
+interface MapEventListener {
+	void provinceClicked(String id);
+}
 
 public class MapPanel extends JPanel implements MouseListener,
 		MouseMotionListener, MouseWheelListener {
@@ -31,6 +37,7 @@ public class MapPanel extends JPanel implements MouseListener,
 	Map map2;
 	int x = 10000, y = 2000;
 	int newHeight, newWidth;
+	private List<MapEventListener> listeners;
 
 	public MapPanel(BufferedImage Frontend, BufferedImage Backend,
 			Map<Color, Integer> map) {
@@ -38,7 +45,7 @@ public class MapPanel extends JPanel implements MouseListener,
 		this.setOpaque(true);
 		this.setLayout(null);
 		map2 = map;
-
+		listeners = new ArrayList<MapEventListener>();
 		biFrontendOriginal = Frontend;
 		biBackend = biBackendOriginal = Backend;
 		// image = new JLabel(new ImageIcon(Frontend));
@@ -57,6 +64,10 @@ public class MapPanel extends JPanel implements MouseListener,
 		mouseWheelMoved(new MouseWheelEvent(this, 1, 1, 1, 1, 1, 0, false, 0,
 				0, 0));
 
+	}
+
+	public void addMapListener(MapEventListener toAdd) {
+		listeners.add(toAdd);
 	}
 
 	public void paintComponent(Graphics g) {
@@ -127,6 +138,9 @@ public class MapPanel extends JPanel implements MouseListener,
 		// target ist die ausgewählte Provinz
 		// map2.get(target) ist die gespeicherte ID für die Provinz
 		// ********************************************************
+
+		for (MapEventListener listeners : listeners)
+			listeners.provinceClicked((String) map2.get(target));
 
 	}
 

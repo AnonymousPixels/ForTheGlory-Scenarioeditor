@@ -1,6 +1,7 @@
 package scenarioeditor;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,11 +13,23 @@ public class SaveSettings {
 	public static BufferedWriter writer;
 
 	public SaveSettings(HashMap<String, Object> settings) throws IOException {
-
+		File file = new File(Main.getModFolderName());
 		
+		
+		FileWriter filewriter = new FileWriter(file);
+		file = new File(Main.getModFolderName());
+		if (!file.exists()) {
 
-		SaveCountries(settings, Main.getModFolderName() + "//db//countries.txt");
-//		SaveProvinces(settings, Main.getModFolderName() + "//db//Map//provinces..txt");
+			file.mkdir();
+
+			file = new File(file + "//db");
+			file.mkdir();
+
+		}
+
+		file = new File(Main.getModFolderName());
+		SaveCountries(settings, file + "//db//countries.txt");
+		// SaveProvinces(settings, file + "//db//Map//provinces..txt");
 
 	}
 
@@ -314,9 +327,9 @@ public class SaveSettings {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void SaveCountries(HashMap<String, Object> settings,
-			String countryfilepath) throws IOException {
-		file = new FileWriter(countryfilepath);
+	public void SaveCountries(HashMap<String, Object> settings, String string)
+			throws IOException {
+		file = new FileWriter(string);
 		writer = new BufferedWriter(file);
 		String allcountrynames = "";
 		String[] countries;

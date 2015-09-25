@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Set;
 
+import javax.swing.JComboBox;
+
 public class SaveSettings {
 
 	public static FileWriter file;
@@ -37,6 +39,9 @@ public class SaveSettings {
 			}
 
 		}
+		
+	
+		
 
 		allprovinces = allprovinces.replaceAll(",,", "");
 

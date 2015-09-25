@@ -12,7 +12,7 @@ public class Settings {
 
 		hashmap = new HashMap<String, Object>();
 
-		new SettingReader(gamepath);
+		new SettingReader(gamepath,scenariofilepath);
 
 		// new scenarioreader(scenariofilepath);
 		// new readIncludes(gamepath);

@@ -1,6 +1,7 @@
 package scenarioeditor;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -24,7 +25,8 @@ public class SettingReader {
 			quality_array, serfdom_array, elector_array;
 
 	public static HashMap<String, Object> provincesettinghashmap,
-			provincehashmap, countryhashmap, countrysettinghashmap;
+			provincehashmap, countryhashmap, countrysettinghashmap,
+			scenariosettingshashmap;
 
 	public static String id, name, efficiency, tolerance, tp_negotiation,
 			ferocity, combat, colonization_difficulty, continent, region, area,
@@ -32,17 +34,15 @@ public class SettingReader {
 			income, goods, city_name, cot_modifier;
 	public static String varification;
 
-	// , String countryfilepath, String culturefilepath, String
-	// techgroupfilepath, String provincefilepath, String armynamesfilepath
+	public SettingReader(String gamepath, String ScenarioFilePath)
+			throws IOException {
 
-	public SettingReader(String gamepath) throws IOException {
+		// getCountrySettings(gamepath + "//Db//countries.txt");
+		// getCultures(gamepath + "//Db//cultures.txt");
+		// getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
+		// getProvinces(gamepath + "//Db//Map//provinces.txt");
 
-		getCountrySettings(gamepath + "//Db//countries.txt");
-		getCultures(gamepath + "//Db//cultures.txt");
-		getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
-
-		getProvinces(gamepath + "//Db//Map//provinces.txt");
-
+		getScenarioSettings(ScenarioFilePath);
 		// getArmynames(gamepath + "//Db//armynames.txt");
 
 	}
@@ -112,9 +112,9 @@ public class SettingReader {
 
 	}
 
-	public void getCultures(String countryfilepath) throws IOException {
+	public void getCultures(String culturefilepath) throws IOException {
 
-		file = new FileReader(countryfilepath);
+		file = new FileReader(culturefilepath);
 		reader = new BufferedReader(file);
 		counter_cultures = 0;
 		counter_cultures_city = 0;
@@ -265,7 +265,6 @@ public class SettingReader {
 					String property = input.replaceAll(s + "=", "");
 					provincehashmap.put(s, property);
 					if (s.contains("id") && property.length() <= 4)
-
 						id = property;
 				}
 			}
@@ -281,7 +280,7 @@ public class SettingReader {
 		// }
 
 		// Settings.hashmap.put("provincedata", provincesettinghashmap.clone());
-		Settings.putInHashMap("provincedata", provincesettinghashmap.clone());
+		Settings.putInHashMap("scenariodata", provincesettinghashmap.clone());
 	}
 
 	public void getArmynames(String countryfilepath) throws IOException {
@@ -308,6 +307,10 @@ public class SettingReader {
 			System.out.println(input);
 			input = reader.readLine();
 		}
+
+	}
+
+	public void getScenarioSettings(String ScenarioFilePath) throws IOException {
 
 	}
 }

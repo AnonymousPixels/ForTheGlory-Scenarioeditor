@@ -13,11 +13,12 @@ public class SaveSettings {
 	public static BufferedWriter writer;
 
 	public SaveSettings(HashMap<String, Object> settings) throws IOException {
-		File file = new File(Main.getModFolderName());
+		File file = new File(Main.getGameFolderName() + "//Mods//");
+		FileWriter filewriter = new FileWriter(file + "mod_"  + Main.getModFolderName().replaceAll(" ", "_") + ".txt");
+		filewriter.write("BEDO");
+		filewriter.close();
 		
-		
-		FileWriter filewriter = new FileWriter(file);
-		file = new File(Main.getModFolderName());
+		file = new File(file + Main.getModFolderName());
 		if (!file.exists()) {
 
 			file.mkdir();
@@ -27,7 +28,7 @@ public class SaveSettings {
 
 		}
 
-		file = new File(Main.getModFolderName());
+		file = new File(Main.getGameFolderName() + "//Mods//" + Main.getModFolderName());
 		SaveCountries(settings, file + "//db//countries.txt");
 		// SaveProvinces(settings, file + "//db//Map//provinces..txt");
 

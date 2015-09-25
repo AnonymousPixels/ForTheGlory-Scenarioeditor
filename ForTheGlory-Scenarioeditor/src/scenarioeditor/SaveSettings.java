@@ -11,13 +11,12 @@ public class SaveSettings {
 	public static FileWriter file;
 	public static BufferedWriter writer;
 
-	public SaveSettings(HashMap<String, Object> settings,
-			String countryfilepath, String provincefilepath) throws IOException {
+	public static SaveSettings(HashMap<String, Object> settings) throws IOException {
+
 		
-		System.out.println(Main.getModFolderName());
-		
-		SaveCountries(settings, countryfilepath);
-		SaveProvinces(settings, provincefilepath);
+
+		SaveCountries(settings, Main.getModFolderName() + "//db//countries.txt");
+//		SaveProvinces(settings, Main.getModFolderName() + "//db//Map//provinces..txt");
 
 	}
 
@@ -50,7 +49,8 @@ public class SaveSettings {
 					&& !provinces[i].equals("0")
 					&& i != 0
 					&& !((HashMap<String, Object>) ((HashMap<String, Object>) settings
-							.get("provincedata")).get(provinces[i])).get("id").equals("0")) {
+							.get("provincedata")).get(provinces[i])).get("id")
+							.equals("0")) {
 				writer.write("province = {\n");
 
 				writer.write("\tid = " + provinces[i] + "\n");

@@ -13,7 +13,6 @@ public class Settings {
 		hashmap = new HashMap<String, Object>();
 
 		new SettingReader(gamepath);
-		System.out.println(Main.getModFolderName());
 		// new scenarioreader(scenariofilepath);
 		// new readIncludes(gamepath);
 		return hashmap;

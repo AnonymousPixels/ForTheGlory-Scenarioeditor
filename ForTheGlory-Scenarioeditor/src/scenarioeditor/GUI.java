@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.channels.SelectableChannel;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -40,6 +41,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.plaf.SliderUI;
 
 /**
  * This class is more or less the second main class, because it doesn't just
@@ -100,9 +102,10 @@ public class GUI implements ActionListener, ChangeListener {
 	Dimension minSize = new Dimension(1200, 720);
 	Color clrBackground = new Color(240, 240, 240), clrStandard = new Color(0, 0, 0);
 	Font fntStandard = new Font("Verdana", 0, 12);
-	String name = Strings.getString("name"), version = Strings.getString("version"), build = Strings.getString("build"),
-			title = name + " | Version: " + version + " (Build: " + build + ")",
-			scenarioFilePath = "C://Program Files (x86)//Steam//steamapps//common//For The Glory//Scenarios//1419 - The Grand Campaign.eeg";
+	static String name = Strings.getString("name"), version = Strings.getString("version"),
+			build = Strings.getString("build"), title = name + " | Version: " + version + " (Build: " + build + ")",
+			scenarioFilePath = "C://Program Files (x86)//Steam//steamapps//common//For The Glory//Scenarios//1419 - The Grand Campaign.eeg",
+			selectedCountryItem;
 	String[] months = { Strings.getString("Month.1"), Strings.getString("Month.2"), Strings.getString("Month.3"),
 			Strings.getString("Month.4"), Strings.getString("Month.5"), Strings.getString("Month.6"),
 			Strings.getString("Month.7"), Strings.getString("Month.8"), Strings.getString("Month.9"),
@@ -223,39 +226,70 @@ public class GUI implements ActionListener, ChangeListener {
 			if (!s.equals(""))
 				cbxCountry.addItem(s);
 
-		setValues(map, (String) cbxCountry.getSelectedItem());
+		selectedCountryItem = coutryTags[0];
+		setValues(map);
 	}
 
-	static void setValues(HashMap<String, Object> map, String s) {
+	static void setValues(HashMap<String, Object> map) {
 
-		sldAristocracy.setValue(Integer
-				.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(s))
-						.get("aristocracy")));
-		sldCentralization.setValue(Integer
-				.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(s))
-						.get("centralization")));
-		sldInnovative.setValue(Integer
-				.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(s))
-						.get("innovative")));
-		sldMercantilism.setValue(Integer
-				.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(s))
-						.get("mercantilism")));
-		sldOffensive.setValue(Integer
-				.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(s))
-						.get("offensive")));
-		sldLand.setValue(Integer
-				.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(s))
-						.get("land")));
-		sldQuality.setValue(Integer
-				.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(s))
-						.get("quality")));
-		sldSerfdom.setValue(Integer
-				.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(s))
-						.get("serfdom")));
+		sldAristocracy.setValue(
+				Integer.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
+						.get(cbxCountry.getSelectedItem())).get("aristocracy")));
+		sldCentralization.setValue(
+				Integer.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
+						.get(cbxCountry.getSelectedItem())).get("centralization")));
+		sldInnovative.setValue(
+				Integer.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
+						.get(cbxCountry.getSelectedItem())).get("innovative")));
+		sldMercantilism.setValue(
+				Integer.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
+						.get(cbxCountry.getSelectedItem())).get("mercantilism")));
+		sldOffensive.setValue(
+				Integer.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
+						.get(cbxCountry.getSelectedItem())).get("offensive")));
+		sldLand.setValue(
+				Integer.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
+						.get(cbxCountry.getSelectedItem())).get("land")));
+		sldQuality.setValue(
+				Integer.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
+						.get(cbxCountry.getSelectedItem())).get("quality")));
+		sldSerfdom.setValue(
+				Integer.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
+						.get(cbxCountry.getSelectedItem())).get("serfdom")));
 	}
 
-	void saveValues() {
+	void saveValues(HashMap<String, Object> map) {
 
+		if (selectedCountryItem != null) {
+
+			if (sldAristocracy != null)
+				((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(selectedCountryItem))
+						.put("aristocracy", String.valueOf(sldAristocracy.getValue()));
+			if (sldCentralization != null)
+				((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(selectedCountryItem))
+						.put("centralization", String.valueOf(sldCentralization.getValue()));
+			if (sldInnovative != null)
+				((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(selectedCountryItem))
+						.put("innovative", String.valueOf(sldInnovative.getValue()));
+			if (sldMercantilism != null)
+				((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(selectedCountryItem))
+						.put("mercantilism", String.valueOf(sldMercantilism.getValue()));
+			if (sldOffensive != null)
+				((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(selectedCountryItem))
+						.put("offensive", String.valueOf(sldOffensive.getValue()));
+			if (sldLand != null)
+				((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(selectedCountryItem))
+						.put("land", String.valueOf(sldLand.getValue()));
+			if (sldQuality != null)
+				((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(selectedCountryItem))
+						.put("quality", String.valueOf(sldQuality.getValue()));
+			if (sldSerfdom != null)
+				((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(selectedCountryItem))
+						.put("serfdom", String.valueOf(sldSerfdom.getValue()));
+		}
+
+		else
+			System.out.println("sdfdsf");
 	}
 
 	static HashMap<String, Object> getData() {
@@ -1448,8 +1482,9 @@ public class GUI implements ActionListener, ChangeListener {
 
 		if (e.getSource() == cbxCountry) {
 
-			saveValues();
-			setValues(dataMap, (String) cbxCountry.getSelectedItem());
+			saveValues(dataMap);
+			setValues(dataMap);
+			selectedCountryItem = (String) cbxCountry.getSelectedItem();
 		}
 
 		if (e.getSource() == cbxCategory) {

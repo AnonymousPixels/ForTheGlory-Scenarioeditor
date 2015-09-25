@@ -13,7 +13,7 @@ public class SaveSettings {
 
 	public SaveSettings(HashMap<String, Object> settings,
 			String countryfilepath, String provincefilepath) throws IOException {
-		// SaveCountries(settings, countryfilepath);
+		SaveCountries(settings, countryfilepath);
 		SaveProvinces(settings, provincefilepath);
 
 	}
@@ -44,10 +44,10 @@ public class SaveSettings {
 
 		for (int i = 0; i < provinces.length; i++) {
 			if (provinces[i] != null
-					&& provinces[i] != "0"
+					&& !provinces[i].equals("0")
 					&& i != 0
-					&& ((HashMap<String, Object>) ((HashMap<String, Object>) settings
-							.get("provincedata")).get(provinces[i])).get("id") != "0") {
+					&& !((HashMap<String, Object>) ((HashMap<String, Object>) settings
+							.get("provincedata")).get(provinces[i])).get("id").equals("0")) {
 				writer.write("province = {\n");
 
 				writer.write("\tid = " + provinces[i] + "\n");

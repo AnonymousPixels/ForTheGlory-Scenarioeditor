@@ -1448,7 +1448,6 @@ public class GUI implements ActionListener, ChangeListener {
 		
 		if (e.getSource() == cbxCountry) {
 
-			System.out.println("sdihfjsdlk");
 			saveValues();
 			setValues(dataMap, (String) cbxCountry.getSelectedItem());
 		}

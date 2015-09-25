@@ -207,6 +207,8 @@ public class GUI implements ActionListener, ChangeListener {
 		frame.setLocationRelativeTo(null);
 
 		frame.setVisible(true);
+		
+		System.out.println(Main.getModFolderName());
 	}
 
 	static void setData(HashMap<String, Object> map) {

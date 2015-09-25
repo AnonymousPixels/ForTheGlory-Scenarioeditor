@@ -46,7 +46,7 @@ import javax.swing.event.ChangeListener;
  * @author Felix Beutter
  */
 
-public class GUI implements ActionListener, ChangeListener, MapEventListener {
+public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 
 	JFrame frame;
 	GridBagLayout layout;
@@ -1552,6 +1552,8 @@ public class GUI implements ActionListener, ChangeListener, MapEventListener {
 	@Override
 	public void provinceClicked(String s) {
 
+		System.out.println("bla");
+		
 		HashMap<String, String> colonyMap = (HashMap<String, String>) ((HashMap<String, Object>) dataMap
 				.get("provincedata")).get(s);
 		colonyPanel.setData(colonyMap);

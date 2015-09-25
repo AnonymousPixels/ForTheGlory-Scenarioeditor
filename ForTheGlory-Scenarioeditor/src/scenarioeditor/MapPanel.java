@@ -91,9 +91,30 @@ public class MapPanel extends JPanel implements MouseListener,
 	public void mouseClicked(MouseEvent arg0) {
 		Graphics2D g = (Graphics2D) biBackend.getGraphics();
 
+		newHeight = (int) (biFrontendOriginal.getHeight() * zoomFactorSelected / 2);
+		newWidth = (int) ((float) newHeight * ((float) this.getWidth() / (float) this
+				.getHeight()));
+
+		if ((y + newHeight) > biFrontendOriginal.getHeight()) {
+			y = biFrontendOriginal.getHeight() - newHeight;
+		}
+		if ((x + newWidth) > biFrontendOriginal.getWidth()) {
+			x = biFrontendOriginal.getWidth() - newWidth;
+		}
+
+		if (newHeight > y) {
+			y = newHeight;
+		}
+		if (newWidth > x) {
+			x = newWidth;
+		}
+
 		g.drawImage(biBackendOriginal, 0, 0, this.getWidth(), this.getWidth(),
 				x - newWidth, y - newHeight, x + newWidth, y + newHeight * 2,
 				null);
+		this.getGraphics().drawImage(biFrontendOriginal, 0, 0, this.getWidth(),
+				this.getHeight(), x - newWidth, y - newHeight, x + newWidth,
+				y + newHeight, null);
 		Color target = new Color(biBackend.getRGB(
 				(arg0.getX() + sliderX.getValue()),
 				(arg0.getY() + sliderY.getValue())));
@@ -145,7 +166,6 @@ public class MapPanel extends JPanel implements MouseListener,
 
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public void mouseWheelMoved(MouseWheelEvent e) {

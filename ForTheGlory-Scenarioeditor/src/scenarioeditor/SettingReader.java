@@ -90,7 +90,7 @@ public class SettingReader {
 					"elector", "history", "varification" };
 			for (String s : checkFor) {
 
-				if (input.contains(s)) {
+				if (input.contains(s) && s != null) {
 					String property = input.replaceAll(s + "=", "");
 					countryhashmap.put(s, property);
 				}

@@ -285,8 +285,6 @@ public class GUI implements ActionListener, ChangeListener {
 
 	static HashMap<String, Object> getData() {
 
-		// TODO fill dataMap
-
 		return dataMap;
 	}
 
@@ -1491,6 +1489,8 @@ public class GUI implements ActionListener, ChangeListener {
 
 		if (e.getSource() == cbxCountry) {
 
+			if (selectedCountryItem == null)
+				selectedCountryItem = (String) cbxCountry.getSelectedItem();
 			saveValues(dataMap);
 			setValues(dataMap);
 			selectedCountryItem = (String) cbxCountry.getSelectedItem();

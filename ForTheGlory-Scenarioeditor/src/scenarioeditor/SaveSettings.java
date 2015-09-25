@@ -13,6 +13,9 @@ public class SaveSettings {
 
 	public SaveSettings(HashMap<String, Object> settings,
 			String countryfilepath, String provincefilepath) throws IOException {
+		
+		System.out.println(Main.getModFolderName());
+		
 		SaveCountries(settings, countryfilepath);
 		SaveProvinces(settings, provincefilepath);
 

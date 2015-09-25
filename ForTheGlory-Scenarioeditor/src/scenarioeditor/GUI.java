@@ -16,6 +16,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -201,9 +204,14 @@ public class GUI implements ActionListener, ChangeListener {
 		frame.setVisible(true);
 	}
 
-	static void setData(HashMap<String, Object> h) {
+	static void setData(HashMap<String, Object> map) {
 
-		// TODO fill graphical user interface components with data
+		Iterator<Entry<String, Object>> it = map.entrySet().iterator();
+		while (it.hasNext()) {
+			@SuppressWarnings("rawtypes")
+			Map.Entry pair = (Map.Entry) it.next();
+			System.out.println(pair.getKey() + " = " + pair.getValue());
+		}
 	}
 
 	static HashMap<String, Object> getData() {

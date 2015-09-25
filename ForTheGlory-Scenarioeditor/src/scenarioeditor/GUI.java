@@ -1445,7 +1445,7 @@ public class GUI implements ActionListener, ChangeListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (e.getSource() == cbxCountry) {
 
 			saveValues();

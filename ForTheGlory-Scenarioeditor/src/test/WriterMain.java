@@ -3,12 +3,16 @@ package test;
 import java.io.IOException;
 import java.util.HashMap;
 
+import javax.swing.JOptionPane;
+
 import scenarioeditor.SaveSettings;
 import scenarioeditor.Settings;
 
 public class WriterMain {
 
 	public static void main(String[] args) throws IOException {
+		
+		
 		HashMap<String, Object> hash;
 		hash = new HashMap<String, Object>();
 

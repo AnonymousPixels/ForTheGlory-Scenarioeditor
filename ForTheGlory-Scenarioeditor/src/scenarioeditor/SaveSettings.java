@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
+
 public class SaveSettings {
 
 	public static FileWriter file;
@@ -41,6 +43,7 @@ public class SaveSettings {
 				+ Main.getModFolderName());
 		SaveCountries(settings, file + "//db//countries.txt");
 //		 SaveProvinces(settings, file + "//db//Map//provinces..txt");
+		JOptionPane.showMessageDialog(null, "Datei Erfolgreich erstellt!");
 
 	}
 

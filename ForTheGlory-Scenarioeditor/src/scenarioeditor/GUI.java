@@ -205,6 +205,7 @@ public class GUI implements ActionListener, ChangeListener {
 		frame.setVisible(true);
 	}
 
+	@SuppressWarnings("unchecked")
 	static void setData(HashMap<String, Object> map) {
 
 		// Iterator<Entry<String, Object>> it = map.entrySet().iterator();
@@ -226,6 +227,7 @@ public class GUI implements ActionListener, ChangeListener {
 		setValues(map);
 	}
 
+	@SuppressWarnings("unchecked")
 	static void setValues(HashMap<String, Object> map) {
 
 		sldAristocracy.setValue(
@@ -254,6 +256,7 @@ public class GUI implements ActionListener, ChangeListener {
 						.get(cbxCountry.getSelectedItem())).get("serfdom")));
 	}
 
+	@SuppressWarnings("unchecked")
 	void saveValues(HashMap<String, Object> map) {
 
 		if (selectedCountryItem != null) {

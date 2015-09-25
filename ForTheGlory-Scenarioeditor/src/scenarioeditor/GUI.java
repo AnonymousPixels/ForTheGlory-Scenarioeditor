@@ -15,12 +15,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.channels.SelectableChannel;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
@@ -41,7 +37,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.plaf.SliderUI;
 
 /**
  * This class is more or less the second main class, because it doesn't just
@@ -160,7 +155,6 @@ public class GUI implements ActionListener, ChangeListener {
 
 		btnSave = new JButton(Strings.getString("GUI.4"));
 		btnSave.addActionListener(this);
-		btnSave.setEnabled(false);
 		addComponent(pnlOther, layout, btnSave, 2, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
 
 		try {
@@ -1480,6 +1474,19 @@ public class GUI implements ActionListener, ChangeListener {
 		if (e.getSource() == btnSave) {
 
 			saveValues(dataMap);
+			Thread save = new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+
+					try {
+						new SaveSettings(dataMap);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			});
+			save.start();
 		}
 
 		if (e.getSource() == cbxCountry) {

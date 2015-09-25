@@ -11,7 +11,7 @@ public class SaveSettings {
 	public static FileWriter file;
 	public static BufferedWriter writer;
 
-	public static SaveSettings(HashMap<String, Object> settings) throws IOException {
+	public SaveSettings(HashMap<String, Object> settings) throws IOException {
 
 		
 

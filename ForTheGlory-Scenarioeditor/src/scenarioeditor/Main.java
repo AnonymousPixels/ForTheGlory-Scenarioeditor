@@ -263,8 +263,6 @@ public class Main {
 		else
 			s = (String) cbxMods.getSelectedItem();
 
-		s = path + "Mods\\" + s;
-
 		return s;
 	}
 

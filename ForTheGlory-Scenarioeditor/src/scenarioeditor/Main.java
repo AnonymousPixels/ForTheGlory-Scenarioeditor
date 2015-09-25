@@ -233,8 +233,6 @@ public class Main {
 
 					if (txfName.getText().trim() != null && !txfName.getText().trim().equals("")) {
 
-						System.out.println("Text:" + txfName.getText() + "!");
-
 						loadingThread.start();
 					} else
 						JOptionPane.showMessageDialog(null, Strings.getString("Main.11"), Strings.getString("Main.6"),
@@ -249,6 +247,11 @@ public class Main {
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+	}
+
+	static String getGameFolderName() {
+
+		return path;
 	}
 
 	static String getModFolderName() {

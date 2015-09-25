@@ -287,9 +287,6 @@ public class GUI implements ActionListener, ChangeListener {
 				((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(selectedCountryItem))
 						.put("serfdom", String.valueOf(sldSerfdom.getValue()));
 		}
-
-		else
-			System.out.println("sdfdsf");
 	}
 
 	static HashMap<String, Object> getData() {
@@ -1479,6 +1476,11 @@ public class GUI implements ActionListener, ChangeListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+
+		if (e.getSource() == btnSave) {
+
+			saveValues(dataMap);
+		}
 
 		if (e.getSource() == cbxCountry) {
 

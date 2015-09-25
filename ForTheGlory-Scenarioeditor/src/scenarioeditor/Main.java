@@ -260,6 +260,8 @@ public class Main {
 		else
 			s = (String) cbxMods.getSelectedItem();
 
+		s = path + "\\" + s;
+
 		return s;
 	}
 

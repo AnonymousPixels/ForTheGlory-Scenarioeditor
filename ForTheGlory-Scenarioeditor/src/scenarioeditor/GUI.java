@@ -46,7 +46,7 @@ import javax.swing.event.ChangeListener;
  * @author Felix Beutter
  */
 
-public class GUI implements ActionListener, ChangeListener {
+public class GUI implements ActionListener, ChangeListener, MapEventListener {
 
 	JFrame frame;
 	GridBagLayout layout;
@@ -57,7 +57,7 @@ public class GUI implements ActionListener, ChangeListener {
 			pnlUnitNumbers, pnlNavalUnits, pnlNavalUnitNumbers;
 	JTabbedPane tabbedPane;
 	JSplitPane splitPane;
-	MapPanel map;
+	MapPanel mapPanel;
 	static JComboBox<String> cbxCountry, cbxCategory, cbxPolicyDateMonth, cbxTechnologyGroup, cbxAi, cbxMonarchtable,
 			cbxLeadertable, cbxSelectedProvince, cbxCopy, cbxCulture, cbxReligion, cbxSelectedCountry, cbxCasusBelli,
 			cbxCasusBelliMonth, cbxWarnedMonth, cbxIndependenceMonth, cbxPeaceMonth, cbxUnits, cbxUnitLocation,
@@ -161,7 +161,7 @@ public class GUI implements ActionListener, ChangeListener {
 
 			imgFrontend = ImageIO.read(GUI.class.getResource("/frontend.png"));
 			imgBackend = ImageIO.read(GUI.class.getResource("/backend.png"));
-			map = new MapPanel(imgFrontend, imgBackend,
+			mapPanel = new MapPanel(imgFrontend, imgBackend,
 					LoadMapFile.LoadFile(new File(GUI.class.getResource("/affiliation.txt").getPath())));
 
 		} catch (IOException e) {
@@ -184,7 +184,7 @@ public class GUI implements ActionListener, ChangeListener {
 		createPnlGeneral();
 		createPnlCountries();
 
-		addComponent(pnlMap, layout, map, 0, 0, 1, 1, 1, 1, new Insets(10, 10, 10, 10));
+		addComponent(pnlMap, layout, mapPanel, 0, 0, 1, 1, 1, 1, new Insets(10, 10, 10, 10));
 		addComponent(pnlMap, layout, pnlOther, 0, 1, 1, 1, 1, 0, new Insets(0, 10, 10, 10));
 		addComponent(panel, layout, splitPane, 0, 0, 1, 1, 1, 1, new Insets(0, 0, 0, 0));
 
@@ -1546,5 +1546,14 @@ public class GUI implements ActionListener, ChangeListener {
 				cbxCasusBelli.setEnabled(false);
 			}
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void provinceClicked(String s) {
+
+		HashMap<String, String> colonyMap = (HashMap<String, String>) ((HashMap<String, Object>) dataMap
+				.get("provincedata")).get(s);
+		colonyPanel.setData(colonyMap);
 	}
 }

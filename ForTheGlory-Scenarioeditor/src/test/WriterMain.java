@@ -24,8 +24,8 @@ public class WriterMain {
 		// System.out.println(((HashMap<String, Object>) ((HashMap<String,
 		// Object>) hash.get("countrydata")).get("RAM")).get("offensive"));
 
-		new SaveSettings(hash, "C://Users//Johannes//Desktop//Text.txt",
-				"C://Users//Johannes//Desktop//Text.txt");
+//		new SaveSettings(hash, "C://Users//Johannes//Desktop//Text.txt",
+//				"C://Users//Johannes//Desktop//Text.txt");
 
 	}
 

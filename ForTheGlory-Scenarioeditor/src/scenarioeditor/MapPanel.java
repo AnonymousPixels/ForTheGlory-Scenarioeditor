@@ -136,7 +136,8 @@ public class MapPanel extends JPanel implements MouseListener,
 		// ********************************************************
 
 		for (IMapEventListener listeners : listeners)
-			listeners.provinceClicked((String) map2.get(target));
+			listeners
+					.provinceClicked(String.valueOf((Integer) map2.get(target)));
 
 	}
 

@@ -1,6 +1,7 @@
 package scenarioeditor;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,6 +9,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * A useful class to load a couple of game-files from the game <i>For The
@@ -75,8 +78,8 @@ public class GameFiles {
 			String section = text.substring(text.indexOf(findWhat + "={"),
 					text.indexOf("}", text.indexOf(findWhat + "={")));
 			text = text.substring(text.indexOf("}") + 1, text.length());
-//			System.out.println(count);
-//			System.out.println(section);
+			// System.out.println(count);
+			// System.out.println(section);
 			text2 = text2 + "\n" + section;
 
 		}
@@ -93,22 +96,22 @@ public class GameFiles {
 				count2++;
 			}
 		}
-//		System.out.println("Find That: " + findWhat);
+		// System.out.println("Find That: " + findWhat);
 
 		// Wiederholungen löschen
 
 		int count3 = 1;
-//		System.out.println(tags.length);
+		// System.out.println(tags.length);
 		for (int o = 0; o < tags.length; o++) {
 			if (o > 0)
 				if (tags[o] != null && tags[o - 1] != null)
 					if (!tags[o].equals(tags[o - 1])) {
-//						System.out.println(tags[o]);
-//						System.out.println(count3);
+						// System.out.println(tags[o]);
+						// System.out.println(count3);
 						count3++;
 					}
 		}
-//		System.out.println(count3);
+		// System.out.println(count3);
 
 		String[] tags2 = new String[count3];
 		tags2[0] = tags[0];
@@ -119,12 +122,44 @@ public class GameFiles {
 				if (tags[o] != null && tags[o - 1] != null)
 					if (!tags[o].equals(tags[o - 1])) {
 						tags2[count4] = tags[o];
-//						System.out.println(tags2[count4]);
+						// System.out.println(tags2[count4]);
 						count4++;
 					}
 		}
 		Arrays.sort(tags2);
 		return tags2;
+
+	}
+
+	/**
+	 * Read the Coordinates from the Gamefiles-HashMap and associate the colors
+	 * with the Province-IDs
+	 * 
+	 * @param map
+	 *            A HashMap with all the GameFiles
+	 * @param biBackend
+	 *            The backend.png image
+	 * @return
+	 */
+
+	public static HashMap<Color, Integer> loadAffilation(
+			HashMap<String, Object> map, BufferedImage biBackend) {
+
+		Iterator it = ((HashMap<String, Object>) map.get("provincedata"))
+				.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry pair = (Map.Entry) it.next();
+			System.out.println(pair.getKey());
+
+			String value = (String) (((HashMap<String, Object>) pair.getValue())
+					.get("city"));
+			System.out.println(value);
+			value = value.replaceAll(" ", "");
+			System.out.println(value);
+			it.remove(); // avoids a ConcurrentModificationException
+		}
+
+		return null;
 
 	}
 
@@ -140,7 +175,6 @@ public class GameFiles {
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
-
 	public static HashMap<Color, Integer> loadMap(String MapPath)
 			throws IOException, InterruptedException {
 		HashMap<Color, Integer> map = new HashMap<Color, Integer>();
@@ -151,16 +185,16 @@ public class GameFiles {
 			if (line.startsWith("ID")) {
 				String line2 = line.substring(9);
 				String line3 = line2.substring(0, line2.indexOf(" "));
-//				System.out.println(line3);
+				// System.out.println(line3);
 
 				String line4 = line2.substring(line2.indexOf(" ",
 						line2.indexOf(" ") + 1) + 1);
 				String line5 = line4.substring(0, 6);
-//				System.out.println(line5);
+				// System.out.println(line5);
 				int zahl = Integer.parseInt(line5, 16);
-//				System.out.println(zahl);
+				// System.out.println(zahl);
 				Color color = new Color(zahl);
-//				System.out.println(color.getRed());
+				// System.out.println(color.getRed());
 				map.put(color, Integer.parseInt(line3));
 			}
 		br.close();
@@ -187,11 +221,11 @@ public class GameFiles {
 		int i = 0;
 		while ((line = br.readLine()) != null)
 			if (line.endsWith("{")) {
-//				System.out.println(line);
+				// System.out.println(line);
 				String line2 = line.substring(0, line.indexOf("="));
-//				System.out.println(line2);
+				// System.out.println(line2);
 				String line3 = line2.trim();
-//				System.out.println(line3);
+				// System.out.println(line3);
 				cultures[i] = line3;
 				i++;
 			}
@@ -221,11 +255,11 @@ public class GameFiles {
 		int i = 0;
 		while ((line = br.readLine()) != null)
 			if (line.endsWith("{")) {
-//				System.out.println(line);
+				// System.out.println(line);
 				String line2 = line.substring(0, line.indexOf("="));
-//				System.out.println(line2);
+				// System.out.println(line2);
 				String line3 = line2.trim();
-//				System.out.println(line3);
+				// System.out.println(line3);
 				cultures[i] = line3;
 				i++;
 			}
@@ -264,11 +298,11 @@ public class GameFiles {
 					&& !line.contains("conflict")
 					&& !line.contains("aggressiveness")
 					&& !line.contains("income_bonus") && !line.contains("war")) {
-//				System.out.println(line);
+				// System.out.println(line);
 				String line2 = line.substring(0, line.indexOf("="));
-//				System.out.println(line2);
+				// System.out.println(line2);
 				String line3 = line2.trim();
-//				System.out.println(line3);
+				// System.out.println(line3);
 				cultures[i] = line3;
 				i++;
 			}
@@ -299,11 +333,11 @@ public class GameFiles {
 		int i = 0;
 		while ((line = br.readLine()) != null)
 			if (line.endsWith("{")) {
-//				System.out.println(line);
+				// System.out.println(line);
 				String line2 = line.substring(0, line.indexOf("="));
-//				System.out.println(line2);
+				// System.out.println(line2);
 				String line3 = line2.trim();
-//				System.out.println(line3);
+				// System.out.println(line3);
 				cultures[i] = line3;
 				i++;
 			}

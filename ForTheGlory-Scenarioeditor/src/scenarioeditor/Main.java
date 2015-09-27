@@ -73,6 +73,9 @@ public class Main {
 		frame.setResizable(false);
 		frame.setLayout(layout);
 
+		ImageIcon icon = new ImageIcon(GUI.class.getResource("/logo.png"));
+		frame.setIconImage(icon.getImage());
+
 		panel = new JPanel();
 		panel.setLayout(layout);
 		panel.setBackground(clrBackground);

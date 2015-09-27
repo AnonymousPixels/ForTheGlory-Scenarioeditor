@@ -283,7 +283,7 @@ public class SettingReader {
 		// Settings.hashmap.put("provincedata", provincesettinghashmap.clone());
 		Settings.putInHashMap("provincedata", provincesettinghashmap.clone());
 		
-		System.out.println("City: " + ((HashMap<String, Object>) provincesettinghashmap.get("1")).get("city"));
+		
 	}
 
 	public void getArmynames(String countryfilepath) throws IOException {

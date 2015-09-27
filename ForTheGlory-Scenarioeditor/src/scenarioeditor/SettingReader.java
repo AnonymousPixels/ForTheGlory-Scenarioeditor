@@ -41,7 +41,7 @@ public class SettingReader {
 //		getCultures(gamepath + "//Db//cultures.txt");
 //		getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
 //
-//		getProvinces(gamepath + "//Db//Map//provinces.txt");
+		getProvinces(gamepath + "//Db//Map//provinces.txt");
 
 //		 getArmynames(gamepath + "//Db//armynames.txt");
 
@@ -256,7 +256,7 @@ public class SettingReader {
 					"colonization_difficulty", "cot_modifier", "city_name",
 					"goods", "income", "manpower", "culture", "religion",
 					"climate", "size_modifier", "terrain", "type", "area",
-					"region", "continent", "name", "id", "terrain1",
+					"region", "continent", "name", "id", "terrain1", "city",
 					"terrain2", "terrain3", "terrain4", "river" };
 			for (String s : checkFor) {
 
@@ -282,6 +282,8 @@ public class SettingReader {
 
 		// Settings.hashmap.put("provincedata", provincesettinghashmap.clone());
 		Settings.putInHashMap("provincedata", provincesettinghashmap.clone());
+		
+		System.out.println("City: " + ((HashMap<String, Object>) provincesettinghashmap.get("1")).get("city"));
 	}
 
 	public void getArmynames(String countryfilepath) throws IOException {

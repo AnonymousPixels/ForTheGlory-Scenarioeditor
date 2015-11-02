@@ -7,14 +7,13 @@ public class Settings {
 
 	public static HashMap<String, Object> hashmap;
 
-	public static HashMap<String, Object> getSettings(String gamepath,
-			String scenariofilepath) throws IOException {
+	public static HashMap<String, Object> getSettings(String gamepath,  String scenariofilepath)
+			throws IOException {
 
 		hashmap = new HashMap<String, Object>();
-
-		new SettingReader(gamepath);
-		// new scenarioreader(scenariofilepath);
-		// new readIncludes(gamepath);
+		String language = "German";
+		//Language is the name of the folder in the Localisation folder.
+		new SettingReader(gamepath, language, hashmap);
 		return hashmap;
 	}
 

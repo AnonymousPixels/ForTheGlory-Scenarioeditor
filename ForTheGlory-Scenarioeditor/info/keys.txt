@@ -1,3 +1,116 @@
+countrydata
+	tag der einzelnen countries (USA, PRU, ...)
+		offensive
+		serfdom
+		color
+		navy
+		history
+		aristocracy
+		leader_language
+		elector
+		picture
+		quality
+		army
+		innovative
+		new_colony
+		techgroup
+		centralization
+		mercantilism
+		land
+		
+localisationdata
+	tag der einzelnen countries (USA, PRU, ...)
+		name: liefert den Vollen Namen der Country zurück
+		
+provincedata
+	id der province
+		terrain
+		sea_adjacency
+		tolerance
+		tp_negotiation
+		efficiency
+		ferocity
+		combat
+		colonization_difficulty
+		cot_modifier
+		city_name
+		goods
+		income
+		manpower
+		culture
+		religion
+		climate 
+		size_modifier 
+		terrain 
+		type 
+		area 
+		region
+ 		continent
+		name 
+		id 
+		terrain1 
+		city 
+		terrain2 
+		terrain3 
+		terrain4
+		river
+
+culturedata
+	culturetag
+		city
+		buildings
+		color
+		
+techgroupdata
+	techgroupname
+		tech_speed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Keine Ahunung ob  man das noch braucht oder nicht aktuell eigentlihc nicht
+
 "techgroups_list", techgroups_array
 "techgroups_speed", techspeed_array
 "cultures_list", cultures_array

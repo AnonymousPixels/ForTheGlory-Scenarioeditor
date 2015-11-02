@@ -42,8 +42,8 @@ public class SaveSettings {
 
 		file = new File(Main.getGameFolderName() + "\\Mods\\" + Main.getModFolderName());
 		SaveCountries(settings, file + "//db//countries.txt");
-		// SaveProvinces(settings, file + "//db//Map//provinces..txt");
-		JOptionPane.showMessageDialog(null, "Das Szenario wurde erfolgreich gespeichert!");
+		SaveProvinces(settings, file + "//db//Map//provinces.txt");
+		JOptionPane.showMessageDialog(null, "Das Szenario wurde erfolgreich gespeichert! (~SaveSettings.java useless no try/catch @Felix)");
 
 	}
 

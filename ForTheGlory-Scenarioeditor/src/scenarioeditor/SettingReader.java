@@ -9,41 +9,64 @@ public class SettingReader {
 	public static BufferedReader reader;
 	public static FileReader file;
 	public static String input, line;
-	public static int brackets, bracketposition, counter_country,
-			counter_techgroups, counter_techspeed, counter_cultures,
-			counter_cultures_city, counter_cultures_buildings,
-			counter_cultures_color;
-	public static String[] shortcountryname_array, cultures_array,
-			cultures_city_array, cultures_color_array,
-			cultures_buildings_array, techgroups_array, techspeed_array;
+	public static int brackets, bracketposition, counter_country, counter_techgroups, counter_techspeed,
+			counter_cultures, counter_cultures_city, counter_cultures_buildings, counter_cultures_color;
 
-	public static String[] newcountry_array, picture_array, color_array,
-			techgroup_array, leader_language_array, new_colony_array,
-			army_array, navy_array, aristocracy_array, centralization_array,
-			innovative_array, mercantilism_array, offensive_array, land_array,
-			quality_array, serfdom_array, elector_array;
+	public static HashMap<String, Object> provincesettinghashmap, provincehashmap, countryhashmap,
+			countrysettinghashmap, countrynamehashmap, culturesettingshashmap, culturehashmap, techgroupsettingshashmap,
+			techgrouphashmap;
 
-	public static HashMap<String, Object> provincesettinghashmap,
-			provincehashmap, countryhashmap, countrysettinghashmap;
-
-	public static String id, name, efficiency, tolerance, tp_negotiation,
-			ferocity, combat, colonization_difficulty, continent, region, area,
-			type, terrain, size_modifier, climate, religion, culture, manpower,
-			income, goods, city_name, cot_modifier;
+	public static String id, name, efficiency, tolerance, tp_negotiation, ferocity, combat, colonization_difficulty,
+			continent, region, area, type, terrain, size_modifier, climate, religion, culture, manpower, income, goods,
+			city_name, cot_modifier;
 	public static String varification;
 
-	// , String countryfilepath, String culturefilepath, String
-	// techgroupfilepath, String provincefilepath, String armynamesfilepath
+	public static String countryname, countrytag;
 
-	public SettingReader(String gamepath) throws IOException {
+	public SettingReader(String gamepath, String language, HashMap<String, Object> hashmap) throws IOException {
 
 		getCountrySettings(gamepath + "//Db//countries.txt");
-//		getCultures(gamepath + "//Db//cultures.txt");
-//		getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
-//
 		getProvinces(gamepath + "//Db//Map//provinces.txt");
+		getLocalisation(gamepath + "//Localisation//" + language + "//countries.csv", hashmap);
+		getCultures(gamepath + "//Db//cultures.txt");
+		getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
 
-//		 getArmynames(gamepath + "//Db//armynames.txt");
+		// USELESS
+		// ===============================================
+		// getArmynames(gamepath + "//Db//armynames.txt");
+
+	}
+
+	public void getLocalisation(String localisationpath, HashMap<String, Object> hashmap) throws IOException {
+		countrynamehashmap = new HashMap<String, Object>();
+		countryhashmap = new HashMap<String, Object>();
+		file = new FileReader(localisationpath);
+		reader = new BufferedReader(file);
+		input = reader.readLine();
+		line = "";
+
+		while (input != null) {
+			if (input.indexOf("#") != 1) {
+				// System.out.println(input);
+				line = line + input + "\n";
+				input = reader.readLine();
+			}
+		}
+
+		String[] lines = line.split("[\\r\\n]+");
+
+		for (int i = 0; i < lines.length; i++) {
+			if (!lines[i].contains("_DESC") && lines[i].charAt(0) != '#') {
+
+				countrytag = lines[i].substring(0, 3);
+				countryname = lines[i].substring(4, lines[i].lastIndexOf(";")).replaceAll(";", "");
+				countryhashmap.put("name", countryname);
+				countrynamehashmap.put(countrytag, countryhashmap.clone());
+
+			}
+		}
+
+		Settings.hashmap.put("localisation", countrynamehashmap.clone());
 
 	}
 
@@ -58,8 +81,12 @@ public class SettingReader {
 
 		input = reader.readLine();
 		while (input != null) {
-			line = line + input + "\n";
-			input = reader.readLine();
+
+			if (input.indexOf("#") != 1) {
+				// System.out.println(input);
+				line = line + input + "\n";
+				input = reader.readLine();
+			}
 		}
 
 		String[] lines = line.split("[\\r\\n]+");
@@ -78,26 +105,25 @@ public class SettingReader {
 
 			}
 			if (input.contains("history")) {
-			} else if ((input != null || input != "") && brackets == 1
-					&& input.contains("={")) {
+			} else if ((input != null || input != "") && brackets == 1 && input.contains("={")) {
 				varification = input.substring(0, 3);
 			}
-			String[] checkFor = { "picture", "color", "techgroup",
-					"leader_language", "combat", "colonization_difficulty",
-					"cot_modifier", "new_colony", "army", "navy",
-					"aristocracy", "centralization", "innovative",
-					"mercantilism", "offensive", "land", "serfdom", "quality",
+			String[] checkFor = { "picture", "color", "techgroup", "leader_language", "combat",
+					"colonization_difficulty", "cot_modifier", "new_colony", "army", "navy", "aristocracy",
+					"centralization", "innovative", "mercantilism", "offensive", "land", "serfdom", "quality",
 					"elector", "history", "varification" };
 			for (String s : checkFor) {
 
 				if (input.contains(s) && s != null) {
 					String property = input.replaceAll(s + "=", "");
 					countryhashmap.put(s, property);
+
 				}
 			}
 			if (brackets == 0) {
 
 				countrysettinghashmap.put(varification, countryhashmap.clone());
+
 			}
 		}
 
@@ -112,113 +138,119 @@ public class SettingReader {
 
 	}
 
-	public void getCultures(String countryfilepath) throws IOException {
+	public void getCultures(String culturefilepath) throws IOException {
 
-		file = new FileReader(countryfilepath);
+		culturesettingshashmap = new HashMap<String, Object>();
+		file = new FileReader(culturefilepath);
 		reader = new BufferedReader(file);
-		counter_cultures = 0;
-		counter_cultures_city = 0;
-		counter_cultures_buildings = 0;
-		counter_cultures_color = 0;
 		input = "";
-		cultures_array = new String[9999];
-		cultures_city_array = new String[9999];
-		cultures_color_array = new String[9999];
-		cultures_buildings_array = new String[9999];
-
-		bracketposition = 0;
+		id = "";
+		line = "";
+		varification = "";
 
 		input = reader.readLine();
 		while (input != null) {
+
+			if (input.indexOf("#") != 1 || input.indexOf("#") != 0) {
+				System.out.println(input);
+				line = line + input + "\n";
+				input = reader.readLine();
+			}
+		}
+
+		String[] lines = line.split("[\\r\\n]+");
+		culturehashmap = new HashMap<String, Object>();
+		for (String input : lines) {
+			input = input.replaceAll(" ", "");
+			input = input.replaceAll("	", "");
+			input = input.replaceAll("\"", "");
 			if (input.contains("{")) {
 				brackets++;
-
 			}
 			if (input.contains("}")) {
 				brackets--;
 			}
-			input = input.replaceAll(" ", "");
-			input = input.replaceAll("	", "");
-			if (brackets == 1 && input != null) {
-				if (input.contains("={")) {
-					input = input.replace("={", "");
-					cultures_array[counter_cultures] = input;
-					counter_cultures++;
-				}
-
-				if (input.contains("city=")) {
-					input = input.replace("city=", "");
-					cultures_city_array[counter_cultures] = input;
-					counter_cultures_city++;
-				}
-				if (input.contains("buildings=")) {
-					input = input.replace("buildings=", "");
-					cultures_buildings_array[counter_cultures] = input;
-					counter_cultures_buildings++;
-				}
-				if (input.contains("color=")) {
-					input = input.replace("color=", "");
-					cultures_color_array[counter_cultures] = input;
-					counter_cultures_color++;
-				}
+			if (input.trim().charAt(0) == '#') {
 
 			}
+			if ((input != null || input != "") && brackets == 1 && input.contains("={")) {
+				varification = input.substring(0, input.indexOf("="));
+			}
+			String[] checkFor = { "city", "buildings", "color" };
+			for (String s : checkFor) {
 
-			input = reader.readLine();
+				if (input.contains(s) && s != null) {
+					String property = input.replaceAll(s + "=", "");
+					culturehashmap.put(s, property);
 
+				}
+			}
+			if (brackets == 0) {
+
+				culturesettingshashmap.put(varification, culturehashmap.clone());
+
+			}
 		}
 
-		Settings.hashmap.put("cultures_list", cultures_array);
-		Settings.hashmap.put("cultures_city", cultures_city_array);
-		Settings.hashmap.put("cultures_buildings", cultures_buildings_array);
-		Settings.hashmap.put("cultures_color", cultures_color_array);
+		Settings.putInHashMap("culturedata", culturesettingshashmap.clone());
 
 	}
 
-	public void getTechgroups(String countryfilepath) throws IOException {
+	public void getTechgroups(String techgroupfilepath) throws IOException {
 
-		file = new FileReader(countryfilepath);
+		techgroupsettingshashmap = new HashMap<String, Object>();
+		file = new FileReader(techgroupfilepath);
 		reader = new BufferedReader(file);
-		counter_techgroups = 0;
-		counter_techspeed = 0;
 		input = "";
-		techgroups_array = new String[9999];
-		techspeed_array = new String[9999];
-		bracketposition = 0;
+		id = "";
+		line = "";
+		varification = "";
 
 		input = reader.readLine();
 		while (input != null) {
+
+			if (input.indexOf("#") != 1 || input.indexOf("#") != 0) {
+				// System.out.println(input);
+				line = line + input + "\n";
+				input = reader.readLine();
+			}
+		}
+
+		String[] lines = line.split("[\\r\\n]+");
+		techgrouphashmap = new HashMap<String, Object>();
+		for (String input : lines) {
+			input = input.replaceAll(" ", "");
+			input = input.replaceAll("	", "");
+			input = input.replaceAll("\"", "");
 			if (input.contains("{")) {
 				brackets++;
-
 			}
 			if (input.contains("}")) {
 				brackets--;
 			}
-			input = input.replaceAll(" ", "");
-			input = input.replaceAll("	", "");
+			if (input.trim().charAt(0) == '#') {
 
-			if (brackets == 1 && input != null && input.contains("={")) {
-				bracketposition = input.indexOf("={");
-				if (bracketposition < 0) {
-					bracketposition = 0;
+			}
+			if ((input != null || input != "") && brackets == 1 && input.contains("={")) {
+				varification = input.substring(0, input.indexOf("="));
+			}
+			String[] checkFor = { "tech_speed" };
+			for (String s : checkFor) {
+
+				if (input.contains(s) && s != null) {
+					String property = input.replaceAll(s + "=", "");
+					techgrouphashmap.put(s, property);
+
 				}
-				input = input.substring(0, bracketposition);
-				input = input.replace("={", "");
-				techgroups_array[counter_techgroups] = input;
-				counter_techgroups++;
 			}
-			if (brackets == 1 && input != null && input.contains("tech_speed=")) {
-				input = input.replaceAll("tech_speed=", "");
-				techspeed_array[counter_techspeed] = input;
-				counter_techspeed++;
-			}
+			if (brackets == 0) {
 
-			input = reader.readLine();
+				techgroupsettingshashmap.put(varification, techgrouphashmap.clone());
+
+			}
 		}
 
-		Settings.hashmap.put("techgroups_list", techgroups_array);
-		Settings.hashmap.put("techgroups_speed", techspeed_array);
+		Settings.putInHashMap("techgroupdata", techgroupsettingshashmap.clone());
 	}
 
 	public void getProvinces(String countryfilepath) throws IOException {
@@ -251,13 +283,10 @@ public class SettingReader {
 			if (input.trim().charAt(0) == '#') {
 
 			}
-			String[] checkFor = { "terrain", "sea_adjacency", "tolerance",
-					"tp_negotiation", "efficiency", "ferocity", "combat",
-					"colonization_difficulty", "cot_modifier", "city_name",
-					"goods", "income", "manpower", "culture", "religion",
-					"climate", "size_modifier", "terrain", "type", "area",
-					"region", "continent", "name", "id", "terrain1", "city",
-					"terrain2", "terrain3", "terrain4", "river" };
+			String[] checkFor = { "terrain", "sea_adjacency", "tolerance", "tp_negotiation", "efficiency", "ferocity",
+					"combat", "colonization_difficulty", "cot_modifier", "city_name", "goods", "income", "manpower",
+					"culture", "religion", "climate", "size_modifier", "terrain", "type", "area", "region", "continent",
+					"name", "id", "terrain1", "city", "terrain2", "terrain3", "terrain4", "river" };
 			for (String s : checkFor) {
 
 				if (input.contains(s)) {
@@ -282,34 +311,7 @@ public class SettingReader {
 
 		// Settings.hashmap.put("provincedata", provincesettinghashmap.clone());
 		Settings.putInHashMap("provincedata", provincesettinghashmap.clone());
-		
-		
-	}
-
-	public void getArmynames(String countryfilepath) throws IOException {
-
-		file = new FileReader(countryfilepath);
-		reader = new BufferedReader(file);
-		counter_techgroups = 0;
-		counter_techspeed = 0;
-		input = "";
-		techgroups_array = new String[9999];
-		techspeed_array = new String[9999];
-		bracketposition = 0;
-
-		input = reader.readLine();
-		while (input != null) {
-			if (input.contains("{")) {
-				brackets++;
-
-			}
-			if (input.contains("}")) {
-				brackets--;
-			}
-
-			System.out.println(input);
-			input = reader.readLine();
-		}
 
 	}
+
 }

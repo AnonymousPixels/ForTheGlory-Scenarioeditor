@@ -112,8 +112,15 @@ public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 			CasusBelliTypes = { Strings.getString("CasusBelliPermanent"), Strings.getString("CasusBelliTemporary") },
 			climate = { "arctic", "tropical", "temperate", "ncontinental", "scontinental", "tundra", "desertic" },
 			days = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18",
-					"19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" };
+					"19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" },
+			countryTags;
 
+	/**
+	 * Constructor of 'GUI' class. Creates JFrame and add components
+	 * 
+	 * @throws IOException
+	 * @throws InterruptedException
+	 */
 	public GUI() throws IOException, InterruptedException {
 
 		readData();
@@ -211,7 +218,45 @@ public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 	}
 
 	@SuppressWarnings("unchecked")
-	static void setData(HashMap<String, Object> map) {
+	String getFullCountryName(HashMap<String, Object> map, String shortcut) {
+
+		return (String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata")).get(shortcut))
+				.get("name");
+	}
+
+	/**
+	 * The 'getFullCountryNames' method returns a String[] which contains the
+	 * full name of every country
+	 * 
+	 * @param map
+	 *            HashMap, which contains the required data
+	 * @param shortcuts
+	 *            String[], which contains the tag of every country
+	 * @return String[], which contains the full name of every country
+	 */
+	@SuppressWarnings("unchecked")
+	String[] getFullCountryNames(HashMap<String, Object> map, String[] shortcuts) {
+
+		String[] fullNames = new String[shortcuts.length];
+
+		for (int i = 0; i < fullNames.length; i++) {
+
+			fullNames[i] = (String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
+					.get(shortcuts[i])).get("name");
+		}
+
+		return fullNames;
+	}
+
+	/**
+	 * The 'setData' method fills the country combobox with data and executes
+	 * the 'setValues' method
+	 * 
+	 * @param map
+	 *            HashMap, which includes the required data
+	 */
+	@SuppressWarnings("unchecked")
+	void setData(HashMap<String, Object> map) {
 
 		// Iterator<Entry<String, Object>> it = map.entrySet().iterator();
 		// while (it.hasNext()) {
@@ -221,19 +266,28 @@ public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 		// }
 
 		Set<String> keys = ((HashMap<String, Object>) map.get("countrydata")).keySet();
-		String[] coutryTags = keys.toArray(new String[keys.size()]);
-		Arrays.sort(coutryTags);
+		countryTags = keys.toArray(new String[keys.size()]);
+		Arrays.sort(countryTags);
+
 		cbxCountry.removeAll();
-		for (String s : coutryTags)
+		for (String s : countryTags)
 			if (!s.equals(""))
 				cbxCountry.addItem(s);
 
-		selectedCountryItem = coutryTags[0];
+		selectedCountryItem = countryTags[0];
 		setValues(map);
 	}
 
+	/**
+	 * The 'setValues' method sets all the county specified data
+	 * 
+	 * @param map
+	 *            HashMap, which includes the required data
+	 */
 	@SuppressWarnings("unchecked")
-	static void setValues(HashMap<String, Object> map) {
+	void setValues(HashMap<String, Object> map) {
+
+		// Policy
 
 		sldAristocracy.setValue(
 				Integer.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
@@ -293,7 +347,7 @@ public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 		}
 	}
 
-	static HashMap<String, Object> getData() {
+	HashMap<String, Object> getData() {
 
 		return dataMap;
 	}
@@ -301,7 +355,7 @@ public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 	void readData() {
 
 		try {
-			dataMap = Settings.getSettings(Main.path, scenarioFilePath);
+			dataMap = Settings.getSettings(Main.path, Main.cbxLanguage.getSelectedItem().toString(), scenarioFilePath);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

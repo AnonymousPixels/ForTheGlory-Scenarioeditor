@@ -38,11 +38,11 @@ public class Main {
 	static JFrame frame;
 	static JPanel panel;
 	static GridBagLayout layout;
-	static JLabel lblPath, lblMods, lblName;
+	static JLabel lblPath, lblMods, lblName, lblLanguage;
 	static JTextField txfPath, txfName;
 	static JButton btnPath, btnContinue, btnAccept;
 	static JFileChooser chooser;
-	static JComboBox<String> cbxMods = new JComboBox<>();
+	static JComboBox<String> cbxMods = new JComboBox<>(), cbxLanguage = new JComboBox<>();
 	static File file;
 	static String path = "";
 	static Color clrBackground = new Color(240, 240, 240), clrFont = new Color(0, 0, 0);
@@ -104,7 +104,7 @@ public class Main {
 
 		addComponent(panel, layout, btnPath, 1, 0, 1, 1, 0, 0, new Insets(10, 0, 10, 10));
 
-		txfPath = new JTextField("C:\\Program Files (x86)\\Steam\\SteamApps\\common\\For The Glory\\");
+		txfPath = new JTextField("D:\\Steam\\steamapps\\common\\For The Glory");
 		txfPath.setEditable(false);
 		txfPath.setForeground(clrFont);
 		txfPath.setBackground(Color.white);
@@ -125,6 +125,7 @@ public class Main {
 
 					String modDir = path + "//Mods";
 					File[] modFiles = new File(modDir).listFiles();
+					
 					String[] mods = new String[1];
 
 					mods[0] = Strings.getString("Main.10");
@@ -157,9 +158,26 @@ public class Main {
 							}
 						}
 					});
-					addComponent(panel, layout, cbxMods, 0, 4, 2, 1, 1, 0, new Insets(0, 10, 10, 10));
-					cbxMods.setVisible(false);
+					addComponent(panel, layout, cbxMods, 0, 6, 2, 1, 1, 0, new Insets(0, 10, 10, 10));
+					
+					File[] languagesFiles = new File(path + "\\Localisation").listFiles();
+					String[] languages = new String[0];
+					
+					for (int i = 0; i < languagesFiles.length; i++) {
 
+						if (languagesFiles[i].isDirectory()) {
+							
+							String[] languages2 = new String[languages.length + 1];
+							System.arraycopy(languages, 0, languages2, 0, languages.length);
+							languages2[languages.length] = languagesFiles[i].getName();
+							languages = languages2;
+						}
+					}
+					
+					cbxLanguage = new JComboBox<>(languages);
+					addComponent(panel, layout, cbxLanguage, 0, 4, 2, 1, 1, 0, new Insets(0, 10, 10, 10));
+					
+					lblLanguage.setVisible(true);
 					lblMods.setVisible(true);
 					cbxMods.setVisible(true);
 					lblName.setVisible(true);
@@ -182,20 +200,20 @@ public class Main {
 		lblMods = new JLabel(Strings.getString("Main.7"), SwingConstants.LEFT);
 		lblMods.setForeground(Color.black);
 		lblMods.setFont(fntStandart);
-		addComponent(panel, layout, lblMods, 0, 3, 2, 1, 1, 0, new Insets(10, 10, 5, 10));
+		addComponent(panel, layout, lblMods, 0, 5, 2, 1, 1, 0, new Insets(10, 10, 5, 10));
 		lblMods.setVisible(false);
 
 		lblName = new JLabel(Strings.getString("Main.8"), SwingConstants.LEFT);
 		lblName.setForeground(Color.black);
 		lblName.setFont(new Font("Verdana", 0, 12));
-		addComponent(panel, layout, lblName, 0, 5, 2, 1, 1, 0, new Insets(5, 10, 5, 10));
+		addComponent(panel, layout, lblName, 0, 7, 2, 1, 1, 0, new Insets(5, 10, 5, 10));
 		lblName.setVisible(false);
 
 		txfName = new JTextField();
 		txfName.setEditable(true);
 		txfName.setForeground(Color.black);
 		txfName.setBackground(Color.white);
-		addComponent(panel, layout, txfName, 0, 6, 2, 1, 1, 0, new Insets(0, 10, 10, 10));
+		addComponent(panel, layout, txfName, 0, 8, 2, 1, 1, 0, new Insets(0, 10, 10, 10));
 		txfName.setVisible(false);
 
 		btnAccept = new JButton(Strings.getString("Main.9"));
@@ -244,9 +262,15 @@ public class Main {
 					loadingThread.start();
 			}
 		});
-		addComponent(panel, layout, btnAccept, 1, 7, 1, 1, 0, 0, new Insets(0, 10, 10, 10));
+		addComponent(panel, layout, btnAccept, 1, 9, 1, 1, 0, 0, new Insets(0, 10, 10, 10));
 		btnAccept.setVisible(false);
-
+		
+		lblLanguage = new JLabel(Strings.getString("Main.12"), SwingConstants.LEFT);
+		lblLanguage.setForeground(clrFont);
+		lblLanguage.setFont(fntStandart);
+		addComponent(panel, layout, lblLanguage, 0, 3, 2, 1, 1, 0, new Insets(10, 10, 10, 10));
+		lblLanguage.setVisible(false);
+		
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);

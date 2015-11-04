@@ -29,13 +29,13 @@ public class SettingReader {
 			throws IOException {
 
 		
-		  getCountrySettings(gamepath + "//Db//countries.txt");
+//		  getCountrySettings(gamepath + "//Db//countries.txt");
 		  getProvinces(gamepath + "//Db//Map//provinces.txt"); //
-		  getProvinces2(gamepath + "//Db//Map//provinces.txt");
-		  getLocalisation(gamepath + "//Localisation//" + language +
-		  "//countries.csv", hashmap); getCultures(gamepath +
-		  "//Db//cultures.txt"); getTechgroups(gamepath +
-		  "//Db//Technologies//techgroups.txt");
+//		  getProvinces2(gamepath + "//Db//Map//provinces.txt");
+//		  getLocalisation(gamepath + "//Localisation//" + language +
+//		  "//countries.csv", hashmap); getCultures(gamepath +
+//		  "//Db//cultures.txt"); getTechgroups(gamepath +
+//		  "//Db//Technologies//techgroups.txt");
 		
 		// USELESS
 		// ===============================================
@@ -56,7 +56,7 @@ public class SettingReader {
 
 		while (input != null) {
 			if (input.indexOf("#") != 1) {
-				System.out.println(input);
+				
 				line = line + input + "\n";
 				input = reader.readLine();
 			}
@@ -65,9 +65,13 @@ public class SettingReader {
 		String[] lines = line.split("[\\r\\n]+");
 		
 		for (String input : lines) {
-			input = input.replaceAll(" ", "");
-			input = input.replaceAll("	", "");
+			input = input.replaceAll("\t", "");
 			input = input.replaceAll("\"", "");
+			System.out.println(input);
+			if ((input != null && input != "") && brackets == 0 && input.contains("= {")) {
+				varification = input.substring(0, input.indexOf("= {"));
+				System.out.println("varification: " + varification);
+			}
 			if (input.contains("{")) {
 				brackets++;
 			}
@@ -75,24 +79,25 @@ public class SettingReader {
 				brackets--;
 			}
 			if (input.trim().charAt(0) == '#') {
-
+				
 			}
 			if (input.contains("history")) {
-			} else if ((input != null || input != "") && brackets == 1 && input.contains("={")) {
-				varification = input.substring(0, input.indexOf("="));
-				System.out.println(varification);
 			}
-			String[] checkFor = { "name", "startyear" ,  "endyear" , "startdate" , };
-			for (String s : checkFor) {
+			
+			
+			if(brackets >= 1){
+				String[] checkFor = { "name", "startyear" ,  "endyear" , "startdate" , };
+				for (String s : checkFor) {
+					
+					if (input.contains(s) && s != null) {
 
-				if (input.contains(s) && s != null) {
+						String property = input.replaceAll(s + "=", "");
+						scenariohashmap.put(s, property);
 
-					String property = input.replaceAll(s + "=", "");
-					scenariohashmap.put(s, property);
-
+					}
 				}
 			}
-			if (brackets == 0) {
+			if (brackets == 0 && varification != null) {
 
 				scenarioeeghashmap.put(varification, scenariohashmap.clone());
 
@@ -344,6 +349,8 @@ public class SettingReader {
 			}
 		}
 
+		System.out.println("Finish wwfawfihawfonlaf");
+		
 		String[] lines = line.split("[\\r\\n]+");
 		provincehashmap = new HashMap<String, Object>();
 		for (String input : lines) {
@@ -365,10 +372,15 @@ public class SettingReader {
 					"culture", "religion", "climate", "size_modifier", "terrain", "type", "area", "region", "continent",
 					"name", "id", "terrain1", "city", "terrain2", "terrain3", "terrain4", "river" };
 			for (String s : checkFor) {
-
+				
 				if (input.contains(s)) {
 					String property = input.replaceAll(s + "=", "");
+					
+					
 					provincehashmap.put(s, property);
+					
+					
+					
 					if (s.contains("id") && property.length() <= 4)
 						id = property;
 
@@ -377,6 +389,7 @@ public class SettingReader {
 			}
 			if (brackets == 0) {
 				provincesettinghashmap.put(id, provincehashmap.clone());
+				provincehashmap.clear();
 			}
 		}
 		Settings.putInHashMap("provincedata", provincesettinghashmap.clone());

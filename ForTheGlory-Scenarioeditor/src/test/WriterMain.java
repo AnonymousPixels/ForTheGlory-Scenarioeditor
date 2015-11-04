@@ -19,12 +19,14 @@ public class WriterMain {
 		hash = Settings.hashmap;
 		
 
-//		System.out.println((HashMap<String, Object>) ((HashMap<String, Object>) hash.get("scenariodata")).get("startyear"));
+		System.out.println((HashMap<String, Object>) ((HashMap<String, Object>) ((HashMap<String, Object>) hash.get("provincedata")).get("1404")).get("city"));
+System.out.println("----------------------------");
+		for (String key : ((HashMap<String, Object>) hash.get("provincedata")).keySet()) {
+			System.out.println(key + ((HashMap<String, Object>) ((HashMap<String, Object>) hash.get("provincedata")).get(key)).get("city"));
 //
-//		for (String key : ((HashMap<String, Object>) hash.get("scenariodata")).keySet()) {
-//			System.out.println(key);
-//
-//		}
+		}
+		
+		
 
 		// new SaveSettings(hash);
 

@@ -17,6 +17,7 @@ public class WriterMain {
 		scenarioeditor.Settings.getSettings("C://Program Files (x86)//Steam//steamapps//common//For The Glory", "German",
 				"C://Program Files (x86)//Steam//steamapps//common//For The Glory//Scenarios//1419 - The Grand Campaign.eeg");
 		hash = Settings.hashmap;
+		
 
 //		System.out.println((HashMap<String, Object>) ((HashMap<String, Object>) hash.get("scenariodata")).get("startyear"));
 //

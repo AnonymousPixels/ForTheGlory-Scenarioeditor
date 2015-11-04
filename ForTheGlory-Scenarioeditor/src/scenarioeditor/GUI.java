@@ -93,7 +93,8 @@ public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 	GlobalDataPanel globalDataPanel;
 	GameFiles gameFiles;
 	HashMap<Color, Integer> hashMap = new HashMap<Color, Integer>();
-	HashMap<String, String> values = new HashMap<String, String>();
+	HashMap<String, String> values = new HashMap<String, String>(), countryFullNamesMap = new HashMap<String, String>(),
+			countryNameTagsMap = new HashMap<String, String>();
 	HashMap<String, String[]> selectables = new HashMap<String, String[]>();
 	static HashMap<String, Object> dataMap = new HashMap<String, Object>();
 	Dimension minSize = new Dimension(1200, 720);
@@ -209,7 +210,7 @@ public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 
-		selectedCountryItem = (String) cbxCountry.getSelectedItem();
+		selectedCountryItem = (String) countryNameTagsMap.get(cbxCountry.getSelectedItem());
 
 		ImageIcon icon = new ImageIcon(GUI.class.getResource("/logo.png"));
 		frame.setIconImage(icon.getImage());
@@ -245,7 +246,23 @@ public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 					.get(shortcuts[i])).get("name");
 		}
 
+		Arrays.sort(fullNames);
 		return fullNames;
+	}
+
+	@SuppressWarnings("unchecked")
+	void setCountryNameMaps(HashMap<String, Object> map, String[] shortcuts) {
+
+		for (int i = 0; i < shortcuts.length; i++) {
+
+			countryFullNamesMap.put(shortcuts[i],
+					(String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
+							.get(shortcuts[i])).get("name"));
+
+			countryNameTagsMap
+					.put((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
+							.get(shortcuts[i])).get("name"), shortcuts[i]);
+		}
 	}
 
 	/**
@@ -269,12 +286,16 @@ public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 		countryTags = keys.toArray(new String[keys.size()]);
 		Arrays.sort(countryTags);
 
+		setCountryNameMaps(map, countryTags);
+		String[] countryNames = countryNameTagsMap.keySet().toArray(new String[keys.size()]);
+		Arrays.sort(countryNames);
+		
 		cbxCountry.removeAll();
-		for (String s : countryTags)
+		for (String s : countryNames)
 			if (!s.equals(""))
 				cbxCountry.addItem(s);
 
-		selectedCountryItem = countryTags[0];
+		selectedCountryItem = countryNames[0];
 		setValues(map);
 	}
 
@@ -291,28 +312,28 @@ public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 
 		sldAristocracy.setValue(
 				Integer.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
-						.get(cbxCountry.getSelectedItem())).get("aristocracy")));
+						.get(countryNameTagsMap.get(countryNameTagsMap.get(cbxCountry.getSelectedItem())))).get("aristocracy")));
 		sldCentralization.setValue(
 				Integer.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
-						.get(cbxCountry.getSelectedItem())).get("centralization")));
+						.get(countryNameTagsMap.get(cbxCountry.getSelectedItem()))).get("centralization")));
 		sldInnovative.setValue(
 				Integer.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
-						.get(cbxCountry.getSelectedItem())).get("innovative")));
+						.get(countryNameTagsMap.get(cbxCountry.getSelectedItem()))).get("innovative")));
 		sldMercantilism.setValue(
 				Integer.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
-						.get(cbxCountry.getSelectedItem())).get("mercantilism")));
+						.get(countryNameTagsMap.get(cbxCountry.getSelectedItem()))).get("mercantilism")));
 		sldOffensive.setValue(
 				Integer.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
-						.get(cbxCountry.getSelectedItem())).get("offensive")));
+						.get(countryNameTagsMap.get(cbxCountry.getSelectedItem()))).get("offensive")));
 		sldLand.setValue(
 				Integer.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
-						.get(cbxCountry.getSelectedItem())).get("land")));
+						.get(countryNameTagsMap.get(cbxCountry.getSelectedItem()))).get("land")));
 		sldQuality.setValue(
 				Integer.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
-						.get(cbxCountry.getSelectedItem())).get("quality")));
+						.get(countryNameTagsMap.get(cbxCountry.getSelectedItem()))).get("quality")));
 		sldSerfdom.setValue(
 				Integer.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
-						.get(cbxCountry.getSelectedItem())).get("serfdom")));
+						.get(countryNameTagsMap.get(cbxCountry.getSelectedItem()))).get("serfdom")));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1555,7 +1576,7 @@ public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 
 			saveValues(dataMap);
 			setValues(dataMap);
-			selectedCountryItem = (String) cbxCountry.getSelectedItem();
+			selectedCountryItem = (String) countryNameTagsMap.get(cbxCountry.getSelectedItem());
 		}
 
 		if (e.getSource() == cbxCategory) {

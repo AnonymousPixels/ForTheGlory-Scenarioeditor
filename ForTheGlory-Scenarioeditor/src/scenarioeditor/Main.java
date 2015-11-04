@@ -10,6 +10,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -48,7 +50,7 @@ public class Main {
 	static Color clrBackground = new Color(240, 240, 240), clrFont = new Color(0, 0, 0);
 	static Font fntStandart = new Font("Verdana", 1, 12);
 
-	static boolean finishedLoading = false;
+	static boolean finishedLoading = false, alreadySetPath = false;
 
 	public static void main(String[] args) {
 
@@ -72,10 +74,10 @@ public class Main {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLayout(layout);
-
+		
 		ImageIcon icon = new ImageIcon(GUI.class.getResource("/logo.png"));
 		frame.setIconImage(icon.getImage());
-
+		
 		panel = new JPanel();
 		panel.setLayout(layout);
 		panel.setBackground(clrBackground);
@@ -125,7 +127,7 @@ public class Main {
 
 					String modDir = path + "//Mods";
 					File[] modFiles = new File(modDir).listFiles();
-					
+
 					String[] mods = new String[1];
 
 					mods[0] = Strings.getString("Main.10");
@@ -159,24 +161,24 @@ public class Main {
 						}
 					});
 					addComponent(panel, layout, cbxMods, 0, 6, 2, 1, 1, 0, new Insets(0, 10, 10, 10));
-					
+
 					File[] languagesFiles = new File(path + "\\Localisation").listFiles();
 					String[] languages = new String[0];
-					
+
 					for (int i = 0; i < languagesFiles.length; i++) {
 
 						if (languagesFiles[i].isDirectory()) {
-							
+
 							String[] languages2 = new String[languages.length + 1];
 							System.arraycopy(languages, 0, languages2, 0, languages.length);
 							languages2[languages.length] = languagesFiles[i].getName();
 							languages = languages2;
 						}
 					}
-					
+
 					cbxLanguage = new JComboBox<>(languages);
 					addComponent(panel, layout, cbxLanguage, 0, 4, 2, 1, 1, 0, new Insets(0, 10, 10, 10));
-					
+
 					lblLanguage.setVisible(true);
 					lblMods.setVisible(true);
 					cbxMods.setVisible(true);
@@ -186,6 +188,8 @@ public class Main {
 
 					btnPath.setEnabled(false);
 					btnContinue.setEnabled(false);
+					
+					alreadySetPath = true;
 
 					frame.pack();
 				} else
@@ -264,13 +268,13 @@ public class Main {
 		});
 		addComponent(panel, layout, btnAccept, 1, 9, 1, 1, 0, 0, new Insets(0, 10, 10, 10));
 		btnAccept.setVisible(false);
-		
+
 		lblLanguage = new JLabel(Strings.getString("Main.12"), SwingConstants.LEFT);
 		lblLanguage.setForeground(clrFont);
 		lblLanguage.setFont(fntStandart);
 		addComponent(panel, layout, lblLanguage, 0, 3, 2, 1, 1, 0, new Insets(10, 10, 10, 10));
 		lblLanguage.setVisible(false);
-		
+
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);

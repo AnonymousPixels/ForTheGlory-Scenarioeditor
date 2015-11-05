@@ -65,7 +65,9 @@ techgroupdata
 	techgroupname
 		tech_speed
 
-
+localisationdata
+	countrytag
+		name -> gibt Namen in jeweiliger sprache zurück
 
 
 

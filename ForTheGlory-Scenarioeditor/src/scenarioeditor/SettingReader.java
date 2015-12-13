@@ -14,11 +14,8 @@ public class SettingReader {
 
 	public static HashMap<String, Object> provincesettinghashmap, provincehashmap, countryhashmap,
 			countrysettinghashmap, countrynamehashmap, culturesettingshashmap, culturehashmap, techgroupsettingshashmap,
-<<<<<<< HEAD
+
 			techgrouphashmap, scenarioeeghashmap, scenariohashmap;
-=======
-			techgrouphashmap;
->>>>>>> origin/master
 
 	public static String id, name, efficiency, tolerance, tp_negotiation, ferocity, combat, colonization_difficulty,
 			continent, region, area, type, terrain, size_modifier, climate, religion, culture, manpower, income, goods,
@@ -27,30 +24,29 @@ public class SettingReader {
 
 	public static String countryname, countrytag;
 
-<<<<<<< HEAD
 	public SettingReader(String gamepath, String language, HashMap<String, Object> hashmap, String scenariofilepath)
 			throws IOException {
 
 		// getCountrySettings(gamepath + "//Db//countries.txt");
-		// getProvinces(gamepath + "//Db//Map//provinces.txt");
-		getLocalisation(gamepath + "//Localisation//" + language + "//countries.csv", hashmap);
-//		getCultures(gamepath + "//Db//cultures.txt");
-//		getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
-=======
-	public SettingReader(String gamepath, String language, HashMap<String, Object> hashmap) throws IOException {
+		getProvinces(gamepath + "//Db//Map//provinces.txt");
+		// getLocalisation(gamepath + "//Localisation//" + language +
+		// "//countries.csv", hashmap);
+		// getCultures(gamepath + "//Db//cultures.txt");
+		// getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
+	}
 
+	public SettingReader(String gamepath, String language, HashMap<String, Object> hashmap) throws IOException {
+		long startmillis = System.currentTimeMillis();
 		getCountrySettings(gamepath + "//Db//countries.txt");
 		getProvinces(gamepath + "//Db//Map//provinces.txt");
 		getLocalisation(gamepath + "//Localisation//" + language + "//countries.csv", hashmap);
 		getCultures(gamepath + "//Db//cultures.txt");
 		getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
->>>>>>> origin/master
-
+		System.out.println(System.currentTimeMillis()- startmillis);
 		// USELESS
 		// ===============================================
 		// getArmynames(gamepath + "//Db//armynames.txt");
 
-<<<<<<< HEAD
 		// getScenario(scenariofilepath);
 
 	}
@@ -62,20 +58,38 @@ public class SettingReader {
 		// new hashmap
 		file = new FileReader(scenariofilepath);
 		reader = new BufferedReader(file);
-		input = reader.readLine();
+		//input = reader.readLine();
 		line = "";
 
-		while (input != null) {
-			if (input.indexOf("#") != 1) {
-				System.out.println(input);
-				line = line + input + "\n";
-				input = reader.readLine();
+		StringBuilder sb = new StringBuilder();
+		try {
+
+			String line = reader.readLine();
+
+			while (line != null) {
+				sb.append(line);
+				sb.append("\n");
+				line = reader.readLine();
 			}
+		} finally {
+			reader.close();
 		}
+
+		line = sb.toString();
+
+//		while (input != null){
+//			if (input.indexOf("#") != 1) {
+//				System.out.println(input);
+//				line = line + input + "\n";
+//				input = reader.readLine();
+//			}
+//		}
 
 		String[] lines = line.split("[\\r\\n]+");
 
-		for (String input : lines) {
+		for (String input : lines)
+
+		{
 			input = input.replaceAll("\t", "");
 			input = input.replaceAll("\"", "");
 			if ((input != null && input != "") && brackets == 0 && input.contains("= {")) {
@@ -123,8 +137,6 @@ public class SettingReader {
 	private void getScenarioSettings() {
 		// TODO Auto-generated method stub
 
-=======
->>>>>>> origin/master
 	}
 
 	public void getLocalisation(String localisationpath, HashMap<String, Object> hashmap) throws IOException {
@@ -132,16 +144,36 @@ public class SettingReader {
 		countryhashmap = new HashMap<String, Object>();
 		file = new FileReader(localisationpath);
 		reader = new BufferedReader(file);
-		input = reader.readLine();
+//		input = reader.readLine();
 		line = "";
 
-		while (input != null) {
-			if (input.indexOf("#") != 1) {
-				// System.out.println(input);
-				line = line + input + "\n";
-				input = reader.readLine();
+		
+		StringBuilder sb = new StringBuilder();
+		try {
+
+			String line = reader.readLine();
+
+			while (line != null) {
+				sb.append(line);
+				sb.append("\n");
+				line = reader.readLine();
 			}
+		} finally {
+			reader.close();
 		}
+
+		line = sb.toString();
+
+		
+		
+		
+//		while (input != null) {
+//			if (input.indexOf("#") != 1) {
+//				// System.out.println(input);
+//				line = line + input + "\n";
+//				input = reader.readLine();
+//			}
+//		}
 
 		String[] lines = line.split("[\\r\\n]+");
 
@@ -170,15 +202,32 @@ public class SettingReader {
 		line = "";
 		varification = "";
 
-		input = reader.readLine();
-		while (input != null) {
+		StringBuilder sb = new StringBuilder();
+		try {
 
-			if (input.indexOf("#") != 1) {
-				// System.out.println(input);
-				line = line + input + "\n";
-				input = reader.readLine();
+			String line = reader.readLine();
+
+			while (line != null) {
+				sb.append(line);
+				sb.append("\n");
+				line = reader.readLine();
 			}
+		} finally {
+			reader.close();
 		}
+
+		line = sb.toString();
+
+		
+//		input = reader.readLine();
+//		while (input != null) {
+//
+//			if (input.indexOf("#") != 1) {
+//				// System.out.println(input);
+//				line = line + input + "\n";
+//				input = reader.readLine();
+//			}
+//		}
 
 		String[] lines = line.split("[\\r\\n]+");
 		countryhashmap = new HashMap<String, Object>();
@@ -240,15 +289,33 @@ public class SettingReader {
 		line = "";
 		varification = "";
 
-		input = reader.readLine();
-		while (input != null) {
+		StringBuilder sb = new StringBuilder();
+		try {
 
-			if (input.indexOf("#") != 1 || input.indexOf("#") != 0) {
-				System.out.println(input);
-				line = line + input + "\n";
-				input = reader.readLine();
+			String line = reader.readLine();
+
+			while (line != null) {
+				sb.append(line);
+				sb.append("\n");
+				line = reader.readLine();
 			}
+		} finally {
+			reader.close();
 		}
+
+		line = sb.toString();
+
+		
+		
+//		input = reader.readLine();
+//		while (input != null) {
+//
+//			if (input.indexOf("#") != 1 || input.indexOf("#") != 0) {
+//				System.out.println(input);
+//				line = line + input + "\n";
+//				input = reader.readLine();
+//			}
+//		}
 
 		String[] lines = line.split("[\\r\\n]+");
 		culturehashmap = new HashMap<String, Object>();
@@ -299,15 +366,34 @@ public class SettingReader {
 		line = "";
 		varification = "";
 
-		input = reader.readLine();
-		while (input != null) {
+		
+		StringBuilder sb = new StringBuilder();
+		try {
 
-			if (input.indexOf("#") != 1 || input.indexOf("#") != 0) {
-				// System.out.println(input);
-				line = line + input + "\n";
-				input = reader.readLine();
+			String line = reader.readLine();
+
+			while (line != null) {
+				sb.append(line);
+				sb.append("\n");
+				line = reader.readLine();
 			}
+		} finally {
+			reader.close();
 		}
+
+		line = sb.toString();
+
+		
+		
+//		input = reader.readLine();
+//		while (input != null) {
+//
+//			if (input.indexOf("#") != 1 || input.indexOf("#") != 0) {
+//				// System.out.println(input);
+//				line = line + input + "\n";
+//				input = reader.readLine();
+//			}
+//		}
 
 		String[] lines = line.split("[\\r\\n]+");
 		techgrouphashmap = new HashMap<String, Object>();
@@ -355,17 +441,33 @@ public class SettingReader {
 		id = "";
 		line = "";
 
-		input = reader.readLine();
-		while (input != null) {
-			line = line + input + "\n";
-			input = reader.readLine();
+		
+		StringBuilder sb = new StringBuilder();
+		try {
+
+			String line = reader.readLine();
+
+			while (line != null) {
+				sb.append(line);
+				sb.append("\n");
+				line = reader.readLine();
+			}
+		} finally {
+			reader.close();
 		}
 
-<<<<<<< HEAD
-		System.out.println("Finish wwfawfihawfonlaf");
+		line = sb.toString();
 
-=======
->>>>>>> origin/master
+		
+		
+//		input = reader.readLine();
+//		while (input != null) {
+//			line = line + input + "\n";
+//			input = reader.readLine();
+//		}
+
+		
+
 		String[] lines = line.split("[\\r\\n]+");
 		provincehashmap = new HashMap<String, Object>();
 		for (String input : lines) {
@@ -391,32 +493,31 @@ public class SettingReader {
 				if (input.contains(s)) {
 
 					String property = input.replaceAll(s + "=", "");
-<<<<<<< HEAD
 
 					provincehashmap.put(s, property);
 
 					if (s.contains("id") && property.length() <= 4)
 						id = property;
 
-				}
+					if (brackets == 0) {
+						provincesettinghashmap.put(id, provincehashmap.clone());
+						provincehashmap.clear();
+					}
 
-			}
-			if (brackets == 0) {
-				provincesettinghashmap.put(id, provincehashmap.clone());
-				provincehashmap.clear();
-			}
-		}
-=======
 					provincehashmap.put(s, property);
-					if (s.contains("id") && property.length() <= 4)
+					if (s.contains("id") && property.length() <= 4) {
 
 						id = property;
+					}
+				}
+
+				if (brackets == 0) {
+					provincesettinghashmap.put(id, provincehashmap.clone());
+
 				}
 			}
-			if (brackets == 0) {
-				provincesettinghashmap.put(id, provincehashmap.clone());
-			}
 		}
+
 		// Iterator<Entry<String, Object>> it =
 		// provincesettinghashmap.entrySet().iterator();
 		// while (it.hasNext()) {
@@ -425,7 +526,7 @@ public class SettingReader {
 		// }
 
 		// Settings.hashmap.put("provincedata", provincesettinghashmap.clone());
->>>>>>> origin/master
+
 		Settings.putInHashMap("provincedata", provincesettinghashmap.clone());
 
 	}

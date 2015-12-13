@@ -1,11 +1,9 @@
 package scenarioeditor;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.function.IntPredicate;
 
 public class SettingReader {
 	public static BufferedReader reader;
@@ -16,7 +14,11 @@ public class SettingReader {
 
 	public static HashMap<String, Object> provincesettinghashmap, provincehashmap, countryhashmap,
 			countrysettinghashmap, countrynamehashmap, culturesettingshashmap, culturehashmap, techgroupsettingshashmap,
+<<<<<<< HEAD
 			techgrouphashmap, scenarioeeghashmap, scenariohashmap;
+=======
+			techgrouphashmap;
+>>>>>>> origin/master
 
 	public static String id, name, efficiency, tolerance, tp_negotiation, ferocity, combat, colonization_difficulty,
 			continent, region, area, type, terrain, size_modifier, climate, religion, culture, manpower, income, goods,
@@ -25,6 +27,7 @@ public class SettingReader {
 
 	public static String countryname, countrytag;
 
+<<<<<<< HEAD
 	public SettingReader(String gamepath, String language, HashMap<String, Object> hashmap, String scenariofilepath)
 			throws IOException {
 
@@ -33,11 +36,21 @@ public class SettingReader {
 		getLocalisation(gamepath + "//Localisation//" + language + "//countries.csv", hashmap);
 //		getCultures(gamepath + "//Db//cultures.txt");
 //		getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
+=======
+	public SettingReader(String gamepath, String language, HashMap<String, Object> hashmap) throws IOException {
+
+		getCountrySettings(gamepath + "//Db//countries.txt");
+		getProvinces(gamepath + "//Db//Map//provinces.txt");
+		getLocalisation(gamepath + "//Localisation//" + language + "//countries.csv", hashmap);
+		getCultures(gamepath + "//Db//cultures.txt");
+		getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
+>>>>>>> origin/master
 
 		// USELESS
 		// ===============================================
 		// getArmynames(gamepath + "//Db//armynames.txt");
 
+<<<<<<< HEAD
 		// getScenario(scenariofilepath);
 
 	}
@@ -110,6 +123,8 @@ public class SettingReader {
 	private void getScenarioSettings() {
 		// TODO Auto-generated method stub
 
+=======
+>>>>>>> origin/master
 	}
 
 	public void getLocalisation(String localisationpath, HashMap<String, Object> hashmap) throws IOException {
@@ -229,7 +244,7 @@ public class SettingReader {
 		while (input != null) {
 
 			if (input.indexOf("#") != 1 || input.indexOf("#") != 0) {
-				// System.out.println(input);
+				System.out.println(input);
 				line = line + input + "\n";
 				input = reader.readLine();
 			}
@@ -342,15 +357,15 @@ public class SettingReader {
 
 		input = reader.readLine();
 		while (input != null) {
-			if (input.indexOf("#") != 1 || input.indexOf("#") != 0) {
-				// System.out.println(input);
-				line = line + input + "\n";
-				input = reader.readLine();
-			}
+			line = line + input + "\n";
+			input = reader.readLine();
 		}
 
+<<<<<<< HEAD
 		System.out.println("Finish wwfawfihawfonlaf");
 
+=======
+>>>>>>> origin/master
 		String[] lines = line.split("[\\r\\n]+");
 		provincehashmap = new HashMap<String, Object>();
 		for (String input : lines) {
@@ -374,7 +389,9 @@ public class SettingReader {
 			for (String s : checkFor) {
 
 				if (input.contains(s)) {
+
 					String property = input.replaceAll(s + "=", "");
+<<<<<<< HEAD
 
 					provincehashmap.put(s, property);
 
@@ -389,6 +406,26 @@ public class SettingReader {
 				provincehashmap.clear();
 			}
 		}
+=======
+					provincehashmap.put(s, property);
+					if (s.contains("id") && property.length() <= 4)
+
+						id = property;
+				}
+			}
+			if (brackets == 0) {
+				provincesettinghashmap.put(id, provincehashmap.clone());
+			}
+		}
+		// Iterator<Entry<String, Object>> it =
+		// provincesettinghashmap.entrySet().iterator();
+		// while (it.hasNext()) {
+		// Map.Entry pair = (Map.Entry) it.next();
+		// System.out.println(pair.getKey() + " = " + pair.getValue());
+		// }
+
+		// Settings.hashmap.put("provincedata", provincesettinghashmap.clone());
+>>>>>>> origin/master
 		Settings.putInHashMap("provincedata", provincesettinghashmap.clone());
 
 	}

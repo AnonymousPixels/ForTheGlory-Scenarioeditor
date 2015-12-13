@@ -1,0 +1,25 @@
+﻿Revert "Im serious, I already forgot, what I changed..."
+
+This reverts commit df95ab8ef228defd1cc95c086e887f83f98bb38a.
+
+Conflicts:
+	ForTheGlory-Scenarioeditor/bin/.gitignore
+	ForTheGlory-Scenarioeditor/src/scenarioeditor/GUI.java
+	ForTheGlory-Scenarioeditor/src/scenarioeditor/Main.java
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 1 and 3 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#
+

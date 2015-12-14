@@ -102,7 +102,7 @@ public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 	static String name = Strings.getString("name"), version = Strings.getString("version"),
 			build = Strings.getString("build"), title = name + " | Version: " + version + " (Build: " + build + ")",
 			scenarioFilePath = "C://Program Files (x86)//Steam//steamapps//common//For The Glory//Scenarios//1419 - The Grand Campaign.eeg",
-			selectedCountryItem;
+			selectedCountryItem, language = "English";
 	String[] months = { Strings.getString("Month.1"), Strings.getString("Month.2"), Strings.getString("Month.3"),
 			Strings.getString("Month.4"), Strings.getString("Month.5"), Strings.getString("Month.6"),
 			Strings.getString("Month.7"), Strings.getString("Month.8"), Strings.getString("Month.9"),
@@ -301,7 +301,7 @@ public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 	void readData() {
 
 		try {
-			dataMap = Settings.getSettings(Main.path, scenarioFilePath);
+			dataMap = Settings.getSettings(Main.path, language,scenarioFilePath);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -26,28 +26,13 @@ public class SettingReader {
 
 	public SettingReader(String gamepath, String language, HashMap<String, Object> hashmap, String scenariofilepath)
 			throws IOException {
-
-		// getCountrySettings(gamepath + "//Db//countries.txt");
-		getProvinces(gamepath + "//Db//Map//provinces.txt");
-		// getLocalisation(gamepath + "//Localisation//" + language +
-		// "//countries.csv", hashmap);
-		// getCultures(gamepath + "//Db//cultures.txt");
-		// getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
-	}
-
-	public SettingReader(String gamepath, String language, HashMap<String, Object> hashmap) throws IOException {
-		long startmillis = System.currentTimeMillis();
 		getCountrySettings(gamepath + "//Db//countries.txt");
 		getProvinces(gamepath + "//Db//Map//provinces.txt");
 		getLocalisation(gamepath + "//Localisation//" + language + "//countries.csv", hashmap);
 		getCultures(gamepath + "//Db//cultures.txt");
 		getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
-		System.out.println(System.currentTimeMillis()- startmillis);
-		// USELESS
-		// ===============================================
-		// getArmynames(gamepath + "//Db//armynames.txt");
 
-		// getScenario(scenariofilepath);
+		getScenario(scenariofilepath);
 
 	}
 
@@ -55,11 +40,11 @@ public class SettingReader {
 		// TODO hashmap für jedes land, informationen in hashmap
 		scenarioeeghashmap = new HashMap<String, Object>();
 		scenariohashmap = new HashMap<String, Object>();
-		// new hashmap
 		file = new FileReader(scenariofilepath);
 		reader = new BufferedReader(file);
-		//input = reader.readLine();
+		// input = reader.readLine();
 		line = "";
+		String includestring = "";
 
 		StringBuilder sb = new StringBuilder();
 		try {
@@ -77,24 +62,22 @@ public class SettingReader {
 
 		line = sb.toString();
 
-//		while (input != null){
-//			if (input.indexOf("#") != 1) {
-//				System.out.println(input);
-//				line = line + input + "\n";
-//				input = reader.readLine();
-//			}
-//		}
+		// while (input != null){
+		// if (input.indexOf("#") != 1) {
+		// System.out.println(input);
+		// line = line + input + "\n";
+		// input = reader.readLine();
+		// }
+		// }
 
 		String[] lines = line.split("[\\r\\n]+");
 
-		for (String input : lines)
-
-		{
+		for (String input : lines) {
 			input = input.replaceAll("\t", "");
 			input = input.replaceAll("\"", "");
 			if ((input != null && input != "") && brackets == 0 && input.contains("= {")) {
 				varification = input.substring(0, input.indexOf("= {"));
-				System.out.println("varification: " + varification);
+				// System.out.println("varification: " + varification);
 			}
 			if (input.contains("{")) {
 				brackets++;
@@ -112,15 +95,21 @@ public class SettingReader {
 				String[] checkFor = { "name", "startyear", "endyear", "startdate" };
 				for (String s : checkFor) {
 
-					System.out.println(input);
+					// System.out.println(input);
 					if (input.contains(s)) {
 
 						String property = input.replaceAll(s + "=", "");
 						scenariohashmap.put(s, property);
 
 					}
+
 				}
 			}
+			input = input.replaceAll(" ", "");
+			if (input.contains("include")) {
+				includestring = input.replaceAll("include=", "") + "," + includestring;
+			}
+
 			if (brackets == 0 && varification != null) {
 
 				scenarioeeghashmap.put(varification, scenariohashmap.clone());
@@ -129,13 +118,18 @@ public class SettingReader {
 		}
 
 		Settings.putInHashMap("scenariodata", scenarioeeghashmap.clone());
-
-		// getScenarioSettings();
+		String[] includes = includestring.split(",");
+		getAllScenarioSettings(includes);
 
 	}
 
-	private void getScenarioSettings() {
-		// TODO Auto-generated method stub
+	private void getAllScenarioSettings(String[] includes) {
+		for (int i = 0; i < includes.length; i++) {
+			System.out.println("Include: " + includes[i]);
+		}
+	}
+
+	private void getScenarioSettings(String[] includes) {
 
 	}
 
@@ -144,10 +138,9 @@ public class SettingReader {
 		countryhashmap = new HashMap<String, Object>();
 		file = new FileReader(localisationpath);
 		reader = new BufferedReader(file);
-//		input = reader.readLine();
+		// input = reader.readLine();
 		line = "";
 
-		
 		StringBuilder sb = new StringBuilder();
 		try {
 
@@ -164,16 +157,13 @@ public class SettingReader {
 
 		line = sb.toString();
 
-		
-		
-		
-//		while (input != null) {
-//			if (input.indexOf("#") != 1) {
-//				// System.out.println(input);
-//				line = line + input + "\n";
-//				input = reader.readLine();
-//			}
-//		}
+		// while (input != null) {
+		// if (input.indexOf("#") != 1) {
+		// // System.out.println(input);
+		// line = line + input + "\n";
+		// input = reader.readLine();
+		// }
+		// }
 
 		String[] lines = line.split("[\\r\\n]+");
 
@@ -218,16 +208,15 @@ public class SettingReader {
 
 		line = sb.toString();
 
-		
-//		input = reader.readLine();
-//		while (input != null) {
-//
-//			if (input.indexOf("#") != 1) {
-//				// System.out.println(input);
-//				line = line + input + "\n";
-//				input = reader.readLine();
-//			}
-//		}
+		// input = reader.readLine();
+		// while (input != null) {
+		//
+		// if (input.indexOf("#") != 1) {
+		// // System.out.println(input);
+		// line = line + input + "\n";
+		// input = reader.readLine();
+		// }
+		// }
 
 		String[] lines = line.split("[\\r\\n]+");
 		countryhashmap = new HashMap<String, Object>();
@@ -305,17 +294,15 @@ public class SettingReader {
 
 		line = sb.toString();
 
-		
-		
-//		input = reader.readLine();
-//		while (input != null) {
-//
-//			if (input.indexOf("#") != 1 || input.indexOf("#") != 0) {
-//				System.out.println(input);
-//				line = line + input + "\n";
-//				input = reader.readLine();
-//			}
-//		}
+		// input = reader.readLine();
+		// while (input != null) {
+		//
+		// if (input.indexOf("#") != 1 || input.indexOf("#") != 0) {
+		// System.out.println(input);
+		// line = line + input + "\n";
+		// input = reader.readLine();
+		// }
+		// }
 
 		String[] lines = line.split("[\\r\\n]+");
 		culturehashmap = new HashMap<String, Object>();
@@ -366,7 +353,6 @@ public class SettingReader {
 		line = "";
 		varification = "";
 
-		
 		StringBuilder sb = new StringBuilder();
 		try {
 
@@ -383,17 +369,15 @@ public class SettingReader {
 
 		line = sb.toString();
 
-		
-		
-//		input = reader.readLine();
-//		while (input != null) {
-//
-//			if (input.indexOf("#") != 1 || input.indexOf("#") != 0) {
-//				// System.out.println(input);
-//				line = line + input + "\n";
-//				input = reader.readLine();
-//			}
-//		}
+		// input = reader.readLine();
+		// while (input != null) {
+		//
+		// if (input.indexOf("#") != 1 || input.indexOf("#") != 0) {
+		// // System.out.println(input);
+		// line = line + input + "\n";
+		// input = reader.readLine();
+		// }
+		// }
 
 		String[] lines = line.split("[\\r\\n]+");
 		techgrouphashmap = new HashMap<String, Object>();
@@ -441,7 +425,6 @@ public class SettingReader {
 		id = "";
 		line = "";
 
-		
 		StringBuilder sb = new StringBuilder();
 		try {
 
@@ -458,15 +441,11 @@ public class SettingReader {
 
 		line = sb.toString();
 
-		
-		
-//		input = reader.readLine();
-//		while (input != null) {
-//			line = line + input + "\n";
-//			input = reader.readLine();
-//		}
-
-		
+		// input = reader.readLine();
+		// while (input != null) {
+		// line = line + input + "\n";
+		// input = reader.readLine();
+		// }
 
 		String[] lines = line.split("[\\r\\n]+");
 		provincehashmap = new HashMap<String, Object>();

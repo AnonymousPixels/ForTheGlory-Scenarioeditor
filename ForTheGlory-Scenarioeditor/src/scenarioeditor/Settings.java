@@ -13,7 +13,7 @@ public class Settings {
 		hashmap = new HashMap<String, Object>();
 		
 		//Language is the name of the folder in the Localisation folder.
-		new SettingReader(gamepath, language, hashmap);
+		new SettingReader(gamepath, language, hashmap, scenariofilepath);
 		return hashmap;
 	}
 

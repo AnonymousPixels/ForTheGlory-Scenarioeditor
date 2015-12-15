@@ -16,7 +16,7 @@ public class WriterMain {
 
 		scenarioeditor.Settings.getSettings("C://Program Files (x86)//Steam//steamapps//common//For The Glory",
 				"German",
-				"C://Program Files (x86)//Steam//steamapps//common//For The Glory//Scenarios//1419 - The Grand Campaign.eeg");
+				"1419 - The Grand Campaign.eeg");
 		hash = Settings.hashmap;
 
 		// System.out.println(((HashMap<String, Object>) ((HashMap<String,
@@ -25,13 +25,10 @@ public class WriterMain {
 		// System.out.println(((HashMap<String, Object>) ((HashMap<String,
 		// Object>) hash.get("scenariodata")).get("header")).get("startyear"));
 		// System.out.println("----------------------------");
-		// for (String key : ((HashMap<String, Object>)
-		// hash.get("localisationdata")).keySet()) {
-		// // System.out.println(key + ((HashMap<String, Object>)
-		// // ((HashMap<String, Object>)
-		// // hash.get("provincedata")).get(key)).get("city"));
-		// System.out.println(key);
-		// }
+		for (String key : ((HashMap<String, Object>) hash.get("countrydata")).keySet()) {
+			System.out.println(key + ((HashMap<String, Object>) ((HashMap<String, Object>) hash.get("countrydata"))));
+
+		}
 
 		// new SaveSettings(hash);
 

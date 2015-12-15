@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -58,6 +59,35 @@ public class Main {
 		} catch (Exception e) {
 			System.out.println("Error while setting LookAndFeel! Default Java LookAndFeel will be used...");
 		}
+
+		Thread loadImage = new Thread(new Runnable() {
+			// Added by Johannes
+			@Override
+			public void run() {
+				try {
+
+					GUIAndEverythingElse.imgFrontend = ImageIO
+							.read(GUIAndEverythingElse.class.getResource("/frontend.png"));
+					GUIAndEverythingElse.imgBackend = ImageIO
+							.read(GUIAndEverythingElse.class.getResource("/backend.png"));
+					GUIAndEverythingElse.mapPanel = new MapPanel(GUIAndEverythingElse.imgFrontend,
+							GUIAndEverythingElse.imgBackend, LoadMapFile.LoadFile(
+									new File(GUIAndEverythingElse.class.getResource("/affiliation.txt").getPath())));
+
+				} catch (IOException e) {
+
+					System.out.println("Error while reading images! Program shuts down...");
+					System.exit(1);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		});
+
+		loadImage.start();
+		// End of added stuff by Johannes
 
 		file = new File("");
 

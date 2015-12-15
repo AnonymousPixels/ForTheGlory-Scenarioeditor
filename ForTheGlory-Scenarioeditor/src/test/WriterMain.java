@@ -20,12 +20,12 @@ public class WriterMain {
 		// System.out.println(((HashMap<String, Object>) ((HashMap<String,
 		// Object>) hash.get("localisationdata")).get("USA")).get("name"));
 
-		System.out.println(((HashMap<String, Object>) ((HashMap<String, Object>) hash.get("provincedata")).get("10")).get("name"));
-//		System.out.println("----------------------------");
-//		for (String key : ((HashMap<String, Object>) hash.get("provincedata")).keySet()) {
-//			System.out.println(key + ((HashMap<String, Object>) ((HashMap<String, Object>) hash.get("provincedata"))));
-//
-//		}
+		System.out.println((HashMap<String, Object>) hash.get("culturedata"));
+		System.out.println("----------------------------");
+		for (String key : ((HashMap<String, Object>) hash.get("culturedata")).keySet()) {
+			System.out.println(key + ((HashMap<String, Object>) ((HashMap<String, Object>) hash.get("culturedata")).get("culturedatatag")));
+
+		}
 
 		// new SaveSettings(hash);
 

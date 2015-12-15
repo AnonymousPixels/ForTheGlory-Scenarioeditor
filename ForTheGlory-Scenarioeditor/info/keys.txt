@@ -69,7 +69,35 @@ localisationdata
 	countrytag
 		name -> gibt Namen in jeweiliger sprache zurück
 
-
+religiondata
+	religionen (kein key)
+		predominance
+		force_conversion
+		defender
+		annexable
+		annex_same_penalty
+		annex_other_penalty
+		tech_speed
+		reveal_map
+		whiteman
+		defectprovinceto_penalty
+		province_nationalism
+		province_religion
+		coastalprovince_bonus
+		stability_bonus
+		stability_cost
+		colonists
+		diplomats
+		missionaries
+		missionary_placement_chance
+		missionary_placement_penalty
+		missionary_sprite
+		land_morale
+		naval_morale
+		trade_efficiency
+		production_efficiency
+		global_tax_modifier
+		slaves_effect
 
 
 

@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
@@ -59,14 +60,15 @@ public class GUIAndEverythingElse implements ActionListener, ChangeListener, IMa
 			pnlUnitNumbers, pnlNavalUnits, pnlNavalUnitNumbers;
 	JTabbedPane tabbedPane;
 	JSplitPane splitPane;
-	MapPanel mapPanel;
+	// TODO Edit by Johannes changed public static
+	public static MapPanel mapPanel;
 	static JComboBox<String> cbxCountry, cbxCategory, cbxPolicyDateMonth, cbxTechnologyGroup, cbxAi, cbxMonarchtable,
 			cbxLeadertable, cbxSelectedProvince, cbxCopy, cbxCulture, cbxReligion, cbxSelectedCountry, cbxCasusBelli,
 			cbxCasusBelliMonth, cbxWarnedMonth, cbxIndependenceMonth, cbxPeaceMonth, cbxUnits, cbxUnitLocation,
 			cbxNavalUnits, cbxNavalUnitLocation, cbxPolicyDateDay, cbxCasusBelliDay, cbxWarnedDay, cbxIndependenceDay,
 			cbxPeaceDay;
 	JScrollPane scpCountrySettings, scpProvinces;
-	JTextField txfPolicyDateYear, txfTechnologyLand, txfTechnologyNaval, txfTechnologyTrade, txfTechnologyInfra,
+	static JTextField txfPolicyDateYear, txfTechnologyLand, txfTechnologyNaval, txfTechnologyTrade, txfTechnologyInfra,
 			txfTechnologyStability, txfColonialAttempts, txfLoansize, txfTreasury, txfInflation, txfMissionaries,
 			txfMerchants, txfDiplomats, txfWhiteMan, txfColonists, txfBadboy, txfDiplomacyRelation, txfCasusBelliYear,
 			txfWarnedYear, txfIndependenceYear, txfPeaceYear, txfInfantry, txfCavalry, txfArtillery, txfWarships,
@@ -88,7 +90,8 @@ public class GUIAndEverythingElse implements ActionListener, ChangeListener, IMa
 			rbnExtendedLoansTrue, rbnExtendedLoansFalse;
 	JCheckBox chbMajorProvince, chbTradeAgreement, chbMilitaryAccess, chbRefuseTrade, chbCasusBelli;
 	ButtonGroup grpProvinces, grpColonialnation, grpCancelledLoans, grpExtendedLoans;
-	BufferedImage imgFrontend, imgBackend;
+	// TODO Changed by Johannes changed public static
+	public static BufferedImage imgFrontend, imgBackend;
 	ColonyPanel colonyPanel;
 	GlobalDataPanel globalDataPanel;
 	GameFiles gameFiles;
@@ -160,19 +163,25 @@ public class GUIAndEverythingElse implements ActionListener, ChangeListener, IMa
 		btnSave.addActionListener(this);
 		addComponent(pnlOther, layout, btnSave, 2, 0, 1, 1, 0, 0, new Insets(0, 0, 5, 5));
 
-		try {
+		// TODO edit by Johannes
+		// try {
 
-			imgFrontend = ImageIO.read(GUIAndEverythingElse.class.getResource("/frontend.png"));
-			imgBackend = ImageIO.read(GUIAndEverythingElse.class.getResource("/backend.png"));
-			mapPanel = new MapPanel(imgFrontend, imgBackend, LoadMapFile
-					.LoadFile(new File(GUIAndEverythingElse.class.getResource("/affiliation.txt").getPath())));
-			mapPanel.addMapListener(this);
+		// imgFrontend =
+		// ImageIO.read(GUIAndEverythingElse.class.getResource("/frontend.png"));
+		// imgBackend =
+		// ImageIO.read(GUIAndEverythingElse.class.getResource("/backend.png"));
+		// mapPanel = new MapPanel(imgFrontend, imgBackend, LoadMapFile
+		// .LoadFile(new
+		// File(GUIAndEverythingElse.class.getResource("/affiliation.txt").getPath())));
+		mapPanel.addMapListener(this);
 
-		} catch (IOException e) {
-
-			System.out.println("Error while reading images! Program shuts down...");
-			System.exit(1);
-		}
+		// } catch (IOException e) {
+		//
+		// System.out.println("Error while reading images! Program shuts
+		// down...");
+		// System.exit(1);
+		// }
+		// TODO END of edit by Johannes
 
 		// if (!createHashMap(new File(Main.path + "\\affiliation.txt"))) {
 		//
@@ -261,6 +270,32 @@ public class GUIAndEverythingElse implements ActionListener, ChangeListener, IMa
 		sldSerfdom.setValue(
 				Integer.parseInt((String) ((HashMap<String, Object>) ((HashMap<String, Object>) map.get("countrydata"))
 						.get(cbxCountry.getSelectedItem())).get("serfdom")));
+
+		// TODO JOHANNES ADDDES SOMETHING BELOW
+		cbxCulture.removeAllItems();
+		String ToSplit = "";
+		for (String key : ((HashMap<String, Object>) map.get("culturedata")).keySet()) {
+			ToSplit = key + "," + ToSplit;
+		}
+
+		String[] ArrayToSort = ToSplit.split(",");
+		Arrays.sort(ArrayToSort);
+		for (String s : ArrayToSort)
+			if (!s.equals(""))
+				cbxCulture.addItem(s);
+
+		cbxReligion.removeAllItems();
+		ToSplit = "";
+		for (String key : ((HashMap<String, Object>) map.get("religiondata")).keySet()) {
+			ToSplit = key + "," + ToSplit;
+		}
+
+		ArrayToSort = ToSplit.split(",");
+		Arrays.sort(ArrayToSort);
+		for (String s : ArrayToSort)
+			if (!s.equals(""))
+				cbxReligion.addItem(s);
+
 	}
 
 	@SuppressWarnings("unchecked")

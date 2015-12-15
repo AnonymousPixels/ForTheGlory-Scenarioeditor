@@ -31,8 +31,79 @@ public class SettingReader {
 		getLocalisation(gamepath + "//Localisation//" + language + "//countries.csv", hashmap);
 		getCultures(gamepath + "//Db//cultures.txt");
 		getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
+		getReligion(gamepath + "//Db//Religions//religions.txt");
 
-		getScenario(scenariofilepath);
+		// getScenario(scenariofilepath);
+
+	}
+
+	public void getReligion(String culturefilepath) throws IOException {
+
+		culturesettingshashmap = new HashMap<String, Object>();
+		file = new FileReader(culturefilepath);
+		reader = new BufferedReader(file);
+		input = "";
+		id = "";
+		line = "";
+		varification = "";
+
+		StringBuilder sb = new StringBuilder();
+		try {
+
+			String line = reader.readLine();
+
+			while (line != null) {
+				sb.append(line);
+				sb.append("\n");
+				line = reader.readLine();
+			}
+		} finally {
+			reader.close();
+		}
+
+		line = sb.toString();
+
+		String[] lines = line.split("[\\r\\n]+");
+		culturehashmap = new HashMap<String, Object>();
+		for (String input : lines) {
+			input = input.replaceAll(" ", "");
+			input = input.replaceAll("	", "");
+			input = input.replaceAll("\"", "");
+			if (input.contains("{")) {
+				brackets++;
+			}
+			if (input.contains("}")) {
+				brackets--;
+			}
+			if (input.trim().charAt(0) == '#') {
+
+			}
+			if ((input != null || input != "") && brackets == 1 && input.contains("={")) {
+				varification = input.substring(0, input.indexOf("="));
+			}
+			String[] checkFor = { "predominance", "force_conversion", "defender", "annexable", "annex_same_penalty",
+					"annex_other_penalty", "tech_speed", "reveal_map", "whiteman", "defectprovinceto_penalty",
+					"province_nationalism", "province_religion", "coastalprovince_bonus", "stability_bonus",
+					"stability_cost", "colonists", "diplomats", "missionaries", "missionary_placement_chance",
+					"missionary_placement_penalty", "missionary_sprite", "land_morale", "naval_morale",
+					"trade_efficiency", "production_efficiency", "global_tax_modifier", "slaves_effect" };
+			for (String s : checkFor) {
+
+				if (input.contains(s) && s != null) {
+					String property = input.replaceAll(s + "=", "");
+					culturehashmap.put(s, property);
+
+				}
+			}
+			if (brackets == 0 && varification != null && !varification.equals("")) {
+
+				culturesettingshashmap.put(varification, culturehashmap.clone());
+				culturehashmap.clear();
+
+			}
+		}
+
+		Settings.putInHashMap("religiondata", culturesettingshashmap.clone());
 
 	}
 
@@ -62,14 +133,6 @@ public class SettingReader {
 
 		line = sb.toString();
 
-		// while (input != null){
-		// if (input.indexOf("#") != 1) {
-		// System.out.println(input);
-		// line = line + input + "\n";
-		// input = reader.readLine();
-		// }
-		// }
-
 		String[] lines = line.split("[\\r\\n]+");
 
 		for (String input : lines) {
@@ -77,7 +140,7 @@ public class SettingReader {
 			input = input.replaceAll("\"", "");
 			if ((input != null && input != "") && brackets == 0 && input.contains("= {")) {
 				varification = input.substring(0, input.indexOf("= {"));
-				// System.out.println("varification: " + varification);
+
 			}
 			if (input.contains("{")) {
 				brackets++;
@@ -95,7 +158,6 @@ public class SettingReader {
 				String[] checkFor = { "name", "startyear", "endyear", "startdate" };
 				for (String s : checkFor) {
 
-					// System.out.println(input);
 					if (input.contains(s)) {
 
 						String property = input.replaceAll(s + "=", "");
@@ -110,7 +172,7 @@ public class SettingReader {
 				includestring = input.replaceAll("include=", "") + "," + includestring;
 			}
 
-			if (brackets == 0 && varification != null) {
+			if (brackets == 0 && varification != null && !varification.equals("")) {
 
 				scenarioeeghashmap.put(varification, scenariohashmap.clone());
 
@@ -138,7 +200,6 @@ public class SettingReader {
 		countryhashmap = new HashMap<String, Object>();
 		file = new FileReader(localisationpath);
 		reader = new BufferedReader(file);
-		// input = reader.readLine();
 		line = "";
 
 		StringBuilder sb = new StringBuilder();
@@ -156,14 +217,6 @@ public class SettingReader {
 		}
 
 		line = sb.toString();
-
-		// while (input != null) {
-		// if (input.indexOf("#") != 1) {
-		// // System.out.println(input);
-		// line = line + input + "\n";
-		// input = reader.readLine();
-		// }
-		// }
 
 		String[] lines = line.split("[\\r\\n]+");
 
@@ -207,16 +260,6 @@ public class SettingReader {
 		}
 
 		line = sb.toString();
-
-		// input = reader.readLine();
-		// while (input != null) {
-		//
-		// if (input.indexOf("#") != 1) {
-		// // System.out.println(input);
-		// line = line + input + "\n";
-		// input = reader.readLine();
-		// }
-		// }
 
 		String[] lines = line.split("[\\r\\n]+");
 		countryhashmap = new HashMap<String, Object>();
@@ -294,16 +337,6 @@ public class SettingReader {
 
 		line = sb.toString();
 
-		// input = reader.readLine();
-		// while (input != null) {
-		//
-		// if (input.indexOf("#") != 1 || input.indexOf("#") != 0) {
-		// System.out.println(input);
-		// line = line + input + "\n";
-		// input = reader.readLine();
-		// }
-		// }
-
 		String[] lines = line.split("[\\r\\n]+");
 		culturehashmap = new HashMap<String, Object>();
 		for (String input : lines) {
@@ -331,7 +364,7 @@ public class SettingReader {
 
 				}
 			}
-			if (brackets == 0) {
+			if (brackets == 0 && varification != null && !varification.equals("")) {
 
 				culturesettingshashmap.put(varification, culturehashmap.clone());
 				culturehashmap.clear();

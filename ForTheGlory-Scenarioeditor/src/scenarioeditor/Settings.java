@@ -21,5 +21,4 @@ public class Settings {
 		hashmap.put(key, value);
 
 	}
-
 }

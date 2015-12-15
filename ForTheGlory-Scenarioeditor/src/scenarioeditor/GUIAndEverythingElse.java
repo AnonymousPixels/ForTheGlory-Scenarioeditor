@@ -48,7 +48,7 @@ import javax.swing.event.ChangeListener;
  * @author Felix Beutter
  */
 
-public class GUI implements ActionListener, ChangeListener, IMapEventListener {
+public class GUIAndEverythingElse implements ActionListener, ChangeListener, IMapEventListener {
 
 	JFrame frame;
 	GridBagLayout layout;
@@ -101,8 +101,9 @@ public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 	Font fntStandard = new Font("Verdana", 0, 12);
 	static String name = Strings.getString("name"), version = Strings.getString("version"),
 			build = Strings.getString("build"), title = name + " | Version: " + version + " (Build: " + build + ")",
-			scenarioFilePath = "C://Program Files (x86)//Steam//steamapps//common//For The Glory//Scenarios//1419 - The Grand Campaign.eeg",
-			selectedCountryItem, language = "English";
+			scenarioFilePath = Main.path + "\\Scenarios\\1419 - The Grand Campaign.eeg", selectedCountryItem,
+			language = "English";
+	// TODO change scenarioFilePath
 	String[] months = { Strings.getString("Month.1"), Strings.getString("Month.2"), Strings.getString("Month.3"),
 			Strings.getString("Month.4"), Strings.getString("Month.5"), Strings.getString("Month.6"),
 			Strings.getString("Month.7"), Strings.getString("Month.8"), Strings.getString("Month.9"),
@@ -114,7 +115,7 @@ public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 			days = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18",
 					"19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" };
 
-	public GUI() throws IOException, InterruptedException {
+	public GUIAndEverythingElse() throws IOException, InterruptedException {
 
 		readData();
 
@@ -161,10 +162,11 @@ public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 
 		try {
 
-			imgFrontend = ImageIO.read(GUI.class.getResource("/frontend.png"));
-			imgBackend = ImageIO.read(GUI.class.getResource("/backend.png"));
-			mapPanel = new MapPanel(imgFrontend, imgBackend,
-					LoadMapFile.LoadFile(new File(GUI.class.getResource("/affiliation.txt").getPath())));
+			imgFrontend = ImageIO.read(GUIAndEverythingElse.class.getResource("/frontend.png"));
+			imgBackend = ImageIO.read(GUIAndEverythingElse.class.getResource("/backend.png"));
+			mapPanel = new MapPanel(imgFrontend, imgBackend, LoadMapFile
+					.LoadFile(new File(GUIAndEverythingElse.class.getResource("/affiliation.txt").getPath())));
+			mapPanel.addMapListener(this);
 
 		} catch (IOException e) {
 
@@ -204,7 +206,7 @@ public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 
 		selectedCountryItem = (String) cbxCountry.getSelectedItem();
 
-		ImageIcon icon = new ImageIcon(GUI.class.getResource("/logo.png"));
+		ImageIcon icon = new ImageIcon(GUIAndEverythingElse.class.getResource("/logo.png"));
 		frame.setIconImage(icon.getImage());
 
 		frame.setVisible(true);
@@ -301,7 +303,7 @@ public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 	void readData() {
 
 		try {
-			dataMap = Settings.getSettings(Main.path, language,scenarioFilePath);
+			dataMap = Settings.getSettings(Main.path, language, scenarioFilePath);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -1556,8 +1558,6 @@ public class GUI implements ActionListener, ChangeListener, IMapEventListener {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void provinceClicked(String s) {
-
-		System.out.println("bla");
 
 		HashMap<String, String> colonyMap = (HashMap<String, String>) ((HashMap<String, Object>) dataMap
 				.get("provincedata")).get(s);

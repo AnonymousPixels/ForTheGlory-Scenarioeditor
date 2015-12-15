@@ -24,14 +24,15 @@ public class SettingReader {
 
 	public static String countryname, countrytag;
 
-	public SettingReader(String gamepath, String language, HashMap<String, Object> hashmap, String scenariofilename)
+	public SettingReader(String gamepath, String language, HashMap<String, Object> hashmap, String scenariofilepath)
 			throws IOException {
 		getCountrySettings(gamepath + "//Db//countries.txt");
 		getProvinces(gamepath + "//Db//Map//provinces.txt");
 		getLocalisation(gamepath + "//Localisation//" + language + "//countries.csv", hashmap);
 		getCultures(gamepath + "//Db//cultures.txt");
 		getTechgroups(gamepath + "//Db//Technologies//techgroups.txt");
-		getScenario(gamepath + "//Scenarios//" + scenariofilename);
+
+		getScenario(scenariofilepath);
 
 	}
 

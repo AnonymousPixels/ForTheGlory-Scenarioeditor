@@ -25,6 +25,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import javax.swing.plaf.OptionPaneUI;
 
 /**
  * Main class of the szenario editor. Contains main void to start the program
@@ -73,7 +74,7 @@ public class Main {
 		frame.setResizable(false);
 		frame.setLayout(layout);
 
-		ImageIcon icon = new ImageIcon(GUI.class.getResource("/logo.png"));
+		ImageIcon icon = new ImageIcon(GUIAndEverythingElse.class.getResource("/logo.png"));
 		frame.setIconImage(icon.getImage());
 
 		panel = new JPanel();
@@ -121,60 +122,7 @@ public class Main {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				if (path.trim() != null && !path.trim().equals("")) {
-
-					String modDir = path + "//Mods";
-					File[] modFiles = new File(modDir).listFiles();
-					String[] mods = new String[1];
-
-					mods[0] = Strings.getString("Main.10");
-
-					for (int i = 0; i < modFiles.length; i++) {
-
-						if (modFiles[i].isDirectory()) {
-
-							String[] mods2 = new String[mods.length + 1];
-							System.arraycopy(mods, 0, mods2, 0, mods.length);
-							mods2[mods.length] = modFiles[i].getName();
-							mods = mods2;
-						}
-					}
-
-					cbxMods = new JComboBox<String>(mods);
-					cbxMods.addActionListener(new ActionListener() {
-
-						@Override
-						public void actionPerformed(ActionEvent e) {
-
-							if (cbxMods.getSelectedItem().equals(Strings.getString("Main.10"))) {
-								txfName.setVisible(true);
-								lblName.setVisible(true);
-								frame.pack();
-							} else {
-								txfName.setVisible(false);
-								lblName.setVisible(false);
-								frame.pack();
-							}
-						}
-					});
-					addComponent(panel, layout, cbxMods, 0, 4, 2, 1, 1, 0, new Insets(0, 10, 10, 10));
-					cbxMods.setVisible(false);
-
-					lblMods.setVisible(true);
-					cbxMods.setVisible(true);
-					lblName.setVisible(true);
-					txfName.setVisible(true);
-					btnAccept.setVisible(true);
-
-					btnPath.setEnabled(false);
-					btnContinue.setEnabled(false);
-
-					frame.pack();
-				} else
-					JOptionPane.showMessageDialog(null, Strings.getString("Main.5"), Strings.getString("Main.6"),
-							JOptionPane.ERROR_MESSAGE);
-
-				// System.out.println("MAX DU PFOSTEN");
+				incorrectPath();
 			}
 		});
 		addComponent(panel, layout, btnContinue, 1, 2, 1, 1, 0, 0, new Insets(0, 10, 10, 10));
@@ -225,7 +173,7 @@ public class Main {
 						loadLoadingGUI.start();
 
 						try {
-							new GUI();
+							new GUIAndEverythingElse();
 						} catch (IOException | InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -282,6 +230,70 @@ public class Main {
 		gbc.insets = insets;
 		gbl.setConstraints(c, gbc);
 		cont.add(c);
+	}
+
+	static void incorrectPath() {
+
+		try {
+
+			if (path.trim() != null && !path.trim().equals("")) {
+
+				String modDir = path + "//Mods";
+				File[] modFiles = new File(modDir).listFiles();
+				String[] mods = new String[1];
+
+				mods[0] = Strings.getString("Main.10");
+
+				for (int i = 0; i < modFiles.length; i++) {
+
+					if (modFiles[i].isDirectory()) {
+
+						String[] mods2 = new String[mods.length + 1];
+						System.arraycopy(mods, 0, mods2, 0, mods.length);
+						mods2[mods.length] = modFiles[i].getName();
+						mods = mods2;
+					}
+				}
+
+				cbxMods = new JComboBox<String>(mods);
+				cbxMods.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+
+						if (cbxMods.getSelectedItem().equals(Strings.getString("Main.10"))) {
+							txfName.setVisible(true);
+							lblName.setVisible(true);
+							frame.pack();
+						} else {
+							txfName.setVisible(false);
+							lblName.setVisible(false);
+							frame.pack();
+						}
+					}
+				});
+				addComponent(panel, layout, cbxMods, 0, 4, 2, 1, 1, 0, new Insets(0, 10, 10, 10));
+				cbxMods.setVisible(false);
+
+				lblMods.setVisible(true);
+				cbxMods.setVisible(true);
+				lblName.setVisible(true);
+				txfName.setVisible(true);
+				btnAccept.setVisible(true);
+
+				btnPath.setEnabled(false);
+				btnContinue.setEnabled(false);
+
+				frame.pack();
+			} else
+				JOptionPane.showMessageDialog(null, Strings.getString("Main.5"), Strings.getString("Main.6"),
+						JOptionPane.ERROR_MESSAGE);
+
+		} catch (Exception E) {
+			JOptionPane.showMessageDialog(null, "Geben Sie bitte den korrekten Spiel-Pfad an!");
+		}
+
+		// System.out.println("MAX DU PFOSTEN");
 	}
 
 	static void loadGUI() throws IOException, InterruptedException {
